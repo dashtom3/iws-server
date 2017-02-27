@@ -23,10 +23,12 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="SpringMVC Redis" />
+        <module name="SpringMVCRedis" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="SpringMVC Redis" target="1.5" />
+      <module name="SpringMVCRedis" target="1.6" />
     </bytecodeTargetLevel>
   </component>
 </project>
