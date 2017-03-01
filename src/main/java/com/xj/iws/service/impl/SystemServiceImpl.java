@@ -1,6 +1,5 @@
 package com.xj.iws.service.impl;
 
-import com.xj.iws.dao.CommonDao;
 import com.xj.iws.enums.ErrorCodeEnum;
 import com.xj.iws.service.SystemService;
 import com.xj.iws.utils.DataWrapper;
@@ -106,20 +105,20 @@ public class SystemServiceImpl implements SystemService {
         DataWrapper<List<Map<String, String>>> dataWrapper = new DataWrapper<List<Map<String, String>>>();
         dataWrapper.setErrorCode(ErrorCodeEnum.Error);
 
-        //获取key
-        Set<String> systemKeys = commonDao.getKey("index_" + table);
-        //查询所有系统数据
-        if (systemKeys != null) {
-            List<Map<String, String>> data = new ArrayList<Map<String, String>>();
-            for (String key : systemKeys) {
-                Map<String, String> system = commonDao.getHash(key);
-                data.add(system);
-            }
-            if (data != null) {
-                dataWrapper.setData(data);
-                dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
-            }
-        }
+//        //获取key
+//        Set<String> systemKeys = commonDao.getKey("index_" + table);
+//        //查询所有系统数据
+//        if (systemKeys != null) {
+//            List<Map<String, String>> data = new ArrayList<Map<String, String>>();
+//            for (String key : systemKeys) {
+//                Map<String, String> system = commonDao.getHash(key);
+//                data.add(system);
+//            }
+//            if (data != null) {
+//                dataWrapper.setData(data);
+//                dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
+//            }
+//        }
         return dataWrapper;
     }
 

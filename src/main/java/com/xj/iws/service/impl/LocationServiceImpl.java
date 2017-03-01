@@ -1,7 +1,5 @@
 package com.xj.iws.service.impl;
 
-import com.xj.iws.dao.CommonDao;
-import com.xj.iws.entity.LocationEntity;
 import com.xj.iws.enums.ErrorCodeEnum;
 import com.xj.iws.service.LocationService;
 import com.xj.iws.utils.DataWrapper;
