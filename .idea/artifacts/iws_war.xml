@@ -1,7 +1,7 @@
 <component name="ArtifactManager">
   <artifact type="war" name="iws:war">
     <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="redis.war">
+    <root id="archive" name="com.xj.iws.war">
       <element id="artifact" artifact-name="iws:war exploded" />
     </root>
   </artifact>

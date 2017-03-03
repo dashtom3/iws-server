@@ -1,6 +1,5 @@
 package com.xj.iws.service;
 
-import com.xj.iws.entity.SystemEntity;
 import com.xj.iws.utils.DataWrapper;
 
 import java.util.List;

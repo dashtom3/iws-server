@@ -1,12 +1,19 @@
 package com.xj.iws.service.impl;
 
+import com.xj.iws.dao.SystemDao;
 import com.xj.iws.enums.ErrorCodeEnum;
 import com.xj.iws.service.SystemService;
 import com.xj.iws.utils.DataWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.SystemEnvironmentPropertySource;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by XiaoJiang01 on 2017/2/24.
@@ -17,7 +24,7 @@ public class SystemServiceImpl implements SystemService {
     String table = "system";
 
     @Autowired
-    CommonDao commonDao;
+    SystemDao systemDao;
 
     /**
      * 添加系统
@@ -32,22 +39,20 @@ public class SystemServiceImpl implements SystemService {
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
         dataWrapper.setErrorCode(ErrorCodeEnum.Error);
 
+        //生成score
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+        Long score = Long.valueOf(dateFormat.format(new Date()));
+
+        System.out.println(score);
         //格式化参数
         Map<String, String> value = new HashMap<String, String>();
         value.put("name", name);
         value.put("pic", pic);
-        //获取编号
-        Long num = commonDao.getCount("index_" + table) + 1;
-        //生成key
-        String key = "basic_" + table + "_" + num;
+
         //写入数据
-        String result = commonDao.addHash(key, value);
-        //添加索引
-        if (key.equals(result)) {
-            String s = commonDao.addSet("index_" + table, key);
-            if (key.equals(s)) {
-                dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
-            }
+        boolean sign = systemDao.add(score,value);
+        if (sign){
+            dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
         }
         return dataWrapper;
     }
@@ -62,15 +67,15 @@ public class SystemServiceImpl implements SystemService {
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
         dataWrapper.setErrorCode(ErrorCodeEnum.Error);
 
-        //删除数据
-        String result = commonDao.deleteKey(systemId);
-        //删除索引
-        if (systemId.equals(result)) {
-            String s = commonDao.deleteSet("index_" + table, systemId);
-            if (systemId.equals(s)) {
-                dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
-            }
-        }
+//        //删除数据
+//        String result = commonDao.deleteKey(systemId);
+//        //删除索引
+//        if (systemId.equals(result)) {
+//            String s = commonDao.deleteSet("index_" + table, systemId);
+//            if (systemId.equals(s)) {
+//                dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
+//            }
+//        }
         return dataWrapper;
     }
 
@@ -80,17 +85,17 @@ public class SystemServiceImpl implements SystemService {
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
         dataWrapper.setErrorCode(ErrorCodeEnum.Error);
 
-        //格式化参数
-        Map<String, String> value = new HashMap<String, String>();
-        value.put("name", name);
-        value.put("pic", pic);
-
-        //写入数据
-        String result = commonDao.updateHash(systemId, value);
-
-        if (systemId.equals(result)) {
-            dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
-        }
+//        //格式化参数
+//        Map<String, String> value = new HashMap<String, String>();
+//        value.put("name", name);
+//        value.put("pic", pic);
+//
+//        //写入数据
+//        String result = commonDao.updateHash(systemId, value);
+//
+//        if (systemId.equals(result)) {
+//            dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
+//        }
         return dataWrapper;
     }
 

@@ -1,6 +1,5 @@
 package com.xj.iws.controller;
 
-import com.xj.iws.entity.SystemEntity;
 import com.xj.iws.service.SystemService;
 import com.xj.iws.utils.DataWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 import java.util.Map;
@@ -28,51 +28,53 @@ public class SystemController {
      * @return boolean
      */
     @RequestMapping(value = "add",method = RequestMethod.POST)
+    @ResponseBody
     public DataWrapper<Void> add(
             @RequestParam(value = "name",required = true) String name,
             @RequestParam(value = "pic",required = true) String pic,
             @RequestParam(value = "token",required = true) String token
     ){
-
         return systemService.add(name,pic);
-
     }
+
     /**
      * 删除系统
      * @return boolean
      */
     @RequestMapping(value = "delete",method = RequestMethod.POST)
+    @ResponseBody
     public DataWrapper<Void> delete(
             @RequestParam(value = "systemId",required = true) String systemId,
             @RequestParam(value = "token",required = true) String token
     ){
-
         return systemService.delete(systemId);
     }
+
     /**
      * 编辑系统
      * @return boolean
      */
     @RequestMapping(value = "update",method = RequestMethod.POST)
+    @ResponseBody
     public DataWrapper<Void> update(
             @RequestParam(value = "systemId",required = true) String systemId,
             @RequestParam(value = "name",required = true) String name,
             @RequestParam(value = "pic",required = true) String pic,
             @RequestParam(value = "token",required = true) String token
     ){
-
         return systemService.update(systemId,name,pic);
     }
+
     /**
      * 获取系统列表
      * @return system list
      */
     @RequestMapping(value = "list",method = RequestMethod.POST)
+    @ResponseBody
     public DataWrapper<List<Map<String, String>>> list(
             @RequestParam(value = "name",required = true) String name,
             @RequestParam(value = "token",required = true) String token
     ){
-
         return systemService.list();
     }
 }

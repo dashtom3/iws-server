@@ -1,6 +1,5 @@
 package com.xj.iws.service;
 
-import com.xj.iws.entity.LocationEntity;
 import com.xj.iws.utils.DataWrapper;
 
 /**
