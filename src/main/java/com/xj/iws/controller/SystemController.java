@@ -28,8 +28,6 @@ public class SystemController {
     @RequestMapping(value = "add",method = RequestMethod.POST)
     @ResponseBody
     public DataWrapper<Void> add(
-//            @RequestParam(value = "name",required = true) String name,
-//            @RequestParam(value = "pic",required = true) String pic,
             @ModelAttribute SystemEntity system,
             @RequestParam(value = "token",required = true) String token
     ){
@@ -59,9 +57,10 @@ public class SystemController {
             @RequestParam(value = "systemId",required = true) String systemId,
             @RequestParam(value = "name",required = true) String name,
             @RequestParam(value = "pic",required = true) String pic,
+            @ModelAttribute SystemEntity system,
             @RequestParam(value = "token",required = true) String token
     ){
-        return systemService.update(systemId,name,pic);
+        return systemService.update(system);
     }
 
     /**
@@ -71,9 +70,24 @@ public class SystemController {
     @RequestMapping(value = "list",method = RequestMethod.POST)
     @ResponseBody
     public DataWrapper<List<Map<String, String>>> list(
-            @RequestParam(value = "name",required = true) String name,
+            @RequestParam(value = "name",required = false) String name,
             @RequestParam(value = "token",required = true) String token
     ){
         return systemService.list();
+    }
+
+    /**
+     * 获取详细信息
+     * @param systemId
+     * @param token
+     * @return
+     */
+    @RequestMapping(value = "detail",method = RequestMethod.POST)
+    @ResponseBody
+    public DataWrapper<Map<String,String>> detail(
+            @RequestParam(value = "systemId",required = true) String systemId,
+            @RequestParam(value = "token",required = true) String token
+    ){
+        return systemService.detail(systemId);
     }
 }

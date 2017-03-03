@@ -10,13 +10,14 @@ import java.util.Map;
  * Created by XiaoJiang01 on 2017/2/24.
  */
 public interface SystemService {
-    
+
     DataWrapper<Void> add(SystemEntity systemEntity);
 
     DataWrapper<Void> delete(String systemId);
 
-    DataWrapper<Void> update(String systemId, String name, String pic);
+    DataWrapper<Void> update(SystemEntity system);
 
     DataWrapper<List<Map<String, String>>> list();
 
+    DataWrapper<Map<String,String>> detail(String key);
 }

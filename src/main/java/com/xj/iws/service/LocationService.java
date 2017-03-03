@@ -1,5 +1,6 @@
 package com.xj.iws.service;
 
+import com.xj.iws.entity.LocationEntity;
 import com.xj.iws.utils.DataWrapper;
 
 /**
@@ -7,13 +8,13 @@ import com.xj.iws.utils.DataWrapper;
  */
 public interface LocationService {
 
+    DataWrapper add(LocationEntity locationEntity);
+
     DataWrapper delete(String locationId);
 
-    DataWrapper update(String locationId, String locationName, String systemId, String blockId, String blockName);
+    DataWrapper update(LocationEntity location);
 
-    DataWrapper list(String name, String positationId, String systemId);
+    DataWrapper list(String systemId, String positationId);
 
     DataWrapper detail(String locationId);
-
-    DataWrapper add(String name, String positationX, String positationY, String positationId, String systemId, String blockId, String blockName);
 }

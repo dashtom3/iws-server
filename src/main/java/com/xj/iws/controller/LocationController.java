@@ -1,13 +1,11 @@
 package com.xj.iws.controller;
 
+import com.xj.iws.entity.LocationEntity;
 import com.xj.iws.service.LocationService;
 import com.xj.iws.utils.DataWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 管理全部地点设置请求
@@ -29,18 +27,18 @@ public class LocationController {
     @RequestMapping(value = "add", method = RequestMethod.POST)
     @ResponseBody
     public DataWrapper add(
-            @RequestParam(value = "name", required = true) String name,
-            @RequestParam(value = "positationX", required = true) String positationX,
-            @RequestParam(value = "positationY", required = true) String positationY,
-            @RequestParam(value = "positationId", required = true) String positationId,
-            @RequestParam(value = "systemId", required = true) String systemId,
-            @RequestParam(value = "blockId", required = true) String blockId,
-            @RequestParam(value = "blockName", required = true) String blockName,
-//            @ModelAttribute LocationEntity locationEntity,
+//            @RequestParam(value = "name", required = true) String name,
+//            @RequestParam(value = "positationX", required = true) String positationX,
+//            @RequestParam(value = "positationY", required = true) String positationY,
+//            @RequestParam(value = "positationId", required = true) String positationId,
+//            @RequestParam(value = "systemId", required = true) String systemId,
+//            @RequestParam(value = "blockId", required = true) String blockId,
+//            @RequestParam(value = "blockName", required = true) String blockName,
+            @ModelAttribute LocationEntity locationEntity,
             @RequestParam(value = "token", required = true) String token
 
     ) {
-        return locationService.add(name,positationX,positationY,positationId,systemId,blockId,blockName);
+        return locationService.add(locationEntity);
     }
 
     /**
@@ -63,16 +61,17 @@ public class LocationController {
      * @return boolean
      */
     public DataWrapper update(
-            @RequestParam(value = "locationId", required = true) String locationId,
-            @RequestParam(value = "locationName", required = true) String locationName,
-            @RequestParam(value = "systemId", required = true) String systemId,
-            @RequestParam(value = "blockId", required = true) String blockId,
-            @RequestParam(value = "blockName", required = true) String blockName,
+//            @RequestParam(value = "locationId", required = true) String locationId,
+//            @RequestParam(value = "locationName", required = true) String locationName,
+//            @RequestParam(value = "systemId", required = true) String systemId,
+//            @RequestParam(value = "blockId", required = true) String blockId,
+//            @RequestParam(value = "blockName", required = true) String blockName,
+            @ModelAttribute LocationEntity locationEntity,
             @RequestParam(value = "token", required = true) String token
 
     ) {
 
-        return locationService.update(locationId,locationName,systemId,blockId,blockName);
+        return locationService.update(locationEntity);
     }
 
     /**
@@ -81,13 +80,12 @@ public class LocationController {
      * @return location list
      */
     public DataWrapper list(
-            @RequestParam(value = "name", required = true) String name,
-            @RequestParam(value = "positationId", required = true) String positationId,
             @RequestParam(value = "systemId", required = true) String systemId,
+            @RequestParam(value = "positationId", required = true) String positationId,
             @RequestParam(value = "token", required = true) String token
     ) {
 
-        return locationService.list(name,positationId,systemId);
+        return locationService.list(systemId,positationId);
     }
 
 

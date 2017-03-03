@@ -1,9 +1,16 @@
 package com.xj.iws.service.impl;
 
+import com.xj.iws.dao.LocationDao;
+import com.xj.iws.entity.LocationEntity;
+import com.xj.iws.enums.CallStatusEnum;
 import com.xj.iws.enums.ErrorCodeEnum;
 import com.xj.iws.service.LocationService;
 import com.xj.iws.utils.DataWrapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by XiaoJiang01 on 2017/2/27.
@@ -11,36 +18,24 @@ import org.springframework.stereotype.Service;
 @Service
 public class LocationServiceImpl implements LocationService {
 
-    String table = "location";
+    @Autowired
+    LocationDao locationDao;
 
     @Override
-    public DataWrapper add(String name, String positationX, String positationY, String positationId, String systemId, String blockId, String blockName) {
+    public DataWrapper add(LocationEntity locationEntity) {
+
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
         dataWrapper.setErrorCode(ErrorCodeEnum.Error);
 
-//        //初始化参数
-//        Map<String, String> value = new HashMap<String, String>();
-//        value.put("name", name);
-//        value.put("positationX", positationX);
-//        value.put("positationY", positationY);
-//        value.put("positationId", positationId);
-//        value.put("systemId", systemId);
-//        value.put("blockId", blockId);
-//        value.put("blockName", blockName);
-//
-//        //获取编号
-//        Long num = commonDao.getCount("index_" + table) + 1;
-//        //生成key
-//        String key = "basic_" + table + "_" + positationId + "_" + systemId + "_" + num;
-//        //写入数据
-//        String result = commonDao.addHash(key, value);
-//        //添加索引
-//        if (key.equals(result)) {
-//            String s = commonDao.addSet("index_" + table, key);
-//            if (key.equals(s)) {
-//                dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
-//            }
-//        }
+        //生成score
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+        Long score = Long.valueOf(dateFormat.format(new Date()));
+
+        //写入数据
+        boolean sign = locationDao.add(score, locationEntity);
+        if (sign){
+            dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
+        }
         return dataWrapper;
     }
 
@@ -50,47 +45,49 @@ public class LocationServiceImpl implements LocationService {
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
         dataWrapper.setErrorCode(ErrorCodeEnum.Error);
 
-//        //删除数据
-//        String result = commonDao.deleteKey(locationId);
-//        //删除索引
-//        if (locationId.equals(result)) {
-//            String s = commonDao.deleteSet("index_" + table, locationId);
-//            if (locationId.equals(s)) {
-//                dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
-//            }
-//        }
+        boolean sign = locationDao.delete(locationId);
+        if (sign){
+            dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
+        }
+        dataWrapper.setCallStatus(CallStatusEnum.SUCCEED);
         return dataWrapper;
     }
 
     @Override
-    public DataWrapper update(String locationId, String locationName, String systemId, String blockId, String blockName) {
+    public DataWrapper update(LocationEntity location) {
+
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
         dataWrapper.setErrorCode(ErrorCodeEnum.Error);
 
-//        //初始化参数
-//        Map<String, String> value = new HashMap<String, String>();
-//        value.put("locationName", locationName);
-//        value.put("systemId", systemId);
-//        value.put("blockId", blockId);
-//        value.put("blockName", blockName);
-//        //编辑数据
-//        String result = commonDao.updateHash(locationId, value);
-//
-//        if (locationId.equals(result)) {
-//            dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
-//        }
+        locationDao.update(location);
+        dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
+        dataWrapper.setCallStatus(CallStatusEnum.SUCCEED);
         return dataWrapper;
     }
 
     @Override
-    public DataWrapper list(String name, String positationId, String systemId) {
+    public DataWrapper list(String systemId ,String positationId) {
 
-        return null;
+        DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
+        dataWrapper.setErrorCode(ErrorCodeEnum.Error);
+
+        locationDao.list(systemId ,positationId);
+        dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
+        dataWrapper.setCallStatus(CallStatusEnum.SUCCEED);
+        return dataWrapper;
     }
 
     @Override
     public DataWrapper detail(String locationId) {
-        return null;
+
+        DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
+        dataWrapper.setErrorCode(ErrorCodeEnum.Error);
+
+        locationDao.detail(locationId);
+        dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
+        dataWrapper.setCallStatus(CallStatusEnum.SUCCEED);
+        return dataWrapper;
     }
+
 
 }

@@ -7,24 +7,24 @@ package com.xj.iws.entity;
  */
 public class LocationEntity {
     private String id;
-    private String name;
+    private String systemId;
+    private String positionId;
     private String positionX;
     private String positionY;
-    private String positionId;
-    private String systemId;
+    private String name;
     private String blockId;
     private String blockName;
 
     public LocationEntity() {
     }
 
-    public LocationEntity(String id, String name, String positionX, String positionY, String positionId, String systemId, String blockId, String blockName) {
+    public LocationEntity(String id, String systemId, String positionId, String positionX, String positionY, String name, String blockId, String blockName) {
         this.id = id;
-        this.name = name;
+        this.systemId = systemId;
+        this.positionId = positionId;
         this.positionX = positionX;
         this.positionY = positionY;
-        this.positionId = positionId;
-        this.systemId = systemId;
+        this.name = name;
         this.blockId = blockId;
         this.blockName = blockName;
     }
