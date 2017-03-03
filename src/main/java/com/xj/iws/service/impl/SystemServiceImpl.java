@@ -1,6 +1,7 @@
 package com.xj.iws.service.impl;
 
 import com.xj.iws.dao.SystemDao;
+import com.xj.iws.entity.SystemEntity;
 import com.xj.iws.enums.ErrorCodeEnum;
 import com.xj.iws.service.SystemService;
 import com.xj.iws.utils.DataWrapper;
@@ -29,12 +30,11 @@ public class SystemServiceImpl implements SystemService {
     /**
      * 添加系统
      *
-     * @param name
-     * @param pic
+     * @param system
      * @return
      */
     @Override
-    public DataWrapper<Void> add(String name, String pic) {
+    public DataWrapper<Void> add(SystemEntity system) {
 
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
         dataWrapper.setErrorCode(ErrorCodeEnum.Error);
@@ -43,14 +43,8 @@ public class SystemServiceImpl implements SystemService {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
         Long score = Long.valueOf(dateFormat.format(new Date()));
 
-        System.out.println(score);
-        //格式化参数
-        Map<String, String> value = new HashMap<String, String>();
-        value.put("name", name);
-        value.put("pic", pic);
-
         //写入数据
-        boolean sign = systemDao.add(score,value);
+        boolean sign = systemDao.add(score,system);
         if (sign){
             dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
         }

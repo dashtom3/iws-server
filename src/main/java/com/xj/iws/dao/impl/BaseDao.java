@@ -3,6 +3,7 @@ package com.xj.iws.dao.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.*;
 import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -43,11 +44,9 @@ public class BaseDao {
         return redisTemplate.opsForSet();
     }
 
-    ListOperations rList(){
-        return redisTemplate.opsForList();
-    }
+    ListOperations rList(){ return redisTemplate.opsForList(); }
 
-    RedisSerializer getRedisSerializer(){
-        return redisTemplate.getStringSerializer();
-    }
+    RedisSerializer serializer(){ return redisTemplate.getStringSerializer(); }
+
+
 }

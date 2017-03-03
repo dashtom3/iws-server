@@ -1,13 +1,11 @@
 package com.xj.iws.controller;
 
+import com.xj.iws.entity.SystemEntity;
 import com.xj.iws.service.SystemService;
 import com.xj.iws.utils.DataWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -30,11 +28,12 @@ public class SystemController {
     @RequestMapping(value = "add",method = RequestMethod.POST)
     @ResponseBody
     public DataWrapper<Void> add(
-            @RequestParam(value = "name",required = true) String name,
-            @RequestParam(value = "pic",required = true) String pic,
+//            @RequestParam(value = "name",required = true) String name,
+//            @RequestParam(value = "pic",required = true) String pic,
+            @ModelAttribute SystemEntity system,
             @RequestParam(value = "token",required = true) String token
     ){
-        return systemService.add(name,pic);
+        return systemService.add(system);
     }
 
     /**
