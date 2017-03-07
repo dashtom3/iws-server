@@ -1,22 +1,27 @@
 package com.xj.iws.entity;
 
+import org.apache.ibatis.type.Alias;
+
+import java.util.Date;
+
 /**
  * 用户信息实体类
  * @author Created by XiaoJiang01 on 2017/2/21.
  */
+@Alias("UserEntity")
 public class UserEntity {
-    private String userId;
-    private String userName;
+    private int userId;
+    private int userName;
     private String password;
     private String name;
-    private String roleId;
+    private int roleId;
     private String pic;
-    private String date;
+    private Date date;
 
     public UserEntity() {
     }
 
-    public UserEntity(String userId, String userName, String password, String name, String roleId, String pic, String date) {
+    public UserEntity(int userId, int userName, String password, String name, int roleId, String pic, Date date) {
         this.userId = userId;
         this.userName = userName;
         this.password = password;
@@ -26,19 +31,19 @@ public class UserEntity {
         this.date = date;
     }
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
-    public String getUserName() {
+    public int getUserName() {
         return userName;
     }
 
-    public void setUserName(String userName) {
+    public void setUserName(int userName) {
         this.userName = userName;
     }
 
@@ -58,11 +63,11 @@ public class UserEntity {
         this.name = name;
     }
 
-    public String getRoleId() {
+    public int getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(String roleId) {
+    public void setRoleId(int roleId) {
         this.roleId = roleId;
     }
 
@@ -74,11 +79,11 @@ public class UserEntity {
         this.pic = pic;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 }

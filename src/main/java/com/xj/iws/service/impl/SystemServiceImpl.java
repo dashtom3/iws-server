@@ -7,13 +7,10 @@ import com.xj.iws.enums.ErrorCodeEnum;
 import com.xj.iws.service.SystemService;
 import com.xj.iws.utils.DataWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.env.SystemEnvironmentPropertySource;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -39,14 +36,10 @@ public class SystemServiceImpl implements SystemService {
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
         dataWrapper.setErrorCode(ErrorCodeEnum.Error);
 
-        //生成score
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-        Long score = Long.valueOf(dateFormat.format(new Date()));
-
-        boolean sign = systemDao.add(score,system);
-        if (sign){
-            dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
-        }
+//        boolean sign = systemDao.add(system);
+//        if (sign){
+//            dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
+//        }
         dataWrapper.setCallStatus(CallStatusEnum.SUCCEED);
         return dataWrapper;
     }
@@ -63,10 +56,10 @@ public class SystemServiceImpl implements SystemService {
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
         dataWrapper.setErrorCode(ErrorCodeEnum.Error);
 
-        boolean sign = systemDao.delete(systemId);
-        if (sign){
-            dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
-        }
+//        boolean sign = systemDao.delete(systemId);
+//        if (sign){
+//            dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
+//        }
         dataWrapper.setCallStatus(CallStatusEnum.SUCCEED);
         return dataWrapper;
     }
@@ -83,7 +76,7 @@ public class SystemServiceImpl implements SystemService {
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
         dataWrapper.setErrorCode(ErrorCodeEnum.Error);
 
-        systemDao.update(system);
+//        systemDao.update(system);
         dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
         dataWrapper.setCallStatus(CallStatusEnum.SUCCEED);
         return dataWrapper;
@@ -100,7 +93,7 @@ public class SystemServiceImpl implements SystemService {
         DataWrapper<List<Map<String, String>>> dataWrapper = new DataWrapper<List<Map<String, String>>>();
         dataWrapper.setErrorCode(ErrorCodeEnum.Error);
 
-        dataWrapper.setData(systemDao.list());
+//        dataWrapper.setData(systemDao.list());
         dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
         dataWrapper.setCallStatus(CallStatusEnum.SUCCEED);
         return dataWrapper;
@@ -117,7 +110,7 @@ public class SystemServiceImpl implements SystemService {
         DataWrapper<Map<String,String>> dataWrapper = new DataWrapper<Map<String,String>>();
         dataWrapper.setErrorCode(ErrorCodeEnum.Error);
 
-        dataWrapper.setData(systemDao.detail(systemId));
+//        dataWrapper.setData(systemDao.detail(systemId));
         dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
         dataWrapper.setCallStatus(CallStatusEnum.SUCCEED);
         return dataWrapper;

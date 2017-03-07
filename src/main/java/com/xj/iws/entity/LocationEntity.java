@@ -1,40 +1,73 @@
 package com.xj.iws.entity;
 
+import org.apache.ibatis.type.Alias;
+
 /**
  * 地点资料实体类
  *
  * @author Created by XiaoJiang01 on 2017/2/21.
  */
+@Alias("LocationEntity")
 public class LocationEntity {
-    private String id;
-    private String systemId;
-    private String positionId;
-    private String positionX;
-    private String positionY;
+    private int id;
+    private int systemId;
+    private int areaId;
+    private Long positionX;
+    private Long positionY;
     private String name;
-    private String blockId;
     private String blockName;
 
     public LocationEntity() {
     }
 
-    public LocationEntity(String id, String systemId, String positionId, String positionX, String positionY, String name, String blockId, String blockName) {
+    public LocationEntity(int id, int systemId, int areaId, Long positionX, Long positionY, String name, String blockName) {
         this.id = id;
         this.systemId = systemId;
-        this.positionId = positionId;
+        this.areaId = areaId;
         this.positionX = positionX;
         this.positionY = positionY;
         this.name = name;
-        this.blockId = blockId;
         this.blockName = blockName;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
+    }
+
+    public int getSystemId() {
+        return systemId;
+    }
+
+    public void setSystemId(int systemId) {
+        this.systemId = systemId;
+    }
+
+    public int getAreaId() {
+        return areaId;
+    }
+
+    public void setAreaId(int areaId) {
+        this.areaId = areaId;
+    }
+
+    public Long getPositionX() {
+        return positionX;
+    }
+
+    public void setPositionX(Long positionX) {
+        this.positionX = positionX;
+    }
+
+    public Long getPositionY() {
+        return positionY;
+    }
+
+    public void setPositionY(Long positionY) {
+        this.positionY = positionY;
     }
 
     public String getName() {
@@ -43,46 +76,6 @@ public class LocationEntity {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getPositionX() {
-        return positionX;
-    }
-
-    public void setPositionX(String positionX) {
-        this.positionX = positionX;
-    }
-
-    public String getPositionY() {
-        return positionY;
-    }
-
-    public void setPositionY(String positionY) {
-        this.positionY = positionY;
-    }
-
-    public String getPositionId() {
-        return positionId;
-    }
-
-    public void setPositionId(String positionId) {
-        this.positionId = positionId;
-    }
-
-    public String getSystemId() {
-        return systemId;
-    }
-
-    public void setSystemId(String systemId) {
-        this.systemId = systemId;
-    }
-
-    public String getBlockId() {
-        return blockId;
-    }
-
-    public void setBlockId(String blockId) {
-        this.blockId = blockId;
     }
 
     public String getBlockName() {
