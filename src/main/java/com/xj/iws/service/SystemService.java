@@ -17,7 +17,7 @@ public interface SystemService {
 
     DataWrapper<Void> update(SystemEntity system);
 
-    DataWrapper<List<Map<String, String>>> list();
+    DataWrapper<List<SystemEntity>> list();
 
-    DataWrapper<Map<String,String>> detail(String key);
+    DataWrapper<SystemEntity> detail(String key);
 }

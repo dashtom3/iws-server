@@ -3,13 +3,42 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!-- namespace命名空间，作用就是对sql进行分类化管理，理解sql隔离
-注意：使用mapper代理方法开发，namespace有特殊重要的作用，namespace等于mapper接口地址
--->
-<mapper namespace="com.xj.iws.mapper.SystemMapper">
+<mapper namespace="com.xj.iws.dao.SystemDao">
+
+    <sql id="field">name,pic</sql>
+
+    <resultMap id="BaseResultMap" type="com.xj.iws.entity.SystemEntity">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="pic" property="pic" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="SystemEntity" type="com.xj.iws.entity.SystemEntity" extends="BaseResultMap">
+    </resultMap>
 
     <insert id="add" parameterType="SystemEntity">
-        insert into system(id,name,pic) values(${id},${NAME},${pic});
+        INSERT INTO system (<include refid="field" />) VALUES (${name},${pic})
     </insert>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM system WHERE id = ${id}
+    </delete>
+
+    <update id="update" parameterType="SystemEntity">
+        UPDATE system
+        <set>
+            <if test="name != null">name = ${name},</if>
+            <if test="pic != null">pic = ${pic},</if>
+        </set>
+        WHERE id = ${id}
+    </update>
+
+    <select id="list" resultMap="SystemEntity">
+        SELECT id,name,pic FROM system
+    </select>
+
+    <select id="detail" parameterType="int" resultMap="SystemEntity">
+        SELECT id,name,pic FROM system WHERE id = ${id}
+    </select>
 
 </mapper>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xj.iws.dao.AreaDao">
+
+    <sql id="province">id,provinceid,name</sql>
+    <sql id="city">id,cityid,name,provinceid</sql>
+    <sql id="area">id,areaid,name,cityid</sql>
+
+    <resultMap id="ProvinceEntity" type="com.xj.iws.entity.area.ProvinceEntity">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="provinceId" property="provinceid" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="CityEntity" type="com.xj.iws.entity.area.CityEntity">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="cityId" property="cityid" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="provinceId" property="provinceid" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <resultMap id="AreaEntity" type="com.xj.iws.entity.area.AreaEntity">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="areaId" property="areaid" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="cityId" property="cityid" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="provinces" resultMap="ProvinceEntity">
+        SELECT <include refid="province" /> FROM province
+    </select>
+
+    <select id="cities" resultMap="CityEntity" parameterType="int">
+        SELECT <include refid="city" /> FROM city WHERE provinceid = ${provinceId}
+    </select>
+
+    <select id="areas" resultMap="AreaEntity" parameterType="int">
+        SELECT <include refid="area" /> FROM area WHERE cityid = ${cityId}
+    </select>
+
+    <select id="province" resultMap="ProvinceEntity" parameterType="int">
+        SELECT <include refid="province" /> FROM province WHERE provinceid = ${provinceId}
+    </select>
+
+    <select id="city" resultMap="CityEntity" parameterType="int">
+        SELECT <include refid="city" /> FROM city WHERE cityid = ${cityId}
+    </select>
+
+    <select id="area" resultMap="AreaEntity" parameterType="int">
+        SELECT <include refid="area" /> FROM area WHERE areaid = ${areaId}
+    </select>
+
+</mapper>

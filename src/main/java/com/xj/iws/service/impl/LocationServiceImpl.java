@@ -32,10 +32,10 @@ public class LocationServiceImpl implements LocationService {
         Long score = Long.valueOf(dateFormat.format(new Date()));
 
         //写入数据
-        boolean sign = locationDao.add(score, locationEntity);
-        if (sign){
-            dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
-        }
+//        boolean sign = locationDao.add(score, locationEntity);
+//        if (sign){
+//            dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
+//        }
         return dataWrapper;
     }
 
@@ -45,10 +45,10 @@ public class LocationServiceImpl implements LocationService {
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
         dataWrapper.setErrorCode(ErrorCodeEnum.Error);
 
-        boolean sign = locationDao.delete(locationId);
-        if (sign){
-            dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
-        }
+//        boolean sign = locationDao.delete(locationId);
+//        if (sign){
+//            dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
+//        }
         dataWrapper.setCallStatus(CallStatusEnum.SUCCEED);
         return dataWrapper;
     }
@@ -59,7 +59,7 @@ public class LocationServiceImpl implements LocationService {
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
         dataWrapper.setErrorCode(ErrorCodeEnum.Error);
 
-        locationDao.update(location);
+//        locationDao.update(location);
         dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
         dataWrapper.setCallStatus(CallStatusEnum.SUCCEED);
         return dataWrapper;
@@ -71,7 +71,7 @@ public class LocationServiceImpl implements LocationService {
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
         dataWrapper.setErrorCode(ErrorCodeEnum.Error);
 
-        locationDao.list(systemId ,positationId);
+//        locationDao.list(systemId ,positationId);
         dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
         dataWrapper.setCallStatus(CallStatusEnum.SUCCEED);
         return dataWrapper;
@@ -83,7 +83,7 @@ public class LocationServiceImpl implements LocationService {
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
         dataWrapper.setErrorCode(ErrorCodeEnum.Error);
 
-        locationDao.detail(locationId);
+//        locationDao.detail(locationId);
         dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
         dataWrapper.setCallStatus(CallStatusEnum.SUCCEED);
         return dataWrapper;

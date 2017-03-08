@@ -54,9 +54,6 @@ public class SystemController {
     @RequestMapping(value = "update",method = RequestMethod.POST)
     @ResponseBody
     public DataWrapper<Void> update(
-            @RequestParam(value = "systemId",required = true) String systemId,
-            @RequestParam(value = "name",required = true) String name,
-            @RequestParam(value = "pic",required = true) String pic,
             @ModelAttribute SystemEntity system,
             @RequestParam(value = "token",required = true) String token
     ){
@@ -69,7 +66,7 @@ public class SystemController {
      */
     @RequestMapping(value = "list",method = RequestMethod.POST)
     @ResponseBody
-    public DataWrapper<List<Map<String, String>>> list(
+    public DataWrapper<List<SystemEntity>> list(
             @RequestParam(value = "name",required = false) String name,
             @RequestParam(value = "token",required = true) String token
     ){
@@ -84,7 +81,7 @@ public class SystemController {
      */
     @RequestMapping(value = "detail",method = RequestMethod.POST)
     @ResponseBody
-    public DataWrapper<Map<String,String>> detail(
+    public DataWrapper<SystemEntity> detail(
             @RequestParam(value = "systemId",required = true) String systemId,
             @RequestParam(value = "token",required = true) String token
     ){

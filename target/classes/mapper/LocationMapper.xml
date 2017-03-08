@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xj.iws.dao.LocationDao">
+
+    <sql id="field">locationid,areaid,positonx,positiony,name,blockname</sql>
+
+    <resultMap id="BaseResultMap" type="com.xj.iws.entity.LocationEntity">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="locationId" property="locationid" jdbcType="VARCHAR"/>
+        <result column="areaId" property="areaid" jdbcType="VARCHAR"/>
+        <result column="positionX" property="positionx" jdbcType="VARCHAR"/>
+        <result column="positionY" property="positiony" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="blockName" property="blockname" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="LoctionEntity" type="com.xj.iws.entity.LocationEntity" extends="BaseResultMap">
+    </resultMap>
+
+    <!--<insert id="add" parameterType="LocatinEntity">-->
+        <!--INSERT INTO locatin (<include refid="field"/>) VALUES (${name},${pic})-->
+    <!--</insert>-->
+
+    <!--<delete id="delete" parameterType="int">-->
+        <!--DELETE FROM locatin WHERE id = ${id}-->
+    <!--</delete>-->
+
+    <!--<update id="update" parameterType="LocatinEntity">-->
+        <!--UPDATE locatin-->
+        <!--<set>-->
+            <!--<if test="name != null">name = ${name},</if>-->
+            <!--<if test="pic != null">pic = ${pic},</if>-->
+        <!--</set>-->
+        <!--WHERE id = ${id}-->
+    <!--</update>-->
+
+    <!--<select id="list" resultMap="LocatinEntity">-->
+        <!--SELECT id,name,pic FROM locatin-->
+    <!--</select>-->
+
+    <!--<select id="detail" parameterType="int" resultMap="locatinEntity">-->
+        <!--SELECT id,name,pic FROM locatin WHERE id = ${id}-->
+    <!--</select>-->
+
+</mapper>

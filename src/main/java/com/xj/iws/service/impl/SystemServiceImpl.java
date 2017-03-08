@@ -36,10 +36,10 @@ public class SystemServiceImpl implements SystemService {
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
         dataWrapper.setErrorCode(ErrorCodeEnum.Error);
 
-//        boolean sign = systemDao.add(system);
-//        if (sign){
-//            dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
-//        }
+        int sign = systemDao.add(system);
+        if (sign == 1){
+            dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
+        }
         dataWrapper.setCallStatus(CallStatusEnum.SUCCEED);
         return dataWrapper;
     }
@@ -56,10 +56,10 @@ public class SystemServiceImpl implements SystemService {
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
         dataWrapper.setErrorCode(ErrorCodeEnum.Error);
 
-//        boolean sign = systemDao.delete(systemId);
-//        if (sign){
-//            dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
-//        }
+        int sign = systemDao.delete(systemId);
+        if (sign==1){
+            dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
+        }
         dataWrapper.setCallStatus(CallStatusEnum.SUCCEED);
         return dataWrapper;
     }
@@ -76,8 +76,10 @@ public class SystemServiceImpl implements SystemService {
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
         dataWrapper.setErrorCode(ErrorCodeEnum.Error);
 
-//        systemDao.update(system);
-        dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
+        int sign = systemDao.update(system);
+        if (sign == 1){
+            dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
+        }
         dataWrapper.setCallStatus(CallStatusEnum.SUCCEED);
         return dataWrapper;
     }
@@ -88,13 +90,16 @@ public class SystemServiceImpl implements SystemService {
      * @return
      */
     @Override
-    public DataWrapper<List<Map<String, String>>> list() {
+    public DataWrapper<List<SystemEntity>> list() {
 
-        DataWrapper<List<Map<String, String>>> dataWrapper = new DataWrapper<List<Map<String, String>>>();
+        DataWrapper<List<SystemEntity>> dataWrapper = new DataWrapper<List<SystemEntity>>();
         dataWrapper.setErrorCode(ErrorCodeEnum.Error);
 
-//        dataWrapper.setData(systemDao.list());
-        dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
+        List<SystemEntity> result = systemDao.list();
+        if (result != null){
+            dataWrapper.setData(result);
+            dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
+        }
         dataWrapper.setCallStatus(CallStatusEnum.SUCCEED);
         return dataWrapper;
     }
@@ -105,13 +110,16 @@ public class SystemServiceImpl implements SystemService {
      * @return
      */
     @Override
-    public DataWrapper<Map<String,String>> detail(String systemId){
+    public DataWrapper<SystemEntity> detail(String systemId){
 
-        DataWrapper<Map<String,String>> dataWrapper = new DataWrapper<Map<String,String>>();
+        DataWrapper<SystemEntity> dataWrapper = new DataWrapper<SystemEntity>();
         dataWrapper.setErrorCode(ErrorCodeEnum.Error);
 
-//        dataWrapper.setData(systemDao.detail(systemId));
-        dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
+        SystemEntity result = systemDao.detail(systemId);
+        if (result != null){
+            dataWrapper.setData(result);
+            dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
+        }
         dataWrapper.setCallStatus(CallStatusEnum.SUCCEED);
         return dataWrapper;
     }
