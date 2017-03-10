@@ -12,11 +12,11 @@ public interface SystemDao {
 
     int add(SystemEntity system);
 
-    int delete(String systemId);
+    int delete(int systemId);
 
     int update(SystemEntity system);
 
     List<SystemEntity> list();
 
-    SystemEntity detail(String systemId);
+    SystemEntity detail(int systemId);
 }

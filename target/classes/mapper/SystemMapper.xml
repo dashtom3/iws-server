@@ -9,36 +9,40 @@
 
     <resultMap id="BaseResultMap" type="com.xj.iws.entity.SystemEntity">
         <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="name" property="name" jdbcType="VARCHAR"/>
-        <result column="pic" property="pic" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR" javaType="String"/>
+        <result column="pic" property="pic" jdbcType="VARCHAR" javaType="String"/>
     </resultMap>
 
     <resultMap id="SystemEntity" type="com.xj.iws.entity.SystemEntity" extends="BaseResultMap">
     </resultMap>
 
     <insert id="add" parameterType="SystemEntity">
-        INSERT INTO system (<include refid="field" />) VALUES (${name},${pic})
+        INSERT INTO system (<include refid="field"/>) VALUES ('${name}','${pic}')
     </insert>
 
     <delete id="delete" parameterType="int">
-        DELETE FROM system WHERE id = ${id}
+        DELETE FROM system WHERE id = ${_parameter}
     </delete>
 
     <update id="update" parameterType="SystemEntity">
         UPDATE system
         <set>
-            <if test="name != null">name = ${name},</if>
-            <if test="pic != null">pic = ${pic},</if>
+            <if test="name != null">name = '${name}',</if>
+            <if test="pic != null">pic = '${pic}',</if>
         </set>
         WHERE id = ${id}
     </update>
 
     <select id="list" resultMap="SystemEntity">
-        SELECT id,name,pic FROM system
+        SELECT id,
+        <include refid="field"/>
+        FROM system
     </select>
 
     <select id="detail" parameterType="int" resultMap="SystemEntity">
-        SELECT id,name,pic FROM system WHERE id = ${id}
+        SELECT id,
+        <include refid="field"/>
+        FROM system WHERE id = ${_parameter}
     </select>
 
 </mapper>

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * 管理全部地点设置请求
  *
@@ -26,17 +28,9 @@ public class LocationController {
      */
     @RequestMapping(value = "add", method = RequestMethod.POST)
     @ResponseBody
-    public DataWrapper add(
-//            @RequestParam(value = "name", required = true) String name,
-//            @RequestParam(value = "positationX", required = true) String positationX,
-//            @RequestParam(value = "positationY", required = true) String positationY,
-//            @RequestParam(value = "positationId", required = true) String positationId,
-//            @RequestParam(value = "systemId", required = true) String systemId,
-//            @RequestParam(value = "blockId", required = true) String blockId,
-//            @RequestParam(value = "blockName", required = true) String blockName,
+    public DataWrapper<Void> add(
             @ModelAttribute LocationEntity locationEntity,
             @RequestParam(value = "token", required = true) String token
-
     ) {
         return locationService.add(locationEntity);
     }
@@ -46,8 +40,10 @@ public class LocationController {
      *
      * @return boolean
      */
-    public DataWrapper delete(
-            @RequestParam(value = "locationId", required = true) String locationId,
+    @RequestMapping(value = "delete", method = RequestMethod.POST)
+    @ResponseBody
+    public DataWrapper<Void> delete(
+            @RequestParam(value = "locationId", required = true) int locationId,
             @RequestParam(value = "token", required = true) String token
 
     ) {
@@ -60,12 +56,9 @@ public class LocationController {
      *
      * @return boolean
      */
-    public DataWrapper update(
-//            @RequestParam(value = "locationId", required = true) String locationId,
-//            @RequestParam(value = "locationName", required = true) String locationName,
-//            @RequestParam(value = "systemId", required = true) String systemId,
-//            @RequestParam(value = "blockId", required = true) String blockId,
-//            @RequestParam(value = "blockName", required = true) String blockName,
+    @RequestMapping(value = "update", method = RequestMethod.POST)
+    @ResponseBody
+    public DataWrapper<Void> update(
             @ModelAttribute LocationEntity locationEntity,
             @RequestParam(value = "token", required = true) String token
 
@@ -75,32 +68,40 @@ public class LocationController {
     }
 
     /**
-     * 获取地点列表
-     *
-     * @return location list
-     */
-    public DataWrapper list(
-            @RequestParam(value = "systemId", required = true) String systemId,
-            @RequestParam(value = "positationId", required = true) String positationId,
-            @RequestParam(value = "token", required = true) String token
-    ) {
-
-        return locationService.list(systemId,positationId);
-    }
-
-
-    /**
-     * 获取某一地点详情
+     * 获取某一地点及地点下全部泵房
      *
      * @return location
      */
-    public DataWrapper detail(
-            @RequestParam(value = "locationId", required = true) String locationId,
+    @RequestMapping(value = "detail", method = RequestMethod.POST)
+    @ResponseBody
+    public DataWrapper<LocationEntity> detail(
+            @RequestParam(value = "locationId", required = true) int locationId,
             @RequestParam(value = "token", required = true) String token
-
     ) {
-
         return locationService.detail(locationId);
+    }
+
+    /**
+     * 条件查询,获取条件下全部地点
+     * 最多可按province,city,area中一项查询，若同时存在优先级为area,city,province
+     *
+     * @param systemId
+     * @param provinceId
+     * @param cityId
+     * @param areaId
+     * @param token
+     * @return
+     */
+    @RequestMapping(value = "query", method = RequestMethod.POST)
+    @ResponseBody
+    public DataWrapper<List<LocationEntity>> query(
+            @RequestParam(value = "systemId", required = false) String systemId,
+            @RequestParam(value = "provinceId", required = false) String provinceId,
+            @RequestParam(value = "cityId", required = false) String cityId,
+            @RequestParam(value = "areaId", required = false) String areaId,
+            @RequestParam(value = "token", required = false) String token
+    ) {
+        return locationService.query(systemId,provinceId,cityId,areaId);
     }
 
 }

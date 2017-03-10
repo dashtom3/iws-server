@@ -41,7 +41,7 @@ public class SystemController {
     @RequestMapping(value = "delete",method = RequestMethod.POST)
     @ResponseBody
     public DataWrapper<Void> delete(
-            @RequestParam(value = "systemId",required = true) String systemId,
+            @RequestParam(value = "systemId",required = true) int systemId,
             @RequestParam(value = "token",required = true) String token
     ){
         return systemService.delete(systemId);
@@ -61,20 +61,19 @@ public class SystemController {
     }
 
     /**
-     * 获取系统列表
+     * 获取全部系统及系统下全部地点
      * @return system list
      */
     @RequestMapping(value = "list",method = RequestMethod.POST)
     @ResponseBody
     public DataWrapper<List<SystemEntity>> list(
-            @RequestParam(value = "name",required = false) String name,
             @RequestParam(value = "token",required = true) String token
     ){
         return systemService.list();
     }
 
     /**
-     * 获取详细信息
+     * 获取某一系统及系统下全部地点
      * @param systemId
      * @param token
      * @return
@@ -82,7 +81,7 @@ public class SystemController {
     @RequestMapping(value = "detail",method = RequestMethod.POST)
     @ResponseBody
     public DataWrapper<SystemEntity> detail(
-            @RequestParam(value = "systemId",required = true) String systemId,
+            @RequestParam(value = "systemId",required = true) int systemId,
             @RequestParam(value = "token",required = true) String token
     ){
         return systemService.detail(systemId);

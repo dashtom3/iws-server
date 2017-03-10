@@ -3,18 +3,20 @@ package com.xj.iws.service;
 import com.xj.iws.entity.LocationEntity;
 import com.xj.iws.utils.DataWrapper;
 
+import java.util.List;
+
 /**
  * Created by XiaoJiang01 on 2017/2/27.
  */
 public interface LocationService {
 
-    DataWrapper add(LocationEntity locationEntity);
+    DataWrapper<Void> add(LocationEntity locationEntity);
 
-    DataWrapper delete(String locationId);
+    DataWrapper<Void> delete(int locationId);
 
-    DataWrapper update(LocationEntity location);
+    DataWrapper<Void> update(LocationEntity locationEntity);
 
-    DataWrapper list(String systemId, String positationId);
+    DataWrapper<LocationEntity> detail(int locationId);
 
-    DataWrapper detail(String locationId);
+    DataWrapper<List<LocationEntity>> query(String systemId, String provinceId, String cityId, String areaId);
 }

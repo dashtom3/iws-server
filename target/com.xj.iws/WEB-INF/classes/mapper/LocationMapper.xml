@@ -5,44 +5,55 @@
 
 <mapper namespace="com.xj.iws.dao.LocationDao">
 
-    <sql id="field">locationid,areaid,positonx,positiony,name,blockname</sql>
+    <sql id="field">systemid,areaid,positionx,positiony,name</sql>
 
     <resultMap id="BaseResultMap" type="com.xj.iws.entity.LocationEntity">
         <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="locationId" property="locationid" jdbcType="VARCHAR"/>
-        <result column="areaId" property="areaid" jdbcType="VARCHAR"/>
-        <result column="positionX" property="positionx" jdbcType="VARCHAR"/>
-        <result column="positionY" property="positiony" jdbcType="VARCHAR"/>
+        <result column="systemid" property="systemId" jdbcType="INTEGER"/>
+        <result column="areaid" property="areaId" jdbcType="INTEGER"/>
+        <result column="positionx" property="positionX" jdbcType="DOUBLE"/>
+        <result column="positiony" property="positionY" jdbcType="DOUBLE"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
-        <result column="blockName" property="blockname" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <resultMap id="LoctionEntity" type="com.xj.iws.entity.LocationEntity" extends="BaseResultMap">
+    <resultMap id="LocationEntity" type="com.xj.iws.entity.LocationEntity" extends="BaseResultMap">
     </resultMap>
 
-    <!--<insert id="add" parameterType="LocatinEntity">-->
-        <!--INSERT INTO locatin (<include refid="field"/>) VALUES (${name},${pic})-->
-    <!--</insert>-->
+    <insert id="add" parameterType="LocationEntity">
+        INSERT INTO location (<include refid="field"/>) VALUES (${systemId},${areaId},${positionX},${positionY},${name})
+    </insert>
 
-    <!--<delete id="delete" parameterType="int">-->
-        <!--DELETE FROM locatin WHERE id = ${id}-->
-    <!--</delete>-->
+    <delete id="delete" parameterType="int">
+        DELETE FROM location WHERE id = ${_parameter}
+    </delete>
 
-    <!--<update id="update" parameterType="LocatinEntity">-->
-        <!--UPDATE locatin-->
-        <!--<set>-->
-            <!--<if test="name != null">name = ${name},</if>-->
-            <!--<if test="pic != null">pic = ${pic},</if>-->
-        <!--</set>-->
-        <!--WHERE id = ${id}-->
-    <!--</update>-->
+    <update id="update" parameterType="LocationEntity">
+        UPDATE location
+        <set>
+            <if test="systemId != null">systemid = ${systemId},</if>
+            <if test="areaId != null">areaid = ${areaId},</if>
+            <if test="positionX != null">positionx = ${positionX},</if>
+            <if test="positionY != null">positiony = ${positionY},</if>
+            <if test="name != null">name = '${name}',</if>
+        </set>
+        WHERE id = ${id}
+    </update>
 
-    <!--<select id="list" resultMap="LocatinEntity">-->
-        <!--SELECT id,name,pic FROM locatin-->
-    <!--</select>-->
+    <select id="detail" parameterType="int" resultMap="LocationEntity">
+        SELECT
+        <include refid="field"/>
+        FROM location WHERE id = ${_parameter}
+    </select>
 
-    <!--<select id="detail" parameterType="int" resultMap="locatinEntity">-->
-        <!--SELECT id,name,pic FROM locatin WHERE id = ${id}-->
-    <!--</select>-->
-
+    <select id="query" resultMap="LocationEntity">
+        SELECT id,
+        <include refid="field"/>
+        FROM location
+        <where>
+            <if test="systemId != null">AND systemid = ${systemId}</if>
+            <if test="areaId != null">AND areaid = ${areaId}</if>
+            <if test="cityId != null">AND areaid IN (SELECT areaid FROM area WHERE cityid = ${cityId})</if>
+            <if test="provinceId != null">AND areaid IN (SELECT areaid FROM area WHERE cityid IN (SELECT cityid FROM city WHERE provinceid = ${provinceId}))</if>
+        </where>
+    </select>
 </mapper>

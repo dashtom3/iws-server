@@ -13,11 +13,11 @@ public interface SystemService {
 
     DataWrapper<Void> add(SystemEntity systemEntity);
 
-    DataWrapper<Void> delete(String systemId);
+    DataWrapper<Void> delete(int systemId);
 
     DataWrapper<Void> update(SystemEntity system);
 
     DataWrapper<List<SystemEntity>> list();
 
-    DataWrapper<SystemEntity> detail(String key);
+    DataWrapper<SystemEntity> detail(int systemId);
 }
