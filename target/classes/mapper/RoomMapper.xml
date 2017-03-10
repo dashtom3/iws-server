@@ -17,7 +17,7 @@
     </resultMap>
 
     <insert id="add" parameterType="RoomEntity">
-        INSERT INTO room (<include refid="field" />) VALUES (${locationId},'${name}')
+        INSERT INTO room (<include refid="field"/>) VALUES (${locationId},'${name}')
     </insert>
 
     <delete id="delete" parameterType="int">
@@ -34,11 +34,15 @@
     </update>
 
     <select id="list" parameterType="int" resultMap="RoomEntity">
-        SELECT id,<include refid="field" /> FROM room WHERE locationid = ${_parameter}
+        SELECT id,
+        <include refid="field"/>
+        FROM room WHERE locationid = ${_parameter} ORDER BY id
     </select>
 
     <select id="detail" parameterType="int" resultMap="RoomEntity">
-        SELECT id,<include refid="field" /> FROM room WHERE id = ${_parameter}
+        SELECT id,
+        <include refid="field"/>
+        FROM room WHERE id = ${_parameter}
     </select>
 
 </mapper>

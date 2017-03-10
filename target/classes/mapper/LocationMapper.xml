@@ -40,7 +40,7 @@
     </update>
 
     <select id="detail" parameterType="int" resultMap="LocationEntity">
-        SELECT
+        SELECT id,
         <include refid="field"/>
         FROM location WHERE id = ${_parameter}
     </select>
@@ -55,5 +55,6 @@
             <if test="cityId != null">AND areaid IN (SELECT areaid FROM area WHERE cityid = ${cityId})</if>
             <if test="provinceId != null">AND areaid IN (SELECT areaid FROM area WHERE cityid IN (SELECT cityid FROM city WHERE provinceid = ${provinceId}))</if>
         </where>
+        ORDER BY systemid, areaid
     </select>
 </mapper>

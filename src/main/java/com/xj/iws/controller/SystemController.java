@@ -23,20 +23,24 @@ public class SystemController {
 
     /**
      * 添加系统
-     * @return boolean
+     * @param systemEntity
+     * @param token
+     * @return
      */
     @RequestMapping(value = "add",method = RequestMethod.POST)
     @ResponseBody
     public DataWrapper<Void> add(
-            @ModelAttribute SystemEntity system,
+            @ModelAttribute SystemEntity systemEntity,
             @RequestParam(value = "token",required = true) String token
     ){
-        return systemService.add(system);
+        return systemService.add(systemEntity);
     }
 
     /**
      * 删除系统
-     * @return boolean
+     * @param systemId
+     * @param token
+     * @return
      */
     @RequestMapping(value = "delete",method = RequestMethod.POST)
     @ResponseBody
@@ -49,20 +53,23 @@ public class SystemController {
 
     /**
      * 编辑系统
-     * @return boolean
+     * @param systemEntity
+     * @param token
+     * @return
      */
     @RequestMapping(value = "update",method = RequestMethod.POST)
     @ResponseBody
     public DataWrapper<Void> update(
-            @ModelAttribute SystemEntity system,
+            @ModelAttribute SystemEntity systemEntity,
             @RequestParam(value = "token",required = true) String token
     ){
-        return systemService.update(system);
+        return systemService.update(systemEntity);
     }
 
     /**
      * 获取全部系统及系统下全部地点
-     * @return system list
+     * @param token
+     * @return
      */
     @RequestMapping(value = "list",method = RequestMethod.POST)
     @ResponseBody

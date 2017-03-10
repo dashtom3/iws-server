@@ -5,19 +5,20 @@
 
 <mapper namespace="com.xj.iws.dao.SystemDao">
 
-    <sql id="field">name,pic</sql>
+    <sql id="field">name,pic,describes</sql>
 
     <resultMap id="BaseResultMap" type="com.xj.iws.entity.SystemEntity">
-        <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="name" property="name" jdbcType="VARCHAR" javaType="String"/>
-        <result column="pic" property="pic" jdbcType="VARCHAR" javaType="String"/>
     </resultMap>
 
     <resultMap id="SystemEntity" type="com.xj.iws.entity.SystemEntity" extends="BaseResultMap">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="pic" property="pic" jdbcType="VARCHAR" />
+        <result column="describes" property="describes" jdbcType="VARCHAR" />
     </resultMap>
 
     <insert id="add" parameterType="SystemEntity">
-        INSERT INTO system (<include refid="field"/>) VALUES ('${name}','${pic}')
+        INSERT INTO system (<include refid="field"/>) VALUES ('${name}','${pic}','${describes}')
     </insert>
 
     <delete id="delete" parameterType="int">
@@ -29,6 +30,7 @@
         <set>
             <if test="name != null">name = '${name}',</if>
             <if test="pic != null">pic = '${pic}',</if>
+            <if test="describes != null">describe = '${describes}',</if>
         </set>
         WHERE id = ${id}
     </update>
@@ -36,7 +38,7 @@
     <select id="list" resultMap="SystemEntity">
         SELECT id,
         <include refid="field"/>
-        FROM system
+        FROM system ORDER BY id
     </select>
 
     <select id="detail" parameterType="int" resultMap="SystemEntity">

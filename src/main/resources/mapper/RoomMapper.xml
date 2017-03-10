@@ -5,19 +5,17 @@
 
 <mapper namespace="com.xj.iws.dao.RoomDao">
 
-    <sql id="field">locationid,name</sql>
+    <sql id="field">locationid,name,describes</sql>
 
-    <resultMap id="BaseResultMap" type="com.xj.iws.entity.RoomEntity">
+    <resultMap id="RoomEntity" type="com.xj.iws.entity.RoomEntity" extends="BaseResultMap">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="locationId" property="locationid" jdbcType="INTEGER"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
-    </resultMap>
-
-    <resultMap id="RoomEntity" type="com.xj.iws.entity.RoomEntity" extends="BaseResultMap">
+        <result column="describes" property="describes" jdbcType="VARCHAR"/>
     </resultMap>
 
     <insert id="add" parameterType="RoomEntity">
-        INSERT INTO room (<include refid="field" />) VALUES (${locationId},'${name}')
+        INSERT INTO room (<include refid="field"/>) VALUES (${locationId},'${name}','${describes}')
     </insert>
 
     <delete id="delete" parameterType="int">
@@ -29,16 +27,21 @@
         <set>
             <if test="locationId != null">locationid = ${locationId},</if>
             <if test="name != null">name = '${name}',</if>
+            <if test="describes != null">describes = '${describes}',</if>
         </set>
         WHERE id = ${id}
     </update>
 
     <select id="list" parameterType="int" resultMap="RoomEntity">
-        SELECT id,<include refid="field" /> FROM room WHERE locationid = ${_parameter}
+        SELECT id,
+        <include refid="field"/>
+        FROM room WHERE locationid = ${_parameter} ORDER BY id
     </select>
 
     <select id="detail" parameterType="int" resultMap="RoomEntity">
-        SELECT id,<include refid="field" /> FROM room WHERE id = ${_parameter}
+        SELECT id,
+        <include refid="field"/>
+        FROM room WHERE id = ${_parameter}
     </select>
 
 </mapper>

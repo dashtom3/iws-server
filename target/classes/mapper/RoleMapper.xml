@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xj.iws.dao.RoleDao">
+
+    <sql id="field">roleId,systemId,provinceId,cityId,areaId,limitation,name,describe</sql>
+
+    <resultMap id="BaseResultMap" type="com.xj.iws.entity.RoleEntity">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="roleid" property="roleId" jdbcType="INTEGER"/>
+        <result column="systemid" property="systemId" jdbcType="INTEGER"/>
+        <result column="provinceid" property="provinceId" jdbcType="INTEGER"/>
+        <result column="cityid" property="cityId" jdbcType="INTEGER"/>
+        <result column="areaid" property="areaId" jdbcType="INTEGER"/>
+        <result column="limitation" property="limitation" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="describe" property="describe" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="RoleEntity" type="com.xj.iws.entity.RoleEntity" extends="BaseResultMap">
+    </resultMap>
+
+    <insert id="add" parameterType="RoleEntity">
+        INSERT INTO role (<include refid="field"/>) VALUES
+        (${roleId},${systemId},${provinceId},${cityId},${areaId},${limitation},${name},${describe})
+    </insert>
+
+    <delete id="delete" parameterType="long">
+        DELETE FROM role WHERE roleid = ${_parameter}
+    </delete>
+
+    <select id="name" parameterType="long" resultType="String">
+        SELECT name FROM role WHERE roleid = ${_parameter} GROUP BY roleid
+    </select>
+
+    <select id="list" parameterType="long" resultMap="RoleEntity">
+        SELECT id,
+        <include refid="field"/>
+        FROM role WHERE roleid = ${_parameter}
+    </select>
+
+    <select id="queryId" resultType="RoleEntity">
+        SELECT roleId FROM role
+        <where>
+            <if test="systemId != null">AND systemid = ${systemId}</if>
+            <if test="areaId != null">AND areaid = ${areaId}</if>
+            <if test="cityId != null">AND areaid IN (SELECT areaid FROM area WHERE cityid = ${cityId})</if>
+            <if test="provinceId != null">AND areaid IN (SELECT areaid FROM area WHERE cityid IN
+                (SELECT cityid FROM city WHERE provinceid = ${provinceId}))
+            </if>
+            <if test="limitation != null">AND limitation = ${limitation}</if>
+            <if test="name != null">AND name = ${name}</if>
+        </where>
+    </select>
+</mapper>

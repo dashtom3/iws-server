@@ -9,6 +9,7 @@ public class RoomEntity {
     private int id;
     private int locationId;
     private String name;
+    private String describes;
     private LocationEntity location;
     private List<EquipmentEntity> equipment;
 
@@ -16,10 +17,11 @@ public class RoomEntity {
 
     }
 
-    public RoomEntity(int id, int locationId, String name, LocationEntity location, List<EquipmentEntity> equipment) {
+    public RoomEntity(int id, int locationId, String name, String describes, LocationEntity location, List<EquipmentEntity> equipment) {
         this.id = id;
         this.locationId = locationId;
         this.name = name;
+        this.describes = describes;
         this.location = location;
         this.equipment = equipment;
     }
@@ -46,6 +48,14 @@ public class RoomEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescribes() {
+        return describes;
+    }
+
+    public void setDescribes(String describes) {
+        this.describes = describes;
     }
 
     public LocationEntity getLocation() {

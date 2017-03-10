@@ -93,7 +93,7 @@ public class LocationServiceImpl implements LocationService {
 
         location.setSystem(system);
         location.setRoom(rooms);
-        if (location == null) {
+        if (location != null) {
             dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
         }
         dataWrapper.setCallStatus(CallStatusEnum.SUCCEED);
@@ -112,16 +112,16 @@ public class LocationServiceImpl implements LocationService {
         if (systemId != null && systemId != ""){
             condition.put("systemId", systemId);
         }
-        if (areaId != null && areaId != "") {
+        if (areaId != null && areaId != "" && areaId != "0") {
             condition.put("areaId", areaId);
-        } else if (cityId != null && cityId != "") {
+        } else if (cityId != null && cityId != "" && cityId != "0") {
             condition.put("cityId", cityId);
-        } else if (provinceId != null && provinceId != "") {
+        } else if (provinceId != null && provinceId != "" && provinceId != "0") {
             condition.put("provinceId", provinceId);
         }
 
         List<LocationEntity> locations = locationDao.query(condition);
-        if (locations == null) {
+        if (locations != null) {
             dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
         }
         dataWrapper.setCallStatus(CallStatusEnum.SUCCEED);

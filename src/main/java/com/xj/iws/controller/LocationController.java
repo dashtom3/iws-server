@@ -83,7 +83,7 @@ public class LocationController {
 
     /**
      * 条件查询,获取条件下全部地点
-     * 最多可按province,city,area中一项查询，若同时存在优先级为area,city,province
+     * province,city,area中按一项查询，若同时存在则优先级为area,city,province
      *
      * @param systemId
      * @param provinceId
@@ -99,7 +99,7 @@ public class LocationController {
             @RequestParam(value = "provinceId", required = false) String provinceId,
             @RequestParam(value = "cityId", required = false) String cityId,
             @RequestParam(value = "areaId", required = false) String areaId,
-            @RequestParam(value = "token", required = false) String token
+            @RequestParam(value = "token", required = true) String token
     ) {
         return locationService.query(systemId,provinceId,cityId,areaId);
     }
