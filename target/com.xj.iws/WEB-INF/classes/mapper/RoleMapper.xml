@@ -5,9 +5,9 @@
 
 <mapper namespace="com.xj.iws.dao.RoleDao">
 
-    <sql id="field">roleId,systemId,provinceId,cityId,areaId,limitation,name,describe</sql>
+    <sql id="field">roleId,systemId,provinceId,cityId,areaId,limitation,name,describes</sql>
 
-    <resultMap id="BaseResultMap" type="com.xj.iws.entity.RoleEntity">
+    <resultMap id="RoleEntity" type="com.xj.iws.entity.RoleEntity" extends="BaseResultMap">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="roleid" property="roleId" jdbcType="INTEGER"/>
         <result column="systemid" property="systemId" jdbcType="INTEGER"/>
@@ -16,15 +16,12 @@
         <result column="areaid" property="areaId" jdbcType="INTEGER"/>
         <result column="limitation" property="limitation" jdbcType="INTEGER"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
-        <result column="describe" property="describe" jdbcType="VARCHAR"/>
-    </resultMap>
-
-    <resultMap id="RoleEntity" type="com.xj.iws.entity.RoleEntity" extends="BaseResultMap">
+        <result column="describes" property="describes" jdbcType="VARCHAR"/>
     </resultMap>
 
     <insert id="add" parameterType="RoleEntity">
         INSERT INTO role (<include refid="field"/>) VALUES
-        (${roleId},${systemId},${provinceId},${cityId},${areaId},${limitation},${name},${describe})
+        (${roleId},${systemId},${provinceId},${cityId},${areaId},${limitation},${name},${describes})
     </insert>
 
     <delete id="delete" parameterType="long">

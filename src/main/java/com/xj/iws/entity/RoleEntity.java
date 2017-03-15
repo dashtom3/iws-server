@@ -10,7 +10,7 @@ import org.apache.ibatis.type.Alias;
 @Alias("RoleEntity")
 public class RoleEntity {
     private int id;
-    private long roleId;
+    private String roleId;
     private int systemId;
     private int provinceId;
     private int cityId;
@@ -22,7 +22,7 @@ public class RoleEntity {
     public RoleEntity() {
     }
 
-    public RoleEntity(int id, long roleId, int systemId, int provinceId, int cityId, int areaId, int limitation, String name, String describes) {
+    public RoleEntity(int id, String roleId, int systemId, int provinceId, int cityId, int areaId, int limitation, String name, String describes) {
         this.id = id;
         this.roleId = roleId;
         this.systemId = systemId;
@@ -42,11 +42,11 @@ public class RoleEntity {
         this.id = id;
     }
 
-    public long getRoleId() {
+    public String getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(long roleId) {
+    public void setRoleId(String roleId) {
         this.roleId = roleId;
     }
 

@@ -8,7 +8,15 @@ import java.io.Serializable;
 public enum ErrorCodeEnum implements Serializable {
 
     No_Error("No ERROE!", 0),
-    Error("Unknown error!", 1);
+    Error("Unknown error!", 1),
+    Login_Error("用户名或者密码错误",2),
+    Username_Already_Exist("用户名已存在",3),
+    Register_Error("注册失败",4),
+    Verify_Code_Error("验证码错误",5),
+    Verify_Code_5min("验证码5分钟",6),
+    Verify_Code_notExist("验证码不存在",7),
+    Username_NOT_Exist("用户不存在",8),
+    Password_error("密码错误",9);
 
     private String label;
     private Integer code;

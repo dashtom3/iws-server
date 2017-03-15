@@ -15,13 +15,13 @@ public interface RoleService {
 
     DataWrapper<Void> add(int[] systemId, int[] provinceId, int[] cityId, int[] areaId, int[] limitation, String name, String describe);
 
-    DataWrapper<Void> delete(long roleId);
+    DataWrapper<Void> delete(String roleId);
 
-    DataWrapper<Void> update(long roleId, int[] systemId, int[] provinceId, int[] cityId, int[] areaId, int[] limitation, String name, String describe);
+    DataWrapper<Void> update(String roleId, int[] systemId, int[] provinceId, int[] cityId, int[] areaId, int[] limitation, String name, String describe);
 
     DataWrapper<List<RoleType>> list();
 
-    DataWrapper<RoleType> detail(long roleId);
+    DataWrapper<RoleType> detail(String roleId);
 
     DataWrapper<List<RoleType>> query(String systemId, String provinceId, String cityId, String areaId, String limitation, String name);
 }

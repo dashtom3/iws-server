@@ -19,21 +19,11 @@ public class LocationEntity {
     private double positionX;
     private double positionY;
     private String name;
+    private String describes;
     private SystemEntity system;
     private List<RoomEntity> room;
 
     public LocationEntity() {
-    }
-
-    public LocationEntity(int id, int systemId, int areaId, double positionX, double positionY, String name, SystemEntity system, List<RoomEntity> room) {
-        this.id = id;
-        this.systemId = systemId;
-        this.areaId = areaId;
-        this.positionX = positionX;
-        this.positionY = positionY;
-        this.name = name;
-        this.system = system;
-        this.room = room;
     }
 
     public int getId() {
@@ -84,6 +74,14 @@ public class LocationEntity {
         this.name = name;
     }
 
+    public String getDescribes() {
+        return describes;
+    }
+
+    public void setDescribes(String describes) {
+        this.describes = describes;
+    }
+
     public SystemEntity getSystem() {
         return system;
     }
@@ -98,5 +96,18 @@ public class LocationEntity {
 
     public void setRoom(List<RoomEntity> room) {
         this.room = room;
+    }
+
+    public LocationEntity(int id, int systemId, int areaId, double positionX, double positionY, String name, String describes, SystemEntity system, List<RoomEntity> room) {
+        this.id = id;
+        this.systemId = systemId;
+        this.areaId = areaId;
+        this.positionX = positionX;
+        this.positionY = positionY;
+        this.name = name;
+        this.describes = describes;
+        this.system = system;
+        this.room = room;
+
     }
 }

@@ -7,10 +7,7 @@
 
     <sql id="field">name,pic,describes</sql>
 
-    <resultMap id="BaseResultMap" type="com.xj.iws.entity.SystemEntity">
-    </resultMap>
-
-    <resultMap id="SystemEntity" type="com.xj.iws.entity.SystemEntity" extends="BaseResultMap">
+    <resultMap id="SystemEntity" type="com.xj.iws.entity.SystemEntity">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="name" property="name" jdbcType="VARCHAR" />
         <result column="pic" property="pic" jdbcType="VARCHAR" />

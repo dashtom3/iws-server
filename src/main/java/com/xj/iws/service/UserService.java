@@ -1,20 +1,26 @@
 package com.xj.iws.service;
 
+import com.xj.iws.entity.UserEntity;
 import com.xj.iws.utils.DataWrapper;
 
 /**
  * Created by XiaoJiang01 on 2017/2/27.
  */
 public interface UserService {
-    DataWrapper login(String userName, String password);
 
-    DataWrapper register(String userName, String password, String name);
+    DataWrapper<UserEntity> login(String userName, String password);
 
-    DataWrapper detail(String userId);
+    DataWrapper<UserEntity> register(UserEntity user, String code);
 
-    DataWrapper update(String userId, String name, String pic);
+    DataWrapper<Void> getVerifyCode(String phone);
 
-    DataWrapper updatePwd(String userId, String password);
+    DataWrapper<UserEntity> detail(int userId);
 
-    DataWrapper reLogin(String userId);
+    DataWrapper<UserEntity> update(UserEntity user);
+
+    DataWrapper<Void> changePwd(int userId, String oldPwd, String newPwd);
+
+    DataWrapper<Void> forgetPwd(String username, String password, String code);
+
+    DataWrapper<Void> reLogin(String token);
 }

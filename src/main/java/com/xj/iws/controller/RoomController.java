@@ -58,7 +58,7 @@ public class RoomController {
     }
 
     /**
-     * 获取某一泵房及泵房内所有控制器
+     * 获取某一泵房及泵房所属地点、泵房内所有控制器
      *
      * @return room
      */

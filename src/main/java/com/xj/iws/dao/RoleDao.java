@@ -12,11 +12,11 @@ public interface RoleDao {
 
     int add(RoleEntity roleEntity);
 
-    int delete(long roleId);
+    int delete(String roleId);
 
-    String name(long roleId);
+    String name(String roleId);
 
-    List<RoleEntity> list(long roleId);
+    List<RoleEntity> list(String roleId);
 
-    List<Long> qureyId(Map<String, String> condition);
+    List<String> queryId(Map<String, String> condition);
 }

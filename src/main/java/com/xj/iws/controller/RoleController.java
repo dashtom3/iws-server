@@ -30,7 +30,7 @@ public class RoleController {
      * @param areaId
      * @param limitation
      * @param name
-     * @param describe
+     * @param describes
      * @param token
      * @return
      */
@@ -43,10 +43,10 @@ public class RoleController {
             @RequestParam(value = "areaId", required = true) int[] areaId,
             @RequestParam(value = "limitation" ,required = true) int[] limitation,
             @RequestParam(value = "name" ,required = true) String name,
-            @RequestParam(value = "describe" ,required = false) String describe,
+            @RequestParam(value = "describes" ,required = false) String describes,
             @RequestParam(value = "token", required = true) String token
     ) {
-        return roleService.add(systemId,provinceId,cityId,areaId,limitation,name,describe);
+        return roleService.add(systemId,provinceId,cityId,areaId,limitation,name,describes);
     }
 
     /**
@@ -58,7 +58,7 @@ public class RoleController {
     @RequestMapping(value = "delete",method = RequestMethod.POST)
     @ResponseBody
     public DataWrapper<Void> delete(
-            @RequestParam(value = "roleId",required = true) long roleId,
+            @RequestParam(value = "roleId",required = true) String roleId,
             @RequestParam(value = "token",required = true) String token
     ){
         return roleService.delete(roleId);
@@ -73,24 +73,24 @@ public class RoleController {
      * @param areaId
      * @param limitation
      * @param name
-     * @param describe
+     * @param describes
      * @param token
      * @return
      */
     @RequestMapping(value = "update",method = RequestMethod.POST)
     @ResponseBody
     public DataWrapper<Void> update(
-            @RequestParam(value = "roleId" ,required = true) long roleId,
+            @RequestParam(value = "roleId" ,required = true) String roleId,
             @RequestParam(value = "systemId" ,required = true) int[] systemId,
             @RequestParam(value = "provinceId" ,required = true) int[] provinceId,
             @RequestParam(value = "cityId" ,required = true) int[] cityId,
             @RequestParam(value = "areaId", required = true) int[] areaId,
             @RequestParam(value = "limitation" ,required = true) int[] limitation,
             @RequestParam(value = "name" ,required = true) String name,
-            @RequestParam(value = "describe" ,required = false) String describe,
+            @RequestParam(value = "describes" ,required = false) String describes,
             @RequestParam(value = "token", required = true) String token
     ){
-        return roleService.update(roleId,systemId,provinceId,cityId,areaId,limitation,name,describe);
+        return roleService.update(roleId,systemId,provinceId,cityId,areaId,limitation,name,describes);
     }
 
     /**
@@ -107,7 +107,7 @@ public class RoleController {
     }
 
     /**
-     * 获取某一角色及角色下全部地点
+     * 获取某一角色
      * @param roleId
      * @param token
      * @return
@@ -115,12 +115,23 @@ public class RoleController {
     @RequestMapping(value = "detail",method = RequestMethod.POST)
     @ResponseBody
     public DataWrapper<RoleType> detail(
-            @RequestParam(value = "roleId",required = true) long roleId,
+            @RequestParam(value = "roleId",required = true) String roleId,
             @RequestParam(value = "token",required = true) String token
     ){
         return roleService.detail(roleId);
     }
 
+    /**
+     * 查询角色
+     * @param systemId
+     * @param provinceId
+     * @param cityId
+     * @param areaId
+     * @param limitation
+     * @param name
+     * @param token
+     * @return
+     */
     @RequestMapping(value = "query", method = RequestMethod.POST)
     @ResponseBody
     public DataWrapper<List<RoleType>> query(

@@ -43,5 +43,11 @@ location
     <input type="hidden" name="token" value="123"/>
     <input type="submit" value="query"/>
 </form>
+device
+<form action="api/device/start.do" method="post">
+    <input type="text" name="com"/>
+    <input type="hidden" name="token" value="123"/>
+    <input type="submit" value="start"/>
+</form>
 </body>
 </html>

@@ -6,13 +6,98 @@ import com.jiang.utils.DataWrapper;
 public interface UserApi {
     /**
      *
-     * @api {post} http://localhost:8080/IWS-Server/api/user/login 登录
+     * @api {post} http://localhost:8080/iws/api/user/register 注册用户
+     * @apiName register
+     * @apiGroup user
+     * @apiVersion 0.1.0
+     * @apiDescription 注册新用户
+     *
+     * @apiParam {String} username 用户名
+     * @apiParam {String} password 密码
+     * @apiParam {String} code 短信验证码
+     * @apiParam {String} name 昵称 nullable
+     * @apiParam {String} describes 用户描述 nullable
+     *
+     * @apiSuccessExample Success-Response:
+     *  HTTP/1.1 200 OK
+     * {
+     * callStatus:"SUCCEED",
+     * errorCode:"No_Error",
+     * data:{
+     *     username:18712345678,
+     *     password:"d1b2cc725d846f0460ff290c60925070",
+     *     name:"name",
+     *     describes:"describes",
+     * }
+     * token:"SK1d7a4fe3-c2cd-417f-8f6f-bf7412592996",
+     * numberPerPage:0,
+     * currentPage:0,
+     * totalNumber:0,
+     * totalPage:0
+     *  }
+     *
+     *  @apiErrorExample {json} Error-Response:
+     *  HTTP/1.1 200 OK
+     * {
+     * callStatus:"FAILED",
+     * errorCode:"Error",
+     * data:null,
+     * token:null,
+     * numberPerPage:0,
+     * currentPage:0,
+     * totalNumber:0,
+     * totalPage:0
+     *  }
+     *
+     */
+
+    /**
+     *
+     * @api {post} http://localhost:8080/iws/api/user/getVerifyCode 获取验证码
+     * @apiName getVerifyCode
+     * @apiGroup user
+     * @apiVersion 0.1.0
+     * @apiDescription 获取验证码
+     *
+     * @apiParam {String} username 用户名,须为11位手机号码
+     *
+     * @apiSuccessExample Success-Response:
+     *  HTTP/1.1 200 OK
+     * {
+     * callStatus:"SUCCEED",
+     * errorCode:"No_Error",
+     * data:null,
+     * token:"SK1d7a4fe3-c2cd-417f-8f6f-bf7412592996",
+     * numberPerPage:0,
+     * currentPage:0,
+     * totalNumber:0,
+     * totalPage:0
+     *  }
+     *
+     *  @apiErrorExample {json} Error-Response:
+     *  HTTP/1.1 200 OK
+     * {
+     * callStatus:"FAILED",
+     * errorCode:"Error",
+     * data:null,
+     * token:null,
+     * numberPerPage:0,
+     * currentPage:0,
+     * totalNumber:0,
+     * totalPage:0
+     *  }
+     *
+     */
+
+    /**
+     *
+     * @api {post} http://localhost:8080/iws/api/user/login 用户登录
      * @apiName login
      * @apiGroup user
      * @apiVersion 0.1.0
      * @apiDescription 用户登录
      *
-     * @apiParam {String} userName 用户名
+     * @apiParam {String} username 用户名
      * @apiParam {String} password 密码
      *
      * @apiSuccessExample Success-Response:
@@ -20,7 +105,16 @@ public interface UserApi {
      * {
      * callStatus:"SUCCEED",
      * errorCode:"No_Error",
-     * data:null,
+     * data:{
+     *     id:1,
+     *     username:18712345678,
+     *     password:"d1b2cc725d846f0460ff290c60925070",
+     *     roleid:"RL1d7a4fe3-c2cd-417f-8f6f-bf7412592996",
+     *     status:1,
+     *     date:2017-01-01 12:00:00,
+     *     name:"name",
+     *     describes:"describes",
+     * }
      * token:"SK1d7a4fe3-c2cd-417f-8f6f-bf7412592996",
      * numberPerPage:0,
      * currentPage:0,
@@ -45,94 +139,112 @@ public interface UserApi {
 
     /**
      *
-     * @api {post} http://localhost:8080/IWS-Server/api/user/register 注册
-     * @apiName register
-     * @apiGroup user
-     * @apiVersion 0.1.0
-     * @apiDescription 用户注册
-     *
-     * @apiParam {String} userName 用户名
-     * @apiParam {String} password 密码
-     * @apiParam {String} name 真实姓名
-     *
-     * @apiSuccessExample Success-Response:
-     *  HTTP/1.1 200 OK
-     * {
-     * callStatus:"SUCCEED",
-     * errorCode:"No_Error",
-     * data:null,
-     * token:"SK1d7a4fe3-c2cd-417f-8f6f-bf7412592996",
-     * numberPerPage:0,
-     * currentPage:0,
-     * totalNumber:0,
-     * totalPage:0
-     *  }
-     *
-     *  @apiErrorExample {json} Error-Response:
-     *  HTTP/1.1 200 OK
-     * {
-     * callStatus:"FAILED",
-     * errorCode:"Error",
-     * data:null,
-     * token:null,
-     * numberPerPage:0,
-     * currentPage:0,
-     * totalNumber:0,
-     * totalPage:0
-     *  }
-     *
-     */
-
-    /**
-     *
-     * @api {post} http://localhost:8080/IWS-Server/api/user/detail 查看详情
-     * @apiName detail
-     * @apiGroup user
-     * @apiVersion 0.1.0
-     * @apiDescription 查看用户个人详情
-     *
-     * @apiParam {String} userId 用户id
-     * @apiParam {String} token 身份验证
-     *
-     * @apiSuccessExample Success-Response:
-     *  HTTP/1.1 200 OK
-     * {
-     * callStatus:"SUCCEED",
-     * errorCode:"No_Error",
-     * data:UserEntity,
-     * token:"SK1d7a4fe3-c2cd-417f-8f6f-bf7412592996",
-     * numberPerPage:0,
-     * currentPage:0,
-     * totalNumber:0,
-     * totalPage:0
-     *  }
-     *
-     *  @apiErrorExample {json} Error-Response:
-     *  HTTP/1.1 200 OK
-     * {
-     * callStatus:"FAILED",
-     * errorCode:"Error",
-     * data:user,
-     * token:null,
-     * numberPerPage:0,
-     * currentPage:0,
-     * totalNumber:0,
-     * totalPage:0
-     *  }
-     *
-     */
-
-    /**
-     *
-     * @api {post} http://localhost:8080/IWS-Server/api/user/update 编辑个人资料
+     * @api {post} http://localhost:8080/iws/api/user/update 编辑用户
      * @apiName update
      * @apiGroup user
      * @apiVersion 0.1.0
-     * @apiDescription 编辑个人资料
+     * @apiDescription 编辑修改用户昵称 描述 头像
      *
-     * @apiParam {String} userId 用户id
-     * @apiParam {String} name 真实姓名
-     * @apiParam {String} pic 上传/修改头像
+     * @apiParam {String} name 用户名称 nullable
+     * @apiParam {String} describes 用户描述 nullable
+     * @apiParam {String} pic 图片 nullable
+     * @apiParam {String} token 身份验证
+     *
+     * @apiSuccessExample Success-Response:
+     *  HTTP/1.1 200 OK
+     * {
+     * callStatus:"SUCCEED",
+     * errorCode:"No_Error",
+     * data:{
+     *     id:1,
+     *     username:18712345678,
+     *     password:"d1b2cc725d846f0460ff290c60925070",
+     *     roleid:"RL1d7a4fe3-c2cd-417f-8f6f-bf7412592996",
+     *     status:1,
+     *     date:2017-01-01 12:00:00,
+     *     name:"name",
+     *     describes:"describes",
+     * }
+     * token:"SK1d7a4fe3-c2cd-417f-8f6f-bf7412592996",
+     * numberPerPage:0,
+     * currentPage:0,
+     * totalNumber:0,
+     * totalPage:0
+     *  }
+     *
+     *  @apiErrorExample {json} Error-Response:
+     *  HTTP/1.1 200 OK
+     * {
+     * callStatus:"FAILED",
+     * errorCode:"Error",
+     * data:null,
+     * token:null,
+     * numberPerPage:0,
+     * currentPage:0,
+     * totalNumber:0,
+     * totalPage:0
+     *  }
+     *
+     */
+
+    /**
+     *
+     * @api {post} http://localhost:8080/iws/api/user/detail 用户详情
+     * @apiName detail
+     * @apiGroup user
+     * @apiVersion 0.1.0
+     * @apiDescription 获取当前用户详情
+     *
+     * @apiParam {String} token 身份验证
+     *
+     * @apiSuccessExample Success-Response:
+     *  HTTP/1.1 200 OK
+     * {
+     * callStatus:"SUCCEED",
+     * errorCode:"No_Error",
+     * data:{
+     *     id:1,
+     *     username:18712345678,
+     *     password:"d1b2cc725d846f0460ff290c60925070",
+     *     roleid:"RL1d7a4fe3-c2cd-417f-8f6f-bf7412592996",
+     *     status:1,
+     *     date:2017-01-01 12:00:00,
+     *     name:"name",
+     *     describes:"describes",
+     *     }
+     * }
+     * token:"SK1d7a4fe3-c2cd-417f-8f6f-bf7412592996",
+     * numberPerPage:0,
+     * currentPage:0,
+     * totalNumber:0,
+     * totalPage:0
+     *  }
+     *
+     *  @apiErrorExample {json} Error-Response:
+     *  HTTP/1.1 200 OK
+     * {
+     * callStatus:"FAILED",
+     * errorCode:"Error",
+     * data:null,
+     * token:null,
+     * numberPerPage:0,
+     * currentPage:0,
+     * totalNumber:0,
+     * totalPage:0
+     *  }
+     *
+     */
+
+    /**
+     *
+     * @api {post} http://localhost:8080/iws/api/user/changePwd 修改密码
+     * @apiName changePwd
+     * @apiGroup user
+     * @apiVersion 0.1.0
+     * @apiDescription 修改当前用户密码
+     *
+     * @apiParam {String} oldPwd 原始密码
+     * @apiParam {String} newPwd 新密码
      * @apiParam {String} token 身份验证
      *
      * @apiSuccessExample Success-Response:
@@ -165,13 +277,15 @@ public interface UserApi {
 
     /**
      *
-     * @api {post} http://localhost:8080/IWS-Server/api/user/relogin 退出登录
-     * @apiName relogin
+     * @api {post} http://localhost:8080/iws/api/user/forgetPwd 忘记密码
+     * @apiName forgetPwd
      * @apiGroup user
      * @apiVersion 0.1.0
-     * @apiDescription 退出当前登录用户
+     * @apiDescription 重置当前用户密码
      *
-     * @apiParam {String} userId 用户id
+     * @apiParam {String} username 用户名
+     * @apiParam {String} password 新密码
+     * @apiParam {String} code 短信验证码
      * @apiParam {String} token 身份验证
      *
      * @apiSuccessExample Success-Response:
@@ -204,91 +318,12 @@ public interface UserApi {
 
     /**
      *
-     * @api {post} http://localhost:8080/IWS-Server/api/user/updatePwd 修改密码
-     * @apiName updatePwd
+     * @api {post} http://localhost:8080/iws/api/user/reLogin 退出登录
+     * @apiName reLogin
      * @apiGroup user
      * @apiVersion 0.1.0
-     * @apiDescription 修改密码
+     * @apiDescription 退出登录
      *
-     * @apiParam {String} userId 用户id
-     * @apiParam {String} token 身份验证
-     *
-     * @apiSuccessExample Success-Response:
-     *  HTTP/1.1 200 OK
-     * {
-     * callStatus:"SUCCEED",
-     * errorCode:"No_Error",
-     * data:null,
-     * token:"SK1d7a4fe3-c2cd-417f-8f6f-bf7412592996",
-     * numberPerPage:0,
-     * currentPage:0,
-     * totalNumber:0,
-     * totalPage:0
-     *  }
-     *
-     *  @apiErrorExample {json} Error-Response:
-     *  HTTP/1.1 200 OK
-     * {
-     * callStatus:"FAILED",
-     * errorCode:"Error",
-     * data:null,
-     * token:null,
-     * numberPerPage:0,
-     * currentPage:0,
-     * totalNumber:0,
-     * totalPage:0
-     *  }
-     *
-     */
-
-    /**
-     *
-     * @api {post} http://localhost:8080/IWS-Server/api/user/idCode 获取验证码
-     * @apiName idCode
-     * @apiGroup user
-     * @apiVersion 0.1.0
-     * @apiDescription 获取验证码
-     *
-     * @apiParam {String} userName 用户名
-     * @apiParam {String} token 身份验证
-     *
-     * @apiSuccessExample Success-Response:
-     *  HTTP/1.1 200 OK
-     * {
-     * callStatus:"SUCCEED",
-     * errorCode:"No_Error",
-     * data:String,
-     * token:"SK1d7a4fe3-c2cd-417f-8f6f-bf7412592996",
-     * numberPerPage:0,
-     * currentPage:0,
-     * totalNumber:0,
-     * totalPage:0
-     *  }
-     *
-     *  @apiErrorExample {json} Error-Response:
-     *  HTTP/1.1 200 OK
-     * {
-     * callStatus:"FAILED",
-     * errorCode:"Error",
-     * data:null,
-     * token:null,
-     * numberPerPage:0,
-     * currentPage:0,
-     * totalNumber:0,
-     * totalPage:0
-     *  }
-     *
-     */
-
-    /**
-     *
-     * @api {post} http://localhost:8080/IWS-Server/api/user/forget 忘记密码
-     * @apiName foget
-     * @apiGroup user
-     * @apiVersion 0.1.0
-     * @apiDescription 忘记密码
-     *
-     * @apiParam {String} userName 用户名
      * @apiParam {String} token 身份验证
      *
      * @apiSuccessExample Success-Response:

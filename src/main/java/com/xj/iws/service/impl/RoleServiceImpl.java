@@ -7,6 +7,7 @@ import com.xj.iws.enums.CallStatusEnum;
 import com.xj.iws.enums.ErrorCodeEnum;
 import com.xj.iws.service.RoleService;
 import com.xj.iws.utils.DataWrapper;
+import com.xj.iws.utils.UUIDGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,11 +26,7 @@ public class RoleServiceImpl implements RoleService {
     public DataWrapper<Void> add(int[] systemId, int[] provinceId, int[] cityId, int[] areaId, int[] limitation, String name, String describes) {
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
         dataWrapper.setErrorCode(ErrorCodeEnum.Error);
-
-        //获取roleId
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-        long roleId = Long.parseLong(dateFormat.format(new Date()));
-
+        String roleId = UUIDGenerator.getCode("RL");
         int sign = 0;
         //遍历数组写入role
         for (int i = 0; i < systemId.length; i++) {
@@ -57,7 +54,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public DataWrapper<Void> delete(long roleId) {
+    public DataWrapper<Void> delete(String roleId) {
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
         dataWrapper.setErrorCode(ErrorCodeEnum.Error);
 
@@ -71,7 +68,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public DataWrapper<Void> update(long roleId, int[] systemId, int[] provinceId, int[] cityId, int[] areaId, int[] limitation, String name, String describe) {
+    public DataWrapper<Void> update(String roleId, int[] systemId, int[] provinceId, int[] cityId, int[] areaId, int[] limitation, String name, String describe) {
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
         dataWrapper.setErrorCode(ErrorCodeEnum.Error);
 
@@ -112,9 +109,9 @@ public class RoleServiceImpl implements RoleService {
 
         List<RoleType> roleTypes = new ArrayList<RoleType>();
         //获取所有roleId
-        List<Long> roleIds = roleDao.qureyId(null);
-        //遍历roleId获取其名称和管辖地区
-        for (long roleId : roleIds) {
+        List<String> roleIds = roleDao.queryId(null);
+        //遍历roleId获取其名称和系统、地区、权限
+        for (String roleId : roleIds) {
             RoleType roleType = new RoleType();
             roleType.setRoleId(roleId);
             roleType.setName(roleDao.name(roleId));
@@ -130,11 +127,11 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public DataWrapper<RoleType> detail(long roleId) {
+    public DataWrapper<RoleType> detail(String roleId) {
         DataWrapper<RoleType> dataWrapper = new DataWrapper<RoleType>();
         dataWrapper.setErrorCode(ErrorCodeEnum.Error);
 
-        //按roleId获取其名称和管辖地区
+        //按roleId获取其名称和系统、地区、权限
         RoleType roleType = new RoleType();
         roleType.setRoleId(roleId);
         roleType.setName(roleDao.name(roleId));
@@ -175,9 +172,9 @@ public class RoleServiceImpl implements RoleService {
 
         List<RoleType> roleTypes = new ArrayList<RoleType>();
         //获取所有roleId
-        List<Long> roleIds = roleDao.qureyId(condition);
-        //遍历roleId获取其名称和管辖地区
-        for (long roleId : roleIds) {
+        List<String> roleIds = roleDao.queryId(condition);
+        //遍历roleId获取其名称和系统、地区、权限
+        for (String roleId : roleIds) {
             RoleType roleType = new RoleType();
             roleType.setRoleId(roleId);
             roleType.setName(roleDao.name(roleId));

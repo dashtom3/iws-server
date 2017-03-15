@@ -10,41 +10,47 @@ import java.util.Date;
  */
 @Alias("UserEntity")
 public class UserEntity {
-    private int userId;
-    private int userName;
+    private int id;
+    private String username;
     private String password;
-    private String name;
     private int roleId;
-    private String pic;
+    private int status;
     private Date date;
+    private String strdate;
+    private String name;
+    private String describes;
+    private String pic;
 
     public UserEntity() {
     }
 
-    public UserEntity(int userId, int userName, String password, String name, int roleId, String pic, Date date) {
-        this.userId = userId;
-        this.userName = userName;
+    public UserEntity(int id, String username, String password, int roleId, int status, Date date, String strdate, String name, String describes, String pic) {
+        this.id = id;
+        this.username = username;
         this.password = password;
-        this.name = name;
         this.roleId = roleId;
-        this.pic = pic;
+        this.status = status;
         this.date = date;
+        this.strdate = strdate;
+        this.name = name;
+        this.describes = describes;
+        this.pic = pic;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getId() {
+        return id;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(int userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -55,14 +61,6 @@ public class UserEntity {
         this.password = password;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getRoleId() {
         return roleId;
     }
@@ -71,12 +69,12 @@ public class UserEntity {
         this.roleId = roleId;
     }
 
-    public String getPic() {
-        return pic;
+    public int getStatus() {
+        return status;
     }
 
-    public void setPic(String pic) {
-        this.pic = pic;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public Date getDate() {
@@ -85,5 +83,37 @@ public class UserEntity {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getStrdate() {
+        return strdate;
+    }
+
+    public void setStrdate(String strdate) {
+        this.strdate = strdate;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescribes() {
+        return describes;
+    }
+
+    public void setDescribes(String describes) {
+        this.describes = describes;
+    }
+
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic;
     }
 }

@@ -6,24 +6,24 @@ import java.util.List;
  * Created by XiaoJiang01 on 2017/3/10.
  */
 public class RoleType {
-    private long roleId;
+    private String roleId;
     private String name;
     private List<RoleEntity> role;
 
     public RoleType() {
     }
 
-    public RoleType(long roleId, String name, List<RoleEntity> role) {
+    public RoleType(String roleId, String name, List<RoleEntity> role) {
         this.roleId = roleId;
         this.name = name;
         this.role = role;
     }
 
-    public long getRoleId() {
+    public String getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(long roleId) {
+    public void setRoleId(String roleId) {
         this.roleId = roleId;
     }
 

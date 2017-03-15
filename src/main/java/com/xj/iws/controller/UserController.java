@@ -1,14 +1,16 @@
 package com.xj.iws.controller;
 
+import com.xj.iws.entity.UserEntity;
 import com.xj.iws.service.UserService;
+import com.xj.iws.sessionManager.SessionManager;
 import com.xj.iws.utils.DataWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 管理全部用户请求
+ *
  * @author Created by XiaoJiang01 on 2017/2/21.
  */
 @Controller
@@ -20,78 +22,119 @@ public class UserController {
 
     /**
      * 用户登录
+     *
      * @return boolean
      */
-    public DataWrapper login(
-            @RequestParam(value = "userName",required = true)String userName,
-            @RequestParam(value = "name",required = true)String password
-
-    ){
-
-        return userService.login(userName,password);
+    @RequestMapping(value = "login", method = RequestMethod.POST)
+    @ResponseBody
+    public DataWrapper<UserEntity> login(
+            @RequestParam(value = "username", required = true) String username,
+            @RequestParam(value = "password", required = true) String password
+    ) {
+        return userService.login(username, password);
     }
 
     /**
      * 用户注册
+     *
      * @return boolean
      */
-    public DataWrapper register(
-            @RequestParam(value = "userName",required = true)String userName,
-            @RequestParam(value = "password",required = true)String password,
-            @RequestParam(value = "name",required = true)String name
+    @RequestMapping(value = "register", method = RequestMethod.POST)
+    @ResponseBody
+    public DataWrapper<UserEntity> register(
+            @ModelAttribute UserEntity user,
+            @RequestParam(value = "code", required = true) String code
+    ) {
+        return userService.register(user, code);
+    }
 
-    ){
-
-        return userService.register(userName,password,name);
+    //获取验证码
+    @RequestMapping(value = "getVerifyCode")
+    @ResponseBody
+    public DataWrapper<Void> getVerifyCode(
+            @RequestParam(value = "username", required = true) String username
+    ) {
+        return userService.getVerifyCode(username);
     }
 
     /**
      * 查看个人资料
+     *
      * @return user
      */
-    public DataWrapper detail(
-            @RequestParam(value = "userId",required = true)String userId,
-            @RequestParam(value = "token",required = true)String token
-    ){
-
+    @RequestMapping(value = "detail", method = RequestMethod.POST)
+    @ResponseBody
+    public DataWrapper<UserEntity> detail(
+            @RequestParam(value = "token", required = true) String token
+    ) {
+        UserEntity user = SessionManager.getSession(token);
+        int userId = user.getId();
         return userService.detail(userId);
     }
 
     /**
      * 个人资料编辑
+     *
      * @return boolean
      */
-    public DataWrapper update(
-            @RequestParam(value = "userId",required = true)String userId,
-            @RequestParam(value = "name",required = true)String name,
-            @RequestParam(value = "pic",required = true)String pic,
-            @RequestParam(value = "token",required = true)String token
-    ){
-
-        return userService.update(userId,name,pic);
+    @RequestMapping(value = "update", method = RequestMethod.POST)
+    @ResponseBody
+    public DataWrapper<UserEntity> update(
+            @RequestParam(value = "name", required = false) String name,
+            @RequestParam(value = "describes", required = false) String describes,
+            @RequestParam(value = "pic", required = false) String pic,
+            @RequestParam(value = "token", required = true) String token
+    ) {
+        UserEntity user = SessionManager.getSession(token);
+        user.setName(name);
+        user.setDescribes(describes);
+        user.setPic(pic);
+        return userService.update(user);
     }
+
     /**
-     * 重置密码
+     * 修改密码
+     *
      * @return boolean
      */
-    public DataWrapper updatePwd(
-            @RequestParam(value = "userId",required = true)String userId,
-            @RequestParam(value = "password",required = true)String password,
-            @RequestParam(value = "token",required = true)String token
-    ){
-
-        return userService.updatePwd(userId,password);
+    @RequestMapping(value = "changePwd", method = RequestMethod.POST)
+    @ResponseBody
+    public DataWrapper<Void> changePwd(
+            @RequestParam(value = "oldPwd", required = true) String oldPwd,
+            @RequestParam(value = "newPwd", required = true) String newPwd,
+            @RequestParam(value = "token", required = true) String token
+    ) {
+        UserEntity user = SessionManager.getSession(token);
+        int userId = user.getId();
+        return userService.changePwd(userId, oldPwd, newPwd);
     }
+
+    /**
+     * 忘记密码
+     *
+     * @return boolean
+     */
+    @RequestMapping(value = "forgetPwd", method = RequestMethod.POST)
+    @ResponseBody
+    public DataWrapper<Void> forgetPwd(
+            @RequestParam(value = "username", required = true) String username,
+            @RequestParam(value = "password", required = true) String password,
+            @RequestParam(value = "code", required = true) String code
+    ) {
+        return userService.forgetPwd(username, password, code);
+    }
+
     /**
      * 退出登录
+     *
      * @return boolean
      */
-    public DataWrapper reLogin(
-            @RequestParam(value = "userId",required = true)String userId,
-            @RequestParam(value = "token",required = true)String token
-    ){
-
-        return userService.reLogin(userId);
+    @RequestMapping(value = "reLogin", method = RequestMethod.POST)
+    @ResponseBody
+    public DataWrapper<Void> reLogin(
+            @RequestParam(value = "token", required = true) String token
+    ) {
+        return userService.reLogin(token);
     }
 
 }
