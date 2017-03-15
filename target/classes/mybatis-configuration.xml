@@ -5,6 +5,6 @@
 <configuration>
 
     <typeAliases>
-        <package name="com.xj.iws.entity"/>
+        <package name="com.xj.iws.http.entity"/>
     </typeAliases>
 </configuration>

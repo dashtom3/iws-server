@@ -145,9 +145,9 @@ public interface UserApi {
      * @apiVersion 0.1.0
      * @apiDescription 编辑修改用户昵称 描述 头像
      *
-     * @apiParam {String} name 用户名称 nullable
-     * @apiParam {String} describes 用户描述 nullable
-     * @apiParam {String} pic 图片 nullable
+     * @apiParam {String} name 用户名称
+     * @apiParam {String} describes 用户描述
+     * @apiParam {String} pic 图片
      * @apiParam {String} token 身份验证
      *
      * @apiSuccessExample Success-Response:

@@ -3,11 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.xj.iws.dao.LocationDao">
+<mapper namespace="com.xj.iws.http.dao.LocationDao">
 
     <sql id="field">systemid,areaid,positionx,positiony,name,describes</sql>
 
-    <resultMap id="LocationEntity" type="com.xj.iws.entity.LocationEntity">
+    <resultMap id="LocationEntity" type="com.xj.iws.http.entity.LocationEntity">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="systemid" property="systemId" jdbcType="INTEGER"/>
         <result column="areaid" property="areaId" jdbcType="INTEGER"/>

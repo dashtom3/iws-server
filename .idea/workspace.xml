@@ -1,96 +1,218 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="iws:war" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="be0bf87b-fdb5-49f0-96ac-bab80a65eead" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/CCP_REST_SMS_SDK_JAVA_v2.6.3r.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/CCP_REST_SMS_SDK_JAVA_v2_6_3r.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/sessionManager/SessionManager.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/sessionManager/VerifyCodeManager.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/utils/HttpUtil.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/utils/TimeUtil.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/utils/UUIDGenerator.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/mapper/UserMapper.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_pool2_2_2.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_jcl_over_slf4j_1_7_22.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_commons_1_13_0_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_keyvalue_1_2_0_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_redis_1_8_0_RELEASE.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__redis_clients_jedis_2_9_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/api/DataApi.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/api/DeviceApi.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/api/DeviceInfoApi.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/api/LogApi.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/api/NewsApi.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/Test.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/page/api/system/add.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/page/api/system/delete.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/page/api/system/detail.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/page/api/system/update.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/page/ok.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/controller/EquipmentController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/controller/EquipmentSettedController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/controller/EquipmentController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/controller/EquipmentSettedController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/page/api/system/add.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/page/api/system/delete.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/page/api/system/detail.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/page/api/system/update.jsp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/page/ok.jsp" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/controller/RoleController.class" afterPath="$PROJECT_DIR$/target/classes/com/xj/iws/controller/RoleController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/entity/EquipmentEntity.class" afterPath="$PROJECT_DIR$/target/classes/com/xj/iws/entity/EquipmentEntity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/entity/EquipmenttypeEntity.class" afterPath="$PROJECT_DIR$/target/classes/com/xj/iws/entity/EquipmenttypeEntity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/entity/LocationEntity.class" afterPath="$PROJECT_DIR$/target/classes/com/xj/iws/entity/LocationEntity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/entity/RoleEntity.class" afterPath="$PROJECT_DIR$/target/classes/com/xj/iws/entity/RoleEntity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/entity/RoomEntity.class" afterPath="$PROJECT_DIR$/target/classes/com/xj/iws/entity/RoomEntity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/entity/SystemEntity.class" afterPath="$PROJECT_DIR$/target/classes/com/xj/iws/entity/SystemEntity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/service/impl/RoleServiceImpl.class" afterPath="$PROJECT_DIR$/target/classes/com/xj/iws/service/impl/RoleServiceImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/controller/RoleController.class" afterPath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/controller/RoleController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/entity/EquipmentEntity.class" afterPath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/entity/EquipmentEntity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/entity/EquipmenttypeEntity.class" afterPath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/entity/EquipmenttypeEntity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/entity/LocationEntity.class" afterPath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/entity/LocationEntity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/entity/RoleEntity.class" afterPath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/entity/RoleEntity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/entity/RoomEntity.class" afterPath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/entity/RoomEntity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/entity/SystemEntity.class" afterPath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/entity/SystemEntity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/service/impl/RoleServiceImpl.class" afterPath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/service/impl/RoleServiceImpl.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_aspectj_aspectjrt_1_8_9.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_aspectj_aspectjweaver_1_8_9.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/common/sessionManager/AdminManager.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/aop/TokenException.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/controller/manager/UserManageController.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/service/manager/UserManageService.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/controller/UserManageController.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/test/Test.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/Test.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/controller/AreaController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/controller/DataController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/controller/DeviceController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/controller/DeviceInfoController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/controller/LocationController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/controller/NewsController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/controller/RoleController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/controller/RoomController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/controller/SystemController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/controller/UserController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/controller/UserManageController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/dao/AreaDao.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/dao/EquipmentDao.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/dao/LocationDao.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/dao/RoleDao.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/dao/RoomDao.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/dao/SystemDao.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/dao/UserDao.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/entity/DataEntity.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/entity/EquipmentEntity.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/entity/EquipmenttypeEntity.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/entity/LocationEntity.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/entity/NewsEntity.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/entity/RoleEntity.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/entity/RoleType.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/entity/RoomEntity.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/entity/SystemEntity.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/entity/UserEntity.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/entity/area/AreaEntity.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/entity/area/CityEntity.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/entity/area/ProvinceEntity.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/enums/CallStatusEnum.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/enums/ErrorCodeEnum.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/service/AreaService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/service/DeviceService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/service/LocationService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/service/RoleService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/service/RoomService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/service/SystemService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/service/UserService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/service/impl/AreaServiceImpl.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/service/impl/DeviceServiceImpl.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/service/impl/LocationServiceImpl.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/service/impl/RoleServiceImpl.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/service/impl/RoomServiceImpl.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/service/impl/SystemServiceImpl.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/service/impl/UserServiceImpl.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/test/Test.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/utils/BaseUtil.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/utils/DataWrapper.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/utils/FileUtil.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/utils/MD5Util.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/classes/springmvc-mybatis.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/Test.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/controller/AreaController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/controller/DataController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/controller/DeviceController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/controller/DeviceInfoController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/controller/LocationController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/controller/NewsController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/controller/RoleController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/controller/RoomController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/controller/SystemController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/controller/UserController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/controller/UserManageController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/dao/AreaDao.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/dao/EquipmentDao.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/dao/LocationDao.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/dao/RoleDao.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/dao/RoomDao.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/dao/SystemDao.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/dao/UserDao.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/entity/DataEntity.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/entity/EquipmentEntity.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/entity/EquipmenttypeEntity.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/entity/LocationEntity.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/entity/NewsEntity.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/entity/RoleEntity.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/entity/RoleType.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/entity/RoomEntity.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/entity/SystemEntity.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/entity/UserEntity.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/entity/area/AreaEntity.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/entity/area/CityEntity.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/entity/area/ProvinceEntity.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/enums/CallStatusEnum.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/enums/ErrorCodeEnum.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/service/AreaService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/service/DeviceService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/service/LocationService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/service/RoleService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/service/RoomService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/service/SystemService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/service/UserService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/service/impl/AreaServiceImpl.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/service/impl/DeviceServiceImpl.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/service/impl/LocationServiceImpl.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/service/impl/RoleServiceImpl.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/service/impl/RoomServiceImpl.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/service/impl/SystemServiceImpl.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/service/impl/UserServiceImpl.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/test/Test.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/utils/BaseUtil.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/utils/DataWrapper.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/utils/FileUtil.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/utils/MD5Util.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/springmvc-mybatis.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/target/redis.war" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/iws_war_exploded.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/iws_war_exploded.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/iws.iml" afterPath="$PROJECT_DIR$/iws.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/api/LocationApi.java" afterPath="$PROJECT_DIR$/src/main/api/LocationApi.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/api/RoleApi.java" afterPath="$PROJECT_DIR$/src/main/api/RoleApi.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/api/SystemApi.java" afterPath="$PROJECT_DIR$/src/main/api/SystemApi.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/controller/RoleController.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/controller/RoleController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/controller/RoomController.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/controller/RoomController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/controller/UserController.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/controller/UserController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/dao/RoleDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/dao/RoleDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/dao/UserDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/dao/UserDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/entity/EquipmentEntity.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/entity/EquipmentEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/entity/LocationEntity.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/entity/LocationEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/entity/RoleEntity.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/entity/RoleEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/entity/RoleType.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/entity/RoleType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/entity/UserEntity.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/entity/UserEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/enums/ErrorCodeEnum.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/enums/ErrorCodeEnum.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/service/RoleService.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/service/RoleService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/service/UserService.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/service/UserService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/service/impl/RoleServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/service/impl/RoleServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/service/impl/UserServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/service/impl/UserServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/api/UserApi.java" afterPath="$PROJECT_DIR$/src/main/api/UserApi.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/applicationContext.xml" afterPath="$PROJECT_DIR$/src/main/resources/applicationContext.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dispatcher-servlet.xml" afterPath="$PROJECT_DIR$/src/main/resources/dispatcher-servlet.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mapper/AreaMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mapper/AreaMapper.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mapper/EquipmentMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mapper/EquipmentMapper.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mapper/LocationMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mapper/LocationMapper.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mapper/RoleMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mapper/RoleMapper.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mapper/RoomMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mapper/RoomMapper.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mapper/SystemMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mapper/SystemMapper.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mapper/UserMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mapper/UserMapper.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mybatis-configuration.xml" afterPath="$PROJECT_DIR$/src/main/resources/mybatis-configuration.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/applicationContext.xml" afterPath="$PROJECT_DIR$/target/classes/applicationContext.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/dispatcher-servlet.xml" afterPath="$PROJECT_DIR$/target/classes/dispatcher-servlet.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/mapper/AreaMapper.xml" afterPath="$PROJECT_DIR$/target/classes/mapper/AreaMapper.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/mapper/EquipmentMapper.xml" afterPath="$PROJECT_DIR$/target/classes/mapper/EquipmentMapper.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/mapper/LocationMapper.xml" afterPath="$PROJECT_DIR$/target/classes/mapper/LocationMapper.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/mapper/RoleMapper.xml" afterPath="$PROJECT_DIR$/target/classes/mapper/RoleMapper.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/mapper/RoomMapper.xml" afterPath="$PROJECT_DIR$/target/classes/mapper/RoomMapper.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/mapper/SystemMapper.xml" afterPath="$PROJECT_DIR$/target/classes/mapper/SystemMapper.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/mybatis-configuration.xml" afterPath="$PROJECT_DIR$/target/classes/mybatis-configuration.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/applicationContext.xml" afterPath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/applicationContext.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/dispatcher-servlet.xml" afterPath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/dispatcher-servlet.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/mapper/AreaMapper.xml" afterPath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/mapper/AreaMapper.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/mapper/EquipmentMapper.xml" afterPath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/mapper/EquipmentMapper.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/mapper/LocationMapper.xml" afterPath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/mapper/LocationMapper.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/mapper/RoleMapper.xml" afterPath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/mapper/RoleMapper.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/mapper/RoomMapper.xml" afterPath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/mapper/RoomMapper.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/mapper/SystemMapper.xml" afterPath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/mapper/SystemMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/web.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/com.xj.iws/index.jsp" afterPath="$PROJECT_DIR$/target/com.xj.iws/index.jsp" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/api/CarApi.java" afterPath="$PROJECT_DIR$/src/main/api/UserApi.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/api/UserManageApi.java" afterPath="$PROJECT_DIR$/src/main/api/RoomApi.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/controller/EquipmentController.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/controller/DeviceController.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/controller/EquipmentSettedController.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/controller/DeviceInfoController.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/entity/EquipmenttypeEntity.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/entity/EquipmentTypeEntity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/mybatis-configuration.xml" afterPath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/mybatis-configuration.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/controller/AreaController.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/controller/user/AreaController.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/controller/DataController.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/controller/user/DataController.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/controller/DeviceController.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/controller/manager/DeviceController.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/controller/DeviceInfoController.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/controller/user/DeviceInfoController.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/controller/LocationController.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/controller/manager/LocationController.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/controller/NewsController.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/controller/user/NewsController.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/controller/RoleController.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/controller/manager/RoleController.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/controller/RoomController.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/controller/manager/RoomController.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/controller/SystemController.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/controller/manager/SystemController.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/controller/UserController.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/controller/user/UserController.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/dao/AreaDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/dao/AreaDao.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/dao/EquipmentDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/dao/EquipmentDao.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/dao/LocationDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/dao/LocationDao.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/dao/RoleDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/dao/RoleDao.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/dao/RoomDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/dao/RoomDao.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/dao/SystemDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/dao/SystemDao.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/dao/UserDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/dao/UserDao.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/entity/DataEntity.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/entity/DataEntity.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/entity/EquipmentEntity.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/entity/EquipmentEntity.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/entity/EquipmentTypeEntity.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/entity/EquipmentTypeEntity.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/entity/LocationEntity.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/entity/LocationEntity.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/entity/NewsEntity.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/entity/NewsEntity.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/entity/RoleEntity.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/entity/RoleEntity.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/entity/RoleType.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/entity/RoleType.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/entity/RoomEntity.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/entity/RoomEntity.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/entity/SystemEntity.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/entity/SystemEntity.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/entity/UserEntity.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/entity/UserEntity.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/entity/area/AreaEntity.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/entity/area/AreaEntity.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/entity/area/CityEntity.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/entity/area/CityEntity.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/entity/area/ProvinceEntity.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/entity/area/ProvinceEntity.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/enums/CallStatusEnum.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/common/enums/CallStatusEnum.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/enums/ErrorCodeEnum.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/common/enums/ErrorCodeEnum.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/service/AreaService.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/service/manager/AreaService.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/service/DeviceService.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/service/manager/DeviceService.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/service/LocationService.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/service/manager/LocationService.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/service/RoleService.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/service/manager/RoleService.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/service/RoomService.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/service/manager/RoomService.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/service/SystemService.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/service/manager/SystemService.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/service/UserService.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/service/user/UserService.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/service/impl/AreaServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/service/impl/AreaServiceImpl.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/service/impl/DeviceServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/service/impl/DeviceServiceImpl.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/service/impl/LocationServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/service/impl/LocationServiceImpl.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/service/impl/RoleServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/service/impl/RoleServiceImpl.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/service/impl/RoomServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/service/impl/RoomServiceImpl.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/service/impl/SystemServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/service/impl/SystemServiceImpl.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/service/impl/UserServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/service/impl/UserServiceImpl.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/sessionManager/SessionManager.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/common/sessionManager/SessionManager.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/sessionManager/VerifyCodeManager.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/common/sessionManager/VerifyCodeManager.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/utils/BaseUtil.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/common/utils/BaseUtil.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/utils/DataWrapper.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/common/utils/DataWrapper.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/utils/FileUtil.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/common/utils/FileUtil.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/utils/HttpUtil.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/common/utils/HttpUtil.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/utils/MD5Util.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/common/utils/MD5Util.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/utils/TimeUtil.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/common/utils/TimeUtil.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/utils/UUIDGenerator.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/common/utils/UUIDGenerator.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/springmvc-mybatis.xml" afterPath="$PROJECT_DIR$/src/main/resources/spring-mybatis.xml" />
     </list>
     <ignored path="iws.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -120,7 +242,108 @@
     <favorites_list name="iws" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="dispatcher-servlet.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/dispatcher-servlet.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="259">
+              <caret line="33" column="59" selection-start-line="33" selection-start-column="59" selection-end-line="33" selection-end-column="59" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserManageController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/http/controller/manager/UserManageController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="176">
+              <caret line="11" column="60" selection-start-line="11" selection-start-column="60" selection-end-line="11" selection-end-column="60" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AdminAspect.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/http/aop/AdminAspect.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="15" column="24" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TokenException.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/http/aop/TokenException.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="132">
+              <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AreaController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/http/controller/user/AreaController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="66">
+              <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DataController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/http/controller/user/DataController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="22">
+              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DeviceInfoController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/http/controller/user/DeviceInfoController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="22">
+              <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NewsController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/http/controller/user/NewsController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="22">
+              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/http/controller/user/UserController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="242">
+              <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="applicationContext.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/applicationContext.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="154">
+              <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -142,34 +365,7 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/xj/iws/utils/QueryUtil.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/xj/iws/service/LocationService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/xj/iws/dao/LocationDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/xj/iws/service/impl/AreaServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/springmvc-mybatis.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/xj/iws/dao/AreaDao.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/mapper/AreaMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/xj/iws/service/impl/SystemServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/xj/iws/controller/LocationController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/xj/iws/service/impl/LocationServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/mapper/SystemMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/resources/mapper/RoleMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/resources/mapper/LocationMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/resources/mapper/RoomMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/xj/iws/entity/SystemEntity.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/xj/iws/entity/LocationEntity.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/xj/iws/controller/RoomController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/xj/iws/entity/EquipmentEntity.java" />
-        <option value="$PROJECT_DIR$/src/main/api/RoomApi.java" />
-        <option value="$PROJECT_DIR$/src/main/api/LocationApi.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/xj/iws/entity/RoomEntity.java" />
-        <option value="$PROJECT_DIR$/src/main/api/SystemApi.java" />
-        <option value="$PROJECT_DIR$/src/main/api/RoleApi.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/xj/iws/service/DeviceService.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/index.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/com/xj/iws/controller/SystemController.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/api/AreaApi.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/xj/iws/controller/DeviceController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/xj/iws/service/impl/DeviceServiceImpl.java" />
@@ -192,7 +388,34 @@
         <option value="$PROJECT_DIR$/src/main/java/com/xj/iws/service/impl/RoleServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/xj/iws/service/impl/UserServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/xj/iws/controller/UserController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xj/iws/http/service/impl/DeviceServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/api/UserApi.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xj/iws/common/sessionManager/AdminManager.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xj/iws/http/controller/UserManageController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xj/iws/http/controller/SystemController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xj/iws/http/controller/RoomController.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xj/iws/http/manager/aop/Admin.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xj/iws/http/controller/user/UserController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xj/iws/http/service/manager/SystemService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xj/iws/http/service/user/UserService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xj/iws/http/service/manager/UserManageService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xj/iws/http/service/impl/UserManageServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xj/iws/http/controller/manager/UserManageController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xj/iws/http/controller/manager/RoomController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xj/iws/http/controller/manager/SystemController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/RoleMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/RoomMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xj/iws/http/aop/Admin.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/springmvc-mybatis.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/springmvc-aop.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/applicationContext.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/spring-mybatis.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xj/iws/http/aop/TokenException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xj/iws/http/aop/AdminAspect.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/dispatcher-servlet.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xj/iws/http/controller/user/AreaController.java" />
       </list>
     </option>
   </component>
@@ -215,12 +438,42 @@
         <option name="mavenHome" value="Bundled (Maven 3)" />
       </MavenGeneralSettings>
     </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1932" />
     <option name="height" value="1056" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>Spring</id>
+          </State>
+          <State>
+            <id>Spring CoreSpring</id>
+          </State>
+          <State>
+            <id>XMLSpring CoreSpring</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>SpringModelInspection</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -247,6 +500,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -254,6 +510,10 @@
               <option name="myItemId" value="iws" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -262,6 +522,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="iws" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="iws" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="iws" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="target" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -301,49 +575,134 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="api" />
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="iws" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="iws" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mapper" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="iws" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="iws" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="iws" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="http" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="iws" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="iws" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="iws" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="aspect.path.notification.shown" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="D:/desktop/Test" />
+    <property name="last_opened_file_path" value="D:/desktop" />
     <property name="js-jscs-nodeInterpreter" value="D:\ProgramFiles\Node.js\node.exe" />
     <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.importing" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.52068967" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\desktop\iws\src\main\resources" />
-      <recent name="D:\desktop\iws\src\main\webapp\WEB-INF" />
-      <recent name="D:\desktop\iws\src\main\webapp" />
-      <recent name="D:\desktop\iws\src\main\webapp\WEB-INF\page" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.xj.iws.http.service.impl" />
+      <recent name="com.xj.iws.http.service.manager" />
+      <recent name="com.xj.iws.service.impl" />
+      <recent name="com.xj.iws.service" />
+      <recent name="com.xj.iws.dao" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Workspace\iws\src\main\webapp\WEB-INF\api" />
+      <recent name="D:\Workspace\iws\src\main\webapp" />
       <recent name="D:\Workspace\iws\src\main\api" />
       <recent name="D:\Workspace\iws\src\main\resources\mapper" />
       <recent name="D:\Workspace\iws\lib" />
-      <recent name="D:\Workspace\iws\src\main\java\com\xj\iws" />
-      <recent name="D:\Workspace\iws\src\main\webapp\WEB-INF\page\api\system" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.xj.iws.http" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.xj.iws.utils" />
     </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="com.xj.iws.service.impl" />
-      <recent name="com.xj.iws.service" />
-      <recent name="com.xj.iws.dao" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Workspace\iws\src\main\webapp\WEB-INF\api" />
+      <recent name="D:\desktop\iws\src\main\resources" />
+      <recent name="D:\desktop\iws\src\main\webapp\WEB-INF" />
+      <recent name="D:\desktop\iws\src\main\webapp" />
+      <recent name="D:\desktop\iws\src\main\webapp\WEB-INF\page" />
     </key>
   </component>
   <component name="RunManager" selected="Tomcat Server.Tomcat 8.0:8080">
@@ -871,19 +1230,21 @@
       <workItem from="1489214720876" duration="10394000" />
       <workItem from="1489376070085" duration="8473000" />
       <workItem from="1489455264491" duration="23205000" />
-      <workItem from="1489541402163" duration="13372000" />
+      <workItem from="1489541402163" duration="13831000" />
+      <workItem from="1489559079386" duration="21008000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="177641000" />
+    <option name="totallyTimeSpent" value="199108000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1932" height="1056" extended-state="1" />
+    <frame x="-8" y="-8" width="1932" height="1056" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16613756" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -891,14 +1252,15 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980973" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22751322" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.114285715" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16649269" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16649269" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32910052" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -908,9 +1270,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16613756" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32910052" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -926,7 +1286,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="22" />
+      <option name="time" value="24" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -935,164 +1295,57 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/api/RoleApi.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2090">
-          <caret line="95" column="29" selection-start-line="95" selection-start-column="29" selection-end-line="95" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/RoleMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="858">
-          <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
-          <folding>
-            <marker date="1489139962197" expanded="true" signature="1120:1271" ph="INSERT INTO role... " />
-            <marker date="1489139962197" expanded="true" signature="1269:1271" ph="INSERT INTO role... " />
-            <marker date="1489139962197" expanded="true" signature="1341:1386" ph="DELETE FROM " />
-            <marker date="1489139962197" expanded="true" signature="1474:1540" ph="SELECT name role" />
-            <marker date="1489139962197" expanded="true" signature="1631:1721" ph="SELECT id, F... role" />
-            <marker date="1489139962197" expanded="true" signature="1795:2426" ph="SELECT id, F... role" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="14" column="73" selection-start-line="14" selection-start-column="73" selection-end-line="14" selection-end-column="73" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/page/api/system/delete.jsp" />
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/page/api/system/detail.jsp" />
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/page/api/system/update.jsp" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/SystemMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="14" column="16" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
-          <folding>
-            <marker date="1489139962226" expanded="true" signature="678:766" ph="INSERT INTO system... " />
-            <marker date="1489139962226" expanded="true" signature="684:766" ph="insert into system... " />
-            <marker date="1489139962226" expanded="true" signature="835:864" ph="DELETE FROM " />
-            <marker date="1489139962226" expanded="true" signature="835:878" ph="DELETE FROM " />
-            <marker date="1489139962226" expanded="true" signature="835:883" ph="DELETE FROM " />
-            <marker date="1489139962226" expanded="true" signature="956:969" ph="UPDATE syste... " />
-            <marker date="1489139962226" expanded="true" signature="956:1211" ph="UPDATE syste... " />
-            <marker date="1489139962226" expanded="true" signature="1283:1346" ph="SELECT id,na... system" />
-            <marker date="1489139962226" expanded="true" signature="1283:1358" ph="SELECT id, F... system" />
-            <marker date="1489139962226" expanded="true" signature="1452:1540" ph="SELECT id,na... system" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="577">
-          <caret line="45" column="6" selection-start-line="45" selection-start-column="6" selection-end-line="45" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpclient/4.3.6/httpclient-4.3.6.jar!/org/apache/http/impl/client/HttpClients.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/api/CarApi.java" />
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
-          <caret line="162" column="0" selection-start-line="162" selection-start-column="0" selection-end-line="162" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/service/DeviceService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/controller/AreaController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-34">
-          <caret line="69" column="7" selection-start-line="69" selection-start-column="7" selection-end-line="69" selection-end-column="7" />
-          <folding>
-            <element signature="e#1213#1214#0" expanded="false" />
-            <element signature="e#1256#1257#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/AreaMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-369">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding>
-            <marker date="1489058568692" expanded="true" signature="1465:1534" ph="SELECT id,na... locatin" />
-            <marker date="1489058568692" expanded="true" signature="1626:1720" ph="SELECT FROM city" />
-            <marker date="1489058568692" expanded="true" signature="1811:1901" ph="SELECT FROM area" />
-            <marker date="1489058568692" expanded="true" signature="1999:2101" ph="SELECT FROM province" />
-            <marker date="1489058568692" expanded="true" signature="2191:2281" ph="SELECT FROM city" />
-            <marker date="1489058568692" expanded="true" signature="2371:2461" ph="SELECT FROM area" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/service/impl/AreaServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1332">
-          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/api/SystemApi.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="20" column="23" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/api/DeviceInfoApi.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/api/DeviceApi.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/api/NewsApi.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/controller/DeviceInfoController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/api/AreaApi.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="638">
-          <caret line="29" column="21" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/test/Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/springmvc-mybatis.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/http/service/impl/AreaServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
-          <caret line="10" column="12" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
+          <caret line="10" column="43" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/applicationContext.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/common/enums/CallStatusEnum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="7" column="49" selection-start-line="7" selection-start-column="49" selection-end-line="7" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/common/enums/ErrorCodeEnum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="10" column="31" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/http/service/impl/DeviceServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="4" column="54" selection-start-line="4" selection-start-column="54" selection-end-line="4" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/common/utils/BaseUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/common/utils/DataWrapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/apidoc/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -1100,246 +1353,398 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/controller/DeviceController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-34">
-          <caret line="12" column="10" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
+        <state relative-caret-position="-616">
+          <caret line="40" column="22" selection-start-line="40" selection-start-column="22" selection-end-line="40" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/controller/SystemController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/apidoc/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/service/impl/DeviceServiceImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="52" column="36" selection-start-line="52" selection-start-column="36" selection-end-line="52" selection-end-column="36" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/utils/TimeUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/sessionManager/VerifyCodeManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_102/src.zip!/java/util/UUID.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-484">
-          <caret line="40" column="8" selection-start-line="40" selection-start-column="8" selection-end-line="40" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_102/src.zip!/java/util/HashMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="903" column="18" selection-start-line="903" selection-start-column="18" selection-end-line="903" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/utils/MD5Util.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="572">
-          <caret line="26" column="5" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/utils/HttpUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="17" column="3" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="3" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/service/UserService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="24" column="42" selection-start-line="24" selection-start-column="42" selection-end-line="24" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/enums/ErrorCodeEnum.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="10" column="31" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/sessionManager/SessionManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="48" column="41" selection-start-line="48" selection-start-column="41" selection-end-line="48" selection-end-column="41" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/entity/UserEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="18" column="22" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
-          <folding>
-            <element signature="e#978#979#0" expanded="true" />
-            <element signature="e#1003#1004#0" expanded="true" />
-            <element signature="e#1804#1805#0" expanded="true" />
-            <element signature="e#1834#1835#0" expanded="true" />
-            <element signature="e#1880#1881#0" expanded="true" />
-            <element signature="e#1918#1919#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/entity/RoleEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
-          <folding>
-            <element signature="e#936#937#0" expanded="false" />
-            <element signature="e#969#970#0" expanded="false" />
-            <element signature="e#997#998#0" expanded="false" />
-            <element signature="e#1059#1060#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/controller/RoleController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="29" column="20" selection-start-line="29" selection-start-column="20" selection-end-line="29" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/service/RoleService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/dao/RoleDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="20" column="56" selection-start-line="20" selection-start-column="56" selection-end-line="20" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/entity/RoleType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="10" column="34" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
-          <folding>
-            <element signature="e#464#465#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/utils/UUIDGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="15" column="9" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/dao/UserDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="17" column="16" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/service/SystemService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/service/impl/SystemServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-259">
-          <caret line="26" column="4" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/service/impl/RoleServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="28" column="52" selection-start-line="28" selection-start-column="52" selection-end-line="28" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/UserMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="22" column="139" selection-start-line="22" selection-start-column="139" selection-end-line="22" selection-end-column="139" />
-          <folding>
-            <marker date="1489549596028" expanded="true" signature="1049:1180" ph="INSERT INTO system... " />
-            <marker date="1489549596028" expanded="true" signature="1286:1378" ph="SELECT id, F... user" />
-            <marker date="1489549596028" expanded="true" signature="1475:1561" ph="SELECT id, F... user" />
-            <marker date="1489549596028" expanded="true" signature="1641:1894" ph="UPDATE syste... " />
-            <marker date="1489549596028" expanded="true" signature="1973:2105" ph="UPDATE user " />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/api/UserApi.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7150">
-          <caret line="325" column="6" selection-start-line="325" selection-start-column="6" selection-end-line="325" selection-end-column="6" />
+        <state relative-caret-position="-215">
+          <caret line="154" column="8" selection-start-line="154" selection-start-column="8" selection-end-line="154" selection-end-column="8" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/controller/UserController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/common/sessionManager/AdminManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="120" column="79" selection-start-line="120" selection-start-column="79" selection-end-line="120" selection-end-column="79" />
+        <state relative-caret-position="242">
+          <caret line="11" column="34" selection-start-line="11" selection-start-column="34" selection-end-line="11" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/service/impl/UserServiceImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/common/sessionManager/SessionManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-633">
-          <caret line="108" column="38" selection-start-line="108" selection-start-column="38" selection-end-line="108" selection-end-column="38" />
+        <state relative-caret-position="924">
+          <caret line="48" column="41" selection-start-line="48" selection-start-column="41" selection-end-line="48" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/common/sessionManager/VerifyCodeManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/http/service/manager/DeviceService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/http/service/user/UserService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/http/service/manager/LocationService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/http/service/impl/UserManageServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="8" column="8" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/http/controller/manager/DeviceController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/http/controller/manager/LocationController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1327">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/http/controller/manager/RoleController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2185">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/http/controller/manager/RoomController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1320">
+          <caret line="65" column="42" selection-start-line="65" selection-start-column="42" selection-end-line="65" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/http/controller/manager/SystemController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="35" column="47" selection-start-line="35" selection-start-column="47" selection-end-line="35" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/RoleMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="9" column="71" selection-start-line="9" selection-start-column="71" selection-end-line="9" selection-end-column="71" />
+          <folding>
+            <marker date="1489578106480" expanded="true" signature="1106:1257" ph="INSERT INTO role... " />
+            <marker date="1489578106480" expanded="true" signature="1327:1372" ph="DELETE FROM " />
+            <marker date="1489578106480" expanded="true" signature="1460:1526" ph="SELECT name role" />
+            <marker date="1489578106480" expanded="true" signature="1617:1707" ph="SELECT id, F... role" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/RoomMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="9" column="71" selection-start-line="9" selection-start-column="71" selection-end-line="9" selection-end-column="71" />
+          <folding>
+            <marker date="1489578106345" expanded="true" signature="698:789" ph="INSERT INTO room... " />
+            <marker date="1489578106345" expanded="true" signature="858:899" ph="DELETE FROM " />
+            <marker date="1489578106345" expanded="true" signature="975:1248" ph="UPDATE room " />
+            <marker date="1489578106345" expanded="true" signature="1338:1444" ph="SELECT id, F... room" />
+            <marker date="1489578106345" expanded="true" signature="1536:1622" ph="SELECT id, F... room" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/SystemMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1489558762837" expanded="true" signature="688:776" ph="INSERT INTO system... " />
+            <marker date="1489558762837" expanded="true" signature="845:888" ph="DELETE FROM " />
+            <marker date="1489558762837" expanded="true" signature="966:1221" ph="UPDATE syste... " />
+            <marker date="1489558762837" expanded="true" signature="1293:1368" ph="SELECT id, F... system" />
+            <marker date="1489558762837" expanded="true" signature="1462:1550" ph="SELECT id, F... system" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/UserMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="484">
+          <caret line="22" column="139" selection-start-line="22" selection-start-column="139" selection-end-line="22" selection-end-column="139" />
+          <folding>
+            <marker date="1489558763823" expanded="true" signature="1059:1190" ph="INSERT INTO system... " />
+            <marker date="1489558763823" expanded="true" signature="1296:1388" ph="SELECT id, F... user" />
+            <marker date="1489558763823" expanded="true" signature="1485:1571" ph="SELECT id, F... user" />
+            <marker date="1489558763823" expanded="true" signature="1651:1904" ph="UPDATE syste... " />
+            <marker date="1489558763823" expanded="true" signature="1983:2115" ph="UPDATE user " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/LocationMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1489558765277" expanded="true" signature="958:1087" ph="INSERT INTO location... " />
+            <marker date="1489558765277" expanded="true" signature="1156:1201" ph="DELETE FROM " />
+            <marker date="1489558765277" expanded="true" signature="1281:1759" ph="UPDATE locat... " />
+            <marker date="1489558765277" expanded="true" signature="1855:1945" ph="SELECT id, F... location" />
+            <marker date="1489558765277" expanded="true" signature="2020:2560" ph="SELECT id, F... location" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/EquipmentMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1489558766079" expanded="true" signature="733:806" ph="INSERT INTO equipment... " />
+            <marker date="1489558766079" expanded="true" signature="875:913" ph="DELETE FROM " />
+            <marker date="1489558766079" expanded="true" signature="994:1175" ph="UPDATE equip... " />
+            <marker date="1489558766079" expanded="true" signature="1250:1283" ph="SELECT id,na... equipment" />
+            <marker date="1489558766079" expanded="true" signature="1380:1430" ph="SELECT id,na... equipment" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/AreaMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1489558767737" expanded="true" signature="1485:1554" ph="SELECT FROM province" />
+            <marker date="1489558767737" expanded="true" signature="1646:1740" ph="SELECT FROM city" />
+            <marker date="1489558767737" expanded="true" signature="1831:1921" ph="SELECT FROM area" />
+            <marker date="1489558767737" expanded="true" signature="2019:2121" ph="SELECT FROM province" />
+            <marker date="1489558767737" expanded="true" signature="2211:2301" ph="SELECT FROM city" />
+            <marker date="1489558767737" expanded="true" signature="2391:2481" ph="SELECT FROM area" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="598">
+          <caret line="174" column="0" selection-start-line="174" selection-start-column="0" selection-end-line="174" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/http/service/manager/UserManageService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/http/service/impl/SystemServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/http/service/manager/AreaService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/http/service/manager/RoleService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="13" column="17" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/http/service/manager/RoomService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="8" column="17" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/http/service/manager/SystemService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/http/aop/Admin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="9" column="8" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/springmvc-aop.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="12" column="22" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis-configuration.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/spring-mybatis.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/applicationContext.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/http/aop/TokenException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/http/controller/manager/UserManageController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="11" column="60" selection-start-line="11" selection-start-column="60" selection-end-line="11" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/http/controller/user/AreaController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/http/controller/user/DataController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/http/controller/user/DeviceInfoController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/http/controller/user/NewsController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/http/controller/user/UserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/dispatcher-servlet.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="33" column="59" selection-start-line="33" selection-start-column="59" selection-end-line="33" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/http/aop/AdminAspect.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="15" column="24" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
           <folding />
         </state>
       </provider>
@@ -1354,7 +1759,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.52068967" />
                 <option value="0.5" />
               </list>
             </option>
@@ -1399,7 +1804,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>iws</last-edited>
+          <last-edited>Spring|iws</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
