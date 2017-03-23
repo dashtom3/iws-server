@@ -5,7 +5,7 @@
 
 <mapper namespace="com.xj.iws.http.dao.UserDao">
 
-    <sql id="field">username,password,roleid,status,date,name,describes,pic</sql>
+    <sql id="field">username,password,roleid,status,date,name,address,describes,pic</sql>
 
     <resultMap id="UserEntity" type="com.xj.iws.http.entity.UserEntity">
         <id column="id" property="id" jdbcType="INTEGER"/>
@@ -13,14 +13,15 @@
         <result column="password" property="password" jdbcType="VARCHAR"/>
         <result column="roleid" property="roleId" jdbcType="INTEGER"/>
         <result column="status" property="status" jdbcType="INTEGER"/>
-        <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="date" property="date"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
         <result column="describes" property="describes" jdbcType="VARCHAR"/>
         <result column="pic" property="pic" jdbcType="VARCHAR"/>
     </resultMap>
 
     <insert id="register" parameterType="UserEntity">
-        INSERT INTO user (<include refid="field"/>) VALUES ('${username}','${password}',0,1,'${strdate}','${name}','${describes}','${pic}')
+        INSERT INTO user (<include refid="field"/>) VALUES ('${username}','${password}',0,1,'${strdate}','${name}','${address}','${describes}','${pic}')
     </insert>
 
     <select id="getUserByUsername" resultMap="UserEntity" parameterType="String">
@@ -39,8 +40,9 @@
         UPDATE user
         <set>
             <if test="name != null">name = '${name}',</if>
+            <if test="address != null">address = '${address}',</if>
+            <if test="describes != null">describes = '${describes}',</if>
             <if test="pic != null">pic = '${pic}',</if>
-            <if test="describes != null">describe = '${describes}',</if>
         </set>
         WHERE id = ${id}
     </update>
@@ -48,9 +50,11 @@
     <update id="updatePwd" parameterType="UserEntity">
         UPDATE user
         <set>
-            <if test="password != null">name = '${password}',</if>
+            <if test="password != null">password = '${password}',</if>
         </set>
         WHERE id = ${id}
     </update>
+
+
 
 </mapper>

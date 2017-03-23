@@ -1,8 +1,7 @@
 package com.xj.iws.http.controller.manager;
 
-import com.xj.iws.common.sessionManager.AdminManager;
 import com.xj.iws.http.entity.RoomEntity;
-import com.xj.iws.http.service.manager.RoomService;
+import com.xj.iws.http.service.RoomService;
 import com.xj.iws.common.utils.DataWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

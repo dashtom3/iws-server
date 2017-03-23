@@ -17,8 +17,10 @@
     <!-- 激活@Controller模式 -->
     <mvc:annotation-driven/>
     <!-- 对包中的所有类进行扫描，以完成Bean创建和自动依赖注入的功能 -->
+    <context:component-scan base-package="com.xj.iws.http.filter"/>
     <context:component-scan base-package="com.xj.iws.http.controller"/>
     <context:component-scan base-package="com.xj.iws.http.service"/>
+    <context:component-scan base-package="com.xj.iws.http.dao"/>
     <!-- 配置视图解析器，把控制器的逻辑视频映射为真正的视图 -->
     <bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
@@ -31,25 +33,19 @@
 
     <aop:aspectj-autoproxy proxy-target-class="true"/>
 
-    <bean id="adminAspect" class="com.xj.iws.http.aop.AdminAspect"></bean>
+    <bean id="manageAspect" class="com.xj.iws.http.aop.ManageAspect"></bean>
 
     <!-- 配置AOP -->
     <aop:config>
         <!-- 配置切点表达式  -->
         <aop:pointcut id="pointcut" expression="execution(* com.xj.iws.http.controller.manager.*Controller.*(..))"/>
         <!-- 配置切面及配置 -->
-        <aop:aspect order="1" ref="adminAspect">
+        <aop:aspect order="1" ref="manageAspect">
             <!-- 前置通知 -->
             <aop:before method="beforeMethod" pointcut-ref="pointcut"/>
-            <!-- 后置通知 -->
-            <aop:after method="afterMethod" pointcut-ref="pointcut"/>
-            <!-- 返回通知 -->
-            <aop:after-returning method="afterReturnMethod" pointcut-ref="pointcut" returning="result"/>
-            <!-- 异常通知 -->
-            <aop:after-throwing method="afterThrowingMethod" pointcut-ref="pointcut" throwing="ex"/>
+
         </aop:aspect>
     </aop:config>
-
 
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
         <property name="messageConverters">

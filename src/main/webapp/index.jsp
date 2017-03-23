@@ -8,6 +8,9 @@ system
     <input type="hidden" name="token" value="123"/>
     <input type="submit" value="add"/>
 </form>
+<form action="api/system/pic.do" method="post">
+    <input type="submit" value="pic"/>
+</form>
 area
 <form action="api/area/cities.do" method="post">
 
@@ -48,6 +51,18 @@ device
     <input type="text" name="com"/>
     <input type="hidden" name="token" value="123"/>
     <input type="submit" value="start"/>
+</form>
+user
+<form action="api/user/getVerifyCode.do" method="post">
+    <input type="text" name="username"/>
+    <input type="hidden" name="token" value="123"/>
+    <input type="submit" value="getVerifyCode"/>
+</form>
+<form action="api/user/login.do" method="post">
+    <input type="text" name="username"/>
+    <input type="password" name="password">
+    <input type="hidden" name="token" value="123"/>
+    <input type="submit" value="login"/>
 </form>
 </body>
 </html>

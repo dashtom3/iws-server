@@ -38,6 +38,12 @@
         WHERE id = ${id}
     </update>
 
+    <select id="list" parameterType="int" resultMap="LocationEntity">
+        SELECT id,
+        <include refid="field"/>
+        FROM location WHERE systemid = ${_parameter}
+    </select>
+
     <select id="detail" parameterType="int" resultMap="LocationEntity">
         SELECT id,
         <include refid="field"/>

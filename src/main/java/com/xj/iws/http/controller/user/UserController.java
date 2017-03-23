@@ -1,7 +1,7 @@
 package com.xj.iws.http.controller.user;
 
 import com.xj.iws.http.entity.UserEntity;
-import com.xj.iws.http.service.user.UserService;
+import com.xj.iws.http.service.UserService;
 import com.xj.iws.common.sessionManager.SessionManager;
 import com.xj.iws.common.utils.DataWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,12 +81,14 @@ public class UserController {
     @ResponseBody
     public DataWrapper<UserEntity> update(
             @RequestParam(value = "name", required = false) String name,
+            @RequestParam(value = "address", required = false) String address,
             @RequestParam(value = "describes", required = false) String describes,
             @RequestParam(value = "pic", required = false) String pic,
             @RequestParam(value = "token", required = true) String token
     ) {
         UserEntity user = SessionManager.getSession(token);
         user.setName(name);
+        user.setAddress(address);
         user.setDescribes(describes);
         user.setPic(pic);
         return userService.update(user);
@@ -136,5 +138,4 @@ public class UserController {
     ) {
         return userService.reLogin(token);
     }
-
 }

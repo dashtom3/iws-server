@@ -13,18 +13,19 @@ public class UserEntity {
     private int id;
     private String username;
     private String password;
-    private int roleId;
+    private String roleId;
     private int status;
     private Date date;
     private String strdate;
     private String name;
+    private String address;
     private String describes;
     private String pic;
 
     public UserEntity() {
     }
 
-    public UserEntity(int id, String username, String password, int roleId, int status, Date date, String strdate, String name, String describes, String pic) {
+    public UserEntity(int id, String username, String password, String roleId, int status, Date date, String strdate, String name, String address, String describes, String pic) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -33,6 +34,7 @@ public class UserEntity {
         this.date = date;
         this.strdate = strdate;
         this.name = name;
+        this.address = address;
         this.describes = describes;
         this.pic = pic;
     }
@@ -61,11 +63,11 @@ public class UserEntity {
         this.password = password;
     }
 
-    public int getRoleId() {
+    public String getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(int roleId) {
+    public void setRoleId(String roleId) {
         this.roleId = roleId;
     }
 
@@ -99,6 +101,14 @@ public class UserEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getDescribes() {

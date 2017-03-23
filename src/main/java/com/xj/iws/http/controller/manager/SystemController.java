@@ -1,8 +1,7 @@
 package com.xj.iws.http.controller.manager;
 
-import com.xj.iws.common.sessionManager.AdminManager;
 import com.xj.iws.http.entity.SystemEntity;
-import com.xj.iws.http.service.manager.SystemService;
+import com.xj.iws.http.service.SystemService;
 import com.xj.iws.common.utils.DataWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -92,5 +91,18 @@ public class SystemController {
             @RequestParam(value = "token",required = true) String token
     ){
         return systemService.detail(systemId);
+    }
+
+    /**
+     * 获取系统图标
+     * @param token
+     * @return
+     */
+    @RequestMapping(value = "pic",method = RequestMethod.POST)
+    @ResponseBody
+    public DataWrapper<List<String>> pic(
+            @RequestParam(value = "token",required = true) String token
+    ){
+        return systemService.pic();
     }
 }

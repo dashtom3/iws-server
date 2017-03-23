@@ -9,7 +9,7 @@ import com.xj.iws.http.entity.RoomEntity;
 import com.xj.iws.http.entity.SystemEntity;
 import com.xj.iws.common.enums.CallStatusEnum;
 import com.xj.iws.common.enums.ErrorCodeEnum;
-import com.xj.iws.http.service.manager.LocationService;
+import com.xj.iws.http.service.LocationService;
 import com.xj.iws.common.utils.DataWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,46 +32,40 @@ public class LocationServiceImpl implements LocationService {
     AreaDao areaDao;
 
     @Override
-    public DataWrapper add(LocationEntity locationEntity) {
+    public DataWrapper<Void> add(LocationEntity locationEntity) {
 
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
-        dataWrapper.setErrorCode(ErrorCodeEnum.Error);
-
         int sign = locationDao.add(locationEntity);
 
-        if (sign == 1) {
-            dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
+        if (sign != 1) {
+            dataWrapper.setErrorCode(ErrorCodeEnum.Error);
         }
         return dataWrapper;
     }
 
     @Override
-    public DataWrapper delete(int locationId) {
+    public DataWrapper<Void> delete(int locationId) {
 
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
-        dataWrapper.setErrorCode(ErrorCodeEnum.Error);
 
         int sign = locationDao.delete(locationId);
 
-        if (sign == 1) {
-            dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
+        if (sign != 1) {
+            dataWrapper.setErrorCode(ErrorCodeEnum.Error);
         }
-        dataWrapper.setCallStatus(CallStatusEnum.SUCCEED);
         return dataWrapper;
     }
 
     @Override
-    public DataWrapper update(LocationEntity locationEntity) {
+    public DataWrapper<Void> update(LocationEntity locationEntity) {
 
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
-        dataWrapper.setErrorCode(ErrorCodeEnum.Error);
 
         int sign = locationDao.update(locationEntity);
 
-        if (sign == 1) {
-            dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
+        if (sign != 1) {
+            dataWrapper.setErrorCode(ErrorCodeEnum.Error);
         }
-        dataWrapper.setCallStatus(CallStatusEnum.SUCCEED);
         return dataWrapper;
     }
 
@@ -79,7 +73,6 @@ public class LocationServiceImpl implements LocationService {
     public DataWrapper<LocationEntity> detail(int locationId) {
 
         DataWrapper<LocationEntity> dataWrapper = new DataWrapper<LocationEntity>();
-        dataWrapper.setErrorCode(ErrorCodeEnum.Error);
 
         //获取地点
         LocationEntity location = locationDao.detail(locationId);
@@ -90,10 +83,9 @@ public class LocationServiceImpl implements LocationService {
 
         location.setSystem(system);
         location.setRoom(rooms);
-        if (location != null) {
-            dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
+        if (location == null) {
+            dataWrapper.setErrorCode(ErrorCodeEnum.Error);
         }
-        dataWrapper.setCallStatus(CallStatusEnum.SUCCEED);
         return dataWrapper;
     }
 
@@ -101,7 +93,6 @@ public class LocationServiceImpl implements LocationService {
     public DataWrapper<List<LocationEntity>> query(String systemId, String provinceId, String cityId, String areaId) {
 
         DataWrapper<List<LocationEntity>> dataWrapper = new DataWrapper<List<LocationEntity>>();
-        dataWrapper.setErrorCode(ErrorCodeEnum.Error);
 
         //创建查询条件
         Map<String, String> condition = new HashMap<String, String>();
@@ -118,10 +109,9 @@ public class LocationServiceImpl implements LocationService {
         }
 
         List<LocationEntity> locations = locationDao.query(condition);
-        if (locations != null) {
-            dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
+        if (locations == null) {
+            dataWrapper.setErrorCode(ErrorCodeEnum.Error);
         }
-        dataWrapper.setCallStatus(CallStatusEnum.SUCCEED);
         return dataWrapper;
     }
 

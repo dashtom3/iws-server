@@ -1,6 +1,6 @@
 package com.xj.iws.http.controller.manager;
 
-import com.xj.iws.http.service.manager.DeviceService;
+import com.xj.iws.http.service.DeviceService;
 import com.xj.iws.common.utils.DataWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

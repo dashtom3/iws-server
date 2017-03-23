@@ -1,6 +1,6 @@
 package com.xj.iws.http.service.impl;
 
-import com.xj.iws.http.service.manager.DeviceService;
+import com.xj.iws.http.service.DeviceService;
 import com.xj.iws.common.utils.DataWrapper;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;

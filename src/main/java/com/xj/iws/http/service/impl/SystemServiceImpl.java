@@ -6,11 +6,13 @@ import com.xj.iws.http.entity.LocationEntity;
 import com.xj.iws.http.entity.SystemEntity;
 import com.xj.iws.common.enums.CallStatusEnum;
 import com.xj.iws.common.enums.ErrorCodeEnum;
-import com.xj.iws.http.service.manager.SystemService;
+import com.xj.iws.http.service.SystemService;
 import com.xj.iws.common.utils.DataWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -35,11 +37,10 @@ public class SystemServiceImpl implements SystemService {
     public DataWrapper<Void> add(SystemEntity system) {
 
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
-        dataWrapper.setErrorCode(ErrorCodeEnum.Error);
-
+        system.setStrdate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()).toString());
         int sign = systemDao.add(system);
-        if (sign == 1) {
-            dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
+        if (sign != 1) {
+            dataWrapper.setErrorCode(ErrorCodeEnum.Error);
         }
         dataWrapper.setCallStatus(CallStatusEnum.SUCCEED);
         return dataWrapper;
@@ -55,11 +56,9 @@ public class SystemServiceImpl implements SystemService {
     public DataWrapper<Void> delete(int systemId) {
 
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
-        dataWrapper.setErrorCode(ErrorCodeEnum.Error);
-
         int sign = systemDao.delete(systemId);
-        if (sign == 1) {
-            dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
+        if (sign != 1) {
+            dataWrapper.setErrorCode(ErrorCodeEnum.Error);
         }
         dataWrapper.setCallStatus(CallStatusEnum.SUCCEED);
         return dataWrapper;
@@ -75,11 +74,10 @@ public class SystemServiceImpl implements SystemService {
     public DataWrapper<Void> update(SystemEntity system) {
 
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
-        dataWrapper.setErrorCode(ErrorCodeEnum.Error);
 
         int sign = systemDao.update(system);
-        if (sign == 1) {
-            dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
+        if (sign != 1) {
+            dataWrapper.setErrorCode(ErrorCodeEnum.Error);
         }
         dataWrapper.setCallStatus(CallStatusEnum.SUCCEED);
         return dataWrapper;
@@ -94,17 +92,16 @@ public class SystemServiceImpl implements SystemService {
     public DataWrapper<List<SystemEntity>> list() {
 
         DataWrapper<List<SystemEntity>> dataWrapper = new DataWrapper<List<SystemEntity>>();
-        dataWrapper.setErrorCode(ErrorCodeEnum.Error);
-
         //获取全部系统
         List<SystemEntity> systems = systemDao.list();
         //获取系统下全部地点
         for (SystemEntity system : systems) {
             system.setLocation(locationDao.list(system.getId()));
         }
-        if (systems != null) {
+        if (systems == null) {
+            dataWrapper.setErrorCode(ErrorCodeEnum.Error);
+        }else {
             dataWrapper.setData(systems);
-            dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
         }
         dataWrapper.setCallStatus(CallStatusEnum.SUCCEED);
         return dataWrapper;
@@ -120,7 +117,6 @@ public class SystemServiceImpl implements SystemService {
     public DataWrapper<SystemEntity> detail(int systemId) {
 
         DataWrapper<SystemEntity> dataWrapper = new DataWrapper<SystemEntity>();
-        dataWrapper.setErrorCode(ErrorCodeEnum.Error);
 
         //获取系统
         SystemEntity system = systemDao.detail(systemId);
@@ -128,11 +124,23 @@ public class SystemServiceImpl implements SystemService {
         List<LocationEntity> locations = locationDao.list(systemId);
         system.setLocation(locations);
 
-        if (system != null) {
+        if (system == null) {
+            dataWrapper.setErrorCode(ErrorCodeEnum.Error);
+        }else {
             dataWrapper.setData(system);
-            dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
         }
-        dataWrapper.setCallStatus(CallStatusEnum.SUCCEED);
+        return dataWrapper;
+    }
+
+    @Override
+    public DataWrapper<List<String>> pic() {
+        DataWrapper<List<String>> dataWrapper = new DataWrapper<List<String>>();
+        List<String> pics = systemDao.pic();
+        if (pics == null){
+            dataWrapper.setErrorCode(ErrorCodeEnum.Error);
+        }else {
+            dataWrapper.setData(pics);
+        }
         return dataWrapper;
     }
 }

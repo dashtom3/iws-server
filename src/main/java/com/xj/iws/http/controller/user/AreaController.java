@@ -3,7 +3,7 @@ package com.xj.iws.http.controller.user;
 import com.xj.iws.http.entity.area.AreaEntity;
 import com.xj.iws.http.entity.area.CityEntity;
 import com.xj.iws.http.entity.area.ProvinceEntity;
-import com.xj.iws.http.service.manager.AreaService;
+import com.xj.iws.http.service.AreaService;
 import com.xj.iws.common.utils.DataWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

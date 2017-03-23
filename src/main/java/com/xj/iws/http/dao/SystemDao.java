@@ -1,12 +1,14 @@
 package com.xj.iws.http.dao;
 
 import com.xj.iws.http.entity.SystemEntity;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
  * Created by XiaoJiang01 on 2017/3/6.
  */
+@Repository
 public interface SystemDao {
 
     int add(SystemEntity system);
@@ -18,4 +20,6 @@ public interface SystemDao {
     List<SystemEntity> list();
 
     SystemEntity detail(int systemId);
+
+    List<String> pic();
 }

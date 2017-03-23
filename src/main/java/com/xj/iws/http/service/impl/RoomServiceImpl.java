@@ -1,14 +1,14 @@
 package com.xj.iws.http.service.impl;
 
-import com.xj.iws.http.dao.EquipmentDao;
+import com.xj.iws.http.dao.DeviceDao;
 import com.xj.iws.http.dao.LocationDao;
 import com.xj.iws.http.dao.RoomDao;
-import com.xj.iws.http.entity.EquipmentEntity;
+import com.xj.iws.http.entity.DeviceEntity;
 import com.xj.iws.http.entity.LocationEntity;
 import com.xj.iws.http.entity.RoomEntity;
 import com.xj.iws.common.enums.CallStatusEnum;
 import com.xj.iws.common.enums.ErrorCodeEnum;
-import com.xj.iws.http.service.manager.RoomService;
+import com.xj.iws.http.service.RoomService;
 import com.xj.iws.common.utils.DataWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,7 @@ public class RoomServiceImpl implements RoomService {
     @Autowired
     RoomDao roomDao;
     @Autowired
-    EquipmentDao equipmentDao;
+    DeviceDao deviceDao;
     @Autowired
     LocationDao locationDao;
 
@@ -75,12 +75,12 @@ public class RoomServiceImpl implements RoomService {
         //获取泵房详情
         RoomEntity room = roomDao.detail(roomId);
         //获取泵房所属地点
-        LocationEntity location = locationDao.location(room.getLocationId());
+        LocationEntity location = locationDao.detail(room.getLocationId());
         //获取泵房内所有控制器
-        List<EquipmentEntity> equipments = equipmentDao.equipments(roomId);
+        List<DeviceEntity> devices = deviceDao.list(roomId);
 
         room.setLocation(location);
-        room.setEquipment(equipments);
+        room.setDevices(devices);
 
         if (room != null){
             dataWrapper.setData(room);

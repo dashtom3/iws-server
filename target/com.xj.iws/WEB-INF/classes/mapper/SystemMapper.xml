@@ -5,17 +5,18 @@
 
 <mapper namespace="com.xj.iws.http.dao.SystemDao">
 
-    <sql id="field">name,pic,describes</sql>
+    <sql id="field">date,name,pic,describes</sql>
 
     <resultMap id="SystemEntity" type="com.xj.iws.http.entity.SystemEntity">
         <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="name" property="name" jdbcType="VARCHAR" />
-        <result column="pic" property="pic" jdbcType="VARCHAR" />
-        <result column="describes" property="describes" jdbcType="VARCHAR" />
+        <result column="date" property="date" jdbcType="DATE"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="pic" property="pic" jdbcType="VARCHAR"/>
+        <result column="describes" property="describes" jdbcType="VARCHAR"/>
     </resultMap>
 
     <insert id="add" parameterType="SystemEntity">
-        INSERT INTO system (<include refid="field"/>) VALUES ('${name}','${pic}','${describes}')
+        INSERT INTO system (<include refid="field"/>) VALUES ('${strdate}','${name}','${pic}','${describes}')
     </insert>
 
     <delete id="delete" parameterType="int">
@@ -42,6 +43,10 @@
         SELECT id,
         <include refid="field"/>
         FROM system WHERE id = ${_parameter}
+    </select>
+
+    <select id="pic" resultType="String">
+        SELECT url FROM img WHERE name = 'system'
     </select>
 
 </mapper>

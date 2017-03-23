@@ -5,41 +5,60 @@
 
 <mapper namespace="com.xj.iws.http.dao.RoleDao">
 
-    <sql id="field">roleId,systemId,provinceId,cityId,areaId,limitation,name,describes</sql>
+    <sql id="roleField">name,describes</sql>
+    <sql id="roleSubField">roleId,systemId,areaId,limitation</sql>
 
     <resultMap id="RoleEntity" type="com.xj.iws.http.entity.RoleEntity">
         <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="roleid" property="roleId" jdbcType="INTEGER"/>
-        <result column="systemid" property="systemId" jdbcType="INTEGER"/>
-        <result column="provinceid" property="provinceId" jdbcType="INTEGER"/>
-        <result column="cityid" property="cityId" jdbcType="INTEGER"/>
-        <result column="areaid" property="areaId" jdbcType="INTEGER"/>
-        <result column="limitation" property="limitation" jdbcType="INTEGER"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="describes" property="describes" jdbcType="VARCHAR"/>
     </resultMap>
 
+    <resultMap id="RoleSubEntity" type="com.xj.iws.http.entity.RoleSubEntity">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="roleid" property="roleId" jdbcType="INTEGER"/>
+        <result column="systemid" property="systemId" jdbcType="INTEGER"/>
+        <result column="areaid" property="areaId" jdbcType="INTEGER"/>
+        <result column="limitation" property="limitation" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="getNextId" resultType="int">
+        SELECT Auto_increment FROM information_schema.tables WHERE Table_Schema='iws1.0' and TABLE_NAME = 'role'
+    </select>
+
     <insert id="add" parameterType="RoleEntity">
-        INSERT INTO role (<include refid="field"/>) VALUES
-        (${roleId},${systemId},${provinceId},${cityId},${areaId},${limitation},${name},${describes})
+        INSERT INTO role (<include refid="roleField"/>) VALUES (${name},${describes})
     </insert>
 
-    <delete id="delete" parameterType="long">
-        DELETE FROM role WHERE roleid = ${_parameter}
+    <insert id="addSub">
+        INSERT INTO rolesub (<include refid="roleField"/>) VALUES
+        <foreach collection="list" item="subitem" separator=",">
+            (${roleId},${subitem.systemId},${subitem.areaId},${subitem.limitation})
+        </foreach>
+    </insert>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM role WHERE id = ${_parameter}
     </delete>
 
-    <select id="name" parameterType="long" resultType="String">
-        SELECT name FROM role WHERE roleid = ${_parameter} GROUP BY roleid
-    </select>
+    <delete id="deleteSub" parameterType="int">
+        DELETE FROM rolesub
+        <where>
+            <if test="roleId != 0">AND roleid = ${roleId}</if>
+            <if test="id != 0">AND id = ${id}</if>
+        </where>
+    </delete>
 
-    <select id="list" parameterType="long" resultMap="RoleEntity">
+    <select id="list" resultMap="RoleEntity">
         SELECT id,
-        <include refid="field"/>
-        FROM role WHERE roleid = ${_parameter}
+        <include refid="roleField"/>
+        FROM role ORDER BY id
     </select>
 
-    <select id="queryId" resultType="RoleEntity">
-        SELECT roleId FROM role
+    <select id="query" resultType="RoleEntity" parameterType="HashMap">
+        SELECT id,
+        <include refid="roleField"/>
+        FROM role
         <where>
             <if test="systemId != null">AND systemid = ${systemId}</if>
             <if test="areaId != null">AND areaid = ${areaId}</if>
@@ -50,5 +69,6 @@
             <if test="limitation != null">AND limitation = ${limitation}</if>
             <if test="name != null">AND name = ${name}</if>
         </where>
+        ORDER BY id
     </select>
 </mapper>

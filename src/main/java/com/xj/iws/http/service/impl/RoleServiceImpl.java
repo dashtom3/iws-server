@@ -2,12 +2,11 @@ package com.xj.iws.http.service.impl;
 
 import com.xj.iws.http.dao.RoleDao;
 import com.xj.iws.http.entity.RoleEntity;
-import com.xj.iws.http.entity.RoleType;
 import com.xj.iws.common.enums.CallStatusEnum;
 import com.xj.iws.common.enums.ErrorCodeEnum;
-import com.xj.iws.http.service.manager.RoleService;
+import com.xj.iws.http.entity.RoleSubEntity;
+import com.xj.iws.http.service.RoleService;
 import com.xj.iws.common.utils.DataWrapper;
-import com.xj.iws.common.utils.UUIDGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,168 +21,101 @@ public class RoleServiceImpl implements RoleService {
     RoleDao roleDao;
 
     @Override
-    public DataWrapper<Void> add(int[] systemId, int[] provinceId, int[] cityId, int[] areaId, int[] limitation, String name, String describes) {
+    public DataWrapper<Void> add(RoleEntity roleEntity, List<RoleSubEntity> subitem) {
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
-        dataWrapper.setErrorCode(ErrorCodeEnum.Error);
-        String roleId = UUIDGenerator.getCode("RL");
-        int sign = 0;
-        //遍历数组写入role
-        for (int i = 0; i < systemId.length; i++) {
 
-            RoleEntity roleEntity = new RoleEntity();
+        int roleId = roleDao.getNextId();
 
-            roleEntity.setRoleId(roleId);
-            roleEntity.setName(name);
-            roleEntity.setSystemId(systemId[i]);
-            roleEntity.setProvinceId(provinceId[i]);
-            roleEntity.setCityId(cityId[i]);
-            roleEntity.setAreaId(areaId[i]);
-            roleEntity.setLimitation(limitation[i]);
-            roleEntity.setDescribes(describes);
-
-            int j = roleDao.add(roleEntity);
-            sign += j;
+        int i = roleDao.addRole(roleEntity);
+        int j = roleDao.addSub(roleId,subitem);
+        if (i != 1) {
+            dataWrapper.setErrorCode(ErrorCodeEnum.Error);
         }
-
-        if (sign == systemId.length) {
-            dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
-        }
-        dataWrapper.setCallStatus(CallStatusEnum.SUCCEED);
         return dataWrapper;
     }
 
     @Override
-    public DataWrapper<Void> delete(String roleId) {
+    public DataWrapper<Void> delete(int roleId) {
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
-        dataWrapper.setErrorCode(ErrorCodeEnum.Error);
 
-        int sign = roleDao.delete(roleId);
-
-        if (sign == 1) {
-            dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
+        int i = roleDao.deleteSub(roleId,0);
+        int j = roleDao.deleteRole(roleId);
+        if (i != 1) {
+            dataWrapper.setErrorCode(ErrorCodeEnum.Error);
         }
-        dataWrapper.setCallStatus(CallStatusEnum.SUCCEED);
         return dataWrapper;
     }
 
     @Override
-    public DataWrapper<Void> update(String roleId, int[] systemId, int[] provinceId, int[] cityId, int[] areaId, int[] limitation, String name, String describe) {
+    public DataWrapper<Void> addSub(int roleId, RoleSubEntity subitem) {
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
-        dataWrapper.setErrorCode(ErrorCodeEnum.Error);
-
-        //删除原有role
-        roleDao.delete(roleId);
-
-        int sign = 0;
-        //遍历数组写入role
-        for (int i = 0; i < systemId.length; i++) {
-
-            RoleEntity roleEntity = new RoleEntity();
-
-            roleEntity.setRoleId(roleId);
-            roleEntity.setName(name);
-            roleEntity.setSystemId(systemId[i]);
-            roleEntity.setProvinceId(provinceId[i]);
-            roleEntity.setCityId(cityId[i]);
-            roleEntity.setAreaId(areaId[i]);
-            roleEntity.setLimitation(limitation[i]);
-
-            int j = roleDao.add(roleEntity);
-            sign += j;
+        List<RoleSubEntity> subitems = new ArrayList<RoleSubEntity>();
+        subitems.add(subitem);
+        int i = roleDao.addSub(roleId, subitems);
+        if (i != 1) {
+            dataWrapper.setErrorCode(ErrorCodeEnum.Error);
         }
-
-        if (sign == systemId.length) {
-            dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
-        }
-
-
-        dataWrapper.setCallStatus(CallStatusEnum.SUCCEED);
         return dataWrapper;
     }
 
     @Override
-    public DataWrapper<List<RoleType>> list() {
-        DataWrapper<List<RoleType>> dataWrapper = new DataWrapper<List<RoleType>>();
-        dataWrapper.setErrorCode(ErrorCodeEnum.Error);
+    public DataWrapper<Void> deleteSub(int id) {
+        DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
+        int i = roleDao.deleteSub(0,id);
+        if (i != 1) {
+            dataWrapper.setErrorCode(ErrorCodeEnum.Error);
+        }
+        return dataWrapper;
+    }
 
-        List<RoleType> roleTypes = new ArrayList<RoleType>();
-        //获取所有roleId
-        List<String> roleIds = roleDao.queryId(null);
+    @Override
+    public DataWrapper<Void> update(RoleEntity roleEntity) {
+        DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
+
+        int i = roleDao.update(roleEntity);
+        if (i != 1) {
+            dataWrapper.setErrorCode(ErrorCodeEnum.Error);
+        }
+        return dataWrapper;
+    }
+
+    @Override
+    public DataWrapper<List<RoleEntity>> list() {
+        DataWrapper<List<RoleEntity>> dataWrapper = new DataWrapper<List<RoleEntity>>();
+        List<RoleEntity> roles = roleDao.list();
+        for (RoleEntity role : roles) {
+            role.setSubitem(roleDao.getSub(role.getId()));
+        }
+        if (roles == null) {
+            dataWrapper.setErrorCode(ErrorCodeEnum.Error);
+        }else {
+            dataWrapper.setData(roles);
+        }
+        return dataWrapper;
+    }
+
+    @Override
+    public DataWrapper<RoleEntity> detail(int roleId) {
+        DataWrapper<RoleEntity> dataWrapper = new DataWrapper<RoleEntity>();
+        RoleEntity role = roleDao.detail(roleId);
+        role.setSubitem(roleDao.getSub(roleId));
+        dataWrapper.setData(role);
+        return dataWrapper;
+    }
+
+    @Override
+    public DataWrapper<List<RoleEntity>> query(Map<String, String> condition) {
+        DataWrapper<List<RoleEntity>> dataWrapper = new DataWrapper<List<RoleEntity>>();
+        List<RoleEntity> roles = roleDao.query(condition);
         //遍历roleId获取其名称和系统、地区、权限
-        for (String roleId : roleIds) {
-            RoleType roleType = new RoleType();
-            roleType.setRoleId(roleId);
-            roleType.setName(roleDao.name(roleId));
-            roleType.setRole(roleDao.list(roleId));
-            roleTypes.add(roleType);
+        for (RoleEntity role : roles) {
+            role.setSubitem(roleDao.getSub(role.getId()));
         }
-        if (roleTypes != null) {
-            dataWrapper.setData(roleTypes);
-            dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
+        if (roles == null) {
+            dataWrapper.setErrorCode(ErrorCodeEnum.Error);
+        }else {
+            dataWrapper.setData(roles);
         }
-        dataWrapper.setCallStatus(CallStatusEnum.SUCCEED);
-        return dataWrapper;
-    }
-
-    @Override
-    public DataWrapper<RoleType> detail(String roleId) {
-        DataWrapper<RoleType> dataWrapper = new DataWrapper<RoleType>();
-        dataWrapper.setErrorCode(ErrorCodeEnum.Error);
-
-        //按roleId获取其名称和系统、地区、权限
-        RoleType roleType = new RoleType();
-        roleType.setRoleId(roleId);
-        roleType.setName(roleDao.name(roleId));
-        roleType.setRole(roleDao.list(roleId));
-
-        if (roleType != null) {
-            dataWrapper.setData(roleType);
-            dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
-        }
-        dataWrapper.setCallStatus(CallStatusEnum.SUCCEED);
-        return dataWrapper;
-    }
-
-    @Override
-    public DataWrapper<List<RoleType>> query(String systemId, String provinceId, String cityId, String areaId, String limitation, String name) {
-        DataWrapper<List<RoleType>> dataWrapper = new DataWrapper<List<RoleType>>();
-        dataWrapper.setErrorCode(ErrorCodeEnum.Error);
-
-        //创建查询条件
-        Map<String, String> condition = new HashMap<String, String>();
-
-        if (systemId != null && systemId != ""){
-            condition.put("systemId", systemId);
-        }
-        if (areaId != null && areaId != "" && areaId != "0") {
-            condition.put("areaId", areaId);
-        } else if (cityId != null && cityId != "" && cityId != "0") {
-            condition.put("cityId", cityId);
-        } else if (provinceId != null && provinceId != "" && provinceId != "0") {
-            condition.put("provinceId", provinceId);
-        }
-        if (limitation != null && limitation != ""){
-            condition.put("limitation", limitation);
-        }
-        if (name != null && name != ""){
-            condition.put("name", name);
-        }
-
-        List<RoleType> roleTypes = new ArrayList<RoleType>();
-        //获取所有roleId
-        List<String> roleIds = roleDao.queryId(condition);
-        //遍历roleId获取其名称和系统、地区、权限
-        for (String roleId : roleIds) {
-            RoleType roleType = new RoleType();
-            roleType.setRoleId(roleId);
-            roleType.setName(roleDao.name(roleId));
-            roleType.setRole(roleDao.list(roleId));
-            roleTypes.add(roleType);
-        }
-        if (roleTypes != null) {
-            dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
-        }
-        dataWrapper.setCallStatus(CallStatusEnum.SUCCEED);
         return dataWrapper;
     }
 }

@@ -10,12 +10,12 @@ public interface RoleApi {
      * @apiVersion 0.1.0
      * @apiDescription 注册添加新角色
      *
-     * @apiParam {long} roleId 角色id
-     * @apiParam {int[]} systemId 系统id
-     * @apiParam {int[]} provinceId 省份id
-     * @apiParam {int[]} cityId 城市id
-     * @apiParam {int[]} areaId 城区id
-     * @apiParam {int[]} limitation 操作权限
+     * @apiParam {int} roleId 角色id
+     * @apiParam {List} {
+     *      {int} systemId 系统id,
+     *      {int} areaId 地区id，可为省、市或区
+     *      {int} limitation 操作权限 0只读/1可写/2管理员
+     * }
      * @apiParam {String} name 角色名称
      * @apiParam {String} describes 角色描述
      * @apiParam {String} token 身份验证
@@ -56,7 +56,89 @@ public interface RoleApi {
      * @apiVersion 0.1.0
      * @apiDescription 删除角色
      *
-     * @apiParam {String} roleId 角色id
+     * @apiParam {int} roleId 角色id
+     * @apiParam {String} token 身份验证
+     *
+     * @apiSuccessExample Success-Response:
+     *  HTTP/1.1 200 OK
+     * {
+     * callStatus:"SUCCEED",
+     * errorCode:"No_Error",
+     * data:null,
+     * token:"SK1d7a4fe3-c2cd-417f-8f6f-bf7412592996",
+     * numberPerPage:0,
+     * currentPage:0,
+     * totalNumber:0,
+     * totalPage:0
+     *  }
+     *
+     *  @apiErrorExample {json} Error-Response:
+     *  HTTP/1.1 200 OK
+     * {
+     * callStatus:"FAILED",
+     * errorCode:"Error",
+     * data:null,
+     * token:null,
+     * numberPerPage:0,
+     * currentPage:0,
+     * totalNumber:0,
+     * totalPage:0
+     *  }
+     *
+     */
+
+    /**
+     *
+     * @api {post} http://localhost:8080/iws/api/role/addsub 添加角色权限
+     * @apiName addsub
+     * @apiGroup role
+     * @apiVersion 0.1.0
+     * @apiDescription 在编辑角色中，添加一条权限
+     *
+     * @apiParam {int} roleId 角色id
+     * @apiParam {int} systemId 系统id
+     * @apiParam {int} areaId 地区id，可为省、市或区
+     * @apiParam {int} limitation 操作权限 0只读/1可写/2管理员
+     * @apiParam {String} token 身份验证
+     *
+     * @apiSuccessExample Success-Response:
+     *  HTTP/1.1 200 OK
+     * {
+     * callStatus:"SUCCEED",
+     * errorCode:"No_Error",
+     * data:null,
+     * token:"SK1d7a4fe3-c2cd-417f-8f6f-bf7412592996",
+     * numberPerPage:0,
+     * currentPage:0,
+     * totalNumber:0,
+     * totalPage:0
+     *  }
+     *
+     *  @apiErrorExample {json} Error-Response:
+     *  HTTP/1.1 200 OK
+     * {
+     * callStatus:"FAILED",
+     * errorCode:"Error",
+     * data:null,
+     * token:null,
+     * numberPerPage:0,
+     * currentPage:0,
+     * totalNumber:0,
+     * totalPage:0
+     *  }
+     *
+     */
+
+    /**
+     *
+     * @api {post} http://localhost:8080/iws/api/role/delete 删除角色权限
+     * @apiName delete
+     * @apiGroup role
+     * @apiVersion 0.1.0
+     * @apiDescription 在编辑角色中，删除一条权限
+     *
+     * @apiParam {int} roleId 角色id
+     * @apiParam {int} id 角色权限条目id
      * @apiParam {String} token 身份验证
      *
      * @apiSuccessExample Success-Response:
@@ -95,12 +177,7 @@ public interface RoleApi {
      * @apiVersion 0.1.0
      * @apiDescription 编辑修改角色
      *
-     * @apiParam {long} roleId 角色id
-     * @apiParam {int[]} systemId 系统id
-     * @apiParam {int[]} provinceId 省份id
-     * @apiParam {int[]} cityId 城市id
-     * @apiParam {int[]} areaId 城区id
-     * @apiParam {int[]} limitation 操作权限
+     * @apiParam {int} roleId 角色id
      * @apiParam {String} name 角色名称
      * @apiParam {String} describes 角色描述
      * @apiParam {String} token 身份验证
@@ -251,7 +328,7 @@ public interface RoleApi {
      * @apiparam {int} provinceId 省份id
      * @apiparam {int} cityId 城市id
      * @apiparam {int} areaId 城区id
-     * @apiparam {int} limitation 操作权限
+     * @apiparam {int} limitation 操作权限 0只读/1可写/2管理员
      * @apiparam {String} name 角色名称
      * @apiparam {String} token 身份验证
      *

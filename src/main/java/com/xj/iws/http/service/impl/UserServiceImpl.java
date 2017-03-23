@@ -3,7 +3,7 @@ package com.xj.iws.http.service.impl;
 import com.xj.iws.http.dao.UserDao;
 import com.xj.iws.http.entity.UserEntity;
 import com.xj.iws.common.enums.ErrorCodeEnum;
-import com.xj.iws.http.service.user.UserService;
+import com.xj.iws.http.service.UserService;
 import com.xj.iws.common.sessionManager.SessionManager;
 import com.xj.iws.common.sessionManager.VerifyCodeManager;
 import com.xj.iws.common.utils.DataWrapper;
@@ -29,11 +29,10 @@ public class UserServiceImpl implements UserService {
         DataWrapper<UserEntity> dataWrapper = new DataWrapper<UserEntity>();
         UserEntity user = userDao.getUserByUsername(username);
         if (user != null) {
-            if (user.getPassword().equals(MD5Util.getMD5String(password))) {
+            if (user.getPassword().equals(MD5Util.getMD5String(MD5Util.prePassword(password)))) {
                 String token = SessionManager.newSession(user);
                 dataWrapper.setData(user);
                 dataWrapper.setToken(token);
-                dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
                 return dataWrapper;
             } else {
                 dataWrapper.setErrorCode(ErrorCodeEnum.Login_Error);
@@ -58,8 +57,9 @@ public class UserServiceImpl implements UserService {
             } else if (serverCode.equals(code)) {
                 UserEntity newUser = new UserEntity();
                 newUser.setUsername(username);
-                newUser.setPassword(MD5Util.getMD5String(user.getPassword()));
+                newUser.setPassword(MD5Util.getMD5String(MD5Util.prePassword(user.getPassword())));
                 newUser.setName(user.getName() == null ? user.getUsername() : user.getName());
+                newUser.setAddress(user.getAddress());
                 newUser.setDescribes(user.getDescribes());
                 newUser.setStrdate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()).toString());
                 if (1 == userDao.register(newUser)) {
@@ -118,10 +118,10 @@ public class UserServiceImpl implements UserService {
     public DataWrapper<UserEntity> update(UserEntity user) {
         DataWrapper<UserEntity> dataWrapper = new DataWrapper<UserEntity>();
         if (1 == userDao.updateUser(user)) {
-            dataWrapper.setErrorCode(ErrorCodeEnum.Error);
-        } else {
-            dataWrapper.setData(user);
             dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
+            dataWrapper.setData(user);
+        } else {
+            dataWrapper.setErrorCode(ErrorCodeEnum.Error);
         }
         return dataWrapper;
     }
@@ -130,7 +130,7 @@ public class UserServiceImpl implements UserService {
     public DataWrapper<Void> changePwd(int userId, String oldPwd, String newPwd) {
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
         UserEntity user = userDao.getUserById(userId);
-        if (oldPwd.equals(MD5Util.getMD5String(user.getPassword()))) {
+        if (oldPwd.equals(MD5Util.getMD5String(MD5Util.prePassword(user.getPassword())))) {
             user.setPassword(MD5Util.getMD5String(newPwd));
             if (1 == userDao.updatePwd(user)) {
                 dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
@@ -153,10 +153,14 @@ public class UserServiceImpl implements UserService {
         } else if (serverCode.equals("overdue")) {
             dataWrapper.setErrorCode(ErrorCodeEnum.Verify_Code_5min);
         } else if (serverCode.equals(code)) {
-            UserEntity user = userDao.getUserByUsername(username);
-            user.setPassword(MD5Util.getMD5String(password));
-            userDao.updatePwd(user);
-            VerifyCodeManager.removePhoneCodeByPhoneNum(username);
+            UserEntity user;
+            if ((user = userDao.getUserByUsername(username)) != null){
+                user.setPassword(MD5Util.getMD5String(MD5Util.prePassword(password)));
+                userDao.updatePwd(user);
+                VerifyCodeManager.removePhoneCodeByPhoneNum(username);
+            }else {
+                dataWrapper.setErrorCode(ErrorCodeEnum.Username_NOT_Exist);
+            }
         }
         return dataWrapper;
     }

@@ -1,29 +1,32 @@
 package com.xj.iws.http.entity;
 
+import org.apache.ibatis.type.Alias;
+
 import java.util.List;
 
 /**
  * Created by XiaoJiang01 on 2017/3/9.
  */
+@Alias("RoomEntity")
 public class RoomEntity {
     private int id;
     private int locationId;
     private String name;
     private String describes;
     private LocationEntity location;
-    private List<EquipmentEntity> equipment;
+    private List<DeviceEntity> devices;
 
     public RoomEntity() {
 
     }
 
-    public RoomEntity(int id, int locationId, String name, String describes, LocationEntity location, List<EquipmentEntity> equipment) {
+    public RoomEntity(int id, int locationId, String name, String describes, LocationEntity location, List<DeviceEntity> devices) {
         this.id = id;
         this.locationId = locationId;
         this.name = name;
         this.describes = describes;
         this.location = location;
-        this.equipment = equipment;
+        this.devices = devices;
     }
 
     public int getId() {
@@ -66,11 +69,11 @@ public class RoomEntity {
         this.location = location;
     }
 
-    public List<EquipmentEntity> getEquipment() {
-        return equipment;
+    public List<DeviceEntity> getDevices() {
+        return devices;
     }
 
-    public void setEquipment(List<EquipmentEntity> equipment) {
-        this.equipment = equipment;
+    public void setDevices(List<DeviceEntity> devices) {
+        this.devices = devices;
     }
 }

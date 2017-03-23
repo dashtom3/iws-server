@@ -2,6 +2,7 @@ package com.xj.iws.http.entity;
 
 import org.apache.ibatis.type.Alias;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -12,6 +13,8 @@ import java.util.List;
 public class SystemEntity {
 
     private int id;
+    private Date date;
+    private String strdate;
     private String name;
     private String pic;
     private String describes;
@@ -20,8 +23,10 @@ public class SystemEntity {
     public SystemEntity() {
     }
 
-    public SystemEntity(int id, String name, String pic, String describes, List<LocationEntity> location) {
+    public SystemEntity(int id, Date date, String strdate, String name, String pic, String describes, List<LocationEntity> location) {
         this.id = id;
+        this.date = date;
+        this.strdate = strdate;
         this.name = name;
         this.pic = pic;
         this.describes = describes;
@@ -34,6 +39,22 @@ public class SystemEntity {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getStrdate() {
+        return strdate;
+    }
+
+    public void setStrdate(String strdate) {
+        this.strdate = strdate;
     }
 
     public String getName() {
