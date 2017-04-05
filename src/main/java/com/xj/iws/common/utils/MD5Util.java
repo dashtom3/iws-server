@@ -28,5 +28,4 @@ public class MD5Util {
     public static String prePassword(String s){
         return s + "XJCompany";
     }
-    
 }

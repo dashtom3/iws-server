@@ -8,7 +8,7 @@ public interface LocationApi {
      * @apiName add
      * @apiGroup location
      * @apiVersion 0.1.0
-     * @apiDescription 注册添加新地点
+     * @apiDescription 添加地点
      *
      * @apiParam {int} systemId 系统id
      * @apiParam {int} areaId 地点所属区域编号，标识到城区
@@ -52,7 +52,7 @@ public interface LocationApi {
      * @apiName update
      * @apiGroup location
      * @apiVersion 0.1.0
-     * @apiDescription 编辑修改系统，更改系统状态
+     * @apiDescription 修改地点
      *
      * @apiParam {int} id 地点id
      * @apiParam {int} systemId 系统id
@@ -99,7 +99,7 @@ public interface LocationApi {
      * @apiVersion 0.1.0
      * @apiDescription 删除地点
      *
-     * @apiParam {String} id 地点id
+     * @apiParam {String} locationId 地点id
      * @apiParam {String} token 身份验证
      *
      * @apiSuccessExample Success-Response:
@@ -132,13 +132,13 @@ public interface LocationApi {
 
     /**
      *
-     * @api {post} http://localhost:8080/iws/api/location/detail 查看地点
+     * @api {post} http://localhost:8080/iws/api/location/detail 地点详情(地点ID-->该地点信息)
      * @apiName detail
      * @apiGroup location
      * @apiVersion 0.1.0
-     * @apiDescription 获取某一地点及其所属系统、地点下全部泵房
+     * @apiDescription 传地点id,返回该地点及其所属系统和地点下全部泵房
      *
-     * @apiParam {int} id 地点id
+     * @apiParam {int} locationId 地点id
      * @apiParam {String} token 身份验证
      *
      * @apiSuccessExample Success-Response:
@@ -147,17 +147,22 @@ public interface LocationApi {
      * callStatus:"SUCCEED",
      * errorCode:"No_Error",
      * data:{
-     *      id:1，
-     *      systemId:1，
+     *      id:1,
+     *      systemId:1,
+     *      proviceId:110000,
+     *      cityId:110100,
      *      areaId:110101,
      *      positionX:123.1234567890,
      *      positionY:123.123456,
-     *      name:"name",
-     *      describes:"describes",
+     *      provinceName:"北京市",
+     *      cityName:"市辖区",
+     *      areaName:"东城区",
+     *      name:"小区",
+     *      describes:"describes"
      *      system:{
      *          id:1,
      *          name:"name",
-     *          pic:"WIN-INF/pic/a.jpg",
+     *          pic:"img/system01.png",
      *          describes:"describes"
      *
      *      }
@@ -192,7 +197,65 @@ public interface LocationApi {
 
     /**
      *
-     * @api {post} http://localhost:8080/iws/api/location/query 查询地点
+     * @api {post} http://localhost:8080/iws/api/location/list 地点列表(系统ID-->地点List)
+     * @apiName list
+     * @apiGroup location
+     * @apiVersion 0.1.0
+     * @apiDescription 传系统id,返回系统下全部地点,散列数据,按省市区排序
+     *
+     * @apiParam {int} systemId 系统id(传0可查询所有地点)
+     * @apiParam {String} token 身份验证
+     *
+     * @apiSuccessExample Success-Response:
+     *  HTTP/1.1 200 OK
+     * {
+     * callStatus:"SUCCEED",
+     * errorCode:"No_Error",
+     * data:{
+     *      id:1,
+     *      systemId:1,
+     *      proviceId:110000,
+     *      cityId:110100,
+     *      areaId:110101,
+     *      positionX:123.1234567890,
+     *      positionY:123.123456,
+     *      provinceName:"北京市",
+     *      cityName:"市辖区",
+     *      areaName:"东城区",
+     *      name:"小区",
+     *      describes:"describes"
+     *      sytem:{
+     *          id:1
+     *          name:"供水系统",
+     *          pic:"img/system01.png",
+     *          describes:"123",a
+     *      }
+     * }
+     * token:"SK1d7a4fe3-c2cd-417f-8f6f-bf7412592996",
+     * numberPerPage:0,
+     * currentPage:0,
+     * totalNumber:0,
+     * totalPage:0
+     *  }
+     *
+     *  @apiErrorExample {json} Error-Response:
+     *  HTTP/1.1 200 OK
+     * {
+     * callStatus:"FAILED",
+     * errorCode:"Error",
+     * data:null,
+     * token:null,
+     * numberPerPage:0,
+     * currentPage:0,
+     * totalNumber:0,
+     * totalPage:0
+     *  }
+     *
+     */
+
+    /**
+     *
+     * @api {post} http://localhost:8080/iws/api/location/query 查询地点(条件-->地点List)
      * @apiName query
      * @apiGroup location
      * @apiVersion 0.1.0
@@ -211,12 +274,17 @@ public interface LocationApi {
      * callStatus:"SUCCEED",
      * errorCode:"No_Error",
      * data(List):{
-     *      id:1，
-     *      systemId:1，
+     *      id:1,
+     *      systemId:1,
+     *      proviceId:110000,
+     *      cityId:110100,
      *      areaId:110101,
      *      positionX:123.1234567890,
      *      positionY:123.123456,
-     *      name:"name",
+     *      provinceName:"北京市",
+     *      cityName:"市辖区",
+     *      areaName:"东城区",
+     *      name:"小区",
      *      describes:"describes"
      * }
      * token:"SK1d7a4fe3-c2cd-417f-8f6f-bf7412592996",

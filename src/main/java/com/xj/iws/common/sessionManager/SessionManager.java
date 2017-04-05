@@ -1,6 +1,6 @@
 package com.xj.iws.common.sessionManager;
 
-import com.xj.iws.http.entity.UserEntity;
+import com.xj.iws.http.mvc.entity.UserEntity;
 import com.xj.iws.common.utils.UUIDGenerator;
 
 import java.util.HashMap;

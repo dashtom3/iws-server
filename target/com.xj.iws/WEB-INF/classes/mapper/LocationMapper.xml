@@ -3,22 +3,31 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.xj.iws.http.dao.LocationDao">
+<mapper namespace="com.xj.iws.http.mvc.dao.LocationDao">
 
-    <sql id="field">systemid,areaid,positionx,positiony,name,describes</sql>
+    <sql id="field">systemid,provinceid,cityid,areaid,positionx,positiony,name,describes</sql>
 
-    <resultMap id="LocationEntity" type="com.xj.iws.http.entity.LocationEntity">
+    <resultMap id="LocationEntity" type="com.xj.iws.http.mvc.entity.LocationEntity">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="systemid" property="systemId" jdbcType="INTEGER"/>
+        <result column="provinceid" property="provinceId" jdbcType="INTEGER"/>
+        <result column="cityid" property="cityId" jdbcType="INTEGER"/>
         <result column="areaid" property="areaId" jdbcType="INTEGER"/>
         <result column="positionx" property="positionX" jdbcType="DOUBLE"/>
         <result column="positiony" property="positionY" jdbcType="DOUBLE"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="describes" property="describes" jdbcType="VARCHAR"/>
+        <result column="provincename" property="provinceName" jdbcType="VARCHAR"/>
+        <result column="cityname" property="cityName" jdbcType="VARCHAR"/>
+        <result column="areaname" property="areaName" jdbcType="VARCHAR"/>
     </resultMap>
 
     <insert id="add" parameterType="LocationEntity">
-        INSERT INTO location (<include refid="field"/>) VALUES (${systemId},${areaId},${positionX},${positionY},'${name}','${describes}')
+        <selectKey resultType="int" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+        INSERT INTO location (<include refid="field"/>) VALUES
+        (${systemId},${provinceId},${cityId},${areaId},${positionX},${positionY},'${name}','${describes}')
     </insert>
 
     <delete id="delete" parameterType="int">
@@ -29,6 +38,8 @@
         UPDATE location
         <set>
             <if test="systemId != null">systemid = ${systemId},</if>
+            <if test="provinceId != null">provinceid = ${provinceId},</if>
+            <if test="cityId != null">cityid = ${cityId},</if>
             <if test="areaId != null">areaid = ${areaId},</if>
             <if test="positionX != null">positionx = ${positionX},</if>
             <if test="positionY != null">positiony = ${positionY},</if>
@@ -39,27 +50,40 @@
     </update>
 
     <select id="list" parameterType="int" resultMap="LocationEntity">
-        SELECT id,
-        <include refid="field"/>
-        FROM location WHERE systemid = ${_parameter}
+        SELECT
+            l.id,l.systemid,l.provinceid,l.cityid,l.areaid,l.positionx,l.positiony,l.name,l.describes,
+            p.name AS provincename,c.name AS cityname,a.name AS areaname
+        FROM
+            location l,province p,city c,area a
+        <where>
+            l.provinceid = p.provinceid AND l.cityid = c.cityid AND l.areaid = a.areaid
+            <if test="_parameter != 0">AND l.systemid = ${_parameter}</if>
+        </where>
+        ORDER BY
+            l.systemid,l.provinceid,l.cityid,l.areaid
     </select>
 
     <select id="detail" parameterType="int" resultMap="LocationEntity">
-        SELECT id,
-        <include refid="field"/>
-        FROM location WHERE id = ${_parameter}
+        SELECT
+            l.id,l.systemid,l.provinceid,l.cityid,l.areaid,l.positionx,l.positiony,l.name,l.describes,
+            p.name AS provincename,c.name AS cityname,a.name AS areaname
+        FROM
+            location l,province p,city c,area a
+        WHERE
+            l.id = ${_parameter}
+            AND l.provinceid = p.provinceid AND l.cityid = c.cityid AND l.areaid = a.areaid
     </select>
 
-    <select id="query" resultMap="LocationEntity">
+    <select id="query" parameterType="HashMap" resultMap="LocationEntity">
         SELECT id,
         <include refid="field"/>
         FROM location
         <where>
             <if test="systemId != null">AND systemid = ${systemId}</if>
             <if test="areaId != null">AND areaid = ${areaId}</if>
-            <if test="cityId != null">AND areaid IN (SELECT areaid FROM area WHERE cityid = ${cityId})</if>
-            <if test="provinceId != null">AND areaid IN (SELECT areaid FROM area WHERE cityid IN (SELECT cityid FROM city WHERE provinceid = ${provinceId}))</if>
+            <if test="cityId != null">AND cityid = ${cityId}</if>
+            <if test="provinceId != null">AND provinceid = ${provinceId}</if>
         </where>
-        ORDER BY systemid, areaid
+        ORDER BY systemid,provinceid,cityid,areaid
     </select>
 </mapper>

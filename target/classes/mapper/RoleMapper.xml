@@ -3,52 +3,89 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.xj.iws.http.dao.RoleDao">
+<mapper namespace="com.xj.iws.http.mvc.dao.RoleDao">
 
-    <sql id="field">roleId,systemId,provinceId,cityId,areaId,limitation,name,describes</sql>
+    <sql id="roleField">name,describes</sql>
+    <sql id="roleSubField">roleId,systemId,areaId,limitation</sql>
 
-    <resultMap id="RoleEntity" type="com.xj.iws.http.entity.RoleEntity">
+    <resultMap id="RoleEntity" type="com.xj.iws.http.mvc.entity.RoleEntity">
         <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="roleid" property="roleId" jdbcType="INTEGER"/>
-        <result column="systemid" property="systemId" jdbcType="INTEGER"/>
-        <result column="provinceid" property="provinceId" jdbcType="INTEGER"/>
-        <result column="cityid" property="cityId" jdbcType="INTEGER"/>
-        <result column="areaid" property="areaId" jdbcType="INTEGER"/>
-        <result column="limitation" property="limitation" jdbcType="INTEGER"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="describes" property="describes" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <insert id="add" parameterType="RoleEntity">
-        INSERT INTO role (<include refid="field"/>) VALUES
-        (${roleId},${systemId},${provinceId},${cityId},${areaId},${limitation},${name},${describes})
+    <resultMap id="RoleSubEntity" type="com.xj.iws.http.mvc.entity.RoleSubEntity">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="roleid" property="roleId" jdbcType="INTEGER"/>
+        <result column="systemid" property="systemId" jdbcType="INTEGER"/>
+        <result column="areaid" property="areaId" jdbcType="INTEGER"/>
+        <result column="limitation" property="limitation" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <insert id="addRole" parameterType="RoleEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO role (<include refid="roleField"/>) VALUES ('${name}','${describes}')
     </insert>
 
-    <delete id="delete" parameterType="long">
-        DELETE FROM role WHERE roleid = ${_parameter}
+    <insert id="addSub">
+        INSERT INTO rolesub (<include refid="roleSubField"/>) VALUES
+        <foreach collection="subitem" item="subitem" separator=",">
+            (${roleId},${subitem.systemId},${subitem.areaId},${subitem.limitation})
+        </foreach>
+    </insert>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM role WHERE id = ${_parameter}
     </delete>
 
-    <select id="name" parameterType="long" resultType="String">
-        SELECT name FROM role WHERE roleid = ${_parameter} GROUP BY roleid
-    </select>
-
-    <select id="list" parameterType="long" resultMap="RoleEntity">
-        SELECT id,
-        <include refid="field"/>
-        FROM role WHERE roleid = ${_parameter}
-    </select>
-
-    <select id="queryId" resultType="RoleEntity">
-        SELECT roleId FROM role
+    <delete id="deleteSub" parameterType="int">
+        DELETE FROM rolesub
         <where>
-            <if test="systemId != null">AND systemid = ${systemId}</if>
-            <if test="areaId != null">AND areaid = ${areaId}</if>
-            <if test="cityId != null">AND areaid IN (SELECT areaid FROM area WHERE cityid = ${cityId})</if>
+            <if test="roleId != 0">AND roleid = ${roleId}</if>
+            <if test="id != 0">AND id = ${id}</if>
+        </where>
+    </delete>
+
+    <update id="update" parameterType="RoleEntity">
+        UPDATE role
+        <set>
+            <if test="name != null">name = '${name}',</if>
+            <if test="describes != null">describe = '${describes}',</if>
+        </set>
+        WHERE id = ${id}
+    </update>
+
+    <select id="list" resultMap="RoleEntity">
+        SELECT id,
+        <include refid="roleField"/>
+        FROM role ORDER BY id
+    </select>
+
+    <select id="detail" resultMap="RoleEntity">
+        SELECT id,
+        <include refid="roleField"/>
+        FROM role WHERE id = ${_parameter}
+    </select>
+
+    <select id="getSub" resultMap="RoleSubEntity">
+        SELECT id,
+        <include refid="roleSubField"/>
+        FROM rolesub WHERE roleid = ${_parameter}
+    </select>
+
+    <select id="query" resultType="RoleEntity" parameterType="HashMap">
+        SELECT id,
+        <include refid="roleField"/>
+        FROM role
+        <where>
+            <if test="systemId != null">AND systemid = '${systemId}'</if>
+            <if test="areaId != null">AND areaid = '${areaId}'</if>
+            <if test="cityId != null">AND areaid IN (SELECT areaid FROM area WHERE cityid = '${cityId}')</if>
             <if test="provinceId != null">AND areaid IN (SELECT areaid FROM area WHERE cityid IN
-                (SELECT cityid FROM city WHERE provinceid = ${provinceId}))
+                (SELECT cityid FROM city WHERE provinceid = '${provinceId}'))
             </if>
             <if test="limitation != null">AND limitation = ${limitation}</if>
-            <if test="name != null">AND name = ${name}</if>
+            <if test="name != null">AND name LIKE '%${name}%'</if>
         </where>
+        ORDER BY id
     </select>
 </mapper>

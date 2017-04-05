@@ -3,26 +3,26 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.xj.iws.http.dao.AreaDao">
+<mapper namespace="com.xj.iws.http.mvc.dao.AreaDao">
 
     <sql id="provinceField">id,provinceid,name</sql>
     <sql id="cityField">id,cityid,name,provinceid</sql>
     <sql id="areaField">id,areaid,name,cityid</sql>
 
-    <resultMap id="ProvinceEntity" type="com.xj.iws.http.entity.area.ProvinceEntity">
+    <resultMap id="ProvinceEntity" type="com.xj.iws.http.mvc.entity.area.ProvinceEntity">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="provinceid" property="provinceId" jdbcType="INTEGER"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <resultMap id="CityEntity" type="com.xj.iws.http.entity.area.CityEntity">
+    <resultMap id="CityEntity" type="com.xj.iws.http.mvc.entity.area.CityEntity">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="cityid" property="cityId" jdbcType="INTEGER"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="provinceid" property="provinceId" jdbcType="INTEGER"/>
     </resultMap>
 
-    <resultMap id="AreaEntity" type="com.xj.iws.http.entity.area.AreaEntity">
+    <resultMap id="AreaEntity" type="com.xj.iws.http.mvc.entity.area.AreaEntity">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="areaid" property="areaId" jdbcType="INTEGER"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>

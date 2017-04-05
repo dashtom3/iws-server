@@ -8,7 +8,7 @@ public interface RoomApi {
      * @apiName add
      * @apiGroup room
      * @apiVersion 0.1.0
-     * @apiDescription 注册添加新泵房
+     * @apiDescription 添加新泵房
      *
      * @apiParam {int} locationId 泵房所属区域地点id
      * @apiParam {String} name 泵房名称
@@ -20,7 +20,12 @@ public interface RoomApi {
      * {
      * callStatus:"SUCCEED",
      * errorCode:"No_Error",
-     * data:null,
+     * data:{
+     *     id:1,
+     *     locationId:1,
+     *     name:"123",
+     *     describes:"123"
+     * },
      * token:"SK1d7a4fe3-c2cd-417f-8f6f-bf7412592996",
      * numberPerPage:0,
      * currentPage:0,
@@ -51,7 +56,7 @@ public interface RoomApi {
      * @apiVersion 0.1.0
      * @apiDescription 删除泵房
      *
-     * @apiParam {String} id 泵房id
+     * @apiParam {String} roomId 泵房id
      * @apiParam {String} token 身份验证
      *
      * @apiSuccessExample Success-Response:
@@ -101,7 +106,12 @@ public interface RoomApi {
      * {
      * callStatus:"SUCCEED",
      * errorCode:"No_Error",
-     * data:null,
+     * data:{
+     *     id:1,
+     *     locationId:1,
+     *     name:"123",
+     *     describes:"123"
+     * },
      * token:"SK1d7a4fe3-c2cd-417f-8f6f-bf7412592996",
      * numberPerPage:0,
      * currentPage:0,
@@ -132,7 +142,7 @@ public interface RoomApi {
      * @apiVersion 0.1.0
      * @apiDescription 获取某一泵房及泵房所属地点、泵房内所有控制器
      *
-     * @apiParam {int} id 泵房id
+     * @apiParam {int} roomId 泵房id
      * @apiParam {String} token 身份验证
      *
      * @apiSuccessExample Success-Response:
@@ -154,14 +164,12 @@ public interface RoomApi {
      *          name:"name",
      *          describes:"describes",
      *      }
-     *      equipment(List):{
+     *      deviceGroup(List):{
      *          id:1,
      *          roomId:1,
-     *          equipmentType:"equipmenttype000",
-     *          parameterId:"1",
-     *          com:"com1",
-     *          num:1,
-     *          name:"name",
+     *          status:1,(1运行,2停止)
+     *          type:"水箱变频",
+     *          name:"水箱变频001",
      *          describes:"describes"
      *      }
      *

@@ -9,7 +9,12 @@ system
     <input type="submit" value="add"/>
 </form>
 <form action="api/system/pic.do" method="post">
+    <input type="hidden" name="token" value="123"/>
     <input type="submit" value="pic"/>
+</form>
+<form action="api/system/list.do" method="post">
+    <input type="hidden" name="token" value="123"/>
+    <input type="submit" value="list"/>
 </form>
 area
 <form action="api/area/cities.do" method="post">
@@ -46,11 +51,21 @@ location
     <input type="hidden" name="token" value="123"/>
     <input type="submit" value="query"/>
 </form>
+<form action="api/location/detail.do" method="post">
+    <input type="text" name="locationId"/>
+    <input type="hidden" name="token" value="123"/>
+    <input type="submit" value="detail"/>
+</form>
 device
 <form action="api/device/start.do" method="post">
     <input type="text" name="com"/>
     <input type="hidden" name="token" value="123"/>
     <input type="submit" value="start"/>
+</form>
+<form action="api/device/enable.do" method="post">
+    <input type="text" name="groupId"/>
+    <input type="hidden" name="token" value="123"/>
+    <input type="submit" value="enable"/>
 </form>
 user
 <form action="api/user/getVerifyCode.do" method="post">
@@ -64,5 +79,53 @@ user
     <input type="hidden" name="token" value="123"/>
     <input type="submit" value="login"/>
 </form>
+role
+<form action="api/role/list.do" method="post">
+    <input type="hidden" name="token" value="123"/>
+    <input type="submit" value="list"/>
+</form>
+<form action="api/role/delete.do" method="post">
+    <input type="hidden" name="token" value="123"/>
+    <input type="text" name="roleId" value="123"/>
+    <input type="submit" value="delete"/>
+</form>
+deviceTerm
+<form action="api/deviceTerm/query.do" method="post">
+    <input type="text" name="name"/>
+    <input type="hidden" name="token" value="123"/>
+    <input type="submit" value="query"/>
+</form>
+
+JsonArray<br />
+<input type="text" name="" value="" id="systemId"><br>
+<input type="text" name="" value="" id="name"><br>
+<input type="button" name="" value="JsonArray" onclick="btn()">
 </body>
+
+
+<script type="text/javascript">
+    function btn () {
+        var name = document.getElementById('name').value
+        var systemId = document.getElementById('systemId').value
+        var subitem = JSON.stringify([{
+            systemId: systemId,
+            areaId:110000
+        }])
+        subitem = subitem;
+        console.log(subitem);
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://localhost:8080/iws/api/role/add?token=123&name="+name+"&")
+        xhr.setRequestHeader("Content-Type", "application/json")
+        xhr.send(subitem)
+//        xhr.onreadystatechange = function () {
+//            switch (this.readyState) {
+//                case 4:
+//                    console.log('ok');
+//                    var result = JSON.parse(this.responseText)
+//                    console.log(result)
+//                    break
+//            }
+//        }
+    }
+</script>
 </html>

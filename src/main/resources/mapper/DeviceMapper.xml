@@ -3,46 +3,110 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.xj.iws.http.dao.DeviceDao">
+<mapper namespace="com.xj.iws.http.mvc.dao.DeviceDao">
 
-    <sql id="field">roomid,devicetype,parameterid,com,num,status,name,describes</sql>
+    <sql id="device">groupid,tableid,status,num,name,describes</sql>
+    <sql id="deviceGroup">roomid,status,type,name,describes</sql>
 
-    <resultMap id="DeviceEntity" type="com.xj.iws.http.entity.DeviceEntity">
-        <result column="id" property="id" jdbcType="INTEGER"/>
-        <result column="roomid" property="roomId" jdbcType="INTEGER"/>
-        <result column="deviceinfo" property="deviceInfo" jdbcType="VARCHAR"/>
-        <result column="parameterid" property="parameterId" jdbcType="INTEGER"/>
-        <result column="com" property="com" jdbcType="VARCHAR"/>
-        <result column="num" property="num" jdbcType="VARCHAR"/>
+
+    <resultMap id="DeviceEntity" type="com.xj.iws.http.mvc.entity.DeviceEntity">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="groupid" property="groupId" jdbcType="INTEGER"/>
+        <result column="tableid" property="tableId" jdbcType="INTEGER"/>
         <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="num" property="num" jdbcType="VARCHAR"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="describes" property="describes" jdbcType="VARCHAR"/>
     </resultMap>
 
+    <resultMap id="DeviceGroupEntity" type="com.xj.iws.http.mvc.entity.DeviceGroupEntity">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="roomid" property="roomId" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="describes" property="describes" jdbcType="VARCHAR"/>
+    </resultMap>
 
-    <!--<insert id="add" parameterType="DeviceEntity">-->
-    <!--INSERT INTO Device (<include refid="field" />) VALUES (${name},${pic})-->
-    <!--</insert>-->
+    <select id="deviceGroupList" parameterType="int" resultMap="DeviceGroupEntity">
+        SELECT id,
+        <include refid="deviceGroup"/>
+        FROM devicegroup
+        <where>
+            <if test="_parameter != 0">roomid = ${_parameter}</if>
+        </where>
+        ORDER BY roomid,id
+    </select>
 
-    <!--<delete id="delete" parameterType="int">-->
-    <!--DELETE FROM Device WHERE id = ${id}-->
-    <!--</delete>-->
+    <select id="deviceList" parameterType="int" resultMap="DeviceEntity">
+        SELECT id,
+        <include refid="device"/>
+        FROM device
+        <where>
+            <if test="_parameter != 0">groupid = ${_parameter}</if>
+        </where>
+        ORDER BY groupid,id
+    </select>
 
-    <!--<update id="update" parameterType="DeviceEntity">-->
-    <!--UPDATE Device-->
-    <!--<set>-->
-    <!--<if test="name != null">name = ${name},</if>-->
-    <!--<if test="pic != null">pic = ${pic},</if>-->
-    <!--</set>-->
-    <!--WHERE id = ${id}-->
-    <!--</update>-->
+    <select id="deviceGroupDetail" parameterType="int" resultMap="DeviceGroupEntity">
+        SELECT id,
+        <include refid="deviceGroup"/>
+        FROM devicegroup
+        WHERE id = ${_parameter}
+    </select>
 
-    <!--<select id="list" resultMap="DeviceEntity">-->
-    <!--SELECT id,name,pic FROM Device-->
-    <!--</select>-->
+    <select id="deviceDetail" parameterType="int" resultMap="DeviceEntity">
+        SELECT id,
+        <include refid="device"/>
+        FROM device
+        WHERE id = ${_parameter}
+    </select>
 
-    <!--<select id="detail" parameterType="int" resultMap="DeviceEntity">-->
-    <!--SELECT id,name,pic FROM Device WHERE id = ${id}-->
-    <!--</select>-->
+    <insert id="addGroup" parameterType="DeviceGroupEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO devicegroup (<include refid="deviceGroup"/>) VALUES
+        ('${roomId}','0','${type}','${name}','${describes}')
+    </insert>
+
+    <insert id="addDevice">
+        INSERT INTO device (<include refid="device"/>) VALUES
+        <foreach collection="device" item="item" separator=",">
+            (${groupId},'${device.tableId}','${device.status}','${device.num}','${device.name}','${device.describes}')
+        </foreach>
+    </insert>
+
+    <delete id="deleteGroup" parameterType="int">
+        DELETE FROM devicegroup WHERE id = ${_parameter}
+    </delete>
+
+    <delete id="deleteDevice" parameterType="int">
+        DELETE FROM device
+        <where>
+            <if test="groupId != 0">AND groupid = ${gruopId}</if>
+            <if test="deviceId != 0">AND deviceid = ${deviceId}</if>
+        </where>
+    </delete>
+
+    <update id="update" parameterType="DeviceGroupEntity">
+        UPDATE devicegroup
+        <set>
+            <if test="roomId != 0">roomId = '${roomId}',</if>
+            <if test="type != null">type = '${type}',</if>
+            <if test="name != null">name = '${name}',</if>
+            <if test="describes != null">describes = '${describes}',</if>
+        </set>
+        WHERE id = ${id}
+    </update>
+
+    <update id="createDataTable" parameterType="DeviceEntity">
+        CREATE TABLE `data${id}_${groupId}` (
+            `id` int(10) NOT NULL auto_increment,
+            `roomid` int(10),
+            `status` int(2),
+            `type` varchar(20),
+            `name` varchar(20),
+            `describes` varchar(200),
+        PRIMARY KEY  (`id`))
+            ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='${name}数据表' AUTO_INCREMENT=1
+    </update>
 
 </mapper>

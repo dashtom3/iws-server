@@ -1,6 +1,6 @@
 package com.xj.iws.common.sessionManager;
 
-import com.xj.iws.http.entity.UserEntity;
+import com.xj.iws.http.mvc.entity.UserEntity;
 
 /**
  * Created by XiaoJiang01 on 2017/3/15.

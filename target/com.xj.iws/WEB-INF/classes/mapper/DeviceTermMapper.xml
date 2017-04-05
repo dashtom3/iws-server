@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xj.iws.http.mvc.dao.DeviceTermDao">
+
+    <sql id="deviceTerm">count,protocol,type,name,describes</sql>
+    <sql id="pointField">deviceid,number,roleid,name,describes,unit,min,max,multiple</sql>
+
+    <resultMap id="PointFieldEntity" type="com.xj.iws.http.mvc.entity.PointFieldEntity">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="deviceid" property="deviceId" jdbcType="INTEGER"/>
+        <result column="number" property="number" jdbcType="INTEGER"/>
+        <result column="roleid" property="roleId" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="describes" property="describes" jdbcType="VARCHAR"/>
+        <result column="unit" property="unit" jdbcType="VARCHAR"/>
+        <result column="min" property="min" jdbcType="DOUBLE"/>
+        <result column="max" property="max" jdbcType="DOUBLE"/>
+        <result column="multiple" property="multiple" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <resultMap id="DeviceTermEntity" type="com.xj.iws.http.mvc.entity.DeviceTermEntity">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="count" property="count" jdbcType="INTEGER"/>
+        <result column="protocol" property="protocol" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="describes" property="describes" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="addDevice" parameterType="DeviceTermEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO deviceterm (<include refid="deviceTerm"/>) VALUES
+        ('${count}','${protocol}','${type}','${name}','${describes}')
+    </insert>
+
+    <insert id="addField">
+        INSERT INTO pointfield (<include refid="pointField"/>) VALUES
+        <foreach collection="fields" item="item" separator=",">
+            (${deviceId},'${fields.number}','${fields.roleId}','${fields.name}','${fields.describes}','${fields.unit}','${fields.min}','${fields.max}','${fields.multiple}')
+        </foreach>
+    </insert>
+
+    <delete id="deleteTable" parameterType="int">
+        DELETE FROM deviceterm WHERE id = ${_parameter}
+    </delete>
+
+    <delete id="deleteField" parameterType="int">
+        DELETE FROM pointfield WHERE deviceid = ${_parameter}
+    </delete>
+
+    <update id="update" parameterType="DeviceTermEntity">
+        UPDATE deviceterm
+        <set>
+            <if test="name != null">name = '${name}',</if>
+            <if test="describes != null">describes = '${describes}',</if>
+        </set>
+        WHERE id = ${id}
+    </update>
+
+    <select id="fieldList" parameterType="int" resultMap="PointFieldEntity">
+        SELECT id,
+        <include refid="pointField"/>
+        FROM pointfield
+        <where>
+            <if test="deviceId != 0">deviceid = ${_parameter}</if>
+        </where>
+        ORDER BY deviceid,id
+    </select>
+
+    <select id="fieldDetail" parameterType="int" resultMap="PointFieldEntity">
+        SELECT id,
+        <include refid="pointField"/>
+        FROM pointfield WHERE id = ${_parameter}
+    </select>
+
+    <select id="deviceTermList" resultMap="DeviceTermEntity">
+        SELECT id,
+        <include refid="deviceTerm"/>
+        FROM deviceterm ORDER BY id
+    </select>
+
+    <select id="query" resultMap="DeviceTermEntity">
+        SELECT id,
+        <include refid="deviceTerm"/>
+        FROM deviceterm
+        <where>
+            <if test="protocol != null">AND protocol LIKE '%${protocol}%'</if>
+            <if test="type != null">AND type LIKE '%${type}%'</if>
+            <if test="name != null">AND name LIKE '%${name}%'</if>
+        </where>
+        ORDER BY id
+    </select>
+
+</mapper>

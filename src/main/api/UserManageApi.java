@@ -7,9 +7,9 @@ public interface UserManageApi {
 
     /**
      *
-     * @api {post} http://localhost:8080/iws/api/usermanage/role 编辑用户角色
+     * @api {post} http://localhost:8080/iws/api/userManage/role 编辑用户角色
      * @apiName role
-     * @apiGroup usermanage
+     * @apiGroup userManage
      * @apiVersion 0.1.0
      * @apiDescription 编辑用户角色
      *
@@ -47,9 +47,9 @@ public interface UserManageApi {
 
     /**
      *
-     * @api {post} http://localhost:8080/iws/api/usermanage/status 编辑用户状态
+     * @api {post} http://localhost:8080/iws/api/userManage/status 编辑用户状态
      * @apiName status
-     * @apiGroup usermanage
+     * @apiGroup userManage
      * @apiVersion 0.1.0
      * @apiDescription 编辑用户状态，关闭/开启/审核 用户（此功能依据需要启用）
      *
@@ -87,9 +87,9 @@ public interface UserManageApi {
 
     /**
      *
-     * @api {post} http://localhost:8080/iws/api/usermanage/list 用户列表
+     * @api {post} http://localhost:8080/iws/api/userManage/list 用户列表
      * @apiName list
-     * @apiGroup usermanage
+     * @apiGroup userManage
      * @apiVersion 0.1.0
      * @apiDescription 获取当前用户详情
      *
@@ -102,7 +102,7 @@ public interface UserManageApi {
      * errorCode:"No_Error",
      * data(List):{
      *     id:1,
-     *     usermanagename:18712345678,
+     *     username:18712345678,
      *     password:"d1b2cc725d846f0460ff290c60925070",
      *     roleid:"RL1d7a4fe3-c2cd-417f-8f6f-bf7412592996",
      *     status:1,

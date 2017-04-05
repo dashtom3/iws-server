@@ -3,13 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.xj.iws.http.dao.RoomDao">
+<mapper namespace="com.xj.iws.http.mvc.dao.RoomDao">
 
     <sql id="field">locationid,name,describes</sql>
 
-    <resultMap id="RoomEntity" type="com.xj.iws.http.entity.RoomEntity">
+    <resultMap id="RoomEntity" type="com.xj.iws.http.mvc.entity.RoomEntity">
         <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="locationId" property="locationid" jdbcType="INTEGER"/>
+        <result column="locationid" property="locationId" jdbcType="INTEGER"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="describes" property="describes" jdbcType="VARCHAR"/>
     </resultMap>

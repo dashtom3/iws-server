@@ -10,12 +10,7 @@ public interface RoleApi {
      * @apiVersion 0.1.0
      * @apiDescription 注册添加新角色
      *
-     * @apiParam {int} roleId 角色id
-     * @apiParam {List} {
-     *      {int} systemId 系统id,
-     *      {int} areaId 地区id，可为省、市或区
-     *      {int} limitation 操作权限 0只读/1可写/2管理员
-     * }
+     * @apiParam {List} subitem 角色权限子项(systemId 系统id; areaId 地区id，可为省、市或区; limitation 操作权限 0只读/1可写/2管理员)
      * @apiParam {String} name 角色名称
      * @apiParam {String} describes 角色描述
      * @apiParam {String} token 身份验证
@@ -25,7 +20,11 @@ public interface RoleApi {
      * {
      * callStatus:"SUCCEED",
      * errorCode:"No_Error",
-     * data:null,
+     * data:{
+     *     id:1,
+     *     name:"123",
+     *     describes:"123"
+     * }
      * token:"SK1d7a4fe3-c2cd-417f-8f6f-bf7412592996",
      * numberPerPage:0,
      * currentPage:0,
@@ -89,88 +88,6 @@ public interface RoleApi {
 
     /**
      *
-     * @api {post} http://localhost:8080/iws/api/role/addsub 添加角色权限
-     * @apiName addsub
-     * @apiGroup role
-     * @apiVersion 0.1.0
-     * @apiDescription 在编辑角色中，添加一条权限
-     *
-     * @apiParam {int} roleId 角色id
-     * @apiParam {int} systemId 系统id
-     * @apiParam {int} areaId 地区id，可为省、市或区
-     * @apiParam {int} limitation 操作权限 0只读/1可写/2管理员
-     * @apiParam {String} token 身份验证
-     *
-     * @apiSuccessExample Success-Response:
-     *  HTTP/1.1 200 OK
-     * {
-     * callStatus:"SUCCEED",
-     * errorCode:"No_Error",
-     * data:null,
-     * token:"SK1d7a4fe3-c2cd-417f-8f6f-bf7412592996",
-     * numberPerPage:0,
-     * currentPage:0,
-     * totalNumber:0,
-     * totalPage:0
-     *  }
-     *
-     *  @apiErrorExample {json} Error-Response:
-     *  HTTP/1.1 200 OK
-     * {
-     * callStatus:"FAILED",
-     * errorCode:"Error",
-     * data:null,
-     * token:null,
-     * numberPerPage:0,
-     * currentPage:0,
-     * totalNumber:0,
-     * totalPage:0
-     *  }
-     *
-     */
-
-    /**
-     *
-     * @api {post} http://localhost:8080/iws/api/role/delete 删除角色权限
-     * @apiName delete
-     * @apiGroup role
-     * @apiVersion 0.1.0
-     * @apiDescription 在编辑角色中，删除一条权限
-     *
-     * @apiParam {int} roleId 角色id
-     * @apiParam {int} id 角色权限条目id
-     * @apiParam {String} token 身份验证
-     *
-     * @apiSuccessExample Success-Response:
-     *  HTTP/1.1 200 OK
-     * {
-     * callStatus:"SUCCEED",
-     * errorCode:"No_Error",
-     * data:null,
-     * token:"SK1d7a4fe3-c2cd-417f-8f6f-bf7412592996",
-     * numberPerPage:0,
-     * currentPage:0,
-     * totalNumber:0,
-     * totalPage:0
-     *  }
-     *
-     *  @apiErrorExample {json} Error-Response:
-     *  HTTP/1.1 200 OK
-     * {
-     * callStatus:"FAILED",
-     * errorCode:"Error",
-     * data:null,
-     * token:null,
-     * numberPerPage:0,
-     * currentPage:0,
-     * totalNumber:0,
-     * totalPage:0
-     *  }
-     *
-     */
-
-    /**
-     *
      * @api {post} http://localhost:8080/iws/api/role/update 编辑角色
      * @apiName update
      * @apiGroup role
@@ -178,6 +95,7 @@ public interface RoleApi {
      * @apiDescription 编辑修改角色
      *
      * @apiParam {int} roleId 角色id
+     * @apiParam {List} subitem 角色权限子项(systemId 系统id; areaId 地区id，可为省、市或区; limitation 操作权限 0只读/1可写/2管理员)
      * @apiParam {String} name 角色名称
      * @apiParam {String} describes 角色描述
      * @apiParam {String} token 身份验证
@@ -187,7 +105,11 @@ public interface RoleApi {
      * {
      * callStatus:"SUCCEED",
      * errorCode:"No_Error",
-     * data:null,
+     * data:{
+     *     id:1,
+     *     name:"123",
+     *     describes:"123"
+     * }
      * token:"SK1d7a4fe3-c2cd-417f-8f6f-bf7412592996",
      * numberPerPage:0,
      * currentPage:0,
@@ -227,18 +149,15 @@ public interface RoleApi {
      * callStatus:"SUCCEED",
      * errorCode:"No_Error",
      * data(List):{
-     *     roleId:20170101123030,
+     *     id:1,
      *     name:"name",
-     *     role(List):{
+     *     describes:"describes",
+     *     rolesub(List):{
      *         id:1,
-     *         roleId:20170101123030,
+     *         roleId:1,
      *         systemId:1,
-     *         provinceId:110000,
-     *         cityId:110100,
-     *         areaId:0,
+     *         areaId:110101,
      *         limitation:1,
-     *         name:"name",
-     *         describes:"describes"
      *     }
      * }
      * token:"SK1d7a4fe3-c2cd-417f-8f6f-bf7412592996",
@@ -279,19 +198,16 @@ public interface RoleApi {
      * {
      * callStatus:"SUCCEED",
      * errorCode:"No_Error",
-     * data:{
-     *     roleId:20170101123030,
+     * data(List):{
+     *     id:1,
      *     name:"name",
-     *     role(List):{
+     *     describes:"describes",
+     *     rolesub(List):{
      *         id:1,
-     *         roleId:20170101123030,
+     *         roleId:1,
      *         systemId:1,
-     *         provinceId:110000,
-     *         cityId:110100,
-     *         areaId:0,
+     *         areaId:110101,
      *         limitation:1,
-     *         name:"name",
-     *         describes:"describes"
      *     }
      * }
      * token:"SK1d7a4fe3-c2cd-417f-8f6f-bf7412592996",
@@ -325,8 +241,6 @@ public interface RoleApi {
      * @apiDescription 按条件查询角色
      *
      * @apiparam {int} systemId 系统id
-     * @apiparam {int} provinceId 省份id
-     * @apiparam {int} cityId 城市id
      * @apiparam {int} areaId 城区id
      * @apiparam {int} limitation 操作权限 0只读/1可写/2管理员
      * @apiparam {String} name 角色名称
@@ -338,18 +252,15 @@ public interface RoleApi {
      * callStatus:"SUCCEED",
      * errorCode:"No_Error",
      * data(List):{
-     *     roleId:20170101123030,
+     *     id:1,
      *     name:"name",
-     *     role(List):{
+     *     describes:"describes",
+     *     rolesub(List):{
      *         id:1,
-     *         roleId:20170101123030,
+     *         roleId:1,
      *         systemId:1,
-     *         provinceId:110000,
-     *         cityId:110100,
-     *         areaId:0,
+     *         areaId:110101,
      *         limitation:1,
-     *         name:"name",
-     *         describes:"describes"
      *     }
      * }
      * token:"SK1d7a4fe3-c2cd-417f-8f6f-bf7412592996",

@@ -7,7 +7,7 @@ import com.xj.iws.common.enums.ErrorCodeEnum;
 /**
  * Created by XiaoJiang01 on 2017/3/15.
  */
-public class ExDataWrapper extends Throwable {
+public class ExDataWrapper extends Exception {
     private CallStatusEnum callStatus;
     private ErrorCodeEnum errorCode;
     private String url;
