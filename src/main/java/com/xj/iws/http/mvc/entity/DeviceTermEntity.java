@@ -15,7 +15,9 @@ public class DeviceTermEntity {
     private String type;
     private String name;
     private String describes;
+
     private List<PointFieldEntity> fields;
+
     public DeviceTermEntity() {
     }
 

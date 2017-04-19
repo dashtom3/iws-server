@@ -1,7 +1,9 @@
 package com.xj.iws.http.mvc.controller.manager;
 
+import com.xj.iws.http.mvc.entity.Command;
 import com.xj.iws.http.mvc.entity.DeviceEntity;
 import com.xj.iws.http.mvc.entity.DeviceGroupEntity;
+import com.xj.iws.http.mvc.entity.DeviceGroupTypeEntity;
 import com.xj.iws.http.mvc.service.DeviceService;
 import com.xj.iws.common.utils.DataWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,33 +27,31 @@ public class DeviceController {
     /**
      * 创建控制器组
      * @param deviceGroup
-     * @param devices
      * @param token
      * @return
      */
-    @RequestMapping(value = "add",method = RequestMethod.POST)
+    @RequestMapping(value = "addGroup",method = RequestMethod.POST)
     @ResponseBody
-    public DataWrapper<DeviceGroupEntity> add(
-            @ModelAttribute DeviceGroupEntity deviceGroup,
-            @RequestBody DeviceEntity[] devices,
-            @RequestParam(value = "token", required = true) String token
+    public DataWrapper<DeviceGroupEntity> addGroup(
+            @RequestParam(value = "token", required = true) String token,
+            @ModelAttribute DeviceGroupEntity deviceGroup
     ) {
-        return deviceService.add(deviceGroup,devices);
+        return deviceService.addGroup(deviceGroup);
     }
 
     /**
      * 删除控制器组
-     * @param deviceGroupId
+     * @param groupId
      * @param token
      * @return
      */
     @RequestMapping(value = "delete",method = RequestMethod.POST)
     @ResponseBody
     public DataWrapper<Void> delete(
-            @RequestParam(value = "deviceGroupId", required = true) int deviceGroupId,
-            @RequestParam(value = "token", required = true) String token
+            @RequestParam(value = "token", required = true) String token,
+            @RequestParam(value = "groupId", required = true) int groupId
     ) {
-        return deviceService.delete(deviceGroupId);
+        return deviceService.delete(groupId);
     }
 
     /**
@@ -63,19 +63,18 @@ public class DeviceController {
     @RequestMapping(value = "update",method = RequestMethod.POST)
     @ResponseBody
     public DataWrapper<DeviceEntity> update(
-            @ModelAttribute DeviceGroupEntity deviceGroup,
-            @RequestBody DeviceEntity[] devices,
-            @RequestParam(value = "token", required = true) String token
+            @RequestParam(value = "token", required = true) String token,
+            @ModelAttribute DeviceGroupEntity deviceGroup
     ) {
-        return deviceService.update(deviceGroup,devices);
+        return deviceService.update(deviceGroup);
     }
 
     /**
-     * 控制器列表
+     * 控制器组列表
      * @param token
      * @return
      */
-    @RequestMapping(value = "list",method = RequestMethod.POST)
+    @RequestMapping(value = "list",method = RequestMethod.GET)
     @ResponseBody
     public DataWrapper<List<DeviceGroupEntity>> list(
             @RequestParam(value = "token", required = true) String token
@@ -84,37 +83,35 @@ public class DeviceController {
     }
 
     /**
+     * 控制器组列表
+     * @param token
+     * @return
+     */
+    @RequestMapping(value = "groupType",method = RequestMethod.GET)
+    @ResponseBody
+    public DataWrapper<List<DeviceGroupTypeEntity>> groupType(
+            @RequestParam(value = "token", required = true) String token
+    ) {
+        return deviceService.groupType();
+    }
+
+    /**
      * 控制器组详情
      * @param groupId
      * @param token
      * @return
      */
-    @RequestMapping(value = "groupDetail",method = RequestMethod.POST)
+    @RequestMapping(value = "groupDetail",method = RequestMethod.GET)
     @ResponseBody
     public DataWrapper<DeviceGroupEntity> groupDetail(
-            @RequestParam(value = "groupId", required = true) int groupId,
-            @RequestParam(value = "token", required = true) String token
+            @RequestParam(value = "token", required = true) String token,
+            @RequestParam(value = "groupId", required = true) int groupId
     ) {
         return deviceService.groupDetail(groupId);
     }
 
     /**
-     * 控制器详情
-     * @param deviceId
-     * @param token
-     * @return
-     */
-    @RequestMapping(value = "deviceDetail",method = RequestMethod.POST)
-    @ResponseBody
-    public DataWrapper<DeviceEntity> deviceDetail(
-            @RequestParam(value = "deviceId", required = true) int deviceId,
-            @RequestParam(value = "token", required = true) String token
-    ) {
-        return deviceService.deviceDetail(deviceId);
-    }
-
-    /**
-     * 控制器详情
+     * 启用控制器,创建数据存储表
      * @param groupId
      * @param token
      * @return
@@ -122,24 +119,24 @@ public class DeviceController {
     @RequestMapping(value = "enable",method = RequestMethod.POST)
     @ResponseBody
     public DataWrapper<Void> enable(
-            @RequestParam(value = "groupId", required = true) int groupId,
-            @RequestParam(value = "token", required = true) String token
+            @RequestParam(value = "token", required = true) String token,
+            @RequestParam(value = "groupId", required = true) int groupId
     ) {
         return deviceService.enable(groupId);
     }
 
     /**
-     * 开启串口
-     *
-     * @param com
+     * 数据采集启动
+     * @param token
+     * @param groupId
      * @return
      */
     @RequestMapping(value = "start", method = RequestMethod.POST)
     @ResponseBody
-    public DataWrapper<String> start(
-            @RequestParam(value = "com", required = true) String com,
-            @RequestParam(value = "token", required = true) String token
+    public DataWrapper<Void> start(
+            @RequestParam(value = "token", required = true) String token,
+            @RequestParam(value = "groupId", required = true) String[] groupId
     ) {
-        return deviceService.start(com);
+        return deviceService.start(groupId);
     }
 }

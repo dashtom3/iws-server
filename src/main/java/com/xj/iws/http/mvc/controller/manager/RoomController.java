@@ -1,5 +1,7 @@
 package com.xj.iws.http.mvc.controller.manager;
 
+import com.xj.iws.http.mvc.entity.DeviceEntity;
+import com.xj.iws.http.mvc.entity.DeviceGroupModelEntity;
 import com.xj.iws.http.mvc.entity.RoleEntity;
 import com.xj.iws.http.mvc.entity.RoomEntity;
 import com.xj.iws.http.mvc.service.RoomService;
@@ -73,5 +75,21 @@ public class RoomController {
             @RequestParam(value = "token", required = true) String token
     ) {
         return roomService.detail(roomId);
+    }
+
+    /**
+     * 获取某一泵房及泵房所属地点、泵房内所有控制器
+     *
+     * @return room
+     */
+    @RequestMapping(value = "addDevice", method = RequestMethod.POST)
+    @ResponseBody
+    public DataWrapper<Void> addDevice(
+            @RequestParam(value = "token", required = true) String token,
+            @ModelAttribute DeviceEntity deviceEntity,
+            @RequestBody DeviceEntity[] devices
+
+    ) {
+        return roomService.addDevice(deviceEntity, devices);
     }
 }

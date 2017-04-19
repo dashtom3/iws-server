@@ -1,6 +1,10 @@
 package com.xj.iws.http.mvc.controller.manager;
 
+import com.xj.iws.common.enums.ErrorCodeEnum;
+import com.xj.iws.common.sessionManager.SessionManager;
+import com.xj.iws.http.mvc.dao.UserDao;
 import com.xj.iws.http.mvc.entity.SystemEntity;
+import com.xj.iws.http.mvc.entity.UserEntity;
 import com.xj.iws.http.mvc.service.SystemService;
 import com.xj.iws.common.utils.DataWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +23,8 @@ public class SystemController {
 
     @Autowired
     SystemService systemService;
+    @Autowired
+    UserDao userDao;
 
     /**
      * 添加系统

@@ -14,7 +14,7 @@ public class ExDataWrapper extends Exception {
 
     public ExDataWrapper() {
         callStatus = CallStatusEnum.SUCCEED;
-        errorCode = ErrorCodeEnum.Error;
+        errorCode = ErrorCodeEnum.Limitation_error;
     }
 
     public String getUrl() {

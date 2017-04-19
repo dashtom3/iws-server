@@ -2,6 +2,7 @@ package com.xj.iws.http.mvc.service;
 
 import com.xj.iws.common.utils.DataWrapper;
 import com.xj.iws.http.mvc.entity.DeviceTermEntity;
+import com.xj.iws.http.mvc.entity.DeviceTypeEntity;
 import com.xj.iws.http.mvc.entity.PointFieldEntity;
 import com.xj.iws.http.mvc.entity.PointRoleEntity;
 
@@ -23,6 +24,8 @@ public interface DeviceTermService {
     DataWrapper<DeviceTermEntity> update(DeviceTermEntity deviceTermEntity);
 
     DataWrapper<DeviceTermEntity> add(DeviceTermEntity deviceTermEntity, PointFieldEntity[] fields);
+
+    DataWrapper<List<DeviceTypeEntity>> typeList();
 
     DataWrapper<List<DeviceTermEntity>> query(Map<String, String> condition);
 }

@@ -48,11 +48,7 @@ public class AreaServiceImpl implements AreaService {
             List<CityEntity> cities = areaDao.cities(province.getProvinceId());
             province.setCity(cities);
         }
-        if (provinces != null) {
-            dataWrapper.setErrorCode(ErrorCodeEnum.Error);
-        }else {
-            dataWrapper.setData(provinces);
-        }
+        dataWrapper.setData(provinces);
         return dataWrapper;
     }
 
@@ -73,11 +69,7 @@ public class AreaServiceImpl implements AreaService {
             }
             province.setCity(cities);
         }
-        if (provinces != null) {
-            dataWrapper.setData(provinces);
-            dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
-        }
-        dataWrapper.setCallStatus(CallStatusEnum.SUCCEED);
+        dataWrapper.setData(provinces);
         return dataWrapper;
     }
 
@@ -92,12 +84,7 @@ public class AreaServiceImpl implements AreaService {
         List<CityEntity> citis = areaDao.cities(provinceId);
         province.setCity(citis);
 
-        if (province != null) {
-            dataWrapper.setData(province);
-            dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
-        }
-
-        dataWrapper.setCallStatus(CallStatusEnum.SUCCEED);
+        dataWrapper.setData(province);
         return dataWrapper;
     }
 
@@ -115,10 +102,7 @@ public class AreaServiceImpl implements AreaService {
         city.setProvince(province);
         city.setArea(areas);
 
-        if (city != null) {
-            dataWrapper.setData(city);
-            dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
-        }
+        dataWrapper.setData(city);
         return dataWrapper;
     }
 
@@ -137,12 +121,7 @@ public class AreaServiceImpl implements AreaService {
         city.setProvince(province);
         area.setCity(city);
 
-        if (area != null) {
-            dataWrapper.setData(area);
-            dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
-        }
-
-        dataWrapper.setCallStatus(CallStatusEnum.SUCCEED);
+        dataWrapper.setData(area);
         return dataWrapper;
     }
 }

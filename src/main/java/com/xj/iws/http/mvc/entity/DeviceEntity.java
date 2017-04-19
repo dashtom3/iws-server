@@ -9,29 +9,34 @@ import org.apache.ibatis.type.Alias;
 public class DeviceEntity {
     private int id;
     private int groupId;
-    private int tableId;
+    private int termId;
+    private int roomId;
     private int status;
-    private String num;
+    private String port;
+    private String number;
     private String name;
     private String describes;
 
-    private DeviceGroupEntity deviceGroup;
+    private DeviceTermEntity deviceTerm;
+
+    private String groupName;
 
     public DeviceEntity() {
     }
 
-    public DeviceEntity(int id, int groupId, int tableId, int status, String num, String name, String describes) {
+    public DeviceEntity(int id, int groupId, int termId, int roomId, int status, String port, String number, String name, String describes) {
         this.id = id;
         this.groupId = groupId;
-        this.tableId = tableId;
+        this.termId = termId;
+        this.roomId = roomId;
         this.status = status;
-        this.num = num;
+        this.port = port;
+        this.number = number;
         this.name = name;
         this.describes = describes;
     }
 
     public int getId() {
-
         return id;
     }
 
@@ -47,12 +52,20 @@ public class DeviceEntity {
         this.groupId = groupId;
     }
 
-    public int getTableId() {
-        return tableId;
+    public int getTermId() {
+        return termId;
     }
 
-    public void setTableId(int tableId) {
-        this.tableId = tableId;
+    public void setTermId(int termId) {
+        this.termId = termId;
+    }
+
+    public int getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(int roomId) {
+        this.roomId = roomId;
     }
 
     public int getStatus() {
@@ -63,12 +76,20 @@ public class DeviceEntity {
         this.status = status;
     }
 
-    public String getNum() {
-        return num;
+    public String getPort() {
+        return port;
     }
 
-    public void setNum(String num) {
-        this.num = num;
+    public void setPort(String port) {
+        this.port = port;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
     }
 
     public String getName() {
@@ -87,11 +108,19 @@ public class DeviceEntity {
         this.describes = describes;
     }
 
-    public DeviceGroupEntity getDeviceGroup() {
-        return deviceGroup;
+    public DeviceTermEntity getDeviceTerm() {
+        return deviceTerm;
     }
 
-    public void setDeviceGroup(DeviceGroupEntity deviceGroup) {
-        this.deviceGroup = deviceGroup;
+    public void setDeviceTerm(DeviceTermEntity deviceTerm) {
+        this.deviceTerm = deviceTerm;
+    }
+
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
     }
 }

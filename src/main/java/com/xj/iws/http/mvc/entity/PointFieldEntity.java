@@ -2,13 +2,15 @@ package com.xj.iws.http.mvc.entity;
 
 import org.apache.ibatis.type.Alias;
 
+import java.util.List;
+
 /**
  * Created by XiaoJiang01 on 2017/3/24.
  */
 @Alias("PointFieldEntity")
 public class PointFieldEntity {
     private int id;
-    private int tableId;
+    private int deviceId;
     private int number;
     private int roleId;
     private String name;
@@ -18,14 +20,16 @@ public class PointFieldEntity {
     private double max;
     private int multiple;
 
+    private List<String> status;
+
     private DeviceTermEntity table;
 
     public PointFieldEntity() {
     }
 
-    public PointFieldEntity(int id, int tableId, int number, int roleId, String name, String describes, String unit, double min, double max, int multiple) {
+    public PointFieldEntity(int id, int deviceId, int number, int roleId, String name, String describes, String unit, double min, double max, int multiple) {
         this.id = id;
-        this.tableId = tableId;
+        this.deviceId = deviceId;
         this.number = number;
         this.roleId = roleId;
         this.name = name;
@@ -44,12 +48,12 @@ public class PointFieldEntity {
         this.id = id;
     }
 
-    public int getTableId() {
-        return tableId;
+    public int getDeviceId() {
+        return deviceId;
     }
 
-    public void setTableId(int tableId) {
-        this.tableId = tableId;
+    public void setDeviceId(int deviceId) {
+        this.deviceId = deviceId;
     }
 
     public int getNumber() {
@@ -122,5 +126,13 @@ public class PointFieldEntity {
 
     public void setTable(DeviceTermEntity table) {
         this.table = table;
+    }
+
+    public List<String> getStatus() {
+        return status;
+    }
+
+    public void setStatus(List<String> status) {
+        this.status = status;
     }
 }

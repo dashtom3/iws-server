@@ -21,13 +21,12 @@ public class PointRoleEntity {
     private String bit06;
     private String bit07;
     private String bit08;
-    private String write;
 
 
     public PointRoleEntity() {
     }
 
-    public PointRoleEntity(int id, String protocol, int type, int bit, String name, String describes, String bit01, String bit02, String bit03, String bit04, String bit05, String bit06, String bit07, String bit08, String write) {
+    public PointRoleEntity(int id, String protocol, int type, int bit, String name, String describes, String bit01, String bit02, String bit03, String bit04, String bit05, String bit06, String bit07, String bit08) {
         this.id = id;
         this.protocol = protocol;
         this.type = type;
@@ -42,7 +41,6 @@ public class PointRoleEntity {
         this.bit06 = bit06;
         this.bit07 = bit07;
         this.bit08 = bit08;
-        this.write = write;
     }
 
     public int getId() {
@@ -157,11 +155,4 @@ public class PointRoleEntity {
         this.bit08 = bit08;
     }
 
-    public String getWrite() {
-        return write;
-    }
-
-    public void setWrite(String write) {
-        this.write = write;
-    }
 }

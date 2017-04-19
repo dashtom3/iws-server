@@ -18,7 +18,7 @@ public interface RoleDao {
 
     int addSub(@Param("roleId") int roleId, @Param("subitem") RoleSubEntity[] subitem);
 
-    int deleteRole(int roleId);
+    int delete(int roleId);
 
     int deleteSub(@Param("roleId") int roleId,@Param("id") int id);
 
@@ -31,4 +31,11 @@ public interface RoleDao {
     List<RoleSubEntity> getSub(int id);
 
     List<RoleEntity> query(Map<String, String> condition);
+
+    List<String> getSubArea(int roleId);
+
+    int checkSystem(@Param("roleId") int roleId,@Param("systemId") int systemId);
+
+    List<String> checkWritable(@Param("roleId") int roleId,@Param("systemId") int systemId,@Param("writable") int writable);
+
 }

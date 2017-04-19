@@ -35,7 +35,7 @@ public class LocationServiceImpl implements LocationService {
     public DataWrapper<LocationEntity> add(LocationEntity locationEntity) {
 
         DataWrapper<LocationEntity> dataWrapper = new DataWrapper<LocationEntity>();
-        locationEntity.setId(locationDao.add(locationEntity));
+        int i = locationDao.add(locationEntity);
         dataWrapper.setData(locationEntity);
         return dataWrapper;
     }
@@ -82,7 +82,7 @@ public class LocationServiceImpl implements LocationService {
         location.setRoom(rooms);
         if (location == null) {
             dataWrapper.setErrorCode(ErrorCodeEnum.Error);
-        }else {
+        } else {
             dataWrapper.setData(location);
         }
         return dataWrapper;
@@ -93,32 +93,25 @@ public class LocationServiceImpl implements LocationService {
         DataWrapper<List<LocationEntity>> dataWrapper = new DataWrapper<List<LocationEntity>>();
         List<LocationEntity> locations = locationDao.list(id);
         List<SystemEntity> systems = systemDao.list();
-        dataWrapper.setData(PackageUtil.locationSetSystem(locations,systems));
+        dataWrapper.setData(PackageUtil.locationSetSystem(locations, systems));
         return dataWrapper;
     }
 
     @Override
-    public DataWrapper<List<LocationEntity>> query(String systemId, String provinceId, String cityId, String areaId) {
-
+    public DataWrapper<List<LocationEntity>> lockedList(List<Map> conditions) {
         DataWrapper<List<LocationEntity>> dataWrapper = new DataWrapper<List<LocationEntity>>();
-
-        //创建查询条件
-        Map<String, String> condition = new HashMap<String, String>();
-
-        if (systemId != null && !"".equals(systemId)){
-            condition.put("systemId", systemId);
+        List<LocationEntity> locations = new ArrayList<LocationEntity>();
+        for (Map condition : conditions) {
+            locations.addAll(locationDao.query(condition));
         }
-        if (areaId != null && !"".equals(areaId)) {
-            condition.put("areaId", areaId);
-        } else if (cityId != null && !"".equals(cityId)) {
-            condition.put("cityId", cityId);
-        } else if (provinceId != null && !"".equals(provinceId)) {
-            condition.put("provinceId", provinceId);
-        }
+        dataWrapper.setData(locations);
+        return dataWrapper;
+    }
 
+    @Override
+    public DataWrapper<List<LocationEntity>> query(Map<String, String> condition) {
+        DataWrapper<List<LocationEntity>> dataWrapper = new DataWrapper<List<LocationEntity>>();
         List<LocationEntity> locations = locationDao.query(condition);
-
-
         if (locations == null) {
             dataWrapper.setErrorCode(ErrorCodeEnum.Error);
         }

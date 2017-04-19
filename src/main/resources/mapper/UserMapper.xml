@@ -21,7 +21,7 @@
     </resultMap>
 
     <insert id="register" parameterType="UserEntity">
-        INSERT INTO user (<include refid="field"/>) VALUES ('${username}','${password}',0,1,'${strdate}','${name}','${address}','${describes}','${pic}')
+        INSERT INTO user (<include refid="field"/>) VALUES ('${username}','${password}',-1,1,'${strdate}','${name}','${address}','${describes}','${pic}')
     </insert>
 
     <select id="getUserByUsername" resultMap="UserEntity" parameterType="String">

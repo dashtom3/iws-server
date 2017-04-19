@@ -1,0 +1,88 @@
+package com.xj.iws.http.mvc.service.impl;
+
+import com.xj.iws.http.mvc.dao.RoleDao;
+import com.xj.iws.http.mvc.entity.UserEntity;
+import com.xj.iws.http.mvc.service.LimitationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+/**
+ * Created by XiaoJiang01 on 2017/4/7.
+ */
+@Service
+public class LimitationServiceImpl implements LimitationService {
+    @Autowired
+    RoleDao roleDao;
+
+
+    @Override
+    public boolean checkAdmin(UserEntity user) {
+        boolean result = false;
+        if (10 == user.getStatus()) {
+            result = true;
+        }
+        return result;
+    }
+
+    @Override
+    public boolean checkSystem(UserEntity user, int systemId) {
+        boolean result = false;
+        if (0 != roleDao.checkSystem(user.getRoleId(), systemId)) {
+            result = true;
+        }
+        return result;
+    }
+
+    @Override
+    public boolean checkLimit(UserEntity user, int systemId, String areaId,int writable) {
+        boolean result = false;
+
+        //获取用户全部权限
+        List<String> areaIds = roleDao.checkWritable(user.getRoleId(), systemId, writable);
+        if ("00".equals(areaId.substring(4, 6))) {
+            if ("0000".equals(areaId.substring(2, 6))) {
+                //areaId 为省份id,查询该用户权限是否包含该省份
+                for (String id : areaIds) {
+                    if (id.equals(areaId)) {
+                        result = true;
+                        break;
+                    }
+                }
+            } else {
+                //areaId 为城市id,查询该用户权限是否包含该市,或包含上级
+                for (String id : areaIds) {
+                    if (id.equals(areaId)) {
+                        result = true;
+                        break;
+                    } else if ("0000".equals(id.substring(2, 6))) {
+                        if (id.substring(0, 2).equals(areaId.substring(0, 2))) {
+                            result = true;
+                            break;
+                        }
+                    }
+                }
+            }
+        } else {
+            //areaId 为城区id,查询该用户权限是否包含该城区,或包含上级
+            for (String id : areaIds) {
+                if (id.equals(areaId)) {
+                    result = true;
+                    break;
+                } else if ("0000".equals(id.substring(2, 6))) {
+                    if (id.substring(0, 2).equals(areaId.substring(0, 2))) {
+                        result = true;
+                        break;
+                    }
+                } else if ("00".equals(id.substring(4,6))){
+                    if (id.substring(0,4).equals(areaId.substring(0,4))){
+                        result = true;
+                        break;
+                    }
+                }
+            }
+        }
+        return result;
+    }
+}

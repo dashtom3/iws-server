@@ -5,6 +5,7 @@
 
 <mapper namespace="com.xj.iws.http.mvc.dao.DeviceTermDao">
 
+    <sql id="deviceType">name,pic,describes</sql>
     <sql id="deviceTerm">count,protocol,type,name,describes</sql>
     <sql id="pointField">deviceid,number,roleid,name,describes,unit,min,max,multiple</sql>
 
@@ -30,6 +31,13 @@
         <result column="describes" property="describes" jdbcType="VARCHAR"/>
     </resultMap>
 
+    <resultMap id="DeviceTypeEntity" type="com.xj.iws.http.mvc.entity.DeviceTypeEntity">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="pic" property="pic" jdbcType="VARCHAR"/>
+        <result column="describes" property="describes" jdbcType="VARCHAR"/>
+    </resultMap>
+
     <insert id="addDevice" parameterType="DeviceTermEntity" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO deviceterm (<include refid="deviceTerm"/>) VALUES
         ('${count}','${protocol}','${type}','${name}','${describes}')
@@ -42,7 +50,7 @@
         </foreach>
     </insert>
 
-    <delete id="deleteTable" parameterType="int">
+    <delete id="deleteDevice" parameterType="int">
         DELETE FROM deviceterm WHERE id = ${_parameter}
     </delete>
 
@@ -60,13 +68,26 @@
     </update>
 
     <select id="fieldList" parameterType="int" resultMap="PointFieldEntity">
-        SELECT id,
-        <include refid="pointField"/>
+        SELECT id,<include refid="pointField"/>
         FROM pointfield
         <where>
-            <if test="deviceId != 0">deviceid = ${_parameter}</if>
+            <if test="_parameter != 0">deviceid = ${_parameter}</if>
         </where>
         ORDER BY deviceid,id
+    </select>
+
+    <select id="detail" parameterType="int" resultMap="DeviceTermEntity">
+        SELECT id,
+        <include refid="deviceTerm"/>
+        FROM deviceterm
+        WHERE id = ${_parameter}
+    </select>
+
+    <select id="deviceTermByIds" resultMap="DeviceTermEntity">
+        SELECT id,
+        <include refid="deviceTerm"/>
+        FROM deviceterm
+        WHERE id IN (<foreach collection="array" item="item" separator=",">${item}</foreach>)
     </select>
 
     <select id="fieldDetail" parameterType="int" resultMap="PointFieldEntity">
@@ -79,6 +100,12 @@
         SELECT id,
         <include refid="deviceTerm"/>
         FROM deviceterm ORDER BY id
+    </select>
+
+    <select id="typeList" resultMap="DeviceTypeEntity">
+        SELECT id,
+        <include refid="deviceType"/>
+        FROM devicetype ORDER BY id
     </select>
 
     <select id="query" resultMap="DeviceTermEntity">

@@ -1,50 +1,45 @@
 package com.xj.iws.http.mvc.controller.user;
 
+import com.xj.iws.common.sessionManager.SessionManager;
 import com.xj.iws.common.utils.DataWrapper;
+import com.xj.iws.http.mvc.entity.NewsEntity;
+import com.xj.iws.http.mvc.entity.UserEntity;
+import com.xj.iws.http.mvc.service.NewsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 /**
  * 管理全部消息请求
  * @author Created by XiaoJiang01 on 2017/2/21.
  */
+@Controller
+@RequestMapping("api/news")
 public class NewsController {
-    /**
-     * 编辑发送消息
-     *
-     * @return boolean
-     */
-    public DataWrapper add() {
-        // TODO: 2017/2/21
-        return null;
+    @Autowired
+    NewsService newsService;
+
+    @RequestMapping(value = "list", method = RequestMethod.GET)
+    @ResponseBody
+    public DataWrapper<List<NewsEntity>> list(
+            @RequestParam(value = "token", required = true) String token
+    ) {
+        return newsService.list();
     }
 
-    /**
-     * 删除消息
-     *
-     * @return boolean
-     */
-    public DataWrapper delete() {
-        // TODO: 2017/2/21
-        return null;
-    }
-
-
-    /**
-     * 获取全部消息列表
-     *
-     * @return role list
-     */
-    public DataWrapper list() {
-        // TODO: 2017/2/21
-        return null;
-    }
-
-    /**
-     * 获取某一消息详情
-     *
-     * @return role
-     */
-    public DataWrapper detail() {
-        // TODO: 2017/2/21
-        return null;
+    @RequestMapping(value = "confirm", method = RequestMethod.GET)
+    @ResponseBody
+    public DataWrapper<Void> confirm(
+            @RequestParam(value = "token", required = true) String token,
+            @RequestParam(value = "newsId", required = true) int newsId
+    ) {
+        UserEntity user = SessionManager.getSession(token);
+        int userId = user.getId();
+        return newsService.confirm(newsId,userId);
     }
 }

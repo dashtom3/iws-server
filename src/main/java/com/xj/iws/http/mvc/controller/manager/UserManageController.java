@@ -1,6 +1,7 @@
 package com.xj.iws.http.mvc.controller.manager;
 
 import com.xj.iws.common.sessionManager.AdminManager;
+import com.xj.iws.common.sessionManager.SessionManager;
 import com.xj.iws.common.utils.DataWrapper;
 import com.xj.iws.http.mvc.entity.UserEntity;
 import com.xj.iws.http.mvc.service.UserManageService;
@@ -31,11 +32,13 @@ public class UserManageController {
      * @param token
      * @return
      */
-    @RequestMapping(value = "list", method = RequestMethod.POST)
+    @RequestMapping(value = "list", method = RequestMethod.GET)
     @ResponseBody
     public DataWrapper<List<UserEntity>> list(
             @RequestParam(value = "token", required = true) String token
     ) {
+        DataWrapper<List<String>> dataWrapper = new DataWrapper<List<String>>();
+        UserEntity user = SessionManager.getSession(token);
         return userManageService.list();
     }
 
@@ -45,13 +48,16 @@ public class UserManageController {
      * @param token
      * @return
      */
-    @RequestMapping(value = "role", method = RequestMethod.POST)
+    @RequestMapping(value = "role", method = RequestMethod.GET)
     @ResponseBody
     public DataWrapper<Void> role(
             @RequestParam(value = "userId", required = true) int userId,
-            @RequestParam(value = "roleId", required = true) String roleId,
+            @RequestParam(value = "roleId", required = true) int roleId,
             @RequestParam(value = "token", required = true) String token
     ) {
+        DataWrapper<List<String>> dataWrapper = new DataWrapper<List<String>>();
+        UserEntity user = SessionManager.getSession(token);
+
         UserEntity userEntity = new UserEntity();
         userEntity.setId(userId);
         userEntity.setRoleId(roleId);
@@ -64,13 +70,16 @@ public class UserManageController {
      * @param token
      * @return
      */
-    @RequestMapping(value = "status", method = RequestMethod.POST)
+    @RequestMapping(value = "status", method = RequestMethod.GET)
     @ResponseBody
     public DataWrapper<Void> status(
             @RequestParam(value = "userId", required = true) int userId,
             @RequestParam(value = "status", required = true) int status,
             @RequestParam(value = "token", required = true) String token
     ) {
+        DataWrapper<List<String>> dataWrapper = new DataWrapper<List<String>>();
+        UserEntity user = SessionManager.getSession(token);
+
         UserEntity userEntity = new UserEntity();
         userEntity.setId(userId);
         userEntity.setStatus(status);
@@ -83,7 +92,7 @@ public class UserManageController {
      * @param token
      * @return
      */
-    @RequestMapping(value = "query", method = RequestMethod.POST)
+    @RequestMapping(value = "query", method = RequestMethod.GET)
     @ResponseBody
     public DataWrapper<List<UserEntity>> query(
             @RequestParam(value = "username", required = false) String username,
@@ -91,6 +100,9 @@ public class UserManageController {
             @RequestParam(value = "address", required = false) String address,
             @RequestParam(value = "token", required = true) String token
     ) {
+        DataWrapper<List<String>> dataWrapper = new DataWrapper<List<String>>();
+        UserEntity user = SessionManager.getSession(token);
+
         Map<String, String> condition = new HashMap<String, String>();
         if (username != null && !username.equals("")) {
             condition.put("username", username);

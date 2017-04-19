@@ -21,6 +21,7 @@
         <result column="areaid" property="areaId" jdbcType="INTEGER"/>
         <result column="limitation" property="limitation" jdbcType="INTEGER"/>
         <result column="systemname" property="systemName" jdbcType="VARCHAR"/>
+        <result column="areaname" property="areaName" jdbcType="VARCHAR"/>
     </resultMap>
 
     <insert id="addRole" parameterType="RoleEntity" useGeneratedKeys="true" keyProperty="id">
@@ -68,12 +69,17 @@
     </select>
 
     <select id="getSub" resultMap="RoleSubEntity">
-        SELECT r.id,
-        s.name AS systemname
-        <include refid="roleSubField"/>
-        FROM rolesub r,system s
+        SELECT r.id,r.roleId,r.systemId,r.areaId,r.limitation,
+        s.name AS systemname,CONCAT(IFNULL(p01.name,''),IFNULL(p02.name,''),IFNULL(p03.name,''),IFNULL(c01.name,''),IFNULL(c02.name,''),IFNULL(a01.name,'')) AS areaname
+        FROM rolesub r
+        LEFT JOIN system s ON r.systemid = s.id
+        LEFT JOIN area a01 ON r.areaId = a01.areaId
+        LEFT JOIN city c01 ON a01.cityId = c01.cityId
+        LEFT JOIN province p01 ON c01.provinceId = p01.provinceId
+        LEFT JOIN city c02 ON r.areaid = c02.cityid
+        LEFT JOIN province p02 ON c02.provinceid = p02.provinceid
+        LEFT JOIN province p03 ON r.areaid = p03.provinceid
         <where>
-            r.systemid = s.id
             <if test="_parameter != 0">
                 AND roleid = ${_parameter}
             </if>
@@ -81,20 +87,38 @@
         ORDER BY r.roleid,r.id
     </select>
 
+    <select id="getSubArea" resultType="String">
+        SELECT areaId FROM rolesub WHERE roleid = ${_parameter} ORDER BY id
+    </select>
+
     <select id="query" resultType="RoleEntity" parameterType="HashMap">
-        SELECT id,
-        <include refid="roleField"/>
-        FROM role
+        SELECT r.id,r.name,r.describes
+        FROM role r
+        LEFT JOIN rolesub s ON r.id = s.roleid
         <where>
-            <if test="systemId != null">AND systemid = '${systemId}'</if>
-            <if test="areaId != null">AND areaid = '${areaId}'</if>
-            <if test="cityId != null">AND areaid IN (SELECT areaid FROM area WHERE cityid = '${cityId}')</if>
-            <if test="provinceId != null">AND areaid IN (SELECT areaid FROM area WHERE cityid IN
-                (SELECT cityid FROM city WHERE provinceid = '${provinceId}'))
+            <if test="systemId != null">AND s.systemid = '${systemId}'</if>
+            <if test="areaId != null">AND s.areaid = '${areaId}'</if>
+            <if test="cityId != null">AND s.areaid IN (SELECT a.areaid FROM area a WHERE a.cityid = '${cityId}')</if>
+            <if test="provinceId != null">AND s.areaid IN (SELECT a.areaid FROM area a WHERE a.cityid IN
+                (SELECT c.cityid FROM city c WHERE c.provinceid = '${provinceId}'))
             </if>
-            <if test="limitation != null">AND limitation = ${limitation}</if>
-            <if test="name != null">AND name LIKE '%${name}%'</if>
+            <if test="limitation != null">AND s.limitation = ${limitation}</if>
+            <if test="name != null">AND s.name LIKE '%${name}%'</if>
         </where>
-        ORDER BY id
+        GROUP BY r.id
+        ORDER BY r.id
+    </select>
+
+
+    <select id="checkSystem" resultType="int">
+        SELECT count(0)
+        FROM rolesub
+        WHERE roleid = ${roleId} AND systemid = ${systemId}
+    </select>
+
+    <select id="checkWritable" resultType="int">
+        SELECT areaid
+        FROM rolesub
+        WHERE roleid = ${roleId} AND systemid = ${systemId} AND limitation &gt; ${writable}-1
     </select>
 </mapper>

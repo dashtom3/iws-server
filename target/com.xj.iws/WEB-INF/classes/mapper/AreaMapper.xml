@@ -27,6 +27,8 @@
         <result column="areaid" property="areaId" jdbcType="INTEGER"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="cityid" property="cityId" jdbcType="INTEGER"/>
+        <result column="cityname" property="cityName" jdbcType="VARCHAR"/>
+        <result column="provincename" property="provinceName" jdbcType="VARCHAR"/>
     </resultMap>
 
     <select id="provinces" resultMap="ProvinceEntity">
@@ -43,8 +45,13 @@
 
     <select id="areas" resultMap="AreaEntity" parameterType="int">
         SELECT
-        <include refid="areaField"/>
-        FROM area WHERE cityid = ${_parameter}
+        a.id,a.areaid,a.name,a.cityid,
+        c.name AS cityname,
+        p.name AS provinceName
+        FROM area a
+        LEFT JOIN city c ON a.cityid = c.cityid
+        LEFT JOIN province p ON c.provinceid = p.provinceid
+        WHERE a.cityid = ${_parameter}
     </select>
 
     <select id="province" resultMap="ProvinceEntity" parameterType="int">
@@ -61,8 +68,20 @@
 
     <select id="area" resultMap="AreaEntity" parameterType="int">
         SELECT
-        <include refid="areaField"/>
-        FROM area WHERE areaid = ${_parameter}
+        a.id,a.areaid,a.name,a.cityid,
+        c.name AS cityname,
+        p.name AS provinceName
+        FROM area a
+        LEFT JOIN city c ON a.cityid = c.cityid
+        LEFT JOIN province p ON c.provinceid = p.provinceid
+        WHERE a.areaid = ${_parameter}
+    </select>
+
+    <select id="getName" resultType="String" parameterType="String">
+        SELECT name FROM
+        <if test="provinceId != 0">province WHERE provinceid = '${provinceId}'</if>
+        <if test="cityId != 0">city WHERE cityid = '${cityId}'</if>
+        <if test="areaId != 0">area WHERE areaid = '${areaId}'</if>
     </select>
 
 </mapper>

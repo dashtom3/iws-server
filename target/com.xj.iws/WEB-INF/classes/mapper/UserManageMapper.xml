@@ -18,6 +18,7 @@
         <result column="address" property="address" jdbcType="VARCHAR"/>
         <result column="describes" property="describes" jdbcType="VARCHAR"/>
         <result column="pic" property="pic" jdbcType="VARCHAR"/>
+        <result column="rolename" property="roleName" jdbcType="VARCHAR"/>
     </resultMap>
 
     <update id="role" parameterType="UserEntity">
@@ -37,9 +38,11 @@
     </update>
 
     <select id="list" resultMap="UserEntity">
-        SELECT id,
-        <include refid="field"/>
-        FROM user ORDER BY id
+        SELECT u.id,u.username,u.roleid,u.status,u.date,u.name,u.address,u.describes,u.pic,
+        r.name AS rolename
+        FROM user u
+        LEFT JOIN role r ON u.roleid = r.id
+        ORDER BY id
     </select>
 
     <select id="query" resultMap="UserEntity">

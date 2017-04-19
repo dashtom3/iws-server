@@ -3,10 +3,7 @@ package com.xj.iws.http.mvc.service.impl;
 import com.xj.iws.http.mvc.dao.DeviceDao;
 import com.xj.iws.http.mvc.dao.LocationDao;
 import com.xj.iws.http.mvc.dao.RoomDao;
-import com.xj.iws.http.mvc.entity.DeviceEntity;
-import com.xj.iws.http.mvc.entity.DeviceGroupEntity;
-import com.xj.iws.http.mvc.entity.LocationEntity;
-import com.xj.iws.http.mvc.entity.RoomEntity;
+import com.xj.iws.http.mvc.entity.*;
 import com.xj.iws.common.enums.CallStatusEnum;
 import com.xj.iws.common.enums.ErrorCodeEnum;
 import com.xj.iws.http.mvc.service.RoomService;
@@ -14,6 +11,7 @@ import com.xj.iws.common.utils.DataWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,7 +42,7 @@ public class RoomServiceImpl implements RoomService {
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
 
         int sign = roomDao.delete(roomId);
-        if (sign == -1){
+        if (sign == -1) {
             dataWrapper.setErrorCode(ErrorCodeEnum.Error);
         }
         return dataWrapper;
@@ -54,9 +52,9 @@ public class RoomServiceImpl implements RoomService {
     public DataWrapper<RoomEntity> update(RoomEntity roomEntity) {
         DataWrapper<RoomEntity> dataWrapper = new DataWrapper<RoomEntity>();
         int sign = roomDao.update(roomEntity);
-        if (sign == -1){
+        if (sign == -1) {
             dataWrapper.setErrorCode(ErrorCodeEnum.Error);
-        }else {
+        } else {
             dataWrapper.setData(roomEntity);
         }
         return dataWrapper;
@@ -71,16 +69,31 @@ public class RoomServiceImpl implements RoomService {
         //获取泵房所属地点
         LocationEntity location = locationDao.detail(room.getLocationId());
         //获取泵房内所有控制器
-        List<DeviceGroupEntity> deviceGroups = deviceDao.deviceGroupList(roomId);
+        List<Integer> groupIds = deviceDao.groupIds(roomId);
+        List<DeviceGroupEntity> deviceGroups = new ArrayList<DeviceGroupEntity>();
+        for (int groupId : groupIds){
+            DeviceGroupEntity group = deviceDao.groupDetail(groupId);
+            List<DeviceEntity> devices = deviceDao.deviceList(groupId);
+            group.setDevices(devices);
+        }
 
         room.setLocation(location);
         room.setDevices(deviceGroups);
 
-        if (room == null){
+        if (room == null) {
             dataWrapper.setErrorCode(ErrorCodeEnum.Error);
-        }else {
+        } else {
             dataWrapper.setData(room);
         }
         return dataWrapper;
     }
+
+    @Override
+    public DataWrapper<Void> addDevice(DeviceEntity deviceEntity, DeviceEntity[] devices) {
+        DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
+        int i = deviceDao.addGroupModel(deviceEntity);
+        int j = deviceDao.addDevice(deviceEntity,devices);
+        return dataWrapper;
+    }
+
 }

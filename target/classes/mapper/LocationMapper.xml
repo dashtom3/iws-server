@@ -22,10 +22,7 @@
         <result column="areaname" property="areaName" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <insert id="add" parameterType="LocationEntity">
-        <selectKey resultType="int" order="AFTER" keyProperty="id">
-            SELECT LAST_INSERT_ID() AS id
-        </selectKey>
+    <insert id="add" parameterType="LocationEntity" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO location (<include refid="field"/>) VALUES
         (${systemId},${provinceId},${cityId},${areaId},${positionX},${positionY},'${name}','${describes}')
     </insert>
@@ -54,9 +51,14 @@
             l.id,l.systemid,l.provinceid,l.cityid,l.areaid,l.positionx,l.positiony,l.name,l.describes,
             p.name AS provincename,c.name AS cityname,a.name AS areaname
         FROM
-            location l,province p,city c,area a
+            location l
+        LEFT JOIN
+            province p ON l.provinceid = p.provinceid
+        LEFT JOIN
+            city c ON l.cityid = c.cityid
+        LEFT JOIN
+            area a ON l.areaid = a.areaid
         <where>
-            l.provinceid = p.provinceid AND l.cityid = c.cityid AND l.areaid = a.areaid
             <if test="_parameter != 0">AND l.systemid = ${_parameter}</if>
         </where>
         ORDER BY
@@ -68,21 +70,34 @@
             l.id,l.systemid,l.provinceid,l.cityid,l.areaid,l.positionx,l.positiony,l.name,l.describes,
             p.name AS provincename,c.name AS cityname,a.name AS areaname
         FROM
-            location l,province p,city c,area a
+            location l
+        LEFT JOIN
+            province p ON l.provinceid = p.provinceid
+        LEFT JOIN
+            city c ON l.cityid = c.cityid
+        LEFT JOIN
+            area a ON l.areaid = a.areaid
         WHERE
             l.id = ${_parameter}
-            AND l.provinceid = p.provinceid AND l.cityid = c.cityid AND l.areaid = a.areaid
     </select>
 
     <select id="query" parameterType="HashMap" resultMap="LocationEntity">
-        SELECT id,
-        <include refid="field"/>
-        FROM location
+        SELECT
+            l.id,l.systemid,l.provinceid,l.cityid,l.areaid,l.positionx,l.positiony,l.name,l.describes,
+            p.name AS provincename,c.name AS cityname,a.name AS areaname
+        FROM
+            location l
+        LEFT JOIN
+            province p ON l.provinceid = p.provinceid
+        LEFT JOIN
+            city c ON l.cityid = c.cityid
+        LEFT JOIN
+            area a ON l.areaid = a.areaid
         <where>
-            <if test="systemId != null">AND systemid = ${systemId}</if>
-            <if test="areaId != null">AND areaid = ${areaId}</if>
-            <if test="cityId != null">AND cityid = ${cityId}</if>
-            <if test="provinceId != null">AND provinceid = ${provinceId}</if>
+            <if test="systemId != null">AND l.systemid = ${systemId}</if>
+            <if test="areaId != null">AND l.areaid = ${areaId}</if>
+            <if test="cityId != null">AND l.cityid = ${cityId}</if>
+            <if test="provinceId != null">AND l.provinceid = ${provinceId}</if>
         </where>
         ORDER BY systemid,provinceid,cityid,areaid
     </select>

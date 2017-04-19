@@ -3,6 +3,7 @@ package com.xj.iws.http.mvc.service;
 import com.xj.iws.common.utils.DataWrapper;
 import com.xj.iws.http.mvc.entity.DeviceEntity;
 import com.xj.iws.http.mvc.entity.DeviceGroupEntity;
+import com.xj.iws.http.mvc.entity.DeviceGroupTypeEntity;
 
 import java.util.List;
 
@@ -11,19 +12,19 @@ import java.util.List;
  */
 public interface DeviceService {
 
-    DataWrapper<DeviceGroupEntity> add(DeviceGroupEntity deviceGroup, DeviceEntity[] devices);
+    DataWrapper<DeviceGroupEntity> addGroup(DeviceGroupEntity deviceGroup);
 
     DataWrapper<Void> delete(int deviceGroupId);
 
-    DataWrapper<DeviceEntity> update(DeviceGroupEntity deviceGroup, DeviceEntity[] devices);
+    DataWrapper<DeviceEntity> update(DeviceGroupEntity deviceGroup);
 
     DataWrapper<List<DeviceGroupEntity>> groupList();
 
     DataWrapper<DeviceGroupEntity> groupDetail(int groupId);
 
-    DataWrapper<DeviceEntity> deviceDetail(int deviceId);
-
     DataWrapper<Void> enable(int groupId);
 
-    DataWrapper<String> start(String com);
+    DataWrapper<Void> start(String[] groupIds);
+
+    DataWrapper<List<DeviceGroupTypeEntity>> groupType();
 }

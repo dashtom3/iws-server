@@ -2,10 +2,12 @@ package com.xj.iws.http.mvc.controller.manager;
 
 import com.xj.iws.common.utils.DataWrapper;
 import com.xj.iws.http.mvc.entity.DeviceTermEntity;
+import com.xj.iws.http.mvc.entity.DeviceTypeEntity;
 import com.xj.iws.http.mvc.entity.PointFieldEntity;
 import com.xj.iws.http.mvc.entity.PointRoleEntity;
 import com.xj.iws.http.mvc.service.DeviceTermService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,9 +45,9 @@ public class DeviceTermController {
     @RequestMapping(value = "add",method = RequestMethod.POST)
     @ResponseBody
     public DataWrapper<DeviceTermEntity> addPointTable(
+            @RequestParam(value = "token", required = true) String token,
             @ModelAttribute DeviceTermEntity deviceTermEntity,
-            @RequestBody PointFieldEntity[] fields,
-            @RequestParam(value = "token", required = true) String token
+            @RequestBody PointFieldEntity[] fields
     ) {
         return deviceTermService.add(deviceTermEntity,fields);
     }
@@ -59,8 +61,8 @@ public class DeviceTermController {
     @RequestMapping(value = "delete",method = RequestMethod.POST)
     @ResponseBody
     public DataWrapper<Void> delete(
-            @RequestParam(value = "deviceTermId", required = true) int deviceTermId,
-            @RequestParam(value = "token", required = true) String token
+            @RequestParam(value = "token", required = true) String token,
+            @RequestParam(value = "deviceTermId", required = true) int deviceTermId
     ) {
         return deviceTermService.delete(deviceTermId);
     }
@@ -74,8 +76,8 @@ public class DeviceTermController {
     @RequestMapping(value = "update",method = RequestMethod.POST)
     @ResponseBody
     public DataWrapper<DeviceTermEntity> update(
-            @ModelAttribute DeviceTermEntity deviceTermEntity,
-            @RequestParam(value = "token", required = true) String token
+            @RequestParam(value = "token", required = true) String token,
+            @ModelAttribute DeviceTermEntity deviceTermEntity
     ) {
         return deviceTermService.update(deviceTermEntity);
     }
@@ -103,10 +105,24 @@ public class DeviceTermController {
     @RequestMapping(value = "detail",method = RequestMethod.POST)
     @ResponseBody
     public DataWrapper<DeviceTermEntity> detail(
-            @RequestParam(value = "deviceTermId", required = true) int deviceTermId,
-            @RequestParam(value = "token", required = true) String token
+            @RequestParam(value = "token", required = true) String token,
+            @RequestParam(value = "deviceTermId", required = true) int deviceTermId
     ) {
         return deviceTermService.detail(deviceTermId);
+    }
+
+    /**
+     * 获取控制器类型列表
+     *
+     * @param token
+     * @return
+     */
+    @RequestMapping(value = "typeList",method = RequestMethod.POST)
+    @ResponseBody
+    public DataWrapper<List<DeviceTypeEntity>> typeList(
+            @RequestParam(value = "token", required = true) String token
+    ) {
+        return deviceTermService.typeList();
     }
 
     /**
@@ -118,10 +134,10 @@ public class DeviceTermController {
     @RequestMapping(value = "query",method = RequestMethod.POST)
     @ResponseBody
     public DataWrapper<List<DeviceTermEntity>> query(
+            @RequestParam(value = "token", required = true) String token,
             @RequestParam(value = "protocol", required = false) String protocol,
             @RequestParam(value = "type", required = false) String type,
-            @RequestParam(value = "name", required = false) String name,
-            @RequestParam(value = "token", required = true) String token
+            @RequestParam(value = "name", required = false) String name
     ) {
         Map<String,String> condition = new HashMap<String, String>();
         condition.put("protocol",protocol);

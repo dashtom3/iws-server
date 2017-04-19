@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 管理全部地点设置请求
@@ -100,7 +102,20 @@ public class LocationController {
             @RequestParam(value = "areaId", required = false) String areaId,
             @RequestParam(value = "token", required = true) String token
     ) {
-        return locationService.query(systemId,provinceId,cityId,areaId);
+        //创建查询条件
+        Map<String, String> condition = new HashMap<String, String>();
+
+        if (systemId != null && !"".equals(systemId)){
+            condition.put("systemId", systemId);
+        }
+        if (areaId != null && !"".equals(areaId)) {
+            condition.put("areaId", areaId);
+        } else if (cityId != null && !"".equals(cityId)) {
+            condition.put("cityId", cityId);
+        } else if (provinceId != null && !"".equals(provinceId)) {
+            condition.put("provinceId", provinceId);
+        }
+        return locationService.query(condition);
     }
 
 }

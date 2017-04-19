@@ -36,9 +36,9 @@ public class RoleController {
     @RequestMapping(value = "add", method = RequestMethod.POST)
     @ResponseBody
     public DataWrapper<RoleEntity> add(
+            @RequestParam(value = "token", required = true) String token,
             @ModelAttribute RoleEntity roleEntity,
-            @RequestBody RoleSubEntity[] subitem,
-            @RequestParam(value = "token", required = true) String token
+            @RequestBody RoleSubEntity[] subitem
     ) {
         return roleService.add(roleEntity, subitem);
     }
@@ -53,8 +53,8 @@ public class RoleController {
     @RequestMapping(value = "delete", method = RequestMethod.POST)
     @ResponseBody
     public DataWrapper<Void> delete(
-            @RequestParam(value = "roleId", required = true) int roleId,
-            @RequestParam(value = "token", required = true) String token
+            @RequestParam(value = "token", required = true) String token,
+            @RequestParam(value = "roleId", required = true) int roleId
     ) {
         return roleService.delete(roleId);
     }
@@ -70,9 +70,9 @@ public class RoleController {
     @RequestMapping(value = "update", method = RequestMethod.POST)
     @ResponseBody
     public DataWrapper<RoleEntity> update(
+            @RequestParam(value = "token", required = true) String token,
             @ModelAttribute RoleEntity roleEntity,
-            @RequestBody RoleSubEntity[] subitem,
-            @RequestParam(value = "token", required = true) String token
+            @RequestBody RoleSubEntity[] subitem
     ) {
         return roleService.update(roleEntity,subitem);
     }
@@ -101,8 +101,8 @@ public class RoleController {
     @RequestMapping(value = "detail", method = RequestMethod.POST)
     @ResponseBody
     public DataWrapper<RoleEntity> detail(
-            @RequestParam(value = "roleId", required = true) int roleId,
-            @RequestParam(value = "token", required = true) String token
+            @RequestParam(value = "token", required = true) String token,
+            @RequestParam(value = "roleId", required = true) int roleId
     ) {
         return roleService.detail(roleId);
     }
@@ -120,11 +120,11 @@ public class RoleController {
     @RequestMapping(value = "query", method = RequestMethod.POST)
     @ResponseBody
     public DataWrapper<List<RoleEntity>> query(
+            @RequestParam(value = "token", required = true) String token,
             @RequestParam(value = "systemId", required = true) String systemId,
             @RequestParam(value = "areaId", required = false) String areaId,
             @RequestParam(value = "limitation", required = false) String limitation,
-            @RequestParam(value = "name", required = false) String name,
-            @RequestParam(value = "token", required = true) String token
+            @RequestParam(value = "name", required = false) String name
     ) {
         //创建查询条件
         Map<String, String> condition = new HashMap<String, String>();

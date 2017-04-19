@@ -1,6 +1,7 @@
 package com.xj.iws.http.mvc.dao;
 
 import com.xj.iws.http.mvc.entity.DeviceTermEntity;
+import com.xj.iws.http.mvc.entity.DeviceTypeEntity;
 import com.xj.iws.http.mvc.entity.PointFieldEntity;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -13,7 +14,7 @@ import java.util.Map;
  */
 @Repository
 public interface DeviceTermDao {
-    List<DeviceTermEntity> deviceList();
+    List<DeviceTermEntity> deviceTermList();
 
     List<PointFieldEntity> fieldList(int deviceId);
 
@@ -23,7 +24,7 @@ public interface DeviceTermDao {
 
     int deleteField(int pointTableId);
 
-    DeviceTermEntity update(DeviceTermEntity deviceTermEntity);
+    int update(DeviceTermEntity deviceTermEntity);
 
     DeviceTermEntity detail(int pointTableId);
 
@@ -32,4 +33,8 @@ public interface DeviceTermDao {
     int addField(@Param("deviceId") int id, @Param("fields") PointFieldEntity[] fields);
 
     List<DeviceTermEntity> query(Map<String, String> condition);
+
+    List<DeviceTypeEntity> typeList();
+
+    List<DeviceTermEntity> deviceTermByIds(String[] terms);
 }

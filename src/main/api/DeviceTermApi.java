@@ -155,7 +155,7 @@ public interface RoleApi {
      * @apiVersion 0.1.0
      * @apiDescription 编辑修改控制器
      *
-     * @apiParam {int} deviceTermId 控制器id
+     * @apiParam {int} id 控制器id
      * @apiParam {List} fields 控制器点表字段(number 字段数; roleId 字段规则id; name 名称; describes 描述; unit 单位; min 下限值; max 上限值; multiple 检测值倍数)
      * @apiParam {int} count 字段参数数量
      * @apiParam {String} protocol 通讯协议
@@ -248,7 +248,7 @@ public interface RoleApi {
 
     /**
      *
-     * @api {post} http://localhost:8080/iws/api/deviceTerm/detail 查看控制器
+     * @api {post} http://localhost:8080/iws/api/deviceTerm/detail 控制器详情
      * @apiName detail
      * @apiGroup deviceTerm
      * @apiVersion 0.1.0
@@ -281,6 +281,48 @@ public interface RoleApi {
      *         multiple:1000(表示实际值×1000)
      *         }
      *     }
+     * }
+     * token:"SK1d7a4fe3-c2cd-417f-8f6f-bf7412592996",
+     * numberPerPage:0,
+     * currentPage:0,
+     * totalNumber:0,
+     * totalPage:0
+     *  }
+     *
+     *  @apiErrorExample {json} Error-Response:
+     *  HTTP/1.1 200 OK
+     * {
+     * callStatus:"FAILED",
+     * errorCode:"Error",
+     * data:null,
+     * token:null,
+     * numberPerPage:0,
+     * currentPage:0,
+     * totalNumber:0,
+     * totalPage:0
+     *  }
+     *
+     */
+
+    /**
+     *
+     * @api {post} http://localhost:8080/iws/api/deviceTerm/typeList 控制器类型列表
+     * @apiName typeList
+     * @apiGroup deviceTerm
+     * @apiVersion 0.1.0
+     * @apiDescription 控制器类型列表
+     * @apiParam {String} token 身份验证
+     *
+     * @apiSuccessExample Success-Response:
+     *  HTTP/1.1 200 OK
+     * {
+     * callStatus:"SUCCEED",
+     * errorCode:"No_Error",
+     * data:{
+     *     id:1,
+     *     name:"电压表",
+     *     pic:"img/001.jpg"
+     *     describes:"123"
      * }
      * token:"SK1d7a4fe3-c2cd-417f-8f6f-bf7412592996",
      * numberPerPage:0,

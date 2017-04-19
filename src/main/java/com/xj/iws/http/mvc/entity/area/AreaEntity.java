@@ -15,6 +15,9 @@ public class AreaEntity {
     private String name;
     private int cityId;
 
+    private String cityName;
+    private String provinceName;
+
     private CityEntity city;
     private List<LocationEntity> location;
 
@@ -74,5 +77,21 @@ public class AreaEntity {
 
     public void setLocation(List<LocationEntity> location) {
         this.location = location;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+
+    public String getProvinceName() {
+        return provinceName;
+    }
+
+    public void setProvinceName(String provinceName) {
+        this.provinceName = provinceName;
     }
 }

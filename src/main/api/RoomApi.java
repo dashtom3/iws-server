@@ -196,4 +196,124 @@ public interface RoomApi {
      *
      */
 
+    /**
+     *
+     * @api {post} http://localhost:8080/iws/api/room/addDevice 添加控制器
+     * @apiName addDevice
+     * @apiGroup room
+     * @apiVersion 0.1.0
+     * @apiDescription 创建控制器实例
+     *
+     * @apiParam {int} roomId 泵房id
+     * @apiParam {int} groupId 控制器组id
+     * @apiParam {String} port 端口号
+     * @apiParam {String} name 名称
+     * @apiParam {String} describes 描述
+     * @apiParam {List} terms 控制器json数组(termId 终端id,number 编号)
+     * @apiParam {String} token 身份验证
+     *
+     * @apiSuccessExample Success-Response:
+     *  HTTP/1.1 200 OK
+     * {
+     * callStatus:"SUCCEED",
+     * errorCode:"No_Error",
+     * data:null,
+     * token:"SK1d7a4fe3-c2cd-417f-8f6f-bf7412592996",
+     * numberPerPage:0,
+     * currentPage:0,
+     * totalNumber:0,
+     * totalPage:0
+     *  }
+     *
+     *  @apiErrorExample {json} Error-Response:
+     *  HTTP/1.1 200 OK
+     * {
+     * callStatus:"FAILED",
+     * errorCode:"Error",
+     * data:null,
+     * token:null,
+     * numberPerPage:0,
+     * currentPage:0,
+     * totalNumber:0,
+     * totalPage:0
+     *  }
+     *
+     */
+
+    /**
+     *
+     * @api {post} http://localhost:8080/iws/api/device/enable 启用控制器组
+     * @apiName enable
+     * @apiGroup room
+     * @apiVersion 0.1.0
+     * @apiDescription 创建数据存储表
+     * @apiParam {int} groupId 控制器组id
+     * @apiParam {String} token 身份验证
+     *
+     * @apiSuccessExample Success-Response:
+     *  HTTP/1.1 200 OK
+     * {
+     * callStatus:"SUCCEED",
+     * errorCode:"No_Error",
+     * data:null
+     * token:"SK1d7a4fe3-c2cd-417f-8f6f-bf7412592996",
+     * numberPerPage:0,
+     * currentPage:0,
+     * totalNumber:0,
+     * totalPage:0
+     *  }
+     *
+     *  @apiErrorExample {json} Error-Response:
+     *  HTTP/1.1 200 OK
+     * {
+     * callStatus:"FAILED",
+     * errorCode:"Error",
+     * data:null,
+     * token:null,
+     * numberPerPage:0,
+     * currentPage:0,
+     * totalNumber:0,
+     * totalPage:0
+     *  }
+     *
+     */
+
+    /**
+     *
+     * @api {post} http://localhost:8080/iws/api/device/start 开启数据采集
+     * @apiName start
+     * @apiGroup room
+     * @apiVersion 0.1.0
+     * @apiDescription 开启数据采集
+     * @apiParam {int} groupId 控制器组id
+     * @apiParam {String} token 身份验证
+     *
+     * @apiSuccessExample Success-Response:
+     *  HTTP/1.1 200 OK
+     * {
+     * callStatus:"SUCCEED",
+     * errorCode:"No_Error",
+     * data:null
+     * token:"SK1d7a4fe3-c2cd-417f-8f6f-bf7412592996",
+     * numberPerPage:0,
+     * currentPage:0,
+     * totalNumber:0,
+     * totalPage:0
+     *  }
+     *
+     *  @apiErrorExample {json} Error-Response:
+     *  HTTP/1.1 200 OK
+     * {
+     * callStatus:"FAILED",
+     * errorCode:"Error",
+     * data:null,
+     * token:null,
+     * numberPerPage:0,
+     * currentPage:0,
+     * totalNumber:0,
+     * totalPage:0
+     *  }
+     *
+     */
+
 }

@@ -10,26 +10,29 @@ import java.util.List;
 @Alias("DeviceGroupEntity")
 public class DeviceGroupEntity {
     private int id;
-    private int roomId;
+    private String terms;
     private int status;
-    private String type;
+    private int type;
     private String name;
     private String describes;
+    private String pic;
 
-    private RoomEntity room;
+
+    List<DeviceGroupTypeEntity> groupType;
+    List<DeviceTermEntity> deviceTerms;
     List<DeviceEntity> devices;
 
     public DeviceGroupEntity() {
     }
 
-    public DeviceGroupEntity(int id, int roomId, int status, String type, String name, String describes) {
-
+    public DeviceGroupEntity(int id, String terms, int status, int type, String name, String describes, String pic) {
         this.id = id;
-        this.roomId = roomId;
+        this.terms = terms;
         this.status = status;
         this.type = type;
         this.name = name;
         this.describes = describes;
+        this.pic = pic;
     }
 
     public int getId() {
@@ -41,12 +44,12 @@ public class DeviceGroupEntity {
         this.id = id;
     }
 
-    public int getRoomId() {
-        return roomId;
+    public String getTerms() {
+        return terms;
     }
 
-    public void setRoomId(int roomId) {
-        this.roomId = roomId;
+    public void setTerms(String terms) {
+        this.terms = terms;
     }
 
     public int getStatus() {
@@ -57,11 +60,11 @@ public class DeviceGroupEntity {
         this.status = status;
     }
 
-    public String getType() {
+    public int getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(int type) {
         this.type = type;
     }
 
@@ -81,19 +84,35 @@ public class DeviceGroupEntity {
         this.describes = describes;
     }
 
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic;
+    }
+
+    public List<DeviceGroupTypeEntity> getGroupType() {
+        return groupType;
+    }
+
+    public void setGroupType(List<DeviceGroupTypeEntity> groupType) {
+        this.groupType = groupType;
+    }
+
+    public List<DeviceTermEntity> getDeviceTerms() {
+        return deviceTerms;
+    }
+
+    public void setDeviceTerms(List<DeviceTermEntity> deviceTerms) {
+        this.deviceTerms = deviceTerms;
+    }
+
     public List<DeviceEntity> getDevices() {
         return devices;
     }
 
     public void setDevices(List<DeviceEntity> devices) {
         this.devices = devices;
-    }
-
-    public RoomEntity getRoom() {
-        return room;
-    }
-
-    public void setRoom(RoomEntity room) {
-        this.room = room;
     }
 }

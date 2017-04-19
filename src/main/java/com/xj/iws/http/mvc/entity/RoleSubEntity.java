@@ -15,8 +15,9 @@ public class RoleSubEntity {
     private int limitation;
 
     private String systemName;
+    private String areaName;
     private RoleEntity role;
-    private AreaEntity area;
+
 
     public RoleSubEntity() {
 
@@ -86,11 +87,11 @@ public class RoleSubEntity {
         this.systemName = systemName;
     }
 
-    public AreaEntity getArea() {
-        return area;
+    public String getAreaName() {
+        return areaName;
     }
 
-    public void setArea(AreaEntity area) {
-        this.area = area;
+    public void setAreaName(String areaName) {
+        this.areaName = areaName;
     }
 }

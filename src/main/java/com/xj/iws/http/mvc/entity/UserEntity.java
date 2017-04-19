@@ -13,7 +13,7 @@ public class UserEntity {
     private int id;
     private String username;
     private String password;
-    private String roleId;
+    private int roleId;
     private int status;
     private Date date;
     private String strdate;
@@ -22,10 +22,12 @@ public class UserEntity {
     private String describes;
     private String pic;
 
+    private String roleName;
+
     public UserEntity() {
     }
 
-    public UserEntity(int id, String username, String password, String roleId, int status, Date date, String strdate, String name, String address, String describes, String pic) {
+    public UserEntity(int id, String username, String password, int roleId, int status, Date date, String strdate, String name, String address, String describes, String pic) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -63,11 +65,11 @@ public class UserEntity {
         this.password = password;
     }
 
-    public String getRoleId() {
+    public int getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(String roleId) {
+    public void setRoleId(int roleId) {
         this.roleId = roleId;
     }
 
@@ -125,5 +127,13 @@ public class UserEntity {
 
     public void setPic(String pic) {
         this.pic = pic;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 }

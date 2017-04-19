@@ -6,6 +6,7 @@ import com.xj.iws.common.utils.PackageUtil;
 import com.xj.iws.http.mvc.dao.PointRoleDao;
 import com.xj.iws.http.mvc.dao.DeviceTermDao;
 import com.xj.iws.http.mvc.entity.DeviceTermEntity;
+import com.xj.iws.http.mvc.entity.DeviceTypeEntity;
 import com.xj.iws.http.mvc.entity.PointFieldEntity;
 import com.xj.iws.http.mvc.entity.PointRoleEntity;
 import com.xj.iws.http.mvc.service.DeviceTermService;
@@ -28,8 +29,10 @@ public class DeviceTermServiceImpl implements DeviceTermService {
     public DataWrapper<DeviceTermEntity> add(DeviceTermEntity deviceTermEntity, PointFieldEntity[] fields) {
         DataWrapper<DeviceTermEntity> dataWrapper = new DataWrapper<DeviceTermEntity>();
         int i = deviceTermDao.addDevice(deviceTermEntity);
+        for (int j = 0; j <fields.length ; j++) {
+            fields[j].setNumber(j+1);
+        }
         int j = deviceTermDao.addField(deviceTermEntity.getId(),fields);
-
         if (i != 1){
             dataWrapper.setErrorCode(ErrorCodeEnum.Error);
         }else {
@@ -39,6 +42,14 @@ public class DeviceTermServiceImpl implements DeviceTermService {
             deviceTermEntity.setFields(list);
             dataWrapper.setData(deviceTermEntity);
         }
+        return dataWrapper;
+    }
+
+    @Override
+    public DataWrapper<List<DeviceTypeEntity>> typeList() {
+        DataWrapper<List<DeviceTypeEntity>> dataWrapper = new DataWrapper<List<DeviceTypeEntity>>();
+        List<DeviceTypeEntity> types = deviceTermDao.typeList();
+        dataWrapper.setData(types);
         return dataWrapper;
     }
 
@@ -63,16 +74,20 @@ public class DeviceTermServiceImpl implements DeviceTermService {
     @Override
     public DataWrapper<DeviceTermEntity> update(DeviceTermEntity deviceTermEntity) {
         DataWrapper<DeviceTermEntity> dataWrapper = new DataWrapper<DeviceTermEntity>();
-        dataWrapper.setData(deviceTermDao.update(deviceTermEntity));
+        int i = deviceTermDao.update(deviceTermEntity);
+        dataWrapper.setData(deviceTermEntity);
         return dataWrapper;
     }
 
     @Override
     public DataWrapper<List<DeviceTermEntity>> list() {
         DataWrapper<List<DeviceTermEntity>> dataWrapper = new DataWrapper<List<DeviceTermEntity>>();
-        List<DeviceTermEntity> devices = deviceTermDao.deviceList();
+        List<DeviceTermEntity> devices = deviceTermDao.deviceTermList();
         List<PointFieldEntity> fields = deviceTermDao.fieldList(0);
-        dataWrapper.setData(PackageUtil.deviceTermPack(devices,fields));
+        if (devices != null){
+            devices = PackageUtil.deviceTermPack(devices,fields);
+        }
+        dataWrapper.setData(devices);
         return dataWrapper;
     }
 

@@ -16,7 +16,8 @@ public enum ErrorCodeEnum implements Serializable {
     Verify_Code_5min("验证码5分钟",6),
     Verify_Code_notExist("验证码不存在",7),
     Username_NOT_Exist("用户不存在",8),
-    Password_error("密码错误",9);
+    Password_error("密码错误",9),
+    Limitation_error("无操作权限",10);
 
     private String label;
     private Integer code;

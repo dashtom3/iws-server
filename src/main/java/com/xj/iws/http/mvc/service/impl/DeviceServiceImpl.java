@@ -3,10 +3,9 @@ package com.xj.iws.http.mvc.service.impl;
 import com.xj.iws.common.enums.ErrorCodeEnum;
 import com.xj.iws.common.utils.PackageUtil;
 import com.xj.iws.http.mvc.dao.DeviceDao;
+import com.xj.iws.http.mvc.dao.DeviceTermDao;
 import com.xj.iws.http.mvc.dao.RoomDao;
-import com.xj.iws.http.mvc.entity.DeviceEntity;
-import com.xj.iws.http.mvc.entity.DeviceGroupEntity;
-import com.xj.iws.http.mvc.entity.RoomEntity;
+import com.xj.iws.http.mvc.entity.*;
 import com.xj.iws.http.mvc.service.DeviceService;
 import com.xj.iws.common.utils.DataWrapper;
 import org.apache.http.client.ClientProtocolException;
@@ -21,7 +20,9 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -34,23 +35,18 @@ public class DeviceServiceImpl implements DeviceService {
     @Autowired
     DeviceDao deviceDao;
     @Autowired
-    RoomDao roomDao;
+    DeviceTermDao deviceTermDao;
+
 
     @Override
-    public DataWrapper<DeviceGroupEntity> add(DeviceGroupEntity deviceGroup, DeviceEntity[] devices) {
+    public DataWrapper<DeviceGroupEntity> addGroup(DeviceGroupEntity deviceGroup) {
         DataWrapper<DeviceGroupEntity> dataWrapper = new DataWrapper<DeviceGroupEntity>();
         int i = deviceDao.addGroup(deviceGroup);
-        int j = deviceDao.addDevice(deviceGroup.getId(), devices);
         if (i == -1) {
             dataWrapper.setErrorCode(ErrorCodeEnum.Error);
         } else {
-            List<DeviceEntity> list = new ArrayList<DeviceEntity>();
-            Collections.addAll(list, devices);
-
-            deviceGroup.setDevices(list);
             dataWrapper.setData(deviceGroup);
         }
-
         return dataWrapper;
     }
 
@@ -67,11 +63,9 @@ public class DeviceServiceImpl implements DeviceService {
     }
 
     @Override
-    public DataWrapper<DeviceEntity> update(DeviceGroupEntity deviceGroup, DeviceEntity[] devices) {
+    public DataWrapper<DeviceEntity> update(DeviceGroupEntity deviceGroup) {
         DataWrapper<DeviceEntity> dataWrapper = new DataWrapper<DeviceEntity>();
         int i = deviceDao.updateGroup(deviceGroup);
-        int j = deviceDao.deleteDevice(deviceGroup.getId(), 0);
-        int k = deviceDao.addDevice(deviceGroup.getId(), devices);
 
         if (i != 1) {
             dataWrapper.setErrorCode(ErrorCodeEnum.Error);
@@ -83,13 +77,13 @@ public class DeviceServiceImpl implements DeviceService {
     public DataWrapper<List<DeviceGroupEntity>> groupList() {
         DataWrapper<List<DeviceGroupEntity>> dataWrapper = new DataWrapper<List<DeviceGroupEntity>>();
 
-        List<DeviceGroupEntity> deviceGroups = deviceDao.deviceGroupList(0);
-        List<DeviceEntity> devices = deviceDao.deviceList(0);
-        for (DeviceGroupEntity group : deviceGroups) {
-            RoomEntity room = roomDao.detail(group.getRoomId());
-            group.setRoom(room);
+        List<DeviceGroupEntity> deviceGroups = deviceDao.deviceGroupList();
+        for (DeviceGroupEntity group : deviceGroups){
+            String[] terms = group.getTerms().split(",");
+            List<DeviceTermEntity> deviceTerms = deviceTermDao.deviceTermByIds(terms);
+            group.setDeviceTerms(deviceTerms);
         }
-        dataWrapper.setData(PackageUtil.devicePack(deviceGroups, devices));
+        dataWrapper.setData(deviceGroups);
         return dataWrapper;
     }
 
@@ -97,22 +91,10 @@ public class DeviceServiceImpl implements DeviceService {
     public DataWrapper<DeviceGroupEntity> groupDetail(int groupId) {
         DataWrapper<DeviceGroupEntity> dataWrapper = new DataWrapper<DeviceGroupEntity>();
         DeviceGroupEntity group = deviceDao.groupDetail(groupId);
-        List<DeviceEntity> devices = deviceDao.deviceList(groupId);
-
-        group.setDevices(devices);
+        String[] terms = group.getTerms().split(",");
+        List<DeviceTermEntity> deviceTerms = deviceTermDao.deviceTermByIds(terms);
+        group.setDeviceTerms(deviceTerms);
         dataWrapper.setData(group);
-        return dataWrapper;
-    }
-
-
-    @Override
-    public DataWrapper<DeviceEntity> deviceDetail(int deviceId) {
-        DataWrapper<DeviceEntity> dataWrapper = new DataWrapper<DeviceEntity>();
-        DeviceEntity device = deviceDao.deviceDetail(deviceId);
-        DeviceGroupEntity group = deviceDao.groupDetail(device.getGroupId());
-
-        device.setDeviceGroup(group);
-        dataWrapper.setData(device);
         return dataWrapper;
     }
 
@@ -126,16 +108,19 @@ public class DeviceServiceImpl implements DeviceService {
         return dataWrapper;
     }
 
+
     @Override
-    public DataWrapper<String> start(String com) {
-        DataWrapper<String> dataWrapper = new DataWrapper<String>();
+    public DataWrapper<Void> start(String[] groupIds) {
+        DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
         // 创建默认的httpClient实例.
         CloseableHttpClient httpclient = HttpClients.createDefault();
         // 创建httpPost
-        HttpPost httpPost = new HttpPost("http://localhost:8180/api/device/start.do");
+        HttpPost httpPost = new HttpPost("http://localhost:8180/iws_data/api/start");
         // 创建参数队列
         List<BasicNameValuePair> formParams = new ArrayList<BasicNameValuePair>();
-        formParams.add(new BasicNameValuePair("com", com));
+        for (String groupId : groupIds) {
+            formParams.add(new BasicNameValuePair("groupIds", groupId));
+        }
         UrlEncodedFormEntity uefEntity;
         try {
             uefEntity = new UrlEncodedFormEntity(formParams, "UTF-8");
@@ -158,4 +143,13 @@ public class DeviceServiceImpl implements DeviceService {
         }
         return dataWrapper;
     }
+
+    @Override
+    public DataWrapper<List<DeviceGroupTypeEntity>> groupType() {
+        DataWrapper<List<DeviceGroupTypeEntity>> dataWrapper = new DataWrapper<List<DeviceGroupTypeEntity>>();
+        List<DeviceGroupTypeEntity> groupTypes = deviceDao.groupTypes();
+        dataWrapper.setData(groupTypes);
+        return dataWrapper;
+    }
+
 }

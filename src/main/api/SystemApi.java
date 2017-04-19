@@ -128,7 +128,7 @@ public interface SystemApi {
 
     /**
      *
-     * @api {post} http://localhost:8080/iws/api/customer/system/listPack 系统列表(null-->系统List,封装)
+     * @api {post} http://localhost:8080/iws/api/customer/system/listPack 系统列表(封装)
      * @apiName listPack
      * @apiGroup system
      * @apiVersion 0.1.0
@@ -196,7 +196,7 @@ public interface SystemApi {
 
     /**
      *
-     * @api {post} http://localhost:8080/iws/api/customer/system/detailPack 系统详情(系统id-->系统,封装)
+     * @api {post} http://localhost:8080/iws/api/customer/system/detailPack 系统详情(封装)
      * @apiName detailPack
      * @apiGroup system
      * @apiVersion 0.1.0
@@ -266,7 +266,7 @@ public interface SystemApi {
 
     /**
      *
-     * @api {post} http://localhost:8080/iws/api/customer/system/list 系统列表(null-->系统List)
+     * @api {post} http://localhost:8080/iws/api/customer/system/list 系统列表
      * @apiName list
      * @apiGroup system
      * @apiVersion 0.1.0
@@ -323,7 +323,7 @@ public interface SystemApi {
 
     /**
      *
-     * @api {post} http://localhost:8080/iws/api/customer/system/detail 查看系统(系统id-->系统)
+     * @api {post} http://localhost:8080/iws/api/customer/system/detail 查看系统
      * @apiName detail
      * @apiGroup system
      * @apiVersion 0.1.0

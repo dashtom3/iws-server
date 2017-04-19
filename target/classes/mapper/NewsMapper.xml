@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xj.iws.http.mvc.dao.NewsDao">
+
+    <sql id="field">alarmid,userid,status,alarmtime,confirmtime,name,describes</sql>
+
+    <resultMap id="NewsEntity" type="com.xj.iws.http.mvc.entity.NewsEntity">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="alarmid" property="alarmId" jdbcType="INTEGER"/>
+        <result column="userid" property="userId" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="alarmtime" property="alarmTime"/>
+        <result column="confirmtime" property="confirmTime"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="describes" property="describes" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="list" resultType="NewsEntity">
+        SELECT id,
+        <include refid="field" />
+        FROM news
+        ORDER BY alarmtime DESC
+    </select>
+
+    <update id="confirm" parameterType="int">
+        UPDATE news SET userid = ${userId}, status = 1, confirmtime = now()
+        WHERE id = ${newsId}
+    </update>
+
+</mapper>

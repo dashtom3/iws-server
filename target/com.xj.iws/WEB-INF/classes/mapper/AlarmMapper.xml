@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xj.iws.http.mvc.dao.AlarmDao">
+
+    <sql id="field">systemid,locationid,roomid,groupid,starttime,endtime,status,confirm,name,describes</sql>
+
+    <resultMap id="AlarmEntity" type="com.xj.iws.http.mvc.entity.AlarmEntity">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="locationid" property="locationId" jdbcType="INTEGER"/>
+        <result column="roomid" property="roomId" jdbcType="INTEGER"/>
+        <result column="groupid" property="groupId" jdbcType="INTEGER"/>
+        <result column="starttime" property="startTime"/>
+        <result column="endtime" property="endTime"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="confirm" property="confirm" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="describes" property="describes" jdbcType="VARCHAR"/>
+        <result column="systemname" property="systemName" jdbcType="VARCHAR"/>
+        <result column="locationname" property="locationName" jdbcType="VARCHAR"/>
+        <result column="roomname" property="roomName" jdbcType="VARCHAR"/>
+        <result column="groupname" property="groupName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="list" resultType="AlarmEntity">
+        SELECT a.id,a.systemid,a.locationid,a.groupid,a.roomid,a.starttime,a.endtime,a.status,a.confirm,a.name,a.describes,
+        s.name AS systemname,l.name AS locationname,r.name AS roomname,g.name AS groupname
+        FROM alarm a
+        LEFT JOIN system s ON a.systemid = s.id
+        LEFT JOIN location l ON a.locationid = l.id
+        LEFT JOIN room r ON a.roomid = r.id
+        LEFT JOIN devicegroup g ON a.groupid = g.id
+        ORDER BY id DESC
+    </select>
+
+</mapper>

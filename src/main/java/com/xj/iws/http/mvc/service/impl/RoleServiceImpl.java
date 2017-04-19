@@ -45,8 +45,8 @@ public class RoleServiceImpl implements RoleService {
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
 
         int i = roleDao.deleteSub(roleId, 0);
-        int j = roleDao.deleteRole(roleId);
-        if (i != 1) {
+        int j = roleDao.delete(roleId);
+        if (j != 1) {
             dataWrapper.setErrorCode(ErrorCodeEnum.Error);
         }
         return dataWrapper;
@@ -90,19 +90,11 @@ public class RoleServiceImpl implements RoleService {
     public DataWrapper<List<RoleEntity>> list() {
         DataWrapper<List<RoleEntity>> dataWrapper = new DataWrapper<List<RoleEntity>>();
         List<RoleEntity> roles = roleDao.list();
-//        List<RoleSubEntity> roleSubs = roleDao.getSub(0);
         for (RoleEntity role : roles) {
-            List<RoleSubEntity> subs = roleDao.getSub(role.getId());
-            for (RoleSubEntity sub : subs){
-                sub.setArea(areaDao.area(sub.getAreaId()));
-            }
-            role.setSubitem(subs);
+            List<RoleSubEntity> roleSubs = roleDao.getSub(role.getId());
+            role.setSubitem(roleSubs);
         }
-        if (roles == null) {
-            dataWrapper.setErrorCode(ErrorCodeEnum.Error);
-        } else {
-            dataWrapper.setData(roles);
-        }
+        dataWrapper.setData(roles);
         return dataWrapper;
     }
 
@@ -110,7 +102,8 @@ public class RoleServiceImpl implements RoleService {
     public DataWrapper<RoleEntity> detail(int roleId) {
         DataWrapper<RoleEntity> dataWrapper = new DataWrapper<RoleEntity>();
         RoleEntity role = roleDao.detail(roleId);
-        role.setSubitem(roleDao.getSub(roleId));
+        List<RoleSubEntity> roleSubs = roleDao.getSub(roleId);
+        role.setSubitem(roleSubs);
         dataWrapper.setData(role);
         return dataWrapper;
     }

@@ -5,49 +5,47 @@ import org.apache.ibatis.type.Alias;
 import java.util.Date;
 
 /**
- * 数据资料实体类
- *
- * @author Created by XiaoJiang01 on 2017/2/21.
+ * Created by XiaoJiang01 on 2017/4/13.
  */
 @Alias("DataEntity")
 public class DataEntity {
     private int id;
-    private int groupId;
     private int deviceId;
-    private String num;
+    private String port;
+    private String number;
     private Date time;
     private String error;
+    private int count;
     private String data;
+
+    private String tableName;
+
+    private String groupName;
+    private String roomName;
+    private String locationName;
+    private String addressName;
 
     public DataEntity() {
     }
 
-    public DataEntity(int id, int groupId, int deviceId, String num, Date time, String error, String data) {
+    public DataEntity(int id, int deviceId, String port, String number, Date time, String error, int count, String data) {
 
         this.id = id;
-        this.groupId = groupId;
         this.deviceId = deviceId;
-        this.num = num;
+        this.port = port;
+        this.number = number;
         this.time = time;
         this.error = error;
+        this.count = count;
         this.data = data;
     }
 
     public int getId() {
-
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(int groupId) {
-        this.groupId = groupId;
     }
 
     public int getDeviceId() {
@@ -58,12 +56,20 @@ public class DataEntity {
         this.deviceId = deviceId;
     }
 
-    public String getNum() {
-        return num;
+    public String getPort() {
+        return port;
     }
 
-    public void setNum(String num) {
-        this.num = num;
+    public void setPort(String port) {
+        this.port = port;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
     }
 
     public Date getTime() {
@@ -82,6 +88,14 @@ public class DataEntity {
         this.error = error;
     }
 
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
     public String getData() {
         return data;
     }
@@ -90,16 +104,43 @@ public class DataEntity {
         this.data = data;
     }
 
-    @Override
-    public String toString() {
-        return "DataEntity{" +
-                "id=" + id +
-                ", groupId=" + groupId +
-                ", deviceId=" + deviceId +
-                ", num='" + num + '\'' +
-                ", time=" + time +
-                ", error='" + error + '\'' +
-                ", data='" + data + '\'' +
-                '}';
+    public String getTableName() {
+        return tableName;
+    }
+
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
+    }
+
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
+
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
+    }
+
+    public String getLocationName() {
+        return locationName;
+    }
+
+    public void setLocationName(String locationName) {
+        this.locationName = locationName;
+    }
+
+    public String getAddressName() {
+        return addressName;
+    }
+
+    public void setAddressName(String addressName) {
+        this.addressName = addressName;
     }
 }

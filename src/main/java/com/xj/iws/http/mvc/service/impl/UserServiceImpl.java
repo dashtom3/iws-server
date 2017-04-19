@@ -130,8 +130,8 @@ public class UserServiceImpl implements UserService {
     public DataWrapper<Void> changePwd(int userId, String oldPwd, String newPwd) {
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
         UserEntity user = userDao.getUserById(userId);
-        if (oldPwd.equals(MD5Util.getMD5String(MD5Util.prePassword(user.getPassword())))) {
-            user.setPassword(MD5Util.getMD5String(newPwd));
+        if (user.getPassword().equals(MD5Util.getMD5String(MD5Util.prePassword(oldPwd)))) {
+            user.setPassword(MD5Util.getMD5String(MD5Util.prePassword(newPwd)));
             if (1 == userDao.updatePwd(user)) {
                 dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
             } else {

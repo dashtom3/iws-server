@@ -106,27 +106,25 @@ public class PackageUtil {
         List<PointFieldEntity> fieldPack = new ArrayList<PointFieldEntity>();
 
         PointFieldEntity end = new PointFieldEntity();
-        end.setTableId(0);
+        end.setDeviceId(0);
         fields.add(end);
 
         int i = deviceTerms.get(0).getId();
-        for (PointFieldEntity field : fields) {
+        for (int j = 0; j <fields.size() ; j++) {
+            PointFieldEntity field = fields.get(j);
+            int deviceId = field.getDeviceId();
 
-            int tableId = field.getTableId();
-
-            if (i == tableId) {
+            if (i == deviceId) {
                 fieldPack.add(field);
             } else {
-
                 for (DeviceTermEntity deviceTerm :deviceTerms){
-                    if (deviceTerm.getId() == tableId){
+                    if (deviceTerm.getId() == fields.get(j-1).getDeviceId()){
                         deviceTerm.setFields(fieldPack);
                         break;
                     }
                 }
                 fieldPack = new ArrayList<PointFieldEntity>();
                 fieldPack.add(field);
-                i = field.getTableId();
             }
         }
         return deviceTerms;
@@ -148,16 +146,15 @@ public class PackageUtil {
         devices.add(end);
 
         int i = devices.get(0).getId();
-        for (DeviceEntity device : devices) {
-
+        for (int j = 0; j <devices.size() ; j++) {
+            DeviceEntity device = devices.get(j);
             int groupId = device.getGroupId();
-
             if (i == groupId) {
                 devicePack.add(device);
             } else {
 
                 for (DeviceGroupEntity group :groups){
-                    if (group.getId() == groupId){
+                    if (group.getId() == devices.get(j-1).getGroupId()){
                         group.setDevices(devicePack);
                         break;
                     }
@@ -170,9 +167,10 @@ public class PackageUtil {
         return groups;
     }
 
+
     public static List<LocationEntity> locationSetSystem(List<LocationEntity> locations, List<SystemEntity> systems) {
 
-        List<LocationEntity> locationPack = new ArrayList<LocationEntity>();
+
         for (LocationEntity location : locations) {
 
             int systemId = location.getSystemId();

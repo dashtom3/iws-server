@@ -1,7 +1,6 @@
 package com.xj.iws.http.mvc.dao;
 
-import com.xj.iws.http.mvc.entity.DeviceEntity;
-import com.xj.iws.http.mvc.entity.DeviceGroupEntity;
+import com.xj.iws.http.mvc.entity.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -13,9 +12,9 @@ import java.util.List;
 @Repository
 public interface DeviceDao {
 
-    List<DeviceEntity> deviceList(int groupId);
+    List<DeviceEntity> deviceList(@Param("groupId") int groupId);
 
-    List<DeviceGroupEntity> deviceGroupList(int roomId);
+    List<DeviceGroupEntity> deviceGroupList();
 
     DeviceGroupEntity groupDetail(int groupId);
 
@@ -23,7 +22,7 @@ public interface DeviceDao {
 
     int addGroup(DeviceGroupEntity deviceGroup);
 
-    int addDevice(@Param("groupId") int id, @Param("devices") DeviceEntity[] devices);
+    int addDevice(@Param("device") DeviceEntity device,@Param("terms") DeviceEntity[] deviceEntities);
 
     int deleteGroup(int deviceGroupId);
 
@@ -32,4 +31,14 @@ public interface DeviceDao {
     int updateGroup(DeviceGroupEntity deviceGroup);
 
     int createDataTable(DeviceEntity device);
+
+    List<Integer> groupIds(int roomId);
+
+    String getPort(String deviceId);
+
+    String getNumber(String deviceId);
+
+    List<DeviceGroupTypeEntity> groupTypes();
+
+    int addGroupModel(DeviceEntity deviceEntity);
 }
