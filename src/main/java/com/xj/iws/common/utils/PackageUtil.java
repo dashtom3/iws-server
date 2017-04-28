@@ -20,6 +20,9 @@ public class PackageUtil {
      * @return
      */
     public static List<ProvinceEntity> locationPack(List<LocationEntity> locations) {
+        if (locations.size() == 0){
+            return null;
+        }
 
         //创建结束项
         LocationEntity end = new LocationEntity();
@@ -103,28 +106,33 @@ public class PackageUtil {
      */
     public static List<DeviceTermEntity> deviceTermPack(List<DeviceTermEntity> deviceTerms, List<PointFieldEntity> fields) {
 
+        if (deviceTerms.size() == 0) {
+            return deviceTerms;
+        }
+
         List<PointFieldEntity> fieldPack = new ArrayList<PointFieldEntity>();
 
         PointFieldEntity end = new PointFieldEntity();
         end.setDeviceId(0);
         fields.add(end);
 
-        int i = deviceTerms.get(0).getId();
-        for (int j = 0; j <fields.size() ; j++) {
+        int i = fields.get(0).getDeviceId();
+        for (int j = 0; j < fields.size(); j++) {
             PointFieldEntity field = fields.get(j);
             int deviceId = field.getDeviceId();
 
             if (i == deviceId) {
                 fieldPack.add(field);
             } else {
-                for (DeviceTermEntity deviceTerm :deviceTerms){
-                    if (deviceTerm.getId() == fields.get(j-1).getDeviceId()){
+                for (DeviceTermEntity deviceTerm : deviceTerms) {
+                    if (deviceTerm.getId() == fields.get(j - 1).getDeviceId()) {
                         deviceTerm.setFields(fieldPack);
                         break;
                     }
                 }
                 fieldPack = new ArrayList<PointFieldEntity>();
                 fieldPack.add(field);
+                i = field.getDeviceId();
             }
         }
         return deviceTerms;
@@ -137,7 +145,10 @@ public class PackageUtil {
      * @param devices
      * @return
      */
-    public static List<DeviceGroupEntity> devicePack(List<DeviceGroupEntity> groups, List<DeviceEntity> devices) {
+    public static List<DeviceGroupInfoEntity> devicePack(List<DeviceGroupInfoEntity> groups, List<DeviceEntity> devices) {
+        if (groups.size() == 0) {
+            return groups;
+        }
 
         List<DeviceEntity> devicePack = new ArrayList<DeviceEntity>();
 
@@ -146,15 +157,15 @@ public class PackageUtil {
         devices.add(end);
 
         int i = devices.get(0).getId();
-        for (int j = 0; j <devices.size() ; j++) {
+        for (int j = 0; j < devices.size(); j++) {
             DeviceEntity device = devices.get(j);
             int groupId = device.getGroupId();
             if (i == groupId) {
                 devicePack.add(device);
             } else {
 
-                for (DeviceGroupEntity group :groups){
-                    if (group.getId() == devices.get(j-1).getGroupId()){
+                for (DeviceGroupInfoEntity group : groups) {
+                    if (group.getId() == devices.get(j - 1).getGroupId()) {
                         group.setDevices(devicePack);
                         break;
                     }
@@ -169,16 +180,19 @@ public class PackageUtil {
 
 
     public static List<LocationEntity> locationSetSystem(List<LocationEntity> locations, List<SystemEntity> systems) {
+        if (locations.size() == 0) {
+            return locations;
+        }
 
 
         for (LocationEntity location : locations) {
 
             int systemId = location.getSystemId();
 
-            for (int i = 0; i <systems.size() ; i++) {
+            for (int i = 0; i < systems.size(); i++) {
                 SystemEntity system = systems.get(i);
                 int id = system.getId();
-                if (id == systemId){
+                if (id == systemId) {
                     location.setSystem(system);
                     break;
                 }

@@ -59,7 +59,13 @@
         LEFT JOIN
             area a ON l.areaid = a.areaid
         <where>
-            <if test="_parameter != 0">AND l.systemid = ${_parameter}</if>
+            <foreach collection="limits" item="limit" separator="OR">
+                <if test="limit.systemId != 0"> l.systemid = ${limit.systemId}</if>
+                <if test="limit.provinceId != null">AND l.provinceid = ${limit.proviceId}</if>
+                <if test="limit.cityId != null">AND l.cityid = ${limit.cityId}</if>
+                <if test="limit.areaId != null">AND l.areaid = ${limit.areaId}</if>
+            </foreach>
+            <if test="systemId != 0">AND l.systemid = ${systemId}</if>
         </where>
         ORDER BY
             l.systemid,l.provinceid,l.cityid,l.areaid
@@ -99,6 +105,6 @@
             <if test="cityId != null">AND l.cityid = ${cityId}</if>
             <if test="provinceId != null">AND l.provinceid = ${provinceId}</if>
         </where>
-        ORDER BY systemid,provinceid,cityid,areaid
+        ORDER BY l.systemid,l.provinceid,l.cityid,l.areaid
     </select>
 </mapper>

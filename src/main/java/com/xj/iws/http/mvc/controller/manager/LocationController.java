@@ -1,6 +1,7 @@
 package com.xj.iws.http.mvc.controller.manager;
 
 import com.xj.iws.http.mvc.entity.LocationEntity;
+import com.xj.iws.http.mvc.service.LimitationService;
 import com.xj.iws.http.mvc.service.LocationService;
 import com.xj.iws.common.utils.DataWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ public class LocationController {
 
     @Autowired
     LocationService locationService;
+    @Autowired
+    LimitationService limitationService;
 
     /**
      * 添加地点
@@ -76,8 +79,8 @@ public class LocationController {
     @RequestMapping(value = "detail", method = RequestMethod.POST)
     @ResponseBody
     public DataWrapper<LocationEntity> detail(
-            @RequestParam(value = "locationId", required = true) int locationId,
-            @RequestParam(value = "token", required = true) String token
+            @RequestParam(value = "token", required = true) String token,
+            @RequestParam(value = "locationId", required = true) int locationId
     ) {
         return locationService.detail(locationId);
     }
@@ -96,11 +99,11 @@ public class LocationController {
     @RequestMapping(value = "query", method = RequestMethod.POST)
     @ResponseBody
     public DataWrapper<List<LocationEntity>> query(
+            @RequestParam(value = "token", required = true) String token,
             @RequestParam(value = "systemId", required = false) String systemId,
             @RequestParam(value = "provinceId", required = false) String provinceId,
             @RequestParam(value = "cityId", required = false) String cityId,
-            @RequestParam(value = "areaId", required = false) String areaId,
-            @RequestParam(value = "token", required = true) String token
+            @RequestParam(value = "areaId", required = false) String areaId
     ) {
         //创建查询条件
         Map<String, String> condition = new HashMap<String, String>();
@@ -117,5 +120,4 @@ public class LocationController {
         }
         return locationService.query(condition);
     }
-
 }

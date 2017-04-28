@@ -1,8 +1,7 @@
 package com.xj.iws.http.mvc.controller.manager;
 
-import com.xj.iws.http.mvc.entity.Command;
 import com.xj.iws.http.mvc.entity.DeviceEntity;
-import com.xj.iws.http.mvc.entity.DeviceGroupEntity;
+import com.xj.iws.http.mvc.entity.DeviceGroupInfoEntity;
 import com.xj.iws.http.mvc.entity.DeviceGroupTypeEntity;
 import com.xj.iws.http.mvc.service.DeviceService;
 import com.xj.iws.common.utils.DataWrapper;
@@ -32,9 +31,9 @@ public class DeviceController {
      */
     @RequestMapping(value = "addGroup",method = RequestMethod.POST)
     @ResponseBody
-    public DataWrapper<DeviceGroupEntity> addGroup(
+    public DataWrapper<DeviceGroupInfoEntity> addGroup(
             @RequestParam(value = "token", required = true) String token,
-            @ModelAttribute DeviceGroupEntity deviceGroup
+            @ModelAttribute DeviceGroupInfoEntity deviceGroup
     ) {
         return deviceService.addGroup(deviceGroup);
     }
@@ -64,7 +63,7 @@ public class DeviceController {
     @ResponseBody
     public DataWrapper<DeviceEntity> update(
             @RequestParam(value = "token", required = true) String token,
-            @ModelAttribute DeviceGroupEntity deviceGroup
+            @ModelAttribute DeviceGroupInfoEntity deviceGroup
     ) {
         return deviceService.update(deviceGroup);
     }
@@ -76,7 +75,7 @@ public class DeviceController {
      */
     @RequestMapping(value = "list",method = RequestMethod.GET)
     @ResponseBody
-    public DataWrapper<List<DeviceGroupEntity>> list(
+    public DataWrapper<List<DeviceGroupInfoEntity>> list(
             @RequestParam(value = "token", required = true) String token
     ) {
         return deviceService.groupList();
@@ -103,40 +102,12 @@ public class DeviceController {
      */
     @RequestMapping(value = "groupDetail",method = RequestMethod.GET)
     @ResponseBody
-    public DataWrapper<DeviceGroupEntity> groupDetail(
+    public DataWrapper<DeviceGroupInfoEntity> groupDetail(
             @RequestParam(value = "token", required = true) String token,
             @RequestParam(value = "groupId", required = true) int groupId
     ) {
         return deviceService.groupDetail(groupId);
     }
 
-    /**
-     * 启用控制器,创建数据存储表
-     * @param groupId
-     * @param token
-     * @return
-     */
-    @RequestMapping(value = "enable",method = RequestMethod.POST)
-    @ResponseBody
-    public DataWrapper<Void> enable(
-            @RequestParam(value = "token", required = true) String token,
-            @RequestParam(value = "groupId", required = true) int groupId
-    ) {
-        return deviceService.enable(groupId);
-    }
 
-    /**
-     * 数据采集启动
-     * @param token
-     * @param groupId
-     * @return
-     */
-    @RequestMapping(value = "start", method = RequestMethod.POST)
-    @ResponseBody
-    public DataWrapper<Void> start(
-            @RequestParam(value = "token", required = true) String token,
-            @RequestParam(value = "groupId", required = true) String[] groupId
-    ) {
-        return deviceService.start(groupId);
-    }
 }

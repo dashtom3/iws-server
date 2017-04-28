@@ -1,14 +1,15 @@
 package com.xj.iws.http.mvc.controller.manager;
 
 import com.xj.iws.http.mvc.entity.DeviceEntity;
-import com.xj.iws.http.mvc.entity.DeviceGroupModelEntity;
-import com.xj.iws.http.mvc.entity.RoleEntity;
+import com.xj.iws.http.mvc.entity.DeviceGroupEntity;
 import com.xj.iws.http.mvc.entity.RoomEntity;
 import com.xj.iws.http.mvc.service.RoomService;
 import com.xj.iws.common.utils.DataWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Created by XiaoJiang01 on 2017/3/9.
@@ -78,7 +79,7 @@ public class RoomController {
     }
 
     /**
-     * 获取某一泵房及泵房所属地点、泵房内所有控制器
+     * 添加控制器组
      *
      * @return room
      */
@@ -88,8 +89,109 @@ public class RoomController {
             @RequestParam(value = "token", required = true) String token,
             @ModelAttribute DeviceEntity deviceEntity,
             @RequestBody DeviceEntity[] devices
-
     ) {
         return roomService.addDevice(deviceEntity, devices);
+    }
+
+    /**
+     * 修改控制器组
+     *
+     * @return room
+     */
+    @RequestMapping(value = "updateDevice", method = RequestMethod.POST)
+    @ResponseBody
+    public DataWrapper<Void> updateDevice(
+            @RequestParam(value = "token", required = true) String token,
+            @ModelAttribute DeviceEntity deviceEntity,
+            @RequestBody DeviceEntity[] devices
+    ) {
+        return roomService.updateDevice(deviceEntity, devices);
+    }
+
+    /**
+     * 删除控制器组
+     *
+     * @return room
+     */
+    @RequestMapping(value = "deleteDevice", method = RequestMethod.POST)
+    @ResponseBody
+    public DataWrapper<Void> deleteDevice(
+            @RequestParam(value = "token", required = true) String token,
+            @RequestParam(value = "groupId", required = true) int groupId
+    ) {
+        return roomService.deleteDevice(groupId);
+    }
+
+    /**
+     * 控制器组列表
+     *
+     * @return room
+     */
+    @RequestMapping(value = "groupList", method = RequestMethod.GET)
+    @ResponseBody
+    public DataWrapper<List<DeviceGroupEntity>> deviceList(
+            @RequestParam(value = "token", required = true) String token,
+            @RequestParam(value = "roomId", required = true) int roomId
+    ) {
+        return roomService.deviceList(roomId);
+    }
+
+    /**
+     * 控制器组详情
+     *
+     * @return room
+     */
+    @RequestMapping(value = "groupDetail", method = RequestMethod.GET)
+    @ResponseBody
+    public DataWrapper<DeviceGroupEntity> groupDetail(
+            @RequestParam(value = "token", required = true) String token,
+            @RequestParam(value = "groupId", required = true) int groupId
+    ) {
+        return roomService.groupDetail(groupId);
+    }
+
+    /**
+     * 控制器组详情
+     *
+     * @return room
+     */
+    @RequestMapping(value = "deviceDetail", method = RequestMethod.GET)
+    @ResponseBody
+    public DataWrapper<DeviceEntity> deviceDetail(
+            @RequestParam(value = "token", required = true) String token,
+            @RequestParam(value = "deviceId", required = true) int deviceId
+    ) {
+        return roomService.deviceDetail(deviceId);
+    }
+
+
+    /**
+     * 启用控制器,创建数据存储表
+     * @param groupId
+     * @param token
+     * @return
+     */
+    @RequestMapping(value = "enable",method = RequestMethod.POST)
+    @ResponseBody
+    public DataWrapper<Void> enable(
+            @RequestParam(value = "token", required = true) String token,
+            @RequestParam(value = "groupId", required = true) int groupId
+    ) {
+        return roomService.enable(groupId);
+    }
+
+    /**
+     * 数据采集启动
+     * @param token
+     * @param groupId
+     * @return
+     */
+    @RequestMapping(value = "start", method = RequestMethod.POST)
+    @ResponseBody
+    public DataWrapper<Void> start(
+            @RequestParam(value = "token", required = true) String token,
+            @RequestParam(value = "groupId", required = true) String[] groupId
+    ) {
+        return roomService.start(groupId);
     }
 }

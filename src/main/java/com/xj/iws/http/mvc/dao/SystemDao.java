@@ -1,6 +1,7 @@
 package com.xj.iws.http.mvc.dao;
 
 import com.xj.iws.http.mvc.entity.SystemEntity;
+import com.xj.iws.http.mvc.entity.util.Limitation;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public interface SystemDao {
 
     int update(SystemEntity system);
 
-    List<SystemEntity> list();
+    List<SystemEntity> list(List<Limitation> limitations);
 
     SystemEntity detail(int systemId);
 

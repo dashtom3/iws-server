@@ -31,4 +31,5 @@ public class AlarmController {
     ) {
         return alarmService.list();
     }
+
 }

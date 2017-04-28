@@ -14,5 +14,5 @@ import java.util.Map;
 public interface DataDao {
     List<DataEntity> query(Map<String, String> conditions);
 
-    List<DataEntity> presentData(@Param("deviceId") String deviceId, @Param("tableName")String tableName);
+    List<DataEntity> presentData(@Param("deviceId") int deviceId, @Param("tableName")String tableName);
 }

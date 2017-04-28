@@ -1,9 +1,7 @@
 package com.xj.iws.http.mvc.entity;
 
-import com.xj.iws.http.mvc.entity.DeviceGroupEntity;
 import org.apache.ibatis.type.Alias;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,7 +15,7 @@ public class DeviceGroupTypeEntity {
     private String describes;
     private String pic;
 
-    List<DeviceGroupEntity> groups;
+    List<DeviceGroupInfoEntity> groups;
 
     public DeviceGroupTypeEntity() {
     }
@@ -72,11 +70,11 @@ public class DeviceGroupTypeEntity {
         this.pic = pic;
     }
 
-    public List<DeviceGroupEntity> getGroups() {
+    public List<DeviceGroupInfoEntity> getGroups() {
         return groups;
     }
 
-    public void setGroups(List<DeviceGroupEntity> groups) {
+    public void setGroups(List<DeviceGroupInfoEntity> groups) {
         this.groups = groups;
     }
 }

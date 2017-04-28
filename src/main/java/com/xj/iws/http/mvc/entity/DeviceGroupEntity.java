@@ -5,67 +5,43 @@ import org.apache.ibatis.type.Alias;
 import java.util.List;
 
 /**
- * Created by XiaoJiang01 on 2017/3/29.
+ * Created by XiaoJiang01 on 2017/4/19.
  */
 @Alias("DeviceGroupEntity")
 public class DeviceGroupEntity {
-    private int id;
-    private String terms;
-    private int status;
-    private int type;
+    private int groupId;
+    private int roomId;
     private String name;
     private String describes;
-    private String pic;
 
-
-    List<DeviceGroupTypeEntity> groupType;
-    List<DeviceTermEntity> deviceTerms;
-    List<DeviceEntity> devices;
+    private List<DeviceEntity> devices;
 
     public DeviceGroupEntity() {
     }
 
-    public DeviceGroupEntity(int id, String terms, int status, int type, String name, String describes, String pic) {
-        this.id = id;
-        this.terms = terms;
-        this.status = status;
-        this.type = type;
+    public DeviceGroupEntity(int groupId, int roomId, String name, String describes, List<DeviceEntity> devices) {
+        this.groupId = groupId;
+        this.roomId = roomId;
         this.name = name;
         this.describes = describes;
-        this.pic = pic;
+        this.devices = devices;
     }
 
-    public int getId() {
+    public int getGroupId() {
 
-        return id;
+        return groupId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
     }
 
-    public String getTerms() {
-        return terms;
+    public int getRoomId() {
+        return roomId;
     }
 
-    public void setTerms(String terms) {
-        this.terms = terms;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
+    public void setRoomId(int roomId) {
+        this.roomId = roomId;
     }
 
     public String getName() {
@@ -82,30 +58,6 @@ public class DeviceGroupEntity {
 
     public void setDescribes(String describes) {
         this.describes = describes;
-    }
-
-    public String getPic() {
-        return pic;
-    }
-
-    public void setPic(String pic) {
-        this.pic = pic;
-    }
-
-    public List<DeviceGroupTypeEntity> getGroupType() {
-        return groupType;
-    }
-
-    public void setGroupType(List<DeviceGroupTypeEntity> groupType) {
-        this.groupType = groupType;
-    }
-
-    public List<DeviceTermEntity> getDeviceTerms() {
-        return deviceTerms;
-    }
-
-    public void setDeviceTerms(List<DeviceTermEntity> deviceTerms) {
-        this.deviceTerms = deviceTerms;
     }
 
     public List<DeviceEntity> getDevices() {

@@ -4,9 +4,9 @@ import com.xj.iws.common.enums.DataEnum;
 import com.xj.iws.common.utils.ByteUtil;
 import com.xj.iws.http.mvc.dao.PointRoleDao;
 import com.xj.iws.http.mvc.entity.DataEntity;
-import com.xj.iws.http.mvc.entity.DataField;
+import com.xj.iws.http.mvc.entity.util.DataField;
 import com.xj.iws.http.mvc.entity.PointFieldEntity;
-import com.xj.iws.http.mvc.entity.ViewDataEntity;
+import com.xj.iws.http.mvc.entity.util.ViewDataEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

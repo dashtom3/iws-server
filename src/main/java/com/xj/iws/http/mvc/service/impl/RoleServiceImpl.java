@@ -87,9 +87,10 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public DataWrapper<List<RoleEntity>> list() {
+    public DataWrapper<List<RoleEntity>> list(int except) {
         DataWrapper<List<RoleEntity>> dataWrapper = new DataWrapper<List<RoleEntity>>();
-        List<RoleEntity> roles = roleDao.list();
+
+        List<RoleEntity> roles = roleDao.list(except);
         for (RoleEntity role : roles) {
             List<RoleSubEntity> roleSubs = roleDao.getSub(role.getId());
             role.setSubitem(roleSubs);

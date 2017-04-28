@@ -11,11 +11,12 @@ public class RoleSubEntity {
     private int id;
     private int roleId;
     private int systemId;
-    private int areaId;
+    private String areaId;
     private int limitation;
 
     private String systemName;
     private String areaName;
+    private String limitName;
     private RoleEntity role;
 
 
@@ -23,7 +24,7 @@ public class RoleSubEntity {
 
     }
 
-    public RoleSubEntity(int id, int roleId, int systemId, int areaId, int limitation) {
+    public RoleSubEntity(int id, int roleId, int systemId, String areaId, int limitation) {
         this.id = id;
         this.roleId = roleId;
         this.systemId = systemId;
@@ -55,11 +56,11 @@ public class RoleSubEntity {
         this.systemId = systemId;
     }
 
-    public int getAreaId() {
+    public String getAreaId() {
         return areaId;
     }
 
-    public void setAreaId(int areaId) {
+    public void setAreaId(String areaId) {
         this.areaId = areaId;
     }
 
@@ -93,5 +94,13 @@ public class RoleSubEntity {
 
     public void setAreaName(String areaName) {
         this.areaName = areaName;
+    }
+
+    public String getLimitName() {
+        return limitName;
+    }
+
+    public void setLimitName(String limitName) {
+        this.limitName = limitName;
     }
 }

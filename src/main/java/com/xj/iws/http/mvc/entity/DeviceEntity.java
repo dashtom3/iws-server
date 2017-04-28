@@ -10,7 +10,6 @@ public class DeviceEntity {
     private int id;
     private int groupId;
     private int termId;
-    private int roomId;
     private int status;
     private String port;
     private String number;
@@ -19,16 +18,18 @@ public class DeviceEntity {
 
     private DeviceTermEntity deviceTerm;
 
-    private String groupName;
+    private String termName;
+    private String termType;
+    private int count;
+    private String protocol;
 
     public DeviceEntity() {
     }
 
-    public DeviceEntity(int id, int groupId, int termId, int roomId, int status, String port, String number, String name, String describes) {
+    public DeviceEntity(int id, int groupId, int termId, int status, String port, String number, String name, String describes) {
         this.id = id;
         this.groupId = groupId;
         this.termId = termId;
-        this.roomId = roomId;
         this.status = status;
         this.port = port;
         this.number = number;
@@ -58,14 +59,6 @@ public class DeviceEntity {
 
     public void setTermId(int termId) {
         this.termId = termId;
-    }
-
-    public int getRoomId() {
-        return roomId;
-    }
-
-    public void setRoomId(int roomId) {
-        this.roomId = roomId;
     }
 
     public int getStatus() {
@@ -116,11 +109,35 @@ public class DeviceEntity {
         this.deviceTerm = deviceTerm;
     }
 
-    public String getGroupName() {
-        return groupName;
+    public String getTermName() {
+        return termName;
     }
 
-    public void setGroupName(String groupName) {
-        this.groupName = groupName;
+    public void setTermName(String termName) {
+        this.termName = termName;
+    }
+
+    public String getTermType() {
+        return termType;
+    }
+
+    public void setTermType(String termType) {
+        this.termType = termType;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public String getProtocol() {
+        return protocol;
+    }
+
+    public void setProtocol(String protocol) {
+        this.protocol = protocol;
     }
 }

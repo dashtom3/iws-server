@@ -5,16 +5,16 @@ public interface DeviceApi {
 
     /**
      *
-     * @api {post} http://localhost:8080/iws/api/device/addGroup 添加控制器组
+     * @api {post} http://localhost:8080/iws/api/device/addGroup 添加设备组
      * @apiName addGroup
      * @apiGroup device
      * @apiVersion 0.1.0
-     * @apiDescription 添加控制器组
+     * @apiDescription 添加设备组
      *
-     * @apiParam {String} terms 控制器id的字符串(格式:"1,2,3,")
-     * @apiParam {int} type 控制器类型
-     * @apiParam {String} name 控制器名称
-     * @apiParam {String} describes 控制器描述
+     * @apiParam {String} terms 设备id的字符串(格式:"1,2,3,")
+     * @apiParam {int} type 设备类型
+     * @apiParam {String} name 设备名称
+     * @apiParam {String} describes 设备描述
      * @apiParam {String} token 身份验证
      *
      * @apiSuccessExample Success-Response:
@@ -54,13 +54,13 @@ public interface DeviceApi {
 
     /**
      *
-     * @api {post} http://localhost:8080/iws/api/device/delete 删除控制器组
+     * @api {post} http://localhost:8080/iws/api/device/delete 删除设备组
      * @apiName delete
      * @apiGroup device
      * @apiVersion 0.1.0
-     * @apiDescription 删除控制器组
+     * @apiDescription 删除设备组
      *
-     * @apiParam {int} groupId 控制器id
+     * @apiParam {int} groupId 设备id
      * @apiParam {String} token 身份验证
      *
      * @apiSuccessExample Success-Response:
@@ -93,17 +93,17 @@ public interface DeviceApi {
 
     /**
      *
-     * @api {post} http://localhost:8080/iws/api/device/update 编辑控制器组
+     * @api {post} http://localhost:8080/iws/api/device/update 编辑设备组
      * @apiName update
      * @apiGroup device
      * @apiVersion 0.1.0
-     * @apiDescription 编辑修改控制器
+     * @apiDescription 编辑修改设备
      *
-     * @apiParam {int} id 控制器组id
-     * @apiParam {List} devices 控制器实例int数组(基本控制器id)
-     * @apiParam {String} type 控制器类型
-     * @apiParam {String} name 控制器名称
-     * @apiParam {String} describes 控制器描述
+     * @apiParam {int} id 设备组id
+     * @apiParam {List} devices 设备实例int数组(基本设备id)
+     * @apiParam {String} type 设备类型
+     * @apiParam {String} name 设备名称
+     * @apiParam {String} describes 设备描述
      * @apiParam {String} token 身份验证
      *
      * @apiSuccessExample Success-Response:
@@ -144,11 +144,11 @@ public interface DeviceApi {
 
     /**
      *
-     * @api {get} http://localhost:8080/iws/api/device/list 控制器组列表
+     * @api {get} http://localhost:8080/iws/api/device/list 设备组列表
      * @apiName list
      * @apiGroup device
      * @apiVersion 0.1.0
-     * @apiDescription 控制器组列表
+     * @apiDescription 设备组列表
      *
      * @apiParam {String} token 身份验证
      *
@@ -169,8 +169,8 @@ public interface DeviceApi {
      *          count:41,
      *          protocol:"MODBUS",
      *          type:1,
-     *          name:"PLC控制器",
-     *          describes:"PLC控制器"
+     *          name:"PLC设备",
+     *          describes:"PLC设备"
      *     }
      * }
      * token:"SK1d7a4fe3-c2cd-417f-8f6f-bf7412592996",
@@ -197,12 +197,12 @@ public interface DeviceApi {
 
     /**
      *
-     * @api {get} http://localhost:8080/iws/api/device/groupDetail 控制器组详情
+     * @api {get} http://localhost:8080/iws/api/device/groupDetail 设备组详情
      * @apiName groupDetail
      * @apiGroup device
      * @apiVersion 0.1.0
-     * @apiDescription 查看控制器组详情
-     * @apiParam {String} groupId 控制器id
+     * @apiDescription 查看设备组详情
+     * @apiParam {String} groupId 设备id
      * @apiParam {String} token 身份验证
      *
      * @apiSuccessExample Success-Response:
@@ -222,8 +222,52 @@ public interface DeviceApi {
      *          count:41,
      *          protocol:"MODBUS",
      *          type:1,
-     *          name:"PLC控制器",
-     *          describes:"PLC控制器"
+     *          name:"PLC设备",
+     *          describes:"PLC设备"
+     *     }
+     * }
+     * token:"SK1d7a4fe3-c2cd-417f-8f6f-bf7412592996",
+     * numberPerPage:0,
+     * currentPage:0,
+     * totalNumber:0,
+     * totalPage:0
+     *  }
+     *
+     *  @apiErrorExample {json} Error-Response:
+     *  HTTP/1.1 200 OK
+     * {
+     * callStatus:"FAILED",
+     * errorCode:"Error",
+     * data:null,
+     * token:null,
+     * numberPerPage:0,
+     * currentPage:0,
+     * totalNumber:0,
+     * totalPage:0
+     *  }
+     *
+     */
+
+    /**
+     *
+     * @api {get} http://localhost:8080/iws/api/device/groupType 设备组类型列表
+     * @apiName groupType
+     * @apiGroup device
+     * @apiVersion 0.1.0
+     * @apiDescription 设备组类型列表
+     * @apiParam {String} token 身份验证
+     *
+     * @apiSuccessExample Success-Response:
+     *  HTTP/1.1 200 OK
+     * {
+     * callStatus:"SUCCEED",
+     * errorCode:"No_Error",
+     * data:{
+     *     id:1
+     *     systemid:1
+     *     name:"水箱变频"
+     *     describes:"123"
+     *     pic:"123"
      *     }
      * }
      * token:"SK1d7a4fe3-c2cd-417f-8f6f-bf7412592996",

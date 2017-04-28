@@ -16,7 +16,6 @@ public class UserEntity {
     private int roleId;
     private int status;
     private Date date;
-    private String strdate;
     private String name;
     private String address;
     private String describes;
@@ -27,14 +26,13 @@ public class UserEntity {
     public UserEntity() {
     }
 
-    public UserEntity(int id, String username, String password, int roleId, int status, Date date, String strdate, String name, String address, String describes, String pic) {
+    public UserEntity(int id, String username, String password, int roleId, int status, Date date, String name, String address, String describes, String pic) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.roleId = roleId;
         this.status = status;
         this.date = date;
-        this.strdate = strdate;
         this.name = name;
         this.address = address;
         this.describes = describes;
@@ -87,14 +85,6 @@ public class UserEntity {
 
     public void setDate(Date date) {
         this.date = date;
-    }
-
-    public String getStrdate() {
-        return strdate;
-    }
-
-    public void setStrdate(String strdate) {
-        this.strdate = strdate;
     }
 
     public String getName() {

@@ -9,6 +9,7 @@ import com.xj.iws.http.mvc.entity.LocationEntity;
 import com.xj.iws.http.mvc.entity.RoomEntity;
 import com.xj.iws.http.mvc.entity.SystemEntity;
 import com.xj.iws.common.enums.ErrorCodeEnum;
+import com.xj.iws.http.mvc.entity.util.Limitation;
 import com.xj.iws.http.mvc.service.LocationService;
 import com.xj.iws.common.utils.DataWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,10 +90,10 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
-    public DataWrapper<List<LocationEntity>> list(int id) {
+    public DataWrapper<List<LocationEntity>> list(int id, List<Limitation> limitations) {
         DataWrapper<List<LocationEntity>> dataWrapper = new DataWrapper<List<LocationEntity>>();
-        List<LocationEntity> locations = locationDao.list(id);
-        List<SystemEntity> systems = systemDao.list();
+        List<LocationEntity> locations = locationDao.list(id,limitations);
+        List<SystemEntity> systems = systemDao.list(limitations);
         dataWrapper.setData(PackageUtil.locationSetSystem(locations, systems));
         return dataWrapper;
     }

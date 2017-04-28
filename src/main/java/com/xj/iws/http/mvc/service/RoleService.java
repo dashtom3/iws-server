@@ -22,7 +22,7 @@ public interface RoleService {
 
     DataWrapper<RoleEntity> update(RoleEntity roleEntity,RoleSubEntity[] subitem);
 
-    DataWrapper<List<RoleEntity>> list();
+    DataWrapper<List<RoleEntity>> list(int except);
 
     DataWrapper<RoleEntity> detail(int roleId);
 

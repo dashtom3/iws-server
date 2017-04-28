@@ -1,6 +1,5 @@
 package com.xj.iws.http.mvc.controller.manager;
 
-import com.xj.iws.common.sessionManager.AdminManager;
 import com.xj.iws.common.sessionManager.SessionManager;
 import com.xj.iws.common.utils.DataWrapper;
 import com.xj.iws.http.mvc.entity.UserEntity;

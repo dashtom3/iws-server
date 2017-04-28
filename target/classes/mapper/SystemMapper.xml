@@ -36,7 +36,13 @@
     <select id="list" resultMap="SystemEntity">
         SELECT id,
         <include refid="field"/>
-        FROM system ORDER BY id
+        FROM system
+        <where>
+            <foreach collection="list" item="limit" separator="OR ">
+                <if test="limit.systemId != 0">id = ${limit.systemId}</if>
+            </foreach>
+        </where>
+        ORDER BY id
     </select>
 
     <select id="detail" parameterType="int" resultMap="SystemEntity">

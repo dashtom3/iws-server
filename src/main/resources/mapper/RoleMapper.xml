@@ -22,6 +22,7 @@
         <result column="limitation" property="limitation" jdbcType="INTEGER"/>
         <result column="systemname" property="systemName" jdbcType="VARCHAR"/>
         <result column="areaname" property="areaName" jdbcType="VARCHAR"/>
+        <result column="limitname" property="limitName" jdbcType="VARCHAR"/>
     </resultMap>
 
     <insert id="addRole" parameterType="RoleEntity" useGeneratedKeys="true" keyProperty="id">
@@ -56,10 +57,12 @@
         WHERE id = ${id}
     </update>
 
-    <select id="list" resultMap="RoleEntity">
+    <select id="list" parameterType="int" resultMap="RoleEntity">
         SELECT id,
         <include refid="roleField"/>
-        FROM role ORDER BY id
+        FROM role
+        WHERE id != ${_parameter}
+        ORDER BY id
     </select>
 
     <select id="detail" resultMap="RoleEntity">
@@ -69,10 +72,11 @@
     </select>
 
     <select id="getSub" resultMap="RoleSubEntity">
-        SELECT r.id,r.roleId,r.systemId,r.areaId,r.limitation,
+        SELECT r.id,r.roleId,r.systemId,r.areaId,r.limitation,t.name AS limitname,
         s.name AS systemname,CONCAT(IFNULL(p01.name,''),IFNULL(p02.name,''),IFNULL(p03.name,''),IFNULL(c01.name,''),IFNULL(c02.name,''),IFNULL(a01.name,'')) AS areaname
         FROM rolesub r
         LEFT JOIN system s ON r.systemid = s.id
+        LEFT JOIN rolelimit t ON r.limitation = t.name
         LEFT JOIN area a01 ON r.areaId = a01.areaId
         LEFT JOIN city c01 ON a01.cityId = c01.cityId
         LEFT JOIN province p01 ON c01.provinceId = p01.provinceId
@@ -87,14 +91,19 @@
         ORDER BY r.roleid,r.id
     </select>
 
-    <select id="getSubArea" resultType="String">
-        SELECT areaId FROM rolesub WHERE roleid = ${_parameter} ORDER BY id
-    </select>
 
     <select id="query" resultType="RoleEntity" parameterType="HashMap">
-        SELECT r.id,r.name,r.describes
-        FROM role r
-        LEFT JOIN rolesub s ON r.id = s.roleid
+        SELECT r.id,r.roleId,r.systemId,r.areaId,r.limitation,t.name AS limitname,
+        s.name AS systemname,CONCAT(IFNULL(p01.name,''),IFNULL(p02.name,''),IFNULL(p03.name,''),IFNULL(c01.name,''),IFNULL(c02.name,''),IFNULL(a01.name,'')) AS areaname
+        FROM rolesub r
+        LEFT JOIN system s ON r.systemid = s.id
+        LEFT JOIN rolelimit t ON r.limitation = t.name
+        LEFT JOIN area a01 ON r.areaId = a01.areaId
+        LEFT JOIN city c01 ON a01.cityId = c01.cityId
+        LEFT JOIN province p01 ON c01.provinceId = p01.provinceId
+        LEFT JOIN city c02 ON r.areaid = c02.cityid
+        LEFT JOIN province p02 ON c02.provinceid = p02.provinceid
+        LEFT JOIN province p03 ON r.areaid = p03.provinceid
         <where>
             <if test="systemId != null">AND s.systemid = '${systemId}'</if>
             <if test="areaId != null">AND s.areaid = '${areaId}'</if>
@@ -109,6 +118,9 @@
         ORDER BY r.id
     </select>
 
+    <select id="getLimit" resultType="RoleSubEntity">
+        SELECT systemid,areaid,limitation FROM rolesub WHERE roleid = ${_parameter} ORDER BY id
+    </select>
 
     <select id="checkSystem" resultType="int">
         SELECT count(0)

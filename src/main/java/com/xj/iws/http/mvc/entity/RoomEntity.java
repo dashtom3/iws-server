@@ -15,7 +15,7 @@ public class RoomEntity {
     private String describes;
 
     private LocationEntity location;
-    private List<DeviceGroupEntity> devices;
+    private List<DeviceGroupEntity> deviceGroups;
 
     public RoomEntity() {
 
@@ -68,11 +68,11 @@ public class RoomEntity {
         this.location = location;
     }
 
-    public List<DeviceGroupEntity> getDevices() {
-        return devices;
+    public List<DeviceGroupEntity> getDeviceGroups() {
+        return deviceGroups;
     }
 
-    public void setDevices(List<DeviceGroupEntity> devices) {
-        this.devices = devices;
+    public void setDeviceGroups(List<DeviceGroupEntity> deviceGroups) {
+        this.deviceGroups = deviceGroups;
     }
 }

@@ -21,6 +21,7 @@ public class NewsEntity {
     private String describes;
 
     private String userName;
+    private String systemName;
 
     public NewsEntity() {
     }
@@ -106,5 +107,13 @@ public class NewsEntity {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public String getSystemName() {
+        return systemName;
+    }
+
+    public void setSystemName(String systemName) {
+        this.systemName = systemName;
     }
 }

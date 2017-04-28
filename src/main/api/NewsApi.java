@@ -12,6 +12,10 @@ public interface LocationApi {
      * @apiDescription 返回全部消息
      *
      * @apiParam {String} token 身份验证
+     * @apiParam {String} startTime 开始时间 nullalbe
+     * @apiParam {String} endTime 结束时间 nullable
+     * @apiParam {String} status 消息状态 nullable(0未确认,1已确认)
+     * @apiParam {String} systemId 系统id nullable
      *
      *
      * @apiSuccessExample Success-Response:
@@ -27,8 +31,9 @@ public interface LocationApi {
      *     alarmtime:"2017-01-01 12:00:00",
      *     confirmtime:"2017-01-01 12:00:00",
      *     name:"报警01"
-     *     describes:"供水系统 XX省XX市XX区 A小区 01泵房 XX设备 水压故障 已发送给 XXX 18712345678",
+     *     describes:"供水系统 XX省XX市XX区 A小区 01泵房 XX设备 水压故障",
      *     userName:"XXX"(确认人,若未确认则该项为空)
+     *     systemName:"XX系统"
      * }
      * token:"SK1d7a4fe3-c2cd-417f-8f6f-bf7412592996",
      * numberPerPage:0,
@@ -54,7 +59,7 @@ public interface LocationApi {
 
     /**
      *
-     * @api {get} http://localhost:8080/iws/api/news/confirm 消息确认
+     * @api {post} http://localhost:8080/iws/api/news/confirm 消息确认
      * @apiName confirm
      * @apiGroup news
      * @apiVersion 0.1.0

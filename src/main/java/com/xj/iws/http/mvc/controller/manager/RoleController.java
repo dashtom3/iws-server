@@ -1,7 +1,11 @@
 package com.xj.iws.http.mvc.controller.manager;
 
+import com.xj.iws.common.sessionManager.SessionManager;
 import com.xj.iws.http.mvc.entity.RoleEntity;
 import com.xj.iws.http.mvc.entity.RoleSubEntity;
+import com.xj.iws.http.mvc.entity.UserEntity;
+import com.xj.iws.http.mvc.entity.util.Limitation;
+import com.xj.iws.http.mvc.service.LimitationService;
 import com.xj.iws.http.mvc.service.RoleService;
 import com.xj.iws.common.utils.DataWrapper;
 import org.apache.http.io.SessionOutputBuffer;
@@ -25,6 +29,8 @@ public class RoleController {
 
     @Autowired
     RoleService roleService;
+    @Autowired
+    LimitationService limitationService;
 
 
     /**
@@ -88,7 +94,10 @@ public class RoleController {
     public DataWrapper<List<RoleEntity>> list(
             @RequestParam(value = "token", required = true) String token
     ) {
-        return roleService.list();
+        UserEntity user = SessionManager.getSession(token);
+        int except = 0;
+        if (!limitationService.checkMaintainer(user)) except = 1;
+        return roleService.list(except);
     }
 
     /**

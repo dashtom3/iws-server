@@ -16,12 +16,28 @@
         <result column="confirmtime" property="confirmTime"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="describes" property="describes" jdbcType="VARCHAR"/>
+        <result column="systemname" property="systemName" jdbcType="VARCHAR"/>
+        <result column="username" property="userName" jdbcType="VARCHAR"/>
     </resultMap>
 
     <select id="list" resultType="NewsEntity">
-        SELECT id,
-        <include refid="field" />
-        FROM news
+        SELECT
+            n.id,n.alarmid,n.userid,n.status,n.alarmtime,n.confirmtime,n.name,n.describes,s.name AS systemname,u.name AS username
+        FROM news n
+        LEFT JOIN user u ON n.userid = u.id
+        LEFT JOIN alarm a ON n.alarmid = a.id
+        LEFT JOIN device d ON a.deviceid = d.id
+        LEFT JOIN devicegroup dg ON d.groupid = dg.id
+        LEFT JOIN room r ON dg.roomid = r.id
+        LEFT JOIN location l ON r.locationid = l.id
+        LEFT JOIN system s ON l.systemid = s.id
+        <where>
+            <if test="userId != null">AND userid = '${userId}'</if>
+            <if test="startTime != null">AND alarmtime &gt; '${startTime}'</if>
+            <if test="endTime != null">AND alarmtime &lt; '${endTime}'</if>
+            <if test="status != null">AND status = '${status}'</if>
+            <if test="systemId != null">AND s.id = '${systemId}'</if>
+        </where>
         ORDER BY alarmtime DESC
     </select>
 
@@ -29,5 +45,6 @@
         UPDATE news SET userid = ${userId}, status = 1, confirmtime = now()
         WHERE id = ${newsId}
     </update>
+
 
 </mapper>

@@ -6,7 +6,7 @@ import com.xj.iws.http.mvc.dao.SystemDao;
 import com.xj.iws.http.mvc.entity.LocationEntity;
 import com.xj.iws.http.mvc.entity.SystemEntity;
 import com.xj.iws.common.enums.ErrorCodeEnum;
-import com.xj.iws.http.mvc.entity.area.ProvinceEntity;
+import com.xj.iws.http.mvc.entity.util.Limitation;
 import com.xj.iws.http.mvc.service.SystemService;
 import com.xj.iws.common.utils.DataWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,14 +86,14 @@ public class SystemServiceImpl implements SystemService {
      * @return
      */
     @Override
-    public DataWrapper<List<SystemEntity>> list() {
+    public DataWrapper<List<SystemEntity>> list(List<Limitation> limitations) {
 
         DataWrapper<List<SystemEntity>> dataWrapper = new DataWrapper<List<SystemEntity>>();
         //获取全部系统
-        List<SystemEntity> systems = systemDao.list();
+        List<SystemEntity> systems = systemDao.list(limitations);
         //获取系统下全部地点
         for (SystemEntity system : systems) {
-            List<LocationEntity> locations = locationDao.list(system.getId());
+            List<LocationEntity> locations = locationDao.list(system.getId(),limitations);
             system.setLocation(locations);
         }
         dataWrapper.setData(systems);
@@ -107,14 +107,14 @@ public class SystemServiceImpl implements SystemService {
      * @return
      */
     @Override
-    public DataWrapper<SystemEntity> detail(int systemId) {
+    public DataWrapper<SystemEntity> detail(int systemId,List<Limitation> limitations) {
 
         DataWrapper<SystemEntity> dataWrapper = new DataWrapper<SystemEntity>();
 
         //获取系统
         SystemEntity system = systemDao.detail(systemId);
         //获取系统下全部地点
-        List<LocationEntity> locations = locationDao.list(systemId);
+        List<LocationEntity> locations = locationDao.list(systemId,limitations);
         system.setLocation(locations);
         dataWrapper.setData(system);
         return dataWrapper;
@@ -126,14 +126,14 @@ public class SystemServiceImpl implements SystemService {
      * @return
      */
     @Override
-    public DataWrapper<List<SystemEntity>> listPack() {
+    public DataWrapper<List<SystemEntity>> listPack(List<Limitation> limitations) {
 
         DataWrapper<List<SystemEntity>> dataWrapper = new DataWrapper<List<SystemEntity>>();
         //获取全部系统
-        List<SystemEntity> systems = systemDao.list();
+        List<SystemEntity> systems = systemDao.list(limitations);
         //获取系统下全部地点
         for (SystemEntity system : systems) {
-            List<LocationEntity> locations = locationDao.list(system.getId());
+            List<LocationEntity> locations = locationDao.list(system.getId(),limitations);
             system.setLocationPack(PackageUtil.locationPack(locations));
         }
         dataWrapper.setData(systems);
@@ -147,14 +147,14 @@ public class SystemServiceImpl implements SystemService {
      * @return
      */
     @Override
-    public DataWrapper<SystemEntity> detailPack(int systemId) {
+    public DataWrapper<SystemEntity> detailPack(int systemId,List<Limitation> limitations) {
 
         DataWrapper<SystemEntity> dataWrapper = new DataWrapper<SystemEntity>();
 
         //获取系统
         SystemEntity system = systemDao.detail(systemId);
         //获取系统下全部地点
-        List<LocationEntity> locations = locationDao.list(systemId);
+        List<LocationEntity> locations = locationDao.list(systemId,limitations);
 
         system.setLocationPack(PackageUtil.locationPack(locations));
         dataWrapper.setData(system);

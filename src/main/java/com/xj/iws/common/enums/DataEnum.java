@@ -7,8 +7,8 @@ import java.io.Serializable;
  */
 public enum DataEnum implements Serializable {
 
-    No_Exception("数据无异常!", 0),
-    Exception("数据异常!", 1);
+    No_Exception("正常", 0),
+    Exception("数据异常", 1);
 
     private String label;
     private Integer code;
@@ -35,7 +35,7 @@ public enum DataEnum implements Serializable {
 
     @Override
     public String toString() {
-        return code.toString();
+        return label;
     }
 
     public static DataEnum parse(int code) {

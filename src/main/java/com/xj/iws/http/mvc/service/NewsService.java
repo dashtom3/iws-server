@@ -4,12 +4,15 @@ import com.xj.iws.common.utils.DataWrapper;
 import com.xj.iws.http.mvc.entity.NewsEntity;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by XiaoJiang01 on 2017/4/7.
  */
 public interface NewsService {
-    DataWrapper<List<NewsEntity>> list();
+    DataWrapper<List<NewsEntity>> list(Map<String,String> condition);
 
     DataWrapper<Void> confirm(int newsId, int userId);
+
+    DataWrapper<Void> inform(int newsId, int userId);
 }

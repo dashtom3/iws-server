@@ -208,6 +208,7 @@ public interface RoleApi {
      * @apiVersion 0.1.0
      * @apiDescription 查看控制器详情
      *
+     * @apiParam {int} type 身份验证
      * @apiParam {String} token 身份验证
      *
      * @apiSuccessExample Success-Response:
@@ -219,7 +220,7 @@ public interface RoleApi {
      *     id:1,
      *     count:20,
      *     protocol:"MODBUS",
-     *     type:"电压表",
+     *     type:1,
      *     name:"电压表001",
      *     describes:"123"
      *     }

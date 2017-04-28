@@ -91,9 +91,13 @@ public class DeviceTermController {
     @RequestMapping(value = "list",method = RequestMethod.POST)
     @ResponseBody
     public DataWrapper<List<DeviceTermEntity>> list(
-            @RequestParam(value = "token", required = true) String token
+            @RequestParam(value = "token", required = true) String token,
+            @RequestParam(value = "type", required = false) String type
     ) {
-        return deviceTermService.list();
+        if (type == null || type == ""){
+            type = "0";
+        }
+        return deviceTermService.list(Integer.parseInt(type));
     }
 
     /**

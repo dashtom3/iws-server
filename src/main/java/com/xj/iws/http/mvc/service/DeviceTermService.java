@@ -17,7 +17,7 @@ public interface DeviceTermService {
 
     DataWrapper<Void> delete(int pointTableId);
 
-    DataWrapper<List<DeviceTermEntity>> list();
+    DataWrapper<List<DeviceTermEntity>> list(int type);
 
     DataWrapper<DeviceTermEntity> detail(int pointTableId);
 

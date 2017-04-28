@@ -76,7 +76,6 @@ public class AreaServiceImpl implements AreaService {
     @Override
     public DataWrapper<ProvinceEntity> province(int provinceId){
         DataWrapper<ProvinceEntity> dataWrapper = new DataWrapper<ProvinceEntity>();
-        dataWrapper.setErrorCode(ErrorCodeEnum.Error);
 
         //获取省份信息
         ProvinceEntity province = areaDao.province(provinceId);
@@ -109,7 +108,6 @@ public class AreaServiceImpl implements AreaService {
     @Override
     public DataWrapper<AreaEntity> area(int areaId){
         DataWrapper<AreaEntity> dataWrapper = new DataWrapper<AreaEntity>();
-        dataWrapper.setErrorCode(ErrorCodeEnum.Error);
 
         //获取地区信息
         AreaEntity area = areaDao.area(areaId);

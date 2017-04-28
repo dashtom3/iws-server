@@ -61,7 +61,6 @@ public class UserServiceImpl implements UserService {
                 newUser.setName(user.getName() == null ? user.getUsername() : user.getName());
                 newUser.setAddress(user.getAddress());
                 newUser.setDescribes(user.getDescribes());
-                newUser.setStrdate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()).toString());
                 if (1 == userDao.register(newUser)) {
                     //移除验证码
                     VerifyCodeManager.removePhoneCodeByPhoneNum(username);

@@ -14,7 +14,7 @@ import java.util.Map;
  */
 @Repository
 public interface DeviceTermDao {
-    List<DeviceTermEntity> deviceTermList();
+    List<DeviceTermEntity> deviceTermList(int type);
 
     List<PointFieldEntity> fieldList(int deviceId);
 

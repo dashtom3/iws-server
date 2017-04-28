@@ -12,23 +12,24 @@ public class DeviceTermEntity {
     private int id;
     private int count;
     private String protocol;
-    private String type;
+    private int type;
     private String name;
     private String describes;
 
     private List<PointFieldEntity> fields;
 
+    private String typeName;
+
     public DeviceTermEntity() {
     }
 
-    public DeviceTermEntity(int id, int count, String protocol, String type, String name, String describes, List<PointFieldEntity> fields) {
+    public DeviceTermEntity(int id, int count, String protocol, int type, String name, String describes) {
         this.id = id;
         this.count = count;
         this.protocol = protocol;
         this.type = type;
         this.name = name;
         this.describes = describes;
-        this.fields = fields;
     }
 
     public int getId() {
@@ -56,11 +57,11 @@ public class DeviceTermEntity {
         this.protocol = protocol;
     }
 
-    public String getType() {
+    public int getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(int type) {
         this.type = type;
     }
 
@@ -86,5 +87,13 @@ public class DeviceTermEntity {
 
     public void setFields(List<PointFieldEntity> fields) {
         this.fields = fields;
+    }
+
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
     }
 }

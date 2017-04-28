@@ -25,14 +25,17 @@
     </resultMap>
 
     <select id="list" resultType="AlarmEntity">
-        SELECT a.id,a.systemid,a.locationid,a.groupid,a.roomid,a.starttime,a.endtime,a.status,a.confirm,a.name,a.describes,
-        s.name AS systemname,l.name AS locationname,r.name AS roomname,g.name AS groupname
-        FROM alarm a
-        LEFT JOIN system s ON a.systemid = s.id
-        LEFT JOIN location l ON a.locationid = l.id
-        LEFT JOIN room r ON a.roomid = r.id
-        LEFT JOIN devicegroup g ON a.groupid = g.id
-        ORDER BY id DESC
+        SELECT al.id,al.systemid,al.locationid,al.groupid,al.roomid,al.starttime,al.endtime,al.status,al.confirm,al.name,al.describes,
+        s.name AS systemname,CONCAT(IFNULL(p.name,''),IFNULL(c.name,''),IFNULL(a.name,''),IFNULL(l.name,'')) AS locationname,r.name AS roomname,g.name AS groupname
+        FROM alarm al
+        LEFT JOIN system s ON al.systemid = s.id
+        LEFT JOIN room r ON al.roomid = r.id
+        LEFT JOIN devicegroup g ON al.groupid = g.id
+        LEFT JOIN location l ON al.locationid = l.id
+        LEFT JOIN area a ON l.areaid = a.areaid
+        LEFT JOIN city c ON a.cityid = c.cityid
+        LEFT JOIN province p ON c.provinceid = p.provinceid
+        ORDER BY al.id DESC
     </select>
 
 </mapper>

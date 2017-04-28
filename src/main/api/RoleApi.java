@@ -10,7 +10,7 @@ public interface RoleApi {
      * @apiVersion 0.1.0
      * @apiDescription 注册添加新角色
      *
-     * @apiParam {List} subitem 角色权限子项(systemId 系统id; areaId 地区id，可为省、市或区; limitation 操作权限 0只读/1可写/2管理员)
+     * @apiParam {List} subitem 角色权限子项(systemId 系统id; areaId 地区id，可为省、市或区; limitation 操作权限 1只读/2可写/3管理员)
      * @apiParam {String} name 角色名称
      * @apiParam {String} describes 角色描述
      * @apiParam {String} token 身份验证
@@ -95,7 +95,7 @@ public interface RoleApi {
      * @apiDescription 编辑修改角色
      *
      * @apiParam {int} roleId 角色id
-     * @apiParam {List} subitem 角色权限子项(systemId 系统id; areaId 地区id，可为省、市或区; limitation 操作权限 0只读/1可写/2管理员)
+     * @apiParam {List} subitem 角色权限子项(systemId 系统id; areaId 地区id，可为省、市或区; limitation 操作权限 1只读/2可写/3管理员)
      * @apiParam {String} name 角色名称
      * @apiParam {String} describes 角色描述
      * @apiParam {String} token 身份验证
@@ -242,7 +242,7 @@ public interface RoleApi {
      *
      * @apiparam {int} systemId 系统id
      * @apiparam {int} areaId 城区id
-     * @apiparam {int} limitation 操作权限 0只读/1可写/2管理员
+     * @apiparam {int} limitation 操作权限 1只读/2可写/3管理员
      * @apiparam {String} name 角色名称
      * @apiparam {String} token 身份验证
      *

@@ -1,10 +1,9 @@
 package com.xj.iws.http.mvc.service.impl;
 
 import com.xj.iws.common.enums.ErrorCodeEnum;
-import com.xj.iws.common.utils.PackageUtil;
 import com.xj.iws.http.mvc.dao.DeviceDao;
+import com.xj.iws.http.mvc.dao.DeviceInfoDao;
 import com.xj.iws.http.mvc.dao.DeviceTermDao;
-import com.xj.iws.http.mvc.dao.RoomDao;
 import com.xj.iws.http.mvc.entity.*;
 import com.xj.iws.http.mvc.service.DeviceService;
 import com.xj.iws.common.utils.DataWrapper;
@@ -20,10 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -33,15 +29,15 @@ import java.util.List;
 public class DeviceServiceImpl implements DeviceService {
 
     @Autowired
-    DeviceDao deviceDao;
+    DeviceInfoDao deviceInfoDao;
     @Autowired
     DeviceTermDao deviceTermDao;
 
 
     @Override
-    public DataWrapper<DeviceGroupEntity> addGroup(DeviceGroupEntity deviceGroup) {
-        DataWrapper<DeviceGroupEntity> dataWrapper = new DataWrapper<DeviceGroupEntity>();
-        int i = deviceDao.addGroup(deviceGroup);
+    public DataWrapper<DeviceGroupInfoEntity> addGroup(DeviceGroupInfoEntity deviceGroup) {
+        DataWrapper<DeviceGroupInfoEntity> dataWrapper = new DataWrapper<DeviceGroupInfoEntity>();
+        int i = deviceInfoDao.addGroup(deviceGroup);
         if (i == -1) {
             dataWrapper.setErrorCode(ErrorCodeEnum.Error);
         } else {
@@ -53,8 +49,8 @@ public class DeviceServiceImpl implements DeviceService {
     @Override
     public DataWrapper<Void> delete(int deviceGroupId) {
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
-        int i = deviceDao.deleteDevice(deviceGroupId, 0);
-        int j = deviceDao.deleteGroup(deviceGroupId);
+        int i = deviceInfoDao.deleteDevice(deviceGroupId, 0);
+        int j = deviceInfoDao.deleteGroup(deviceGroupId);
 
         if (i != 1) {
             dataWrapper.setErrorCode(ErrorCodeEnum.Error);
@@ -63,9 +59,9 @@ public class DeviceServiceImpl implements DeviceService {
     }
 
     @Override
-    public DataWrapper<DeviceEntity> update(DeviceGroupEntity deviceGroup) {
+    public DataWrapper<DeviceEntity> update(DeviceGroupInfoEntity deviceGroup) {
         DataWrapper<DeviceEntity> dataWrapper = new DataWrapper<DeviceEntity>();
-        int i = deviceDao.updateGroup(deviceGroup);
+        int i = deviceInfoDao.updateGroup(deviceGroup);
 
         if (i != 1) {
             dataWrapper.setErrorCode(ErrorCodeEnum.Error);
@@ -74,11 +70,10 @@ public class DeviceServiceImpl implements DeviceService {
     }
 
     @Override
-    public DataWrapper<List<DeviceGroupEntity>> groupList() {
-        DataWrapper<List<DeviceGroupEntity>> dataWrapper = new DataWrapper<List<DeviceGroupEntity>>();
-
-        List<DeviceGroupEntity> deviceGroups = deviceDao.deviceGroupList();
-        for (DeviceGroupEntity group : deviceGroups){
+    public DataWrapper<List<DeviceGroupInfoEntity>> groupList() {
+        DataWrapper<List<DeviceGroupInfoEntity>> dataWrapper = new DataWrapper<List<DeviceGroupInfoEntity>>();
+        List<DeviceGroupInfoEntity> deviceGroups = deviceInfoDao.deviceGroupList();
+        for (DeviceGroupInfoEntity group : deviceGroups){
             String[] terms = group.getTerms().split(",");
             List<DeviceTermEntity> deviceTerms = deviceTermDao.deviceTermByIds(terms);
             group.setDeviceTerms(deviceTerms);
@@ -88,9 +83,9 @@ public class DeviceServiceImpl implements DeviceService {
     }
 
     @Override
-    public DataWrapper<DeviceGroupEntity> groupDetail(int groupId) {
-        DataWrapper<DeviceGroupEntity> dataWrapper = new DataWrapper<DeviceGroupEntity>();
-        DeviceGroupEntity group = deviceDao.groupDetail(groupId);
+    public DataWrapper<DeviceGroupInfoEntity> groupDetail(int groupId) {
+        DataWrapper<DeviceGroupInfoEntity> dataWrapper = new DataWrapper<DeviceGroupInfoEntity>();
+        DeviceGroupInfoEntity group = deviceInfoDao.groupDetail(groupId);
         String[] terms = group.getTerms().split(",");
         List<DeviceTermEntity> deviceTerms = deviceTermDao.deviceTermByIds(terms);
         group.setDeviceTerms(deviceTerms);
@@ -98,56 +93,11 @@ public class DeviceServiceImpl implements DeviceService {
         return dataWrapper;
     }
 
-    @Override
-    public DataWrapper<Void> enable(int groupId) {
-        DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
-        List<DeviceEntity> devices = deviceDao.deviceList(groupId);
-        for (DeviceEntity device : devices) {
-            int i = deviceDao.createDataTable(device);
-        }
-        return dataWrapper;
-    }
-
-
-    @Override
-    public DataWrapper<Void> start(String[] groupIds) {
-        DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
-        // 创建默认的httpClient实例.
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-        // 创建httpPost
-        HttpPost httpPost = new HttpPost("http://localhost:8180/iws_data/api/start");
-        // 创建参数队列
-        List<BasicNameValuePair> formParams = new ArrayList<BasicNameValuePair>();
-        for (String groupId : groupIds) {
-            formParams.add(new BasicNameValuePair("groupIds", groupId));
-        }
-        UrlEncodedFormEntity uefEntity;
-        try {
-            uefEntity = new UrlEncodedFormEntity(formParams, "UTF-8");
-            httpPost.setEntity(uefEntity);
-            CloseableHttpResponse response = httpclient.execute(httpPost);
-
-        } catch (ClientProtocolException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e1) {
-            e1.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            // 关闭连接,释放资源
-            try {
-                httpclient.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return dataWrapper;
-    }
 
     @Override
     public DataWrapper<List<DeviceGroupTypeEntity>> groupType() {
         DataWrapper<List<DeviceGroupTypeEntity>> dataWrapper = new DataWrapper<List<DeviceGroupTypeEntity>>();
-        List<DeviceGroupTypeEntity> groupTypes = deviceDao.groupTypes();
+        List<DeviceGroupTypeEntity> groupTypes = deviceInfoDao.groupTypes();
         dataWrapper.setData(groupTypes);
         return dataWrapper;
     }

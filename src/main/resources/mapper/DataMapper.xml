@@ -30,7 +30,7 @@
         FROM `${tableName}` d
         LEFT JOIN device de ON d.deviceid = de.id
         LEFT JOIN devicegroup dg ON de.groupid = dg.id
-        LEFT JOIN room r ON de.roomid = r.id
+        LEFT JOIN room r ON dg.roomid = r.id
         LEFT JOIN location l ON r.locationid = l.id
         LEFT JOIN area a ON l.areaid = a.areaid
         LEFT JOIN city c ON c.cityid = a.cityid
@@ -48,7 +48,7 @@
         FROM `${tableName}` d
         LEFT JOIN device de ON d.deviceid = de.id
         LEFT JOIN devicegroup dg ON de.groupid = dg.id
-        LEFT JOIN room r ON de.roomid = r.id
+        LEFT JOIN room r ON dg.roomid = r.id
         LEFT JOIN location l ON r.locationid = l.id
         LEFT JOIN area a ON l.areaid = a.areaid
         LEFT JOIN city c ON c.cityid = a.cityid

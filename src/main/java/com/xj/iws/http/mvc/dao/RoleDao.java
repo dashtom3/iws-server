@@ -24,7 +24,7 @@ public interface RoleDao {
 
     int update(RoleEntity roleEntity);
 
-    List<RoleEntity> list();
+    List<RoleEntity> list(int except);
 
     RoleEntity detail(int roleId);
 
@@ -32,7 +32,7 @@ public interface RoleDao {
 
     List<RoleEntity> query(Map<String, String> condition);
 
-    List<String> getSubArea(int roleId);
+    List<RoleSubEntity> getLimit(int roleId);
 
     int checkSystem(@Param("roleId") int roleId,@Param("systemId") int systemId);
 

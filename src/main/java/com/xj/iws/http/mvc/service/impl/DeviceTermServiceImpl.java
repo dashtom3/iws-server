@@ -28,6 +28,7 @@ public class DeviceTermServiceImpl implements DeviceTermService {
     @Override
     public DataWrapper<DeviceTermEntity> add(DeviceTermEntity deviceTermEntity, PointFieldEntity[] fields) {
         DataWrapper<DeviceTermEntity> dataWrapper = new DataWrapper<DeviceTermEntity>();
+        deviceTermEntity.setCount(fields.length);
         int i = deviceTermDao.addDevice(deviceTermEntity);
         for (int j = 0; j <fields.length ; j++) {
             fields[j].setNumber(j+1);
@@ -80,9 +81,9 @@ public class DeviceTermServiceImpl implements DeviceTermService {
     }
 
     @Override
-    public DataWrapper<List<DeviceTermEntity>> list() {
+    public DataWrapper<List<DeviceTermEntity>> list(int type) {
         DataWrapper<List<DeviceTermEntity>> dataWrapper = new DataWrapper<List<DeviceTermEntity>>();
-        List<DeviceTermEntity> devices = deviceTermDao.deviceTermList();
+        List<DeviceTermEntity> devices = deviceTermDao.deviceTermList(type);
         List<PointFieldEntity> fields = deviceTermDao.fieldList(0);
         if (devices != null){
             devices = PackageUtil.deviceTermPack(devices,fields);
