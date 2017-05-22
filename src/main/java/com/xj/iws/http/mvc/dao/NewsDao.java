@@ -1,5 +1,6 @@
 package com.xj.iws.http.mvc.dao;
 
+import com.xj.iws.common.utils.Page;
 import com.xj.iws.http.mvc.entity.NewsEntity;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -13,9 +14,11 @@ import java.util.Map;
 @Repository
 public interface NewsDao {
 
-    List<NewsEntity> list(Map<String,String> condition);
+    List<NewsEntity> list(@Param("condition") Map<String,String> condition, @Param("page")Page page);
 
     int confirm(@Param("newsId") int newsId,@Param("userId") int userId);
 
-    int informUser(@Param("newsId") int newsId,@Param("userId") int userId);
+    int getCount(@Param("condition") Map<String,String> condition);
+
+    NewsEntity detail(int newsId);
 }

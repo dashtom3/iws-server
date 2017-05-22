@@ -14,7 +14,7 @@ public interface LocationApi {
      * @apiParam {String} token 身份验证
      * @apiParam {String} startTime 开始时间 nullalbe
      * @apiParam {String} endTime 结束时间 nullable
-     * @apiParam {String} status 消息状态 nullable(0未确认,1已确认)
+     * @apiParam {String} status 消息状态 nullable(1已确认,2未确认)
      * @apiParam {String} systemId 系统id nullable
      *
      *
@@ -67,7 +67,6 @@ public interface LocationApi {
      *
      * @apiParam {String} token 身份验证
      * @apiParam {int} newsId 消息id
-     *
      *
      * @apiSuccessExample Success-Response:
      *  HTTP/1.1 200 OK

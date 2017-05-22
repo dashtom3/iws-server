@@ -2,17 +2,17 @@ package com.xj.iws.http.mvc.controller.user;
 
 import com.xj.iws.common.utils.DataWrapper;
 import com.xj.iws.common.utils.ExcelUtil;
+import com.xj.iws.common.utils.Page;
+import com.xj.iws.http.mvc.entity.util.DataField;
 import com.xj.iws.http.mvc.entity.util.ViewDataEntity;
 import com.xj.iws.http.mvc.service.DataService;
 import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.HashMap;
@@ -41,14 +41,15 @@ public class DataController {
             @RequestParam(value = "deviceId", required = true) String deviceId,
             @RequestParam(value = "startTime", required = true) String startTime,
             @RequestParam(value = "endTime", required = true) String endTime,
-            @RequestParam(value = "timeStep", required = true) String timeStep
-    ) {
+            @RequestParam(value = "timeStep", required = true) String timeStep,
+            @ModelAttribute Page page
+            ) {
         Map<String, String> conditions = new HashMap<String, String>();
         conditions.put("deviceId", deviceId);
         conditions.put("startTime", startTime);
         conditions.put("endTime", endTime);
         conditions.put("timeStep", timeStep);
-        return dataService.query(conditions);
+        return dataService.query(conditions,page);
     }
 
     @RequestMapping(value = "presentData", method = RequestMethod.GET)
@@ -64,19 +65,22 @@ public class DataController {
     @ResponseBody
     public void outputExcel(
             HttpServletResponse response,
+            HttpServletRequest request,
             @RequestParam(value = "token", required = true) String token,
             @RequestParam(value = "deviceId", required = true) String deviceId,
             @RequestParam(value = "startTime", required = true) String startTime,
             @RequestParam(value = "endTime", required = true) String endTime,
-            @RequestParam(value = "timeStep", required = true) String timeStep
+            @RequestParam(value = "timeStep", required = true) String timeStep,
+            @ModelAttribute Page page
     ) throws IOException {
+
         Map<String, String> conditions = new HashMap<String, String>();
         conditions.put("deviceId", deviceId);
         conditions.put("startTime", startTime);
         conditions.put("endTime", endTime);
         conditions.put("timeStep", timeStep);
 
-        List<ViewDataEntity> viewDatas = dataService.query(conditions).getData();
+        List<ViewDataEntity> viewDatas = dataService.query(conditions,page).getData();
 
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         try {
@@ -90,6 +94,13 @@ public class DataController {
         response.reset();
         response.setContentType("application/vnd.ms-excel;charset=utf-8");
         response.setHeader("Content-Disposition", "attachment;filename=" + new String((ExcelUtil.fileName(viewDatas)).getBytes(), "iso-8859-1"));
+
+        response.setHeader("Access-Control-Allow-Origin", "*");
+//        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+//        response.setHeader("Access-Control-Max-Age", "3600");
+//        response.setHeader("Access-Control-Allow-Headers", "x-requested-with,Authorization,Content-Type");
+//        response.setHeader("Access-Control-Allow-Credentials", "true");
+
         ServletOutputStream out;
         out = response.getOutputStream();
         BufferedInputStream bis;
@@ -107,5 +118,20 @@ public class DataController {
         if (bis != null) bis.close();
         if (bos != null) bos.close();
 
+    }
+
+    /**
+     *
+     * @param token
+     * @param deviceId
+     * @return
+     */
+    @RequestMapping(value = "pumpStatus", method = RequestMethod.GET)
+    @ResponseBody
+    public DataWrapper<List<DataField>> pumpStatus(
+            @RequestParam(value = "token", required = true) String token,
+            @RequestParam(value = "deviceId",required = true) int deviceId
+    ) {
+        return dataService.pumpStatus(deviceId);
     }
 }

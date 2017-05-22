@@ -20,7 +20,6 @@ public class LimitationServiceImpl implements LimitationService {
     @Autowired
     RoleDao roleDao;
 
-
     @Override
     public boolean checkAdmin(UserEntity user) {
         boolean result = false;

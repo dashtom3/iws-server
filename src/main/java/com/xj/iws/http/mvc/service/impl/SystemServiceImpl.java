@@ -1,6 +1,7 @@
 package com.xj.iws.http.mvc.service.impl;
 
 import com.xj.iws.common.utils.PackageUtil;
+import com.xj.iws.common.utils.Page;
 import com.xj.iws.http.mvc.dao.LocationDao;
 import com.xj.iws.http.mvc.dao.SystemDao;
 import com.xj.iws.http.mvc.entity.LocationEntity;
@@ -93,7 +94,7 @@ public class SystemServiceImpl implements SystemService {
         List<SystemEntity> systems = systemDao.list(limitations);
         //获取系统下全部地点
         for (SystemEntity system : systems) {
-            List<LocationEntity> locations = locationDao.list(system.getId(),limitations);
+            List<LocationEntity> locations = locationDao.list(system.getId(),limitations,new Page());
             system.setLocation(locations);
         }
         dataWrapper.setData(systems);
@@ -114,7 +115,7 @@ public class SystemServiceImpl implements SystemService {
         //获取系统
         SystemEntity system = systemDao.detail(systemId);
         //获取系统下全部地点
-        List<LocationEntity> locations = locationDao.list(systemId,limitations);
+        List<LocationEntity> locations = locationDao.list(systemId,limitations,new Page());
         system.setLocation(locations);
         dataWrapper.setData(system);
         return dataWrapper;
@@ -133,7 +134,7 @@ public class SystemServiceImpl implements SystemService {
         List<SystemEntity> systems = systemDao.list(limitations);
         //获取系统下全部地点
         for (SystemEntity system : systems) {
-            List<LocationEntity> locations = locationDao.list(system.getId(),limitations);
+            List<LocationEntity> locations = locationDao.list(system.getId(),limitations,new Page());
             system.setLocationPack(PackageUtil.locationPack(locations));
         }
         dataWrapper.setData(systems);
@@ -154,7 +155,7 @@ public class SystemServiceImpl implements SystemService {
         //获取系统
         SystemEntity system = systemDao.detail(systemId);
         //获取系统下全部地点
-        List<LocationEntity> locations = locationDao.list(systemId,limitations);
+        List<LocationEntity> locations = locationDao.list(systemId,limitations,new Page());
 
         system.setLocationPack(PackageUtil.locationPack(locations));
         dataWrapper.setData(system);

@@ -8,7 +8,7 @@ import com.xj.iws.common.utils.DataWrapper;
  */
 public interface UserService {
 
-    DataWrapper<UserEntity> login(String userName, String password);
+    DataWrapper<UserEntity> login(String userName, String password, String status);
 
     DataWrapper<UserEntity> register(UserEntity user, String code);
 

@@ -3,6 +3,14 @@
     <output-path>$PROJECT_DIR$/target</output-path>
     <root id="archive" name="com.xj.iws.war">
       <element id="artifact" artifact-name="iws:war exploded" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="CCP_REST_SMS_SDK_JAVA_v2.6.3r" />
+          <element id="library" level="project" name="json-lib-2.4-jdk15" />
+          <element id="library" level="module" name="Maven: com.alibaba:jconsole:1.8.0" module-name="iws" />
+          <element id="library" level="module" name="Maven: com.alibaba:tools:1.8.0" module-name="iws" />
+        </element>
+      </element>
     </root>
   </artifact>
 </component>

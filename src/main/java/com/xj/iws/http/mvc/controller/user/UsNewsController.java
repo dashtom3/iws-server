@@ -4,16 +4,14 @@ import com.xj.iws.common.data.DataProcess;
 import com.xj.iws.common.enums.ErrorCodeEnum;
 import com.xj.iws.common.sessionManager.SessionManager;
 import com.xj.iws.common.utils.DataWrapper;
+import com.xj.iws.common.utils.Page;
 import com.xj.iws.http.mvc.entity.NewsEntity;
 import com.xj.iws.http.mvc.entity.UserEntity;
 import com.xj.iws.http.mvc.service.LimitationService;
 import com.xj.iws.http.mvc.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -36,30 +34,23 @@ public class UsNewsController {
     @ResponseBody
     public DataWrapper<List<NewsEntity>> list(
             @RequestParam(value = "token", required = true) String token,
+            @RequestParam(value = "userId", required = false) String userId,
             @RequestParam(value = "startTime", required = false) String startTime,
             @RequestParam(value = "endTime", required = false) String endTime,
             @RequestParam(value = "status", required = false) String status,
-            @RequestParam(value = "systemId", required = false) String systemId
+            @RequestParam(value = "systemId", required = false) String systemId,
+            @ModelAttribute Page page
     ) {
         UserEntity user = SessionManager.getSession(token);
         Map<String, String> condition = new HashMap<String, String>();
         if (!limitationService.checkAdmin(user)) {
-            condition.put("userId", String.valueOf(user.getId()));
+            condition.put("userId", userId);
         }
         condition.put("startTime", startTime);
-        condition.put("endTime", startTime);
+        condition.put("endTime", endTime);
         condition.put("status", status);
         condition.put("systemId", systemId);
-        return newsService.list(condition);
+        return newsService.list(condition,page);
     }
 
-    @RequestMapping(value = "confirm", method = RequestMethod.POST)
-    @ResponseBody
-    public DataWrapper<Void> confirm(
-            @RequestParam(value = "token", required = true) String token,
-            @RequestParam(value = "newsId", required = true) int newsId
-    ) {
-        UserEntity user = SessionManager.getSession(token);
-        return newsService.confirm(newsId, user.getId());
-    }
 }

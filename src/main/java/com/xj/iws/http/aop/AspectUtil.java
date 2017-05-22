@@ -11,7 +11,7 @@ public class AspectUtil {
     public static UserEntity getUser(Object[] param){
         String token = null;
         for (int i = 0; i <param.length ; i++) {
-            if(param[i].toString().length() > 1){
+            if(param[i] != null && param[i].toString().length() > 1){
                 if ("SK".equals(param[i].toString().substring(0,2))){
                     token = param[i].toString();
                     break;

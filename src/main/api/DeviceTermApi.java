@@ -155,11 +155,6 @@ public interface RoleApi {
      * @apiVersion 0.1.0
      * @apiDescription 编辑修改控制器
      *
-     * @apiParam {int} id 控制器id
-     * @apiParam {List} fields 控制器点表字段(number 字段数; roleId 字段规则id; name 名称; describes 描述; unit 单位; min 下限值; max 上限值; multiple 检测值倍数)
-     * @apiParam {int} count 字段参数数量
-     * @apiParam {String} protocol 通讯协议
-     * @apiParam {String} type 控制器类型
      * @apiParam {String} name 控制器名称
      * @apiParam {String} describes 控制器描述
      * @apiParam {String} token 身份验证

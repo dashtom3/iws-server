@@ -1,5 +1,6 @@
 package com.xj.iws.http.mvc.dao;
 
+import com.xj.iws.common.utils.Page;
 import com.xj.iws.http.mvc.entity.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -12,7 +13,7 @@ import java.util.List;
 @Repository
 public interface DeviceInfoDao {
 
-    List<DeviceGroupInfoEntity> deviceGroupList();
+    List<DeviceGroupInfoEntity> deviceGroupList(Page page);
 
     DeviceGroupInfoEntity groupDetail(int groupId);
 
@@ -26,5 +27,5 @@ public interface DeviceInfoDao {
 
     List<DeviceGroupTypeEntity> groupTypes();
 
-
+    int getCount();
 }

@@ -1,5 +1,6 @@
 package com.xj.iws.http.mvc.dao;
 
+import com.xj.iws.common.utils.Page;
 import com.xj.iws.http.mvc.entity.DeviceTermEntity;
 import com.xj.iws.http.mvc.entity.DeviceTypeEntity;
 import com.xj.iws.http.mvc.entity.PointFieldEntity;
@@ -14,7 +15,7 @@ import java.util.Map;
  */
 @Repository
 public interface DeviceTermDao {
-    List<DeviceTermEntity> deviceTermList(int type);
+    List<DeviceTermEntity> deviceTermList(@Param("type") String type, @Param("page")Page page);
 
     List<PointFieldEntity> fieldList(int deviceId);
 
@@ -37,4 +38,6 @@ public interface DeviceTermDao {
     List<DeviceTypeEntity> typeList();
 
     List<DeviceTermEntity> deviceTermByIds(String[] terms);
+
+    int getCount();
 }

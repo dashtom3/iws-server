@@ -1,5 +1,6 @@
 package com.xj.iws.http.mvc.service;
 
+import com.xj.iws.common.utils.Page;
 import com.xj.iws.http.mvc.entity.LocationEntity;
 import com.xj.iws.common.utils.DataWrapper;
 import com.xj.iws.http.mvc.entity.util.Limitation;
@@ -20,9 +21,7 @@ public interface LocationService {
 
     DataWrapper<LocationEntity> detail(int locationId);
 
-    DataWrapper<List<LocationEntity>> list(int id, List<Limitation> limitations);
+    DataWrapper<List<LocationEntity>> list(int id, List<Limitation> limitations, Page page);
 
-    DataWrapper<List<LocationEntity>> lockedList(List<Map> conditions);
-
-    DataWrapper<List<LocationEntity>> query(Map<String, String> condition);
+    DataWrapper<List<LocationEntity>> query(Map<String, String> condition, Page page);
 }

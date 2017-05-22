@@ -1,6 +1,8 @@
 package com.xj.iws.http.mvc.dao;
 
+import com.xj.iws.common.utils.Page;
 import com.xj.iws.http.mvc.entity.UserEntity;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,7 +17,11 @@ public interface UserManageDao {
 
     int role(UserEntity userEntity);
 
-    List<UserEntity> list();
+    List<UserEntity> list(Page page);
 
     int status(UserEntity userEntity);
+
+    UserEntity detail(int userId);
+
+    int getCount();
 }

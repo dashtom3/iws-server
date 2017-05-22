@@ -1,5 +1,6 @@
 package com.xj.iws.http.mvc.controller.manager;
 
+import com.xj.iws.common.utils.Page;
 import com.xj.iws.http.mvc.entity.DeviceEntity;
 import com.xj.iws.http.mvc.entity.DeviceGroupInfoEntity;
 import com.xj.iws.http.mvc.entity.DeviceGroupTypeEntity;
@@ -76,9 +77,10 @@ public class DeviceController {
     @RequestMapping(value = "list",method = RequestMethod.GET)
     @ResponseBody
     public DataWrapper<List<DeviceGroupInfoEntity>> list(
-            @RequestParam(value = "token", required = true) String token
-    ) {
-        return deviceService.groupList();
+            @RequestParam(value = "token", required = true) String token,
+            @ModelAttribute Page page
+            ) {
+        return deviceService.groupList(page);
     }
 
     /**

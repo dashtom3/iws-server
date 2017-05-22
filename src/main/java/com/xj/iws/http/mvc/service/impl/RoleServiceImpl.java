@@ -1,5 +1,6 @@
 package com.xj.iws.http.mvc.service.impl;
 
+import com.xj.iws.common.utils.Page;
 import com.xj.iws.http.mvc.dao.AreaDao;
 import com.xj.iws.http.mvc.dao.RoleDao;
 import com.xj.iws.http.mvc.entity.RoleEntity;
@@ -31,11 +32,7 @@ public class RoleServiceImpl implements RoleService {
         if (i != 1) {
             dataWrapper.setErrorCode(ErrorCodeEnum.Error);
         } else {
-            List<RoleSubEntity> list = new ArrayList<RoleSubEntity>();
-            Collections.addAll(list, subitem);
-
-            roleEntity.setSubitem(list);
-            dataWrapper.setData(roleEntity);
+            dataWrapper = detail(roleEntity.getId());
         }
         return dataWrapper;
     }
@@ -43,7 +40,10 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public DataWrapper<Void> delete(int roleId) {
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
-
+        if (roleId == 1){
+            dataWrapper.setErrorCode(ErrorCodeEnum.Error);
+            return dataWrapper;
+        }
         int i = roleDao.deleteSub(roleId, 0);
         int j = roleDao.delete(roleId);
         if (j != 1) {
@@ -52,49 +52,58 @@ public class RoleServiceImpl implements RoleService {
         return dataWrapper;
     }
 
-    @Override
-    public DataWrapper<Void> addSub(int roleId, RoleSubEntity subitem) {
-        DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
-        RoleSubEntity[] subitems = new RoleSubEntity[1];
-        subitems[0] = subitem;
-        int i = roleDao.addSub(roleId, subitems);
-        if (i != 1) {
-            dataWrapper.setErrorCode(ErrorCodeEnum.Error);
-        }
-        return dataWrapper;
-    }
+//    @Override
+//    public DataWrapper<Void> addSub(int roleId, RoleSubEntity subitem) {
+//        DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
+//        RoleSubEntity[] subitems = new RoleSubEntity[1];
+//        subitems[0] = subitem;
+//        int i = roleDao.addSub(roleId, subitems);
+//        if (i != 1) {
+//            dataWrapper.setErrorCode(ErrorCodeEnum.Error);
+//        }
+//        return dataWrapper;
+//    }
 
-    @Override
-    public DataWrapper<Void> deleteSub(int id) {
-        DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
-        int i = roleDao.deleteSub(0, id);
-        if (i != 1) {
-            dataWrapper.setErrorCode(ErrorCodeEnum.Error);
-        }
-        return dataWrapper;
-    }
+//    @Override
+//    public DataWrapper<Void> deleteSub(int id) {
+//        DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
+//        int i = roleDao.deleteSub(0, id);
+//        if (i != 1) {
+//            dataWrapper.setErrorCode(ErrorCodeEnum.Error);
+//        }
+//        return dataWrapper;
+//    }
 
     @Override
     public DataWrapper<RoleEntity> update(RoleEntity roleEntity, RoleSubEntity[] subitem) {
         DataWrapper<RoleEntity> dataWrapper = new DataWrapper<RoleEntity>();
+        int id = roleEntity.getId();
+        if (id == 1){
+            dataWrapper.setErrorCode(ErrorCodeEnum.Error);
+            return dataWrapper;
+        }
         int i = roleDao.update(roleEntity);
-        int j = roleDao.deleteSub(roleEntity.getId(), 0);
-        int k = roleDao.addSub(roleEntity.getId(), subitem);
+        int j = roleDao.deleteSub(id, 0);
+        int k = roleDao.addSub(id, subitem);
+
         if (i != 1) {
             dataWrapper.setErrorCode(ErrorCodeEnum.Error);
+        }else {
+            dataWrapper = detail(roleEntity.getId());
         }
         return dataWrapper;
     }
 
     @Override
-    public DataWrapper<List<RoleEntity>> list(int except) {
+    public DataWrapper<List<RoleEntity>> list(int except, Page page) {
         DataWrapper<List<RoleEntity>> dataWrapper = new DataWrapper<List<RoleEntity>>();
-
-        List<RoleEntity> roles = roleDao.list(except);
+        List<RoleEntity> roles = roleDao.list(except,page);
         for (RoleEntity role : roles) {
             List<RoleSubEntity> roleSubs = roleDao.getSub(role.getId());
             role.setSubitem(roleSubs);
         }
+        int totalNumber = roleDao.getCount(except);
+        dataWrapper.setPage(page,totalNumber);
         dataWrapper.setData(roles);
         return dataWrapper;
     }

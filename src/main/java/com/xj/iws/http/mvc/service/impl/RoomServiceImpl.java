@@ -1,24 +1,17 @@
 package com.xj.iws.http.mvc.service.impl;
 
+import com.xj.iws.common.communication.ServerRequest;
+import com.xj.iws.common.utils.ParamUtil;
 import com.xj.iws.http.mvc.dao.*;
 import com.xj.iws.http.mvc.entity.*;
 import com.xj.iws.common.enums.ErrorCodeEnum;
 import com.xj.iws.http.mvc.service.RoomService;
 import com.xj.iws.common.utils.DataWrapper;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicNameValuePair;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by XiaoJiang01 on 2017/3/9.
@@ -92,19 +85,19 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public DataWrapper<Void> addDevice(DeviceEntity deviceEntity, DeviceEntity[] devices) {
+    public DataWrapper<Void> addDevice(DeviceGroupEntity groupEntity, DeviceEntity[] devices) {
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
-        int i = deviceDao.addGroup(deviceEntity);
-        int j = deviceDao.addDevice(deviceEntity,devices);
+        int i = deviceDao.addGroup(groupEntity);
+        int j = deviceDao.addDevice(groupEntity, devices);
+        enable(groupEntity.getGroupId());
+        start(String.valueOf(groupEntity.getGroupId()));
         return dataWrapper;
     }
 
     @Override
-    public DataWrapper<Void> updateDevice(DeviceEntity deviceEntity, DeviceEntity[] devices) {
+    public DataWrapper<Void> updateDevice(DeviceEntity deviceEntity) {
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
         int i = deviceDao.updateGroup(deviceEntity);
-        int j = deviceDao.deleteDevice(deviceEntity.getGroupId());
-        int k = deviceDao.addDevice(deviceEntity,devices);
         return dataWrapper;
     }
 
@@ -117,9 +110,9 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public DataWrapper<List<DeviceGroupEntity>> deviceList(int roomId) {
+    public DataWrapper<List<DeviceGroupEntity>> groupList(int roomId) {
         DataWrapper<List<DeviceGroupEntity>> dataWrapper = new DataWrapper<List<DeviceGroupEntity>>();
-        List<DeviceGroupEntity> groups =  deviceDao.groupList(roomId);
+        List<DeviceGroupEntity> groups = deviceDao.groupList(roomId);
         dataWrapper.setData(groups);
         return dataWrapper;
     }
@@ -129,6 +122,7 @@ public class RoomServiceImpl implements RoomService {
         DataWrapper<DeviceGroupEntity> dataWrapper = new DataWrapper<DeviceGroupEntity>();
         DeviceGroupEntity group = deviceDao.groupDetail(groupId);
         group.setDevices(deviceDao.deviceList(groupId));
+        dataWrapper.setData(group);
         return dataWrapper;
     }
 
@@ -140,7 +134,6 @@ public class RoomServiceImpl implements RoomService {
         return dataWrapper;
     }
 
-
     @Override
     public DataWrapper<Void> enable(int groupId) {
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
@@ -150,43 +143,85 @@ public class RoomServiceImpl implements RoomService {
 
         for (DeviceEntity device : devices) {
             String port = deviceDao.getPort(device.getId());
-            int i = deviceDao.createDataTable(IP,port,device);
+            int i = deviceDao.createDataTable(IP, port, device);
         }
         return dataWrapper;
     }
 
     @Override
-    public DataWrapper<Void> start(String[] groupIds) {
+    public DataWrapper<Void> start(String groupId) {
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
-        // 创建默认的httpClient实例.
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-        // 创建httpPost
-        HttpPost httpPost = new HttpPost("http://localhost:8180/iws_data/api/start");
-        // 创建参数队列
-        List<BasicNameValuePair> formParams = new ArrayList<BasicNameValuePair>();
-        for (String groupId : groupIds) {
-            formParams.add(new BasicNameValuePair("groupIds", groupId));
-        }
-        UrlEncodedFormEntity uefEntity;
-        try {
-            uefEntity = new UrlEncodedFormEntity(formParams, "UTF-8");
-            httpPost.setEntity(uefEntity);
-            CloseableHttpResponse response = httpclient.execute(httpPost);
 
-        } catch (ClientProtocolException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e1) {
-            e1.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            // 关闭连接,释放资源
-            try {
-                httpclient.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        String param = ParamUtil.stringify("groupId:" + groupId);
+        Map<String, Object> response = ServerRequest.send("http://localhost:8180/iws_data/api/device/startDevice", param);
+
+        if (null != response && "SUCCEED".equals(response.get("callStatus"))) {
+            deviceDao.runGroup(groupId, 1);
+            deviceDao.runDevice(groupId, 1);
+        } else {
+            dataWrapper.setErrorCode(ErrorCodeEnum.Error);
         }
         return dataWrapper;
     }
+
+    @Override
+    public DataWrapper<Void> close(String groupId) {
+        DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
+
+        String param = ParamUtil.stringify("groupId:" + groupId);
+        Map<String, Object> response = ServerRequest.send("http://localhost:8180/iws_data/api/device/closeDevice", param);
+
+        if (null != response && "SUCCEED".equals(response.get("callStatus"))) {
+            deviceDao.runGroup(groupId, 0);
+            deviceDao.runDevice(groupId, 0);
+        } else {
+            dataWrapper.setErrorCode(ErrorCodeEnum.Error);
+        }
+        return dataWrapper;
+    }
+
+    @Override
+    public DataWrapper<Map<String, String>> test(DeviceGroupEntity groupEntity, DeviceEntity[] devices) {
+        DataWrapper<Map<String, String>> dataWrapper = new DataWrapper<Map<String, String>>();
+        Map<String, String> data = new HashMap<String, String>();
+        String port = groupEntity.getPort();
+        String[] arrayDevices = new String[devices.length];
+        for (int i = 0; i < devices.length; i++) {
+            DeviceEntity device = devices[i];
+            int termId = device.getTermId();
+            String number = device.getNumber();
+            arrayDevices[i] = ParamUtil.stringify("termId:" + termId, "number:" + number);
+        }
+        String strDevices = ParamUtil.arrayToString(arrayDevices);
+        String param = ParamUtil.stringify("port:" + port, "devices:" + strDevices);
+
+        Map<String, Object> response = ServerRequest.send("http://localhost:8180/iws_data/api/device/testDevice", param);
+        if (null != response && "SUCCEED".equals(response.get("callStatus"))) {
+            String result = (String) response.get("data");
+            String status;
+            String massage = "终端控制器组# " + port + " : ";
+            if (0 == result.length()) {
+                status = "1";
+                massage += "已成功连接!";
+            } else {
+                status = "0";
+                massage += "控制器# " + result + " 连接有误,请检查以上控制器是否正确安装";
+            }
+
+            data.put("status", status);
+            data.put("massage", massage);
+
+            dataWrapper.setData(data);
+        } else {
+            dataWrapper.setErrorCode(ErrorCodeEnum.Error);
+        }
+        return dataWrapper;
+    }
+
+    @Override
+    public DataWrapper<Void> manual(String deviceId, String number, String pumpStatus) {
+        return null;
+    }
+
+
 }

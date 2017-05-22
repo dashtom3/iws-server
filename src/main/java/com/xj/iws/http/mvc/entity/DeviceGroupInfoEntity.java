@@ -15,8 +15,6 @@ public class DeviceGroupInfoEntity {
     private int type;
     private String name;
     private String describes;
-    private String pic;
-
 
     List<DeviceGroupTypeEntity> groupType;
     List<DeviceTermEntity> deviceTerms;
@@ -25,14 +23,13 @@ public class DeviceGroupInfoEntity {
     public DeviceGroupInfoEntity() {
     }
 
-    public DeviceGroupInfoEntity(int id, String terms, int status, int type, String name, String describes, String pic) {
+    public DeviceGroupInfoEntity(int id, String terms, int status, int type, String name, String describes) {
         this.id = id;
         this.terms = terms;
         this.status = status;
         this.type = type;
         this.name = name;
         this.describes = describes;
-        this.pic = pic;
     }
 
     public int getId() {
@@ -82,14 +79,6 @@ public class DeviceGroupInfoEntity {
 
     public void setDescribes(String describes) {
         this.describes = describes;
-    }
-
-    public String getPic() {
-        return pic;
-    }
-
-    public void setPic(String pic) {
-        this.pic = pic;
     }
 
     public List<DeviceGroupTypeEntity> getGroupType() {

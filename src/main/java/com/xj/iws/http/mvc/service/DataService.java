@@ -1,6 +1,8 @@
 package com.xj.iws.http.mvc.service;
 
 import com.xj.iws.common.utils.DataWrapper;
+import com.xj.iws.common.utils.Page;
+import com.xj.iws.http.mvc.entity.util.DataField;
 import com.xj.iws.http.mvc.entity.util.ViewDataEntity;
 
 import java.util.List;
@@ -11,8 +13,9 @@ import java.util.Map;
  */
 public interface DataService {
 
-    DataWrapper<List<ViewDataEntity>> query(Map<String, String> conditions);
+    DataWrapper<List<ViewDataEntity>> query(Map<String, String> condition,Page page);
 
     DataWrapper<ViewDataEntity> presentData(int deviceId);
 
+    DataWrapper<List<DataField>> pumpStatus(int deviceId);
 }

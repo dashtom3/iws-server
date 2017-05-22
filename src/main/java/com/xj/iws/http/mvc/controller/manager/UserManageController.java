@@ -2,14 +2,12 @@ package com.xj.iws.http.mvc.controller.manager;
 
 import com.xj.iws.common.sessionManager.SessionManager;
 import com.xj.iws.common.utils.DataWrapper;
+import com.xj.iws.common.utils.Page;
 import com.xj.iws.http.mvc.entity.UserEntity;
 import com.xj.iws.http.mvc.service.UserManageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -34,11 +32,10 @@ public class UserManageController {
     @RequestMapping(value = "list", method = RequestMethod.GET)
     @ResponseBody
     public DataWrapper<List<UserEntity>> list(
-            @RequestParam(value = "token", required = true) String token
-    ) {
-        DataWrapper<List<String>> dataWrapper = new DataWrapper<List<String>>();
-        UserEntity user = SessionManager.getSession(token);
-        return userManageService.list();
+            @RequestParam(value = "token", required = true) String token,
+            @ModelAttribute Page page
+            ) {
+        return userManageService.list(page);
     }
 
     /**
@@ -54,9 +51,6 @@ public class UserManageController {
             @RequestParam(value = "roleId", required = true) int roleId,
             @RequestParam(value = "token", required = true) String token
     ) {
-        DataWrapper<List<String>> dataWrapper = new DataWrapper<List<String>>();
-        UserEntity user = SessionManager.getSession(token);
-
         UserEntity userEntity = new UserEntity();
         userEntity.setId(userId);
         userEntity.setRoleId(roleId);
@@ -76,9 +70,6 @@ public class UserManageController {
             @RequestParam(value = "status", required = true) int status,
             @RequestParam(value = "token", required = true) String token
     ) {
-        DataWrapper<List<String>> dataWrapper = new DataWrapper<List<String>>();
-        UserEntity user = SessionManager.getSession(token);
-
         UserEntity userEntity = new UserEntity();
         userEntity.setId(userId);
         userEntity.setStatus(status);
@@ -99,9 +90,6 @@ public class UserManageController {
             @RequestParam(value = "address", required = false) String address,
             @RequestParam(value = "token", required = true) String token
     ) {
-        DataWrapper<List<String>> dataWrapper = new DataWrapper<List<String>>();
-        UserEntity user = SessionManager.getSession(token);
-
         Map<String, String> condition = new HashMap<String, String>();
         if (username != null && !username.equals("")) {
             condition.put("username", username);
@@ -113,5 +101,15 @@ public class UserManageController {
             condition.put("address", address);
         }
         return userManageService.query(condition);
+    }
+
+
+    @RequestMapping(value = "detail", method = RequestMethod.GET)
+    @ResponseBody
+    public DataWrapper<UserEntity> detail(
+            @RequestParam(value = "token", required = true) String token,
+            @RequestParam(value = "userId",required = true) int userId
+    ) {
+        return userManageService.detail(userId);
     }
 }

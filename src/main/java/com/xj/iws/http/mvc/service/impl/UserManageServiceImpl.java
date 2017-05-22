@@ -2,6 +2,7 @@ package com.xj.iws.http.mvc.service.impl;
 
 import com.xj.iws.common.enums.ErrorCodeEnum;
 import com.xj.iws.common.utils.DataWrapper;
+import com.xj.iws.common.utils.Page;
 import com.xj.iws.http.mvc.dao.UserManageDao;
 import com.xj.iws.http.mvc.entity.UserEntity;
 import com.xj.iws.http.mvc.service.UserManageService;
@@ -21,9 +22,11 @@ public class UserManageServiceImpl implements UserManageService {
     UserManageDao userManageDao;
 
     @Override
-    public DataWrapper<List<UserEntity>> list() {
+    public DataWrapper<List<UserEntity>> list(Page page) {
         DataWrapper<List<UserEntity>> dataWrapper = new DataWrapper<List<UserEntity>>();
-        List<UserEntity> users = userManageDao.list();
+        List<UserEntity> users = userManageDao.list(page);
+        int totalNumber = userManageDao.getCount();
+        dataWrapper.setPage(page,totalNumber);
         dataWrapper.setData(users);
         return dataWrapper;
     }
@@ -47,6 +50,14 @@ public class UserManageServiceImpl implements UserManageService {
         if (i != 1){
             dataWrapper.setErrorCode(ErrorCodeEnum.Error);
         }
+        return dataWrapper;
+    }
+
+    @Override
+    public DataWrapper<UserEntity> detail(int userId) {
+        DataWrapper<UserEntity> dataWrapper = new DataWrapper<UserEntity>();
+        UserEntity user = userManageDao.detail(userId);
+        dataWrapper.setData(user);
         return dataWrapper;
     }
 

@@ -99,6 +99,7 @@ public interface UserApi {
      *
      * @apiParam {String} username 用户名
      * @apiParam {String} password 密码
+     * @apiParam {String} status 状态(传0请求进入管理员页面)
      *
      * @apiSuccessExample Success-Response:
      *  HTTP/1.1 200 OK

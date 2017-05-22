@@ -10,10 +10,7 @@ import com.xj.iws.http.mvc.entity.util.ViewDataEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by XiaoJiang01 on 2017/3/16.
@@ -24,7 +21,7 @@ public class DataProcess {
     @Autowired
     PointRoleDao pointRoleDao;
 
-    List<Map<String,String>> status;
+    List<Map<String, String>> status;
 
     public List<PointFieldEntity> pointFields;
 
@@ -34,6 +31,35 @@ public class DataProcess {
     public void enable(List<PointFieldEntity> pointFields) {
         this.pointFields = pointFields;
         status = pointRoleDao.getStatus(0);
+    }
+
+    public List<DataField> pumpStatus(DataEntity data) {
+        List<DataField> pumpStatus = new ArrayList<DataField>();
+        String[] arrayData = DataFormat.subData(data.getData(), 4);
+        for (int i = 0; i < pointFields.size(); i++) {
+            PointFieldEntity field = pointFields.get(i);
+            DataField dataField;
+            switch (field.getRoleId()) {
+                case 4:
+                    dataField = role04(arrayData[i]);
+
+                    dataField.setNumber(i);
+                    dataField.setName(field.getName());
+                    pumpStatus.add(dataField);
+                    break;
+                case 5:
+                    dataField = role05(arrayData[i]);
+
+                    dataField.setNumber(i);
+                    dataField.setName(field.getName());
+                    pumpStatus.add(dataField);
+                    break;
+                default:
+                    break;
+            }
+
+        }
+        return pumpStatus;
     }
 
     public List<ViewDataEntity> process(List<DataEntity> datas) {
@@ -49,11 +75,11 @@ public class DataProcess {
             String roomName = data.getRoomName();
             String groupName = data.getGroupName();
 
-            String[] arrayData = DataFormat.subData(data.getData(),4);
+            String[] arrayData = DataFormat.subData(data.getData(), 4);
             List<DataField> dataFields = analyze(arrayData);
 
-            ViewDataEntity viewData = new ViewDataEntity(port,number,time,DataEnum.No_Exception,count,addressName,locationName,roomName,groupName,dataFields);
-            if (!"ER".equals(data.getError())){
+            ViewDataEntity viewData = new ViewDataEntity(port, number, time, DataEnum.No_Exception, count, addressName, locationName, roomName, groupName, dataFields);
+            if (!"ER".equals(data.getError())) {
                 viewData.setException(DataEnum.Exception);
             }
             viewDatas.add(viewData);
@@ -70,7 +96,7 @@ public class DataProcess {
 
             switch (field.getRoleId()) {
                 case 1:
-                    dataField = role01(data[i],field);
+                    dataField = role01(data[i], field);
                     break;
                 case 2:
                     dataField = role02(data[i]);
@@ -101,7 +127,8 @@ public class DataProcess {
         if (value < field.getMin() || value > field.getMax()) {
             data.setException(DataEnum.Exception);
         }
-        data.setData(String.valueOf(value)+field.getUnit());
+        data.setValue(value);
+        data.setData(String.valueOf(value) + field.getUnit());
         return data;
     }
 
@@ -110,11 +137,11 @@ public class DataProcess {
         StringBuffer value = new StringBuffer();
 
         s = ByteUtil.hexToBinary(s);
-        s = s.substring(8,16);
+        s = s.substring(8, 16);
         char[] point = s.toCharArray();
-        for (int j = 0; j <point.length ; j++) {
-            if (point[j] == '1'){
-                value.append(status.get(1).get(String.valueOf(j+1))+" ");
+        for (int j = 0; j < point.length; j++) {
+            if (point[j] == '1') {
+                value.append(status.get(1).get(String.valueOf(j + 1)) + " ");
             }
         }
         if (point[5] == '1') {
@@ -130,11 +157,11 @@ public class DataProcess {
         StringBuffer value = new StringBuffer();
 
         s = ByteUtil.hexToBinary(s);
-        s = s.substring(10,16);
+        s = s.substring(10, 16);
         char[] point = s.toCharArray();
-        for (int j = 0; j <point.length ; j++) {
-            if (point[j] == '1'){
-                value.append(status.get(2).get(String.valueOf(j+1))+" ");
+        for (int j = 0; j < point.length; j++) {
+            if (point[j] == '1') {
+                value.append(status.get(2).get(String.valueOf(j + 1)) + " ");
                 data.setData(String.valueOf(value));
                 data.setException(DataEnum.Exception);
             }
@@ -145,14 +172,16 @@ public class DataProcess {
     private DataField role04(String s) {
         DataField data = new DataField();
         int i = Integer.parseInt(s);
-        data.setData(status.get(3).get(String.valueOf(i+1)));
+        data.setValue(i);
+        data.setData(status.get(3).get(String.valueOf(i + 1)));
         return data;
     }
 
     private DataField role05(String s) {
         DataField data = new DataField();
         int i = Integer.parseInt(s);
-        data.setData(status.get(4).get(String.valueOf(i+1)));
+        data.setValue(i);
+        data.setData(status.get(4).get(String.valueOf(i + 1)));
         return data;
     }
 }

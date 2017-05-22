@@ -31,13 +31,23 @@ public class NewsController {
     @Autowired
     LimitationService limitationService;
 
-    @RequestMapping(value = "inform", method = RequestMethod.POST)
+    @RequestMapping(value = "confirm", method = RequestMethod.POST)
     @ResponseBody
-    public DataWrapper<Void> inform(
+    public DataWrapper<Void> confirm(
             @RequestParam(value = "token", required = true) String token,
-            @RequestParam(value = "newsId", required = true) int newsId,
-            @RequestParam(value = "userId", required = true) int userId
+            @RequestParam(value = "userId", required = true) int userId,
+            @RequestParam(value = "newsId", required = true) int newsId
     ) {
-        return newsService.inform(newsId, userId);
+        return newsService.confirm(newsId, userId);
+    }
+
+    @RequestMapping(value = "sendMassage", method = RequestMethod.POST)
+    @ResponseBody
+    public DataWrapper<Void> sendMassage(
+            @RequestParam(value = "token", required = true) String token,
+            @RequestParam(value = "userId", required = true) int userId,
+            @RequestParam(value = "newsId", required = true) int newsId
+    ) {
+        return newsService.sendMassage(newsId, userId);
     }
 }

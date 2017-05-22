@@ -88,6 +88,17 @@ public class DataWrapper<T>  {
         this.totalPage = totalPage;
     }
 
+    public void setPage(Page page, int totalNumber){
+        this.totalNumber = totalNumber;
+        this.currentPage = page.getCurrentPage();
+        this.numberPerPage = page.getNumberPerPage();
+        if(numberPerPage != 0){
+            this.totalPage = (int)Math.ceil((double) totalNumber/(double) numberPerPage);
+        }else {
+            this.totalPage = 1;
+        }
+    }
+
     @Override
     public String toString() {
         return	"Code:" + this.callStatus + "\n" +

@@ -29,6 +29,8 @@ public class LocationEntity {
     private String provinceName;
     private String cityName;
     private String areaName;
+    private String systemName;
+    private String pic;
 
     public LocationEntity() {
     }
@@ -155,5 +157,21 @@ public class LocationEntity {
 
     public void setAreaName(String areaName) {
         this.areaName = areaName;
+    }
+
+    public String getSystemName() {
+        return systemName;
+    }
+
+    public void setSystemName(String systemName) {
+        this.systemName = systemName;
+    }
+
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic;
     }
 }

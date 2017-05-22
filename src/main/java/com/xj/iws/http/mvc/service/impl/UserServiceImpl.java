@@ -3,6 +3,7 @@ package com.xj.iws.http.mvc.service.impl;
 import com.xj.iws.http.mvc.dao.UserDao;
 import com.xj.iws.http.mvc.entity.UserEntity;
 import com.xj.iws.common.enums.ErrorCodeEnum;
+import com.xj.iws.http.mvc.service.LimitationService;
 import com.xj.iws.http.mvc.service.UserService;
 import com.xj.iws.common.sessionManager.SessionManager;
 import com.xj.iws.common.sessionManager.VerifyCodeManager;
@@ -12,9 +13,6 @@ import com.xj.iws.common.utils.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 /**
  * Created by XiaoJiang01 on 2017/2/27.
  */
@@ -23,13 +21,29 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     UserDao userDao;
+    @Autowired
+    LimitationService limitationService;
 
+    /**
+     *
+     * @param username
+     * @param password
+     * @param status 为0表示请求登录管理员页面
+     *
+     * @return
+     */
     @Override
-    public DataWrapper<UserEntity> login(String username, String password) {
+    public DataWrapper<UserEntity> login(String username, String password, String status) {
         DataWrapper<UserEntity> dataWrapper = new DataWrapper<UserEntity>();
         UserEntity user = userDao.getUserByUsername(username);
         if (user != null) {
             if (user.getPassword().equals(MD5Util.getMD5String(MD5Util.prePassword(password)))) {
+                if ("0".equals(status)){
+                    if (!limitationService.checkAdmin(user)){
+                        dataWrapper.setErrorCode(ErrorCodeEnum.Limitation_error);
+                        return dataWrapper;
+                    }
+                }
                 String token = SessionManager.newSession(user);
                 dataWrapper.setData(user);
                 dataWrapper.setToken(token);
@@ -90,8 +104,7 @@ public class UserServiceImpl implements UserService {
             dataWrapper.setErrorCode(ErrorCodeEnum.Verify_Code_5min);
             return dataWrapper;
         }
-        HttpUtil httpUtil = new HttpUtil();
-        boolean result = httpUtil.sendPhoneVerifyCode(code, phoneNum);
+        boolean result = HttpUtil.sendPhoneVerifyCode(code, phoneNum);
         if (result) {
             dataWrapper.setErrorCode(ErrorCodeEnum.No_Error);
         } else {

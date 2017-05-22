@@ -1,6 +1,7 @@
 package com.xj.iws.http.mvc.controller.manager;
 
 import com.xj.iws.common.sessionManager.SessionManager;
+import com.xj.iws.common.utils.Page;
 import com.xj.iws.http.mvc.entity.RoleEntity;
 import com.xj.iws.http.mvc.entity.RoleSubEntity;
 import com.xj.iws.http.mvc.entity.UserEntity;
@@ -92,12 +93,13 @@ public class RoleController {
     @RequestMapping(value = "list", method = RequestMethod.POST)
     @ResponseBody
     public DataWrapper<List<RoleEntity>> list(
-            @RequestParam(value = "token", required = true) String token
+            @RequestParam(value = "token", required = true) String token,
+            @ModelAttribute Page page
     ) {
         UserEntity user = SessionManager.getSession(token);
         int except = 0;
         if (!limitationService.checkMaintainer(user)) except = 1;
-        return roleService.list(except);
+        return roleService.list(except,page);
     }
 
     /**

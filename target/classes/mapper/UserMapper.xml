@@ -5,7 +5,7 @@
 
 <mapper namespace="com.xj.iws.http.mvc.dao.UserDao">
 
-    <sql id="field">username,password,roleid,status,date,name,address,describes,pic</sql>
+    <sql id="field">username,password,roleid,status,date,name,address,time,describes,pic</sql>
 
     <resultMap id="UserEntity" type="com.xj.iws.http.mvc.entity.UserEntity">
         <id column="id" property="id" jdbcType="INTEGER"/>
@@ -21,7 +21,7 @@
     </resultMap>
 
     <insert id="register" parameterType="UserEntity">
-        INSERT INTO user (<include refid="field"/>) VALUES ('${username}','${password}',0,1,now(),'${name}','${address}','${describes}','${pic}')
+        INSERT INTO user (<include refid="field"/>) VALUES ('${username}','${password}',0,1,now(),'${name}','${address}',now(),'${describes}','${pic}')
     </insert>
 
     <select id="getUserByUsername" resultMap="UserEntity" parameterType="String">

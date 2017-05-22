@@ -2,6 +2,7 @@ package com.xj.iws.http.mvc.controller.user;
 
 import com.xj.iws.common.sessionManager.SessionManager;
 import com.xj.iws.common.utils.DataWrapper;
+import com.xj.iws.common.utils.Page;
 import com.xj.iws.http.mvc.entity.LocationEntity;
 import com.xj.iws.http.mvc.entity.UserEntity;
 import com.xj.iws.http.mvc.entity.util.Limitation;
@@ -38,10 +39,11 @@ public class UsLocationController {
     @ResponseBody
     public DataWrapper<List<LocationEntity>> list(
             @RequestParam(value = "token", required = true)String token,
-            @RequestParam(value = "systemId", required = false)int systemId
-    ) {
+            @RequestParam(value = "systemId", required = false)int systemId,
+            @ModelAttribute Page page
+            ) {
         UserEntity user = SessionManager.getSession(token);
         List<Limitation> limitations = limitationService.getLimit(user);
-        return locationService.list(systemId,limitations);
+        return locationService.list(systemId,limitations,page);
     }
 }

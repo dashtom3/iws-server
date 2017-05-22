@@ -1,8 +1,10 @@
 package com.xj.iws.http.mvc.dao;
 
+import com.sun.tracing.dtrace.ProviderAttributes;
 import com.xj.iws.http.mvc.entity.DeviceEntity;
 import com.xj.iws.http.mvc.entity.DeviceGroupEntity;
 import org.apache.ibatis.annotations.Param;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,9 +15,9 @@ import java.util.List;
 @Repository
 public interface DeviceDao {
 
-    int addGroup(DeviceEntity deviceEntity);
+    int addGroup(DeviceGroupEntity groupEntity);
 
-    int addDevice(@Param("device") DeviceEntity device, @Param("terms") DeviceEntity[] deviceEntities);
+    int addDevice(@Param("device") DeviceGroupEntity groupEntity, @Param("terms") DeviceEntity[] deviceEntities);
 
     int updateGroup(DeviceEntity deviceEntity);
 
@@ -33,7 +35,11 @@ public interface DeviceDao {
 
     int createDataTable(@Param("IP") String IP,@Param("port") String port,@Param("device") DeviceEntity device);
 
-    String getPort(int deviceId);
+    String getPort(int deiceId);
 
     String getNumber(int deviceId);
+
+    int runGroup(@Param("groupId") String groupId,@Param("status") int i);
+
+    int runDevice(@Param("groupId") String groupId,@Param("status") int i);
 }

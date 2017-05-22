@@ -79,34 +79,46 @@
     </select>
 
     <select id="detail" parameterType="int" resultMap="DeviceTermEntity">
-        SELECT d.id,d.count,d.protocol,d.type,d.name,d.describes,
-        t.name AS typename
-        FROM deviceterm d
-        LEFT JOIN devicetype t ON type = t.id
-        WHERE d.id = ${_parameter}
+        SELECT dt.id,dt.count,dt.protocol,dt.type,dt.name,dt.describes,t.name AS typename
+        FROM deviceterm dt
+        LEFT JOIN devicetype t ON dt.type = t.id
+        WHERE dt.id = ${_parameter}
     </select>
 
     <select id="deviceTermByIds" resultMap="DeviceTermEntity">
-        SELECT id,
-        <include refid="deviceTerm"/>
-        FROM deviceterm
-        WHERE id IN (<foreach collection="array" item="item" separator=",">${item}</foreach>)
+        SELECT dt.id,dt.count,dt.protocol,dt.type,dt.name,dt.describes,t.name AS typename
+        FROM deviceterm dt
+        LEFT JOIN devicetype t ON dt.type = t.id
+        WHERE dt.id IN (<foreach collection="array" item="item" separator=",">${item}</foreach>)
+    </select>
+
+    <select id="deviceTermList" resultMap="DeviceTermEntity">
+        SELECT dt.id,dt.count,dt.protocol,dt.type,dt.name,dt.describes,t.name AS typename
+        FROM deviceterm dt
+        LEFT JOIN devicetype t ON dt.type = t.id
+        <where>
+            <if test="type != null"> dt.type = '${type}'</if>
+        </where>
+        ORDER BY dt.id
+        <if test="page.numberPerPage != 0">
+            LIMIT ${page.currentNumber},${page.numberPerPage}
+        </if>
+    </select>
+
+    <select id="getCount" resultType="int">
+        SELECT count(0)
+        FROM deviceterm dt
+        LEFT JOIN devicetype t ON dt.type = t.id
+        <where>
+            <if test="_parameter != null"> dt.type = ${_parameter}</if>
+        </where>
+        ORDER BY dt.id
     </select>
 
     <select id="fieldDetail" parameterType="int" resultMap="PointFieldEntity">
         SELECT id,
         <include refid="pointField"/>
         FROM pointfield WHERE id = ${_parameter}
-    </select>
-
-    <select id="deviceTermList" resultMap="DeviceTermEntity">
-        SELECT id,
-        <include refid="deviceTerm"/>
-        FROM deviceterm
-        <where>
-            <if test="_parameter != 0"> type = ${_parameter}</if>
-        </where>
-        ORDER BY type,id
     </select>
 
     <select id="typeList" resultMap="DeviceTypeEntity">

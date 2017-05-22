@@ -34,4 +34,8 @@
         INSERT INTO log (<include refid="field"/>) VALUES (${userId},1,now(),'${describes}',null,'${ip}')
     </insert>
 
+    <delete id="delete">
+        DELETE FROM log WHERE id IN (<foreach collection="Array" item="id" separator=",">${id}</foreach>)
+    </delete>
+
 </mapper>

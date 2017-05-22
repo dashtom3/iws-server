@@ -7,7 +7,7 @@
 
     <sql id="device">groupid,termid,status,port,number,name,describes</sql>
 
-    <sql id="deviceGroup">roomid,name,describes</sql>
+    <sql id="deviceGroup">roomid,infoid,status,name,describes</sql>
 
     <resultMap id="DeviceEntity" type="com.xj.iws.http.mvc.entity.DeviceEntity">
         <id column="id" property="id" jdbcType="INTEGER"/>
@@ -18,24 +18,32 @@
         <result column="number" property="number" jdbcType="VARCHAR"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="describes" property="describes" jdbcType="VARCHAR"/>
+        <result column="termname" property="termName" jdbcType="VARCHAR"/>
+        <result column="termtype" property="termType" jdbcType="VARCHAR"/>
+        <result column="count" property="count" jdbcType="INTEGER"/>
+        <result column="protocol" property="protocol" jdbcType="VARCHAR"/>
     </resultMap>
-
     <resultMap id="DeviceGroupEntity" type="com.xj.iws.http.mvc.entity.DeviceGroupEntity">
         <id column="id" property="groupId" jdbcType="INTEGER"/>
         <result column="roomid" property="roomId" jdbcType="INTEGER"/>
+        <result column="infoid" property="infoId" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="describes" property="describes" jdbcType="VARCHAR"/>
+        <result column="roomname" property="roomName" jdbcType="VARCHAR"/>
+        <result column="typename" property="typeName" jdbcType="VARCHAR"/>
+        <result column="pic" property="pic" jdbcType="VARCHAR"/>
     </resultMap>
 
     <insert id="addDevice" >
         INSERT INTO device (<include refid="device"/>) VALUES
         <foreach collection="terms" item="item" separator=",">
-            (${device.groupId},${item.termId},${device.roomId},0,'${device.port}','${item.number}','${device.name}','${device.describes}')
+            (${device.groupId},${item.termId},0,'${device.port}','${item.number}','${device.name}','${device.describes}')
         </foreach>
     </insert>
 
-    <insert id="addGroup" useGeneratedKeys="true" keyProperty="groupId">
-        INSERT INTO devicegroup (roomid,name,describes) VALUES (${roomId},'${name}','${describes}')
+    <insert id="addGroup" parameterType="DeviceGroupEntity" useGeneratedKeys="true" keyProperty="groupId">
+        INSERT INTO devicegroup (roomid,infoid,status,name,describes) VALUES (${roomId},${infoId},0,'${name}','${describes}')
     </insert>
 
     <update id="updateGroup" parameterType="DeviceEntity">
@@ -57,21 +65,31 @@
     </delete>
 
     <select id="groupList" parameterType="int" resultMap="DeviceGroupEntity">
-        SELECT id,<include refid="deviceGroup" /> FROM devicegroup WHERE roomid = ${_parameter}
+        SELECT dg.id,dg.roomid,infoid,dg.status,dg.name,dg.describes,r.name AS roomname,dgi.name AS typename,dgt.pic AS pic
+        FROM devicegroup dg
+        LEFT JOIN room r ON dg.roomid = r.id
+        LEFT JOIN devicegroupinfo dgi ON dg.infoid = dgi.id
+        LEFT JOIN devicegrouptype dgt ON dgi.type = dgt.id
+        WHERE dg.roomid = ${_parameter}
     </select>
 
     <select id="groupDetail" parameterType="int" resultMap="DeviceGroupEntity">
-        SELECT id,<include refid="deviceGroup" /> FROM devicegroup WHERE id = ${_parameter}
+        SELECT dg.id,dg.roomid,infoid,dg.status,dg.name,dg.describes,r.name AS roomname,dgi.name AS typename,dgt.pic AS pic
+        FROM devicegroup dg
+        LEFT JOIN room r ON dg.roomid = r.id
+        LEFT JOIN devicegroupinfo dgi ON dg.infoid = dgi.id
+        LEFT JOIN devicegrouptype dgt ON dgi.type = dgt.id
+        WHERE dg.id = ${_parameter}
     </select>
 
     <select id="deviceList" parameterType="int" resultMap="DeviceEntity">
         SELECT d.id,d.groupid,d.termid,d.status,d.port,d.number,d.name,d.describes,
-        t.count,t.protocol,p.name AS termType,t.name AS termname
+        t.count,t.protocol,p.name AS termtype,t.name AS termname
         FROM device d
         LEFT JOIN deviceterm t ON d.termid = t.id
         LEFT JOIN devicetype p ON t.type = p.id
         <where>
-            <if test="_parameter != 0">groupid = ${_parameter}</if>
+            <if test="_parameter != 0">d.groupid = ${_parameter}</if>
         </where>
         ORDER BY d.groupid,d.id
     </select>
@@ -83,7 +101,7 @@
         LEFT JOIN deviceterm t ON d.termid = t.id
         LEFT JOIN devicetype p ON t.type = p.id
         <where>
-            <if test="_parameter != 0">id = ${_parameter}</if>
+            <if test="_parameter != 0">d.id = ${_parameter}</if>
         </where>
     </select>
 
@@ -104,9 +122,17 @@
         `time` datetime,
         `error` varchar(128),
         `count` int(4),
-        `data` varchar(512)
+        `data` varchar(512),
         PRIMARY KEY  (`id`))
         ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='${device.name}数据表' AUTO_INCREMENT=1
+    </update>
+
+    <update id="runGroup" useGeneratedKeys="true" keyProperty="groupId">
+        UPDATE devicegroup SET status = ${status} WHERE id = ${groupId}
+    </update>
+
+    <update id="runDevice">
+        UPDATE device SET status = ${status} WHERE groupid = ${groupId}
     </update>
 
 </mapper>

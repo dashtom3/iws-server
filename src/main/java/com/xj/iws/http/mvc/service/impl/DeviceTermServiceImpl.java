@@ -3,6 +3,7 @@ package com.xj.iws.http.mvc.service.impl;
 import com.xj.iws.common.enums.ErrorCodeEnum;
 import com.xj.iws.common.utils.DataWrapper;
 import com.xj.iws.common.utils.PackageUtil;
+import com.xj.iws.common.utils.Page;
 import com.xj.iws.http.mvc.dao.PointRoleDao;
 import com.xj.iws.http.mvc.dao.DeviceTermDao;
 import com.xj.iws.http.mvc.entity.DeviceTermEntity;
@@ -81,13 +82,15 @@ public class DeviceTermServiceImpl implements DeviceTermService {
     }
 
     @Override
-    public DataWrapper<List<DeviceTermEntity>> list(int type) {
+    public DataWrapper<List<DeviceTermEntity>> list(String type, Page page) {
         DataWrapper<List<DeviceTermEntity>> dataWrapper = new DataWrapper<List<DeviceTermEntity>>();
-        List<DeviceTermEntity> devices = deviceTermDao.deviceTermList(type);
+        List<DeviceTermEntity> devices = deviceTermDao.deviceTermList(type,page);
         List<PointFieldEntity> fields = deviceTermDao.fieldList(0);
         if (devices != null){
             devices = PackageUtil.deviceTermPack(devices,fields);
         }
+        int totalNumber = deviceTermDao.getCount();
+        dataWrapper.setPage(page,totalNumber);
         dataWrapper.setData(devices);
         return dataWrapper;
     }

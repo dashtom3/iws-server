@@ -1,6 +1,7 @@
 package com.xj.iws.http.mvc.service.impl;
 
 import com.xj.iws.common.enums.ErrorCodeEnum;
+import com.xj.iws.common.utils.Page;
 import com.xj.iws.http.mvc.dao.DeviceDao;
 import com.xj.iws.http.mvc.dao.DeviceInfoDao;
 import com.xj.iws.http.mvc.dao.DeviceTermDao;
@@ -52,7 +53,7 @@ public class DeviceServiceImpl implements DeviceService {
         int i = deviceInfoDao.deleteDevice(deviceGroupId, 0);
         int j = deviceInfoDao.deleteGroup(deviceGroupId);
 
-        if (i != 1) {
+        if (j != 1) {
             dataWrapper.setErrorCode(ErrorCodeEnum.Error);
         }
         return dataWrapper;
@@ -70,14 +71,16 @@ public class DeviceServiceImpl implements DeviceService {
     }
 
     @Override
-    public DataWrapper<List<DeviceGroupInfoEntity>> groupList() {
+    public DataWrapper<List<DeviceGroupInfoEntity>> groupList(Page page) {
         DataWrapper<List<DeviceGroupInfoEntity>> dataWrapper = new DataWrapper<List<DeviceGroupInfoEntity>>();
-        List<DeviceGroupInfoEntity> deviceGroups = deviceInfoDao.deviceGroupList();
+        List<DeviceGroupInfoEntity> deviceGroups = deviceInfoDao.deviceGroupList(page);
         for (DeviceGroupInfoEntity group : deviceGroups){
             String[] terms = group.getTerms().split(",");
             List<DeviceTermEntity> deviceTerms = deviceTermDao.deviceTermByIds(terms);
             group.setDeviceTerms(deviceTerms);
         }
+        int totalNumber = deviceInfoDao.getCount();
+        dataWrapper.setPage(page,totalNumber);
         dataWrapper.setData(deviceGroups);
         return dataWrapper;
     }

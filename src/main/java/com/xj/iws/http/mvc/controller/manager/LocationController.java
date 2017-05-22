@@ -1,5 +1,6 @@
 package com.xj.iws.http.mvc.controller.manager;
 
+import com.xj.iws.common.utils.Page;
 import com.xj.iws.http.mvc.entity.LocationEntity;
 import com.xj.iws.http.mvc.service.LimitationService;
 import com.xj.iws.http.mvc.service.LocationService;
@@ -103,11 +104,11 @@ public class LocationController {
             @RequestParam(value = "systemId", required = false) String systemId,
             @RequestParam(value = "provinceId", required = false) String provinceId,
             @RequestParam(value = "cityId", required = false) String cityId,
-            @RequestParam(value = "areaId", required = false) String areaId
-    ) {
+            @RequestParam(value = "areaId", required = false) String areaId,
+            @ModelAttribute Page page
+            ) {
         //创建查询条件
         Map<String, String> condition = new HashMap<String, String>();
-
         if (systemId != null && !"".equals(systemId)){
             condition.put("systemId", systemId);
         }
@@ -118,6 +119,6 @@ public class LocationController {
         } else if (provinceId != null && !"".equals(provinceId)) {
             condition.put("provinceId", provinceId);
         }
-        return locationService.query(condition);
+        return locationService.query(condition,page);
     }
 }

@@ -21,43 +21,6 @@ public class UserController {
     UserService userService;
 
     /**
-     * 用户登录
-     *
-     * @return boolean
-     */
-    @RequestMapping(value = "login", method = RequestMethod.POST)
-    @ResponseBody
-    public DataWrapper<UserEntity> login(
-            @RequestParam(value = "username", required = true) String username,
-            @RequestParam(value = "password", required = true) String password
-    ) {
-        return userService.login(username, password);
-    }
-
-    /**
-     * 用户注册
-     *
-     * @return boolean
-     */
-    @RequestMapping(value = "register", method = RequestMethod.POST)
-    @ResponseBody
-    public DataWrapper<UserEntity> register(
-            @ModelAttribute UserEntity user,
-            @RequestParam(value = "code", required = true) String code
-    ) {
-        return userService.register(user, code);
-    }
-
-    //获取验证码
-    @RequestMapping(value = "getVerifyCode")
-    @ResponseBody
-    public DataWrapper<Void> getVerifyCode(
-            @RequestParam(value = "username", required = true) String username
-    ) {
-        return userService.getVerifyCode(username);
-    }
-
-    /**
      * 查看个人资料
      *
      * @return user
@@ -109,21 +72,6 @@ public class UserController {
         UserEntity user = SessionManager.getSession(token);
         int userId = user.getId();
         return userService.changePwd(userId, oldPwd, newPwd);
-    }
-
-    /**
-     * 忘记密码
-     *
-     * @return boolean
-     */
-    @RequestMapping(value = "forgetPwd", method = RequestMethod.POST)
-    @ResponseBody
-    public DataWrapper<Void> forgetPwd(
-            @RequestParam(value = "username", required = true) String username,
-            @RequestParam(value = "password", required = true) String password,
-            @RequestParam(value = "code", required = true) String code
-    ) {
-        return userService.forgetPwd(username, password, code);
     }
 
     /**

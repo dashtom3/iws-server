@@ -9,17 +9,19 @@ public class DataField {
     private int number;
     private String name;
     private String data;
+    private double value;
     private DataEnum exception;
 
     public DataField() {
         exception = DataEnum.No_Exception;
     }
 
-    public DataField(int number, String name, String data, DataEnum exception) {
+    public DataField(int number, String name, String data, double value) {
         this.number = number;
         this.name = name;
         this.data = data;
-        this.exception = exception;
+        this.value = value;
+        this.exception = DataEnum.No_Exception;
     }
 
     public int getNumber() {
@@ -44,6 +46,14 @@ public class DataField {
 
     public void setData(String data) {
         this.data = data;
+    }
+
+    public double getValue() {
+        return value;
+    }
+
+    public void setValue(double value) {
+        this.value = value;
     }
 
     public DataEnum getException() {

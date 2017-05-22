@@ -1,5 +1,6 @@
 package com.xj.iws.http.mvc.dao;
 
+import com.xj.iws.common.utils.Page;
 import com.xj.iws.http.mvc.entity.RoleEntity;
 import com.xj.iws.http.mvc.entity.RoleSubEntity;
 import org.apache.ibatis.annotations.Param;
@@ -24,7 +25,7 @@ public interface RoleDao {
 
     int update(RoleEntity roleEntity);
 
-    List<RoleEntity> list(int except);
+    List<RoleEntity> list(@Param("except") int except, @Param("page")Page page);
 
     RoleEntity detail(int roleId);
 
@@ -38,4 +39,5 @@ public interface RoleDao {
 
     List<String> checkWritable(@Param("roleId") int roleId,@Param("systemId") int systemId,@Param("writable") int writable);
 
+    int getCount(int except);
 }

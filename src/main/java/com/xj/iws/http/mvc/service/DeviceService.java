@@ -1,6 +1,7 @@
 package com.xj.iws.http.mvc.service;
 
 import com.xj.iws.common.utils.DataWrapper;
+import com.xj.iws.common.utils.Page;
 import com.xj.iws.http.mvc.entity.DeviceEntity;
 import com.xj.iws.http.mvc.entity.DeviceGroupInfoEntity;
 import com.xj.iws.http.mvc.entity.DeviceGroupTypeEntity;
@@ -18,10 +19,9 @@ public interface DeviceService {
 
     DataWrapper<DeviceEntity> update(DeviceGroupInfoEntity deviceGroup);
 
-    DataWrapper<List<DeviceGroupInfoEntity>> groupList();
+    DataWrapper<List<DeviceGroupInfoEntity>> groupList(Page page);
 
     DataWrapper<DeviceGroupInfoEntity> groupDetail(int groupId);
-
 
     DataWrapper<List<DeviceGroupTypeEntity>> groupType();
 }

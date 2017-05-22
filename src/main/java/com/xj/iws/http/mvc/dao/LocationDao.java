@@ -1,5 +1,6 @@
 package com.xj.iws.http.mvc.dao;
 
+import com.xj.iws.common.utils.Page;
 import com.xj.iws.http.mvc.entity.LocationEntity;
 import com.xj.iws.http.mvc.entity.util.Limitation;
 import org.apache.ibatis.annotations.Param;
@@ -13,7 +14,9 @@ import java.util.Map;
  */
 @Repository
 public interface LocationDao {
-    List<LocationEntity> list(@Param("systemId") int systemId,@Param("limits") List<Limitation> limitations);
+    List<LocationEntity> list(@Param("systemId") int systemId,@Param("limits") List<Limitation> limitations,@Param("page") Page page);
+
+    int getListCount(@Param("systemId") int systemId,@Param("limits") List<Limitation> limitations);
 
     int add(LocationEntity locationEntity);
 
@@ -23,5 +26,7 @@ public interface LocationDao {
 
     LocationEntity detail(int locationId);
 
-    List<LocationEntity> query(Map<String,String> condition);
+    List<LocationEntity> query(@Param("condition") Map<String,String> condition,@Param("page") Page page);
+
+    int getCount(Map<String, String> condition);
 }

@@ -285,11 +285,12 @@ public interface RoomApi {
 
     /**
      *
-     * @api {post} http://localhost:8080/iws/api/room/enable 启用控制器组
-     * @apiName enable
+     * @api {post} http://localhost:8080/iws/api/room/deleteDevice 删除控制器
+     * @apiName deleteDevice
      * @apiGroup room
      * @apiVersion 0.1.0
-     * @apiDescription 创建数据存储表
+     * @apiDescription 创建控制器实例
+     *
      * @apiParam {int} groupId 控制器组id
      * @apiParam {String} token 身份验证
      *
@@ -298,7 +299,112 @@ public interface RoomApi {
      * {
      * callStatus:"SUCCEED",
      * errorCode:"No_Error",
-     * data:null
+     * data:null,
+     * token:"SK1d7a4fe3-c2cd-417f-8f6f-bf7412592996",
+     * numberPerPage:0,
+     * currentPage:0,
+     * totalNumber:0,
+     * totalPage:0
+     *  }
+     *
+     *  @apiErrorExample {json} Error-Response:
+     *  HTTP/1.1 200 OK
+     * {
+     * callStatus:"FAILED",
+     * errorCode:"Error",
+     * data:null,
+     * token:null,
+     * numberPerPage:0,
+     * currentPage:0,
+     * totalNumber:0,
+     * totalPage:0
+     *  }
+     *
+     */
+
+    /**
+     *
+     * @api {get} http://localhost:8080/iws/api/room/groupList 控制器组列表
+     * @apiName groupList
+     * @apiGroup room
+     * @apiVersion 0.1.0
+     * @apiDescription 控制器组列表
+     *
+     * @apiParam {int} roomId 控制器组id
+     * @apiParam {String} token 身份验证
+     *
+     * @apiSuccessExample Success-Response:
+     *  HTTP/1.1 200 OK
+     * {
+     * callStatus:"SUCCEED",
+     * errorCode:"No_Error",
+     * data(List):{
+     *      groupId:1
+     *      roomId:1
+     *      roomName:"1泵房"
+     *      name:"1控组"
+     *      describes:"测试控制器"
+     * }
+     * token:"SK1d7a4fe3-c2cd-417f-8f6f-bf7412592996",
+     * numberPerPage:0,
+     * currentPage:0,
+     * totalNumber:0,
+     * totalPage:0
+     *  }
+     *
+     *  @apiErrorExample {json} Error-Response:
+     *  HTTP/1.1 200 OK
+     * {
+     * callStatus:"FAILED",
+     * errorCode:"Error",
+     * data:null,
+     * token:null,
+     * numberPerPage:0,
+     * currentPage:0,
+     * totalNumber:0,
+     * totalPage:0
+     *  }
+     *
+     */
+
+    /**
+     *
+     * @api {get} http://localhost:8080/iws/api/room/groupDetail 控制器组详情
+     * @apiName groupDetail
+     * @apiGroup room
+     * @apiVersion 0.1.0
+     * @apiDescription 控制器组详情
+     *
+     * @apiParam {int} groupId 控制器组id
+     * @apiParam {String} token 身份验证
+     *
+     * @apiSuccessExample Success-Response:
+     *  HTTP/1.1 200 OK
+     * {
+     * callStatus:"SUCCEED",
+     * errorCode:"No_Error",
+     * data:{
+     *      groupId:1
+     *      roomId:1
+     *      roomName:"1泵房"
+     *      name:"1控组"
+     *      describes:"测试控制器"
+     *
+     *      devices(List):{
+     *          id:1,
+     *          groupId:1,
+     *          termId:1,
+     *          status:1,
+     *          port:"178.12.2.216"
+     *          number:"01"
+     *          name:"XX泵房控制器"
+     *          describes:"XX泵房控制器"
+     *          termName:"PLC01"
+     *          termType:"PLC"
+     *          count:41
+     *          protocol:"TCP"
+     *      }
+     * }
      * token:"SK1d7a4fe3-c2cd-417f-8f6f-bf7412592996",
      * numberPerPage:0,
      * currentPage:0,
@@ -337,6 +443,128 @@ public interface RoomApi {
      * callStatus:"SUCCEED",
      * errorCode:"No_Error",
      * data:null
+     * token:"SK1d7a4fe3-c2cd-417f-8f6f-bf7412592996",
+     * numberPerPage:0,
+     * currentPage:0,
+     * totalNumber:0,
+     * totalPage:0
+     *  }
+     *
+     *  @apiErrorExample {json} Error-Response:
+     *  HTTP/1.1 200 OK
+     * {
+     * callStatus:"FAILED",
+     * errorCode:"Error",
+     * data:null,
+     * token:null,
+     * numberPerPage:0,
+     * currentPage:0,
+     * totalNumber:0,
+     * totalPage:0
+     *  }
+     *
+     */
+
+    /**
+     *
+     * @api {post} http://localhost:8080/iws/api/room/close 关闭数据采集
+     * @apiName close
+     * @apiGroup room
+     * @apiVersion 0.1.0
+     * @apiDescription 关闭数据采集
+     * @apiParam {int} groupId 控制器组id
+     * @apiParam {String} token 身份验证
+     *
+     * @apiSuccessExample Success-Response:
+     *  HTTP/1.1 200 OK
+     * {
+     * callStatus:"SUCCEED",
+     * errorCode:"No_Error",
+     * data:null
+     * token:"SK1d7a4fe3-c2cd-417f-8f6f-bf7412592996",
+     * numberPerPage:0,
+     * currentPage:0,
+     * totalNumber:0,
+     * totalPage:0
+     *  }
+     *
+     *  @apiErrorExample {json} Error-Response:
+     *  HTTP/1.1 200 OK
+     * {
+     * callStatus:"FAILED",
+     * errorCode:"Error",
+     * data:null,
+     * token:null,
+     * numberPerPage:0,
+     * currentPage:0,
+     * totalNumber:0,
+     * totalPage:0
+     *  }
+     *
+     */
+
+    /**
+     *
+     * @api {post} http://localhost:8080/iws/api/room/test 测试
+     * @apiName test
+     * @apiGroup room
+     * @apiVersion 0.1.0
+     * @apiDescription 创建控制器实例
+     *
+     * @apiParam {int} roomId 泵房id
+     * @apiParam {String} port 端口号
+     * @apiParam {String} name 名称
+     * @apiParam {String} describes 描述
+     * @apiParam {List} terms 控制器json数组(termId 终端id,number 编号)
+     * @apiParam {String} token 身份验证
+     *
+     * @apiSuccessExample Success-Response:
+     *  HTTP/1.1 200 OK
+     * {
+     * callStatus:"SUCCEED",
+     * errorCode:"No_Error",
+     * data:null,
+     * token:"SK1d7a4fe3-c2cd-417f-8f6f-bf7412592996",
+     * numberPerPage:0,
+     * currentPage:0,
+     * totalNumber:0,
+     * totalPage:0
+     *  }
+     *
+     *  @apiErrorExample {json} Error-Response:
+     *  HTTP/1.1 200 OK
+     * {
+     * callStatus:"FAILED",
+     * errorCode:"Error",
+     * data:null,
+     * token:null,
+     * numberPerPage:0,
+     * currentPage:0,
+     * totalNumber:0,
+     * totalPage:0
+     *  }
+     *
+     */
+
+    /**
+     *
+     * @api {post} http://localhost:8080/iws/api/room/manual 远程启停水泵
+     * @apiName manual
+     * @apiGroup room
+     * @apiVersion 0.1.0
+     * @apiDescription 创建控制器实例
+     *
+     * @apiParam {String} token 身份验证
+     * @apiParam {String} deviceId 控制器id
+     * @apiParam {String} number 字段编号
+     * @apiParam {String} pumpStatus 泵机状态(自动/关闭传0, 手动/开启传1)
+     *
+     * @apiSuccessExample Success-Response:
+     *  HTTP/1.1 200 OK
+     * {
+     * callStatus:"SUCCEED",
+     * errorCode:"No_Error",
+     * data:null,
      * token:"SK1d7a4fe3-c2cd-417f-8f6f-bf7412592996",
      * numberPerPage:0,
      * currentPage:0,

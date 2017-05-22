@@ -1,6 +1,13 @@
 <html>
 <body>
 <h2>Hello World!</h2>
+login
+<form action="http://61.190.61.78:6784/iws/api/user/login" method="post">
+    <input type="text" name="username"/>
+    <input type="password" name="password">
+    <%--<input type="text" name="status" value="0">--%>
+    <input type="submit" value="login"/>
+</form>
 system
 <form action="api/system/add.do" method="post">
     <input type="text" name="name"/>
@@ -53,7 +60,7 @@ location
     <input type="text" name="areaId"/>
     <input type="text" name="cityId"/>
     <input type="text" name="provinceId"/>
-    token<input type="text" name="token" value="123"/>
+    token<input type="text" name="token" value=""/>
     <input type="submit" value="query"/>
 </form>
 <form action="api/location/detail.do" method="post">
@@ -96,6 +103,13 @@ device
     <input type="submit" value="groupDetail"/>
 </form>
 
+<form action="http://61.190.61.78:6784/iws/api/device/list" method="get">
+    token<input type="text" name="token" value=""/>
+    <input type="submit" value="list"/>
+    <input type="text" name="numberPerPage" value="10"/>
+    <input type="text" name="currentPage" value="1"/>
+</form>
+
 <form action="api/device/groupType" method="get">
     token<input type="text" name="token" value="SK123"/>
     <input type="submit" value="groupType"/>
@@ -115,8 +129,8 @@ device
     <input type="submit" value="update"/>
 </form>
 
-<form action="api/device/list" method="get">
-    token<input type="text" name="token" value="SK123"/>
+<form action="http://61.190.61.78:6784/iws/api/device/list" method="get">
+    token<input type="text" name="token"/>
     <input type="submit" value="list"/>
 </form>
 user
@@ -125,12 +139,7 @@ user
     token<input type="text" name="token" value="123"/>
     <input type="submit" value="getVerifyCode"/>
 </form>
-<form action="api/user/login.do" method="post">
-    <input type="text" name="username"/>
-    <input type="password" name="password">
-    token<input type="text" name="token" value="123"/>
-    <input type="submit" value="login"/>
-</form>
+
 <form action="api/user/changePwd.do" method="post">
     <input type="text" name="oldPwd"/>
     <input type="text" name="newPwd">
@@ -138,8 +147,8 @@ user
     <input type="submit" value="changePwd"/>
 </form>
 role
-<form action="http://61.190.61.78:6784/iws/api/role/list" method="post">
-    token<input type="text" name="token" value="123"/>
+<form action="api/role/list" method="post">
+    token<input type="text" name="token" value=""/>
     <input type="submit" value="list"/>
 </form>
 <form action="http://61.190.61.78:6784/iws/api/role/delete" method="post">
@@ -190,13 +199,15 @@ deviceTerm
 </form>
 
 data
-<form action="api/data/query" method="get">
+<form action="http://61.190.61.78:6784/iws/api/data/query" method="get">
     <input type="text" name="deviceId" value="1"/>
     <input type="text" name="startTime" value="2016-01-01 12:00:00"/>
     <input type="text" name="endTime" value="2018-01-01 12:00:00"/>
     <input type="text" name="timeStep" value="60"/>
     token<input type="text" name="token" value="SK123"/>
     <input type="submit" value="query"/>
+    <input type="text" name="numberPerPage" value="10"/>
+    <input type="text" name="currentPage" value="1"/>
 </form>
 
 <form action="api/data/outputExcel" method="get">
@@ -214,22 +225,49 @@ data
     <input type="submit" value="presentDate"/>
 </form>
 
+<form action="api/data/pumpStatus" method="get">
+    <input type="text" name="deviceId" value="1"/>
+    token<input type="text" name="token" value=""/>
+    <input type="submit" value="presentDate"/>
+</form>
+
 room
 <form action="api/room/groupList" method="get">
-    token<input type="text" name="token" value="SK123"/>
+    token<input type="text" name="token"/>
     <input type="text" name="roomId" value="1"/>
     <input type="submit" value="groupList"/>
 </form>
 
 <form action="api/room/groupDetail" method="get">
-    token<input type="text" name="token" value="SK123"/>
-    <input type="text" name="groupId" value="1"/>
+    token<input type="text" name="token" value=""/>
+    <input type="text" name="groupId" value="2"/>
     <input type="submit" value="groupDetail"/>
+</form>
+
+<form action="api/room/start" method="post">
+    token<input type="text" name="token" value=""/>
+    <input type="text" name="groupId" value="1"/>
+    <input type="submit" value="start"/>
+</form>
+
+<form action="api/room/test" method="post">
+    token<input type="text" name="token" value=""/>
+    <input type="text" name="port" value="8080"/>
+    <input type="text" name="number" value="8080"/>
+    <input type="submit" value="test"/>
 </form>
 
 alarm
 <form action="api/alarm/list" method="get">
-    token<input type="text" name="token" value="SK123"/>
+    token<input type="text" name="token" value=""/>
+    <%--<input type="text" name="systemId" value="1"/>--%>
+    <%--<input type="text" name="locationId" value="1"/>--%>
+    <%--<input type="text" name="groupId" value="1"/>--%>
+    <%--<input type="text" name="status" value="1"/>--%>
+    <%--<input type="text" name="numberPerPage" value="10"/>--%>
+    <%--<input type="text" name="currentPage" value="1"/>--%>
+    <%--<input type="text" name="startTime" value="2017-01-01 12:00:00"/>--%>
+    <%--<input type="text" name="endTime" value="2017-01-01 12:00:00"/>--%>
     <input type="submit" value="list"/>
 </form>
 
@@ -238,11 +276,16 @@ userManage
     token<input type="text" name="token" value="123"/>
     <input type="submit" value="list"/>
 </form>
+<form action="api/userManage/detail" method="get">
+    token<input type="text" name="token" value=""/>
+    <input type="text" name="userId" value="1"/>
+    <input type="submit" value="detail"/>
+</form>
 
 role<br />
-<input type="text" name="" value="" id="systemId"><br>
-<input type="text" name="" value="" id="name"><br>
-<input type="button" name="" value="addRole" onclick="btn()">
+<input type="text" name="" value="" id="token"><br>
+<input type="button" name="" value="addRole" onclick="addRole()">
+<input type="button" name="" value="updateRole" onclick="updateRole()">
 
 <input type="button" name="" value="addDevice" onclick="device()">
 
@@ -251,37 +294,66 @@ role<br />
 </body>
 
 <script type="text/javascript">
-    function btn () {
-        var name = document.getElementById('name').value
-        var systemId = document.getElementById('systemId').value
+    function addRole () {
+        var token = document.getElementById('token').value
+        var name = 'test'
         var subitem = JSON.stringify([{
-            systemId: systemId,
+            systemId: 1,
             areaId:110000
         }])
         subitem = subitem;
         console.log(subitem);
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://localhost:8080/iws/api/role/add?token=123&name="+name+"&")
+        xhr.open("POST", "http://localhost:8080/iws/api/role/add")
+        xhr.setRequestHeader("Content-Type", "application/json")
+        xhr.send(subitem)
+    }
+
+    function updateRole () {
+        var token = document.getElementById('token').value
+        var name = 'test'
+        var subitem = JSON.stringify([{
+            systemId: 1,
+            areaId:110000,
+            limitation:1,
+        }])
+        subitem = subitem;
+        console.log(subitem);
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://localhost:8080/iws/api/role/update?id=35&name="+name+"&token="+token+"&")
         xhr.setRequestHeader("Content-Type", "application/json")
         xhr.send(subitem)
     }
 
     function device () {
-        var name = '123'
-        var systemId = document.getElementById('systemId').value
-        var subitem = JSON.stringify([{
-            termId: systemId,
+        var token = document.getElementById('token').value
+        var name = "test";
+        var roomId = 1;
+        var devices = [{
+            termId: 1,
             number:'01'
         },{
-            termId: systemId,
+            termId: 2,
             number:'02'
-        }])
-        subitem = subitem;
-        console.log(subitem);
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://localhost:8080/iws/api/room/addDevice?token=SK123&name="+name+"&")
-        xhr.setRequestHeader("Content-Type", "application/json")
-        xhr.send(subitem)
+        }]
+
+        var data = {"token":token,"name":name,"roomId":roomId,"devices":devices};
+
+//        var data = new FormData();
+//
+//        data.append("token",token);
+//        data.append("name",name);
+//        data.append("roomId",roomId);
+//        data.append("devices",devices);
+
+
+        data = JSON.stringify(data)
+        console.log(data);
+
+//        var xhr = new XMLHttpRequest();
+//        xhr.open("POST", "api/room/addDevice")
+//        xhr.setRequestHeader("Content-Type", "application/json")
+//        xhr.send(data)
     }
 
     function deviceTerm () {

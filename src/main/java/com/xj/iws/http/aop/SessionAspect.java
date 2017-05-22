@@ -2,7 +2,6 @@ package com.xj.iws.http.aop;
 
 
 import com.xj.iws.common.enums.ErrorCodeEnum;
-import com.xj.iws.common.sessionManager.SessionManager;
 import com.xj.iws.common.utils.DataWrapper;
 import com.xj.iws.http.mvc.entity.UserEntity;
 import com.xj.iws.http.mvc.service.LimitationService;
@@ -23,10 +22,11 @@ public class SessionAspect {
     LimitationService limitationService;
 
     @Pointcut("execution(* com.xj.iws.http.mvc.controller.manager.*Controller.*(..))")
-    public void pointCut(){}
+    public void manager() {
+    }
 
-    @Around("pointCut()")
-    public Object beforeMethod(ProceedingJoinPoint point) {
+    @Around("manager()")
+    public Object checkManager(ProceedingJoinPoint point) {
 
         DataWrapper<String> dataWrapper = new DataWrapper<String>();
         dataWrapper.setErrorCode(ErrorCodeEnum.Limitation_error);
@@ -34,13 +34,43 @@ public class SessionAspect {
         Object[] param = point.getArgs();
         UserEntity user = AspectUtil.getUser(param);
 
-        if (user == null){
+        if (user == null) {
             return dataWrapper;
-        }else {
-            if (!limitationService.checkAdmin(user)){
+        } else {
+            if (!limitationService.checkAdmin(user)) {
+                return dataWrapper;
+            } else {
+                Object object = null;
+                try {
+                    object = point.proceed();
+                } catch (Throwable throwable) {
+                    throwable.printStackTrace();
+                }
+                return object;
+            }
+        }
+    }
+
+    @Pointcut("execution(* com.xj.iws.http.mvc.controller.user.*Controller.*(..))")
+    public void user() {
+    }
+
+    @Around("user()")
+    public Object checkUser(ProceedingJoinPoint point) {
+
+        DataWrapper<String> dataWrapper = new DataWrapper<String>();
+        dataWrapper.setErrorCode(ErrorCodeEnum.Limitation_error);
+
+        Object[] param = point.getArgs();
+        UserEntity user = AspectUtil.getUser(param);
+
+        if (user == null) {
+            return dataWrapper;
+        } else {
+            if (0 == user.getRoleId()){
                 return dataWrapper;
             }else {
-                Object object= null;
+                Object object = null;
                 try {
                     object = point.proceed();
                 } catch (Throwable throwable) {
@@ -51,3 +81,4 @@ public class SessionAspect {
         }
     }
 }
+

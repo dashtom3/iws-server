@@ -48,7 +48,7 @@
         </where>
     </delete>
 
-    <update id="update" parameterType="RoleEntity">
+    <update id="update" parameterType="RoleEntity" useGeneratedKeys="true" keyProperty="id">
         UPDATE role
         <set>
             <if test="name != null">name = '${name}',</if>
@@ -61,8 +61,17 @@
         SELECT id,
         <include refid="roleField"/>
         FROM role
-        WHERE id != ${_parameter}
+        WHERE id != ${except}
         ORDER BY id
+        <if test="page.numberPerPage != 0">
+            LIMIT ${page.currentNumber},${page.numberPerPage}
+        </if>
+    </select>
+
+    <select id="getCount" resultType="int">
+        SELECT count(0)
+        FROM role
+        WHERE id != ${_parameter}
     </select>
 
     <select id="detail" resultMap="RoleEntity">
@@ -76,7 +85,7 @@
         s.name AS systemname,CONCAT(IFNULL(p01.name,''),IFNULL(p02.name,''),IFNULL(p03.name,''),IFNULL(c01.name,''),IFNULL(c02.name,''),IFNULL(a01.name,'')) AS areaname
         FROM rolesub r
         LEFT JOIN system s ON r.systemid = s.id
-        LEFT JOIN rolelimit t ON r.limitation = t.name
+        LEFT JOIN rolelimit t ON r.limitation = t.id
         LEFT JOIN area a01 ON r.areaId = a01.areaId
         LEFT JOIN city c01 ON a01.cityId = c01.cityId
         LEFT JOIN province p01 ON c01.provinceId = p01.provinceId

@@ -32,16 +32,52 @@
         LEFT JOIN location l ON r.locationid = l.id
         LEFT JOIN system s ON l.systemid = s.id
         <where>
-            <if test="userId != null">AND userid = '${userId}'</if>
-            <if test="startTime != null">AND alarmtime &gt; '${startTime}'</if>
-            <if test="endTime != null">AND alarmtime &lt; '${endTime}'</if>
-            <if test="status != null">AND status = '${status}'</if>
-            <if test="systemId != null">AND s.id = '${systemId}'</if>
+            <if test="condition.userId != null">AND userid = '${condition.userId}'</if>
+            <if test="condition.startTime != null">AND alarmtime &gt; '${condition.startTime}'</if>
+            <if test="condition.endTime != null">AND alarmtime &lt; '${condition.endTime}'</if>
+            <if test="condition.status != null">AND n.status = '${condition.status}'</if>
+            <if test="condition.systemId != null">AND s.id = '${condition.systemId}'</if>
         </where>
         ORDER BY alarmtime DESC
+        <if test="page.numberPerPage != 0">
+            LIMIT ${page.currentNumber},${page.numberPerPage}
+        </if>
     </select>
 
-    <update id="confirm" parameterType="int">
+    <select id="getCount" resultType="int">
+        SELECT count(0)
+        FROM news n
+        LEFT JOIN user u ON n.userid = u.id
+        LEFT JOIN alarm a ON n.alarmid = a.id
+        LEFT JOIN device d ON a.deviceid = d.id
+        LEFT JOIN devicegroup dg ON d.groupid = dg.id
+        LEFT JOIN room r ON dg.roomid = r.id
+        LEFT JOIN location l ON r.locationid = l.id
+        LEFT JOIN system s ON l.systemid = s.id
+        <where>
+            <if test="condition.userId != null">AND n.userid = '${condition.userId}'</if>
+            <if test="condition.startTime != null">AND n.alarmtime &gt; '${condition.startTime}'</if>
+            <if test="condition.endTime != null">AND n.alarmtime &lt; '${condition.endTime}'</if>
+            <if test="condition.status != null">AND n.status = '${condition.status}'</if>
+            <if test="condition.systemId != null">AND s.id = '${condition.systemId}'</if>
+        </where>
+    </select>
+
+    <select id="detail" resultType="NewsEntity">
+        SELECT
+        n.id,n.alarmid,n.userid,n.status,n.alarmtime,n.confirmtime,n.name,n.describes,s.name AS systemname,u.name AS username
+        FROM news n
+        LEFT JOIN user u ON n.userid = u.id
+        LEFT JOIN alarm a ON n.alarmid = a.id
+        LEFT JOIN device d ON a.deviceid = d.id
+        LEFT JOIN devicegroup dg ON d.groupid = dg.id
+        LEFT JOIN room r ON dg.roomid = r.id
+        LEFT JOIN location l ON r.locationid = l.id
+        LEFT JOIN system s ON l.systemid = s.id
+        WHERE n.id = ${_parameter}
+    </select>
+
+    <update id="confirm" >
         UPDATE news SET userid = ${userId}, status = 1, confirmtime = now()
         WHERE id = ${newsId}
     </update>

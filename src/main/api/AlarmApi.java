@@ -12,6 +12,18 @@ public interface LocationApi {
      * @apiDescription 返回全部报警信息
      *
      * @apiParam {String} token 身份验证
+     * @apiParam {String} systemId 系统id
+     * @apiParam {String} provinceId 地点id
+     * @apiParam {String} cityId 地点id
+     * @apiParam {String} areaId 地点id
+     * @apiParam {String} locationId 地点id
+     * @apiParam {String} roomId 地点id
+     * @apiParam {String} groupId 地点id
+     * @apiParam {String} deviceId 地点id
+     *
+     * @apiParam {String} status 状态(0未结束,1已结束)
+     * @apiParam {String} startTime (查询开始时间大于startTime的数据)
+     * @apiParam {String} endTime (查询开始时间小于startTime的数据)
      *
      *
      * @apiSuccessExample Success-Response:
@@ -26,8 +38,8 @@ public interface LocationApi {
      *      roomId:1,
      *      startTime:"2017-01-01 12:00:00",
      *      endTime:"2017-01-02 12:00:00",
-     *      status:1(0未确认,1已确认),
-     *      confirm:1(0未结束,1已结束),
+     *      status:1(0未结束,1已结束),
+     *      confirm:1(0未确认,1已确认),
      *      name:"123",
      *      describes:"123",
      *      locationName:"XX小区",

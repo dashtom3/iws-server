@@ -94,7 +94,7 @@ public interface RoleApi {
      * @apiVersion 0.1.0
      * @apiDescription 编辑修改角色
      *
-     * @apiParam {int} roleId 角色id
+     * @apiParam {int} id 角色id
      * @apiParam {List} subitem 角色权限子项(systemId 系统id; areaId 地区id，可为省、市或区; limitation 操作权限 1只读/2可写/3管理员)
      * @apiParam {String} name 角色名称
      * @apiParam {String} describes 角色描述

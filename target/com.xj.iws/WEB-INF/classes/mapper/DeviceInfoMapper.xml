@@ -16,7 +16,6 @@
         <result column="type" property="type" jdbcType="INTEGER"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="describes" property="describes" jdbcType="VARCHAR"/>
-        <result column="pic" property="pic" jdbcType="VARCHAR"/>
     </resultMap>
 
     <resultMap id="DeviceGroupTypeEntity" type="com.xj.iws.http.mvc.entity.DeviceGroupTypeEntity">
@@ -27,10 +26,17 @@
         <result column="pic" property="pic" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <select id="deviceGroupList" parameterType="int" resultMap="deviceGroupInfoEntity">
+    <select id="deviceGroupList" resultMap="deviceGroupInfoEntity">
         SELECT id,
         <include refid="deviceGroupInfo"/>
         FROM devicegroupinfo ORDER BY id
+        <if test="numberPerPage != 0">
+            LIMIT ${currentNumber},${numberPerPage}
+        </if>
+    </select>
+
+    <select id="getCount" resultType="int">
+        SELECT COUNT(0) FROM devicegroupinfo
     </select>
 
     <select id="groupDetail" parameterType="int" resultMap="deviceGroupInfoEntity">
@@ -41,7 +47,9 @@
     </select>
 
     <select id="groupTypes" resultMap="DeviceGroupTypeEntity">
-        SELECT id,<include refid="deviceGroupType"/> FROM devicegrouptype
+        SELECT id,
+        <include refid="deviceGroupType"/>
+        FROM devicegrouptype
     </select>
 
     <insert id="addGroup" parameterType="deviceGroupInfoEntity" useGeneratedKeys="true" keyProperty="id">

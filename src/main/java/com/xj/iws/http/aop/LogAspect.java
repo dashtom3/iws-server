@@ -30,7 +30,6 @@ public class LogAspect {
 
     @After("pointCut()")
     public void afterMethod(JoinPoint joinPoint) {
-        System.out.println("log");
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         Object[] param = joinPoint.getArgs();
         UserEntity user = AspectUtil.getUser(param);
@@ -47,6 +46,8 @@ public class LogAspect {
                 method = "编辑";
             } else if (URI[i].indexOf("delete") != -1) {
                 method = "删除";
+            } else {
+                break;
             }
             if ("system".equals(URI[i])) {
                 handle = method + "系统";
@@ -77,9 +78,9 @@ public class LogAspect {
                 break;
             }
         }
-        if (handle != null){
-            LogEntity log = new LogEntity(user.getId(),handle,IP);
-            logDao.addHandle(log);
-        }
+//        if (null != handle){
+//            LogEntity log = new LogEntity(user.getId(),handle,IP);
+//            logDao.addHandle(log);
+//        }
     }
 }

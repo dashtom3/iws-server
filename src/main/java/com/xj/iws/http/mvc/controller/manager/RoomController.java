@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by XiaoJiang01 on 2017/3/9.
@@ -87,10 +88,10 @@ public class RoomController {
     @ResponseBody
     public DataWrapper<Void> addDevice(
             @RequestParam(value = "token", required = true) String token,
-            @ModelAttribute DeviceEntity deviceEntity,
-            @RequestBody DeviceEntity[] devices
+            @ModelAttribute DeviceGroupEntity groupEntity,
+            @RequestBody DeviceEntity[] terms
     ) {
-        return roomService.addDevice(deviceEntity, devices);
+        return roomService.addDevice(groupEntity, terms);
     }
 
     /**
@@ -102,10 +103,9 @@ public class RoomController {
     @ResponseBody
     public DataWrapper<Void> updateDevice(
             @RequestParam(value = "token", required = true) String token,
-            @ModelAttribute DeviceEntity deviceEntity,
-            @RequestBody DeviceEntity[] devices
+            @ModelAttribute DeviceEntity deviceEntity
     ) {
-        return roomService.updateDevice(deviceEntity, devices);
+        return roomService.updateDevice(deviceEntity);
     }
 
     /**
@@ -133,7 +133,7 @@ public class RoomController {
             @RequestParam(value = "token", required = true) String token,
             @RequestParam(value = "roomId", required = true) int roomId
     ) {
-        return roomService.deviceList(roomId);
+        return roomService.groupList(roomId);
     }
 
     /**
@@ -151,7 +151,7 @@ public class RoomController {
     }
 
     /**
-     * 控制器组详情
+     * 控制器详情
      *
      * @return room
      */
@@ -164,22 +164,6 @@ public class RoomController {
         return roomService.deviceDetail(deviceId);
     }
 
-
-    /**
-     * 启用控制器,创建数据存储表
-     * @param groupId
-     * @param token
-     * @return
-     */
-    @RequestMapping(value = "enable",method = RequestMethod.POST)
-    @ResponseBody
-    public DataWrapper<Void> enable(
-            @RequestParam(value = "token", required = true) String token,
-            @RequestParam(value = "groupId", required = true) int groupId
-    ) {
-        return roomService.enable(groupId);
-    }
-
     /**
      * 数据采集启动
      * @param token
@@ -190,8 +174,57 @@ public class RoomController {
     @ResponseBody
     public DataWrapper<Void> start(
             @RequestParam(value = "token", required = true) String token,
-            @RequestParam(value = "groupId", required = true) String[] groupId
+            @RequestParam(value = "groupId", required = true) String groupId
     ) {
         return roomService.start(groupId);
     }
+
+    /**
+     * 数据采集关闭
+     * @param token
+     * @param groupId
+     * @return
+     */
+    @RequestMapping(value = "close", method = RequestMethod.POST)
+    @ResponseBody
+    public DataWrapper<Void> close(
+            @RequestParam(value = "token", required = true) String token,
+            @RequestParam(value = "groupId", required = true) String groupId
+    ) {
+        return roomService.close(groupId);
+    }
+
+    /**
+     *
+     * @param token
+     * @param groupEntity
+     * @param terms
+     * @return
+     */
+    @RequestMapping(value = "testDevice", method = RequestMethod.POST)
+    @ResponseBody
+    public DataWrapper<Map<String,String>> test(
+            @RequestParam(value = "token", required = true) String token,
+            @ModelAttribute DeviceGroupEntity groupEntity,
+            @RequestBody DeviceEntity[] terms
+    ) {
+        return roomService.test(groupEntity,terms);
+    }
+
+    /**
+     *
+     * @param token
+     * @return
+     */
+    @RequestMapping(value = "manual", method = RequestMethod.POST)
+    @ResponseBody
+    public DataWrapper<Void> manual(
+            @RequestParam(value = "token", required = true) String token,
+            @RequestParam(value = "deviceId",required = true) String deviceId,
+            @RequestParam(value = "number",required = true) String number,
+            @RequestParam(value = "pumpStatus",required = true) String pumpStatus
+    ) {
+        return roomService.manual(deviceId,number,pumpStatus);
+    }
+
 }

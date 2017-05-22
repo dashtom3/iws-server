@@ -1,6 +1,7 @@
 package com.xj.iws.http.mvc.controller.manager;
 
 import com.xj.iws.common.utils.DataWrapper;
+import com.xj.iws.common.utils.Page;
 import com.xj.iws.http.mvc.entity.DeviceTermEntity;
 import com.xj.iws.http.mvc.entity.DeviceTypeEntity;
 import com.xj.iws.http.mvc.entity.PointFieldEntity;
@@ -28,7 +29,7 @@ public class DeviceTermController {
      * @param token
      * @return
      */
-    @RequestMapping(value = "pointRole",method = RequestMethod.POST)
+    @RequestMapping(value = "pointRole", method = RequestMethod.POST)
     @ResponseBody
     public DataWrapper<List<PointRoleEntity>> pointRole(
             @RequestParam(value = "token", required = true) String token
@@ -42,14 +43,14 @@ public class DeviceTermController {
      * @param token
      * @return
      */
-    @RequestMapping(value = "add",method = RequestMethod.POST)
+    @RequestMapping(value = "add", method = RequestMethod.POST)
     @ResponseBody
     public DataWrapper<DeviceTermEntity> addPointTable(
             @RequestParam(value = "token", required = true) String token,
             @ModelAttribute DeviceTermEntity deviceTermEntity,
             @RequestBody PointFieldEntity[] fields
     ) {
-        return deviceTermService.add(deviceTermEntity,fields);
+        return deviceTermService.add(deviceTermEntity, fields);
     }
 
     /**
@@ -58,7 +59,7 @@ public class DeviceTermController {
      * @param token
      * @return
      */
-    @RequestMapping(value = "delete",method = RequestMethod.POST)
+    @RequestMapping(value = "delete", method = RequestMethod.POST)
     @ResponseBody
     public DataWrapper<Void> delete(
             @RequestParam(value = "token", required = true) String token,
@@ -73,7 +74,7 @@ public class DeviceTermController {
      * @param token
      * @return
      */
-    @RequestMapping(value = "update",method = RequestMethod.POST)
+    @RequestMapping(value = "update", method = RequestMethod.POST)
     @ResponseBody
     public DataWrapper<DeviceTermEntity> update(
             @RequestParam(value = "token", required = true) String token,
@@ -88,16 +89,14 @@ public class DeviceTermController {
      * @param token
      * @return
      */
-    @RequestMapping(value = "list",method = RequestMethod.POST)
+    @RequestMapping(value = "list", method = RequestMethod.POST)
     @ResponseBody
     public DataWrapper<List<DeviceTermEntity>> list(
             @RequestParam(value = "token", required = true) String token,
-            @RequestParam(value = "type", required = false) String type
+            @RequestParam(value = "type", required = false) String type,
+            @ModelAttribute Page page
     ) {
-        if (type == null || type == ""){
-            type = "0";
-        }
-        return deviceTermService.list(Integer.parseInt(type));
+        return deviceTermService.list(type, page);
     }
 
     /**
@@ -106,7 +105,7 @@ public class DeviceTermController {
      * @param token
      * @return
      */
-    @RequestMapping(value = "detail",method = RequestMethod.POST)
+    @RequestMapping(value = "detail", method = RequestMethod.POST)
     @ResponseBody
     public DataWrapper<DeviceTermEntity> detail(
             @RequestParam(value = "token", required = true) String token,
@@ -121,7 +120,7 @@ public class DeviceTermController {
      * @param token
      * @return
      */
-    @RequestMapping(value = "typeList",method = RequestMethod.POST)
+    @RequestMapping(value = "typeList", method = RequestMethod.POST)
     @ResponseBody
     public DataWrapper<List<DeviceTypeEntity>> typeList(
             @RequestParam(value = "token", required = true) String token
@@ -135,7 +134,7 @@ public class DeviceTermController {
      * @param token
      * @return
      */
-    @RequestMapping(value = "query",method = RequestMethod.POST)
+    @RequestMapping(value = "query", method = RequestMethod.POST)
     @ResponseBody
     public DataWrapper<List<DeviceTermEntity>> query(
             @RequestParam(value = "token", required = true) String token,
@@ -143,10 +142,10 @@ public class DeviceTermController {
             @RequestParam(value = "type", required = false) String type,
             @RequestParam(value = "name", required = false) String name
     ) {
-        Map<String,String> condition = new HashMap<String, String>();
-        condition.put("protocol",protocol);
-        condition.put("type",type);
-        condition.put("name",name);
+        Map<String, String> condition = new HashMap<String, String>();
+        condition.put("protocol", protocol);
+        condition.put("type", type);
+        condition.put("name", name);
         return deviceTermService.query(condition);
     }
 }

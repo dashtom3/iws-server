@@ -20,6 +20,8 @@
         <result column="provincename" property="provinceName" jdbcType="VARCHAR"/>
         <result column="cityname" property="cityName" jdbcType="VARCHAR"/>
         <result column="areaname" property="areaName" jdbcType="VARCHAR"/>
+        <result column="pic" property="pic" jdbcType="VARCHAR"/>
+        <result column="systemname" property="systemName" jdbcType="VARCHAR"/>
     </resultMap>
 
     <insert id="add" parameterType="LocationEntity" useGeneratedKeys="true" keyProperty="id">
@@ -46,65 +48,110 @@
         WHERE id = ${id}
     </update>
 
-    <select id="list" parameterType="int" resultMap="LocationEntity">
+    <select id="list" resultMap="LocationEntity">
         SELECT
-            l.id,l.systemid,l.provinceid,l.cityid,l.areaid,l.positionx,l.positiony,l.name,l.describes,
-            p.name AS provincename,c.name AS cityname,a.name AS areaname
-        FROM
-            location l
-        LEFT JOIN
-            province p ON l.provinceid = p.provinceid
-        LEFT JOIN
-            city c ON l.cityid = c.cityid
-        LEFT JOIN
-            area a ON l.areaid = a.areaid
+        vw.id,vw.systemid,vw.provinceid,vw.cityid,vw.areaid,vw.positionx,vw.positiony,vw.name,vw.describes,
+        vw.provincename,vw.cityname,vw.areaname,vw.systemname,vw.pic
+        FROM (SELECT
+        l.id,l.systemid,l.provinceid,l.cityid,l.areaid,l.positionx,l.positiony,l.name,l.describes,
+        p.name AS provincename,c.name AS cityname,a.name AS areaname,s.name AS systemname,s.pic AS pic
+
+        FROM location l
+        LEFT JOIN province p ON l.provinceid = p.provinceid
+        LEFT JOIN city c ON l.cityid = c.cityid
+        LEFT JOIN area a ON l.areaid = a.areaid
+        LEFT JOIN system s ON l.systemid = s.id
         <where>
             <foreach collection="limits" item="limit" separator="OR">
-                <if test="limit.systemId != 0"> l.systemid = ${limit.systemId}</if>
-                <if test="limit.provinceId != null">AND l.provinceid = ${limit.proviceId}</if>
+                <if test="limit.systemId != 0">l.systemid = ${limit.systemId}</if>
+                <if test="limit.provinceId != null">AND l.provinceid = ${limit.provinceId}</if>
                 <if test="limit.cityId != null">AND l.cityid = ${limit.cityId}</if>
                 <if test="limit.areaId != null">AND l.areaid = ${limit.areaId}</if>
             </foreach>
-            <if test="systemId != 0">AND l.systemid = ${systemId}</if>
         </where>
         ORDER BY
-            l.systemid,l.provinceid,l.cityid,l.areaid
+        l.systemid,l.provinceid,l.cityid,l.areaid ) vw
+        <where>
+            <if test="systemId != 0">AND vw.systemid = ${systemId}</if>
+        </where>
+        <if test="page.numberPerPage != 0">
+            LIMIT ${page.currentNumber},${page.numberPerPage}
+        </if>
+    </select>
+
+    <select id="getListCount" resultType="int">
+        SELECT count(0)
+        FROM ( SELECT
+        l.id,l.systemid
+        FROM location l
+        LEFT JOIN province p ON l.provinceid = p.provinceid
+        LEFT JOIN city c ON l.cityid = c.cityid
+        LEFT JOIN area a ON l.areaid = a.areaid
+        LEFT JOIN system s ON l.systemid = s.id
+        <where>
+            <foreach collection="limits" item="limit" separator="OR">
+                <if test="limit.systemId != 0">l.systemid = ${limit.systemId}</if>
+                <if test="limit.provinceId != null">AND l.provinceid = ${limit.provinceId}</if>
+                <if test="limit.cityId != null">AND l.cityid = ${limit.cityId}</if>
+                <if test="limit.areaId != null">AND l.areaid = ${limit.areaId}</if>
+            </foreach>
+        </where>
+        ) vw
+        <where>
+            <if test="systemId != 0">AND vw.systemid = ${systemId}</if>
+        </where>
+
     </select>
 
     <select id="detail" parameterType="int" resultMap="LocationEntity">
         SELECT
             l.id,l.systemid,l.provinceid,l.cityid,l.areaid,l.positionx,l.positiony,l.name,l.describes,
-            p.name AS provincename,c.name AS cityname,a.name AS areaname
-        FROM
-            location l
-        LEFT JOIN
-            province p ON l.provinceid = p.provinceid
-        LEFT JOIN
-            city c ON l.cityid = c.cityid
-        LEFT JOIN
-            area a ON l.areaid = a.areaid
-        WHERE
-            l.id = ${_parameter}
+            p.name AS provincename,c.name AS cityname,a.name AS areaname,s.name AS systemname,s.pic AS pic
+        FROM location l
+        LEFT JOIN province p ON l.provinceid = p.provinceid
+        LEFT JOIN city c ON l.cityid = c.cityid
+        LEFT JOIN area a ON l.areaid = a.areaid
+        LEFT JOIN system s ON l.systemid = s.id
+        WHERE l.id = ${_parameter}
     </select>
 
-    <select id="query" parameterType="HashMap" resultMap="LocationEntity">
+    <select id="query" resultMap="LocationEntity">
         SELECT
-            l.id,l.systemid,l.provinceid,l.cityid,l.areaid,l.positionx,l.positiony,l.name,l.describes,
-            p.name AS provincename,c.name AS cityname,a.name AS areaname
-        FROM
-            location l
-        LEFT JOIN
-            province p ON l.provinceid = p.provinceid
-        LEFT JOIN
-            city c ON l.cityid = c.cityid
-        LEFT JOIN
-            area a ON l.areaid = a.areaid
+        vw.id,vw.systemid,vw.provinceid,vw.cityid,vw.areaid,vw.positionx,vw.positiony,vw.name,vw.describes,
+        vw.provincename,vw.cityname,vw.areaname,vw.systemname,vw.pic
+        FROM (SELECT
+        l.id,l.systemid,l.provinceid,l.cityid,l.areaid,l.positionx,l.positiony,l.name,l.describes,
+        p.name AS provincename,c.name AS cityname,a.name AS areaname,s.name AS systemname,s.pic AS pic
+
+        FROM location l
+        LEFT JOIN province p ON l.provinceid = p.provinceid
+        LEFT JOIN city c ON l.cityid = c.cityid
+        LEFT JOIN area a ON l.areaid = a.areaid
+        LEFT JOIN system s ON l.systemid = s.id
+        <where>
+            <if test="condition.systemId != null">AND l.systemid = ${condition.systemId}</if>
+            <if test="condition.areaId != null">AND l.areaid = ${condition.areaId}</if>
+            <if test="condition.cityId != null">AND l.cityid = ${condition.cityId}</if>
+            <if test="condition.provinceId != null">AND l.provinceid = ${condition.provinceId}</if>
+        </where>
+        ORDER BY l.systemid,l.provinceid,l.cityid,l.areaid ) vw
+        <if test="page.numberPerPage != 0">
+            LIMIT ${page.currentNumber},${page.numberPerPage}
+        </if>
+    </select>
+
+    <select id="getCount" resultType="int">
+        SELECT count(0)
+        FROM location l
+        LEFT JOIN province p ON l.provinceid = p.provinceid
+        LEFT JOIN city c ON l.cityid = c.cityid
+        LEFT JOIN area a ON l.areaid = a.areaid
+        LEFT JOIN system s ON l.systemid = s.id
         <where>
             <if test="systemId != null">AND l.systemid = ${systemId}</if>
             <if test="areaId != null">AND l.areaid = ${areaId}</if>
             <if test="cityId != null">AND l.cityid = ${cityId}</if>
             <if test="provinceId != null">AND l.provinceid = ${provinceId}</if>
         </where>
-        ORDER BY l.systemid,l.provinceid,l.cityid,l.areaid
     </select>
 </mapper>
