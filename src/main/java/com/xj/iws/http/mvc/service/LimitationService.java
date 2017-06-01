@@ -13,8 +13,6 @@ public interface LimitationService {
 
     boolean checkMaintainer(UserEntity user);
 
-    boolean checkSystem(UserEntity user,int systemId);
-
     boolean checkLimit(UserEntity user,int systemId,String areaId,int writable);
 
     List<Limitation> getLimit(UserEntity user);

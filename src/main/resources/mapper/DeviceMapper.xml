@@ -35,10 +35,14 @@
         <result column="pic" property="pic" jdbcType="VARCHAR"/>
     </resultMap>
 
+    <select id="checkDevice" resultType="int">
+        SELECT count(0) FROM device WHERE port = '${_parameter}'
+    </select>
+
     <insert id="addDevice" >
         INSERT INTO device (<include refid="device"/>) VALUES
         <foreach collection="terms" item="item" separator=",">
-            (${device.groupId},${item.termId},0,'${device.port}','${item.number}','${device.name}','${device.describes}')
+            (${device.groupId},${item.termId},0,'${device.port}','${item.number}','${item.name}','${device.describes}')
         </foreach>
     </insert>
 
@@ -113,7 +117,7 @@
         SELECT number FROM device WHERE id = ${_parameter}
     </select>
 
-    <update id="createDataTable" parameterType="DeviceEntity">
+    <update id="createDataTable">
         CREATE TABLE `data_${IP}:${port}#${device.number}` (
         `id` int(10) NOT NULL auto_increment,
         `deviceid` int(10),
@@ -125,6 +129,10 @@
         `data` varchar(512),
         PRIMARY KEY  (`id`))
         ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='${device.name}数据表' AUTO_INCREMENT=1
+    </update>
+
+    <update id="dropDataTable">
+        DROP TABLE `data_${IP}:${port}#${device.number}`
     </update>
 
     <update id="runGroup" useGeneratedKeys="true" keyProperty="groupId">

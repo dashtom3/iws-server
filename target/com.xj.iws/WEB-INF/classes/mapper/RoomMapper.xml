@@ -5,7 +5,7 @@
 
 <mapper namespace="com.xj.iws.http.mvc.dao.RoomDao">
 
-    <sql id="field">locationid,name,describes</sql>
+    <sql id="field">locationid,name,describes,status</sql>
 
     <resultMap id="RoomEntity" type="com.xj.iws.http.mvc.entity.RoomEntity">
         <id column="id" property="id" jdbcType="INTEGER"/>
@@ -15,12 +15,12 @@
     </resultMap>
 
     <insert id="add" parameterType="RoomEntity">
-        INSERT INTO room (<include refid="field"/>) VALUES (${locationId},'${name}','${describes}')
+        INSERT INTO room (<include refid="field"/>) VALUES (${locationId},'${name}','${describes}',0)
     </insert>
 
-    <delete id="delete" parameterType="int">
-        DELETE FROM room WHERE id = ${_parameter}
-    </delete>
+    <update id="delete">
+        UPDATE room SET status = 2 WHERE id = ${_parameter}
+    </update>
 
     <update id="update" parameterType="RoomEntity">
         UPDATE room
@@ -35,7 +35,7 @@
     <select id="list" parameterType="int" resultMap="RoomEntity">
         SELECT id,
         <include refid="field"/>
-        FROM room WHERE locationid = ${_parameter} ORDER BY id
+        FROM room WHERE status != 2 AND locationid = ${_parameter} ORDER BY id
     </select>
 
     <select id="detail" parameterType="int" resultMap="RoomEntity">

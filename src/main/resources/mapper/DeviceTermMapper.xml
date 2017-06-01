@@ -6,7 +6,7 @@
 <mapper namespace="com.xj.iws.http.mvc.dao.DeviceTermDao">
 
     <sql id="deviceType">name,pic,describes</sql>
-    <sql id="deviceTerm">count,protocol,type,name,describes</sql>
+    <sql id="deviceTerm">count,protocol,type,name,describes,status</sql>
     <sql id="pointField">deviceid,number,roleid,name,describes,unit,min,max,multiple</sql>
 
     <resultMap id="PointFieldEntity" type="com.xj.iws.http.mvc.entity.PointFieldEntity">
@@ -41,7 +41,7 @@
 
     <insert id="addDevice" parameterType="DeviceTermEntity" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO deviceterm (<include refid="deviceTerm"/>) VALUES
-        ('${count}','${protocol}',${type},'${name}','${describes}')
+        ('${count}','${protocol}',${type},'${name}','${describes}',0)
     </insert>
 
     <insert id="addField">
@@ -51,13 +51,9 @@
         </foreach>
     </insert>
 
-    <delete id="deleteDevice" parameterType="int">
-        DELETE FROM deviceterm WHERE id = ${_parameter}
-    </delete>
-
-    <delete id="deleteField" parameterType="int">
-        DELETE FROM pointfield WHERE deviceid = ${_parameter}
-    </delete>
+    <update id="deleteDevice">
+        UPDATE deviceterm SET status = 2 WHERE id = ${_parameter}
+    </update>
 
     <update id="update" parameterType="DeviceTermEntity">
         UPDATE deviceterm
@@ -96,9 +92,8 @@
         SELECT dt.id,dt.count,dt.protocol,dt.type,dt.name,dt.describes,t.name AS typename
         FROM deviceterm dt
         LEFT JOIN devicetype t ON dt.type = t.id
-        <where>
-            <if test="type != null"> dt.type = '${type}'</if>
-        </where>
+        WHERE dt.status != 2
+        <if test="type != null">AND dt.type = '${type}'</if>
         ORDER BY dt.id
         <if test="page.numberPerPage != 0">
             LIMIT ${page.currentNumber},${page.numberPerPage}
@@ -110,7 +105,7 @@
         FROM deviceterm dt
         LEFT JOIN devicetype t ON dt.type = t.id
         <where>
-            <if test="_parameter != null"> dt.type = ${_parameter}</if>
+            <if test="_parameter != null"> dt.type = '${_parameter}'</if>
         </where>
         ORDER BY dt.id
     </select>
@@ -131,11 +126,10 @@
         SELECT id,
         <include refid="deviceTerm"/>
         FROM deviceterm
-        <where>
+        WHERE status != 2
             <if test="protocol != null">AND protocol LIKE '%${protocol}%'</if>
             <if test="type != 0">AND type = '${type}'</if>
             <if test="name != null">AND name LIKE '%${name}%'</if>
-        </where>
         ORDER BY id
     </select>
 

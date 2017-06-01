@@ -21,8 +21,6 @@ public interface DeviceInfoDao {
 
     int deleteGroup(int deviceGroupId);
 
-    int deleteDevice(@Param("groupId") int groupId,@Param("deviceId") int deviceId);
-
     int updateGroup(DeviceGroupInfoEntity deviceGroup);
 
     List<DeviceGroupTypeEntity> groupTypes();

@@ -1,7 +1,10 @@
 package com.xj.iws.http.mvc.controller.manager;
 
+import com.xj.iws.common.sessionManager.SessionManager;
 import com.xj.iws.common.utils.Page;
 import com.xj.iws.http.mvc.entity.LocationEntity;
+import com.xj.iws.http.mvc.entity.UserEntity;
+import com.xj.iws.http.mvc.entity.util.Limitation;
 import com.xj.iws.http.mvc.service.LimitationService;
 import com.xj.iws.http.mvc.service.LocationService;
 import com.xj.iws.common.utils.DataWrapper;
@@ -119,6 +122,8 @@ public class LocationController {
         } else if (provinceId != null && !"".equals(provinceId)) {
             condition.put("provinceId", provinceId);
         }
-        return locationService.query(condition,page);
+        UserEntity user = SessionManager.getSession(token);
+        List<Limitation> limitations = limitationService.getLimit(user);
+        return locationService.query(condition,limitations,page);
     }
 }

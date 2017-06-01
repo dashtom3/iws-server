@@ -26,7 +26,7 @@ public interface LocationDao {
 
     LocationEntity detail(int locationId);
 
-    List<LocationEntity> query(@Param("condition") Map<String,String> condition,@Param("page") Page page);
+    List<LocationEntity> query(@Param("condition") Map<String,String> condition,@Param("limits") List<Limitation> limitations,@Param("page") Page page);
 
     int getCount(Map<String, String> condition);
 }

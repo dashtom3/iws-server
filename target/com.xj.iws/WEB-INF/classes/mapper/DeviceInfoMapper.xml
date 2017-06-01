@@ -57,17 +57,9 @@
         ('${terms}',0,'${type}','${name}','${describes}')
     </insert>
 
-    <delete id="deleteGroup" parameterType="int">
-        DELETE FROM devicegroupinfo WHERE id = ${_parameter}
-    </delete>
-
-    <delete id="deleteDevice" parameterType="int">
-        DELETE FROM device
-        <where>
-            <if test="groupId != 0">AND groupid = ${groupId}</if>
-            <if test="deviceId != 0">AND deviceid = ${deviceId}</if>
-        </where>
-    </delete>
+    <update id="deleteGroup">
+        UPDATE devicegroupinfo SET status = 2 WHERE id = ${_parameter}
+    </update>
 
     <update id="updateGroup" parameterType="deviceGroupInfoEntity">
         UPDATE devicegroupinfo

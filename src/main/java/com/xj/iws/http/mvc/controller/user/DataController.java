@@ -95,19 +95,10 @@ public class DataController {
         response.setContentType("application/vnd.ms-excel;charset=utf-8");
         response.setHeader("Content-Disposition", "attachment;filename=" + new String((ExcelUtil.fileName(viewDatas)).getBytes(), "iso-8859-1"));
 
-        response.setHeader("Access-Control-Allow-Origin", "*");
-//        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
-//        response.setHeader("Access-Control-Max-Age", "3600");
-//        response.setHeader("Access-Control-Allow-Headers", "x-requested-with,Authorization,Content-Type");
-//        response.setHeader("Access-Control-Allow-Credentials", "true");
+        ServletOutputStream out = response.getOutputStream();
+        BufferedInputStream bis = new BufferedInputStream(is);
+        BufferedOutputStream bos = new BufferedOutputStream(out);
 
-        ServletOutputStream out;
-        out = response.getOutputStream();
-        BufferedInputStream bis;
-        BufferedOutputStream bos;
-
-        bis = new BufferedInputStream(is);
-        bos = new BufferedOutputStream(out);
         byte[] buff = new byte[2048];
         int bytesRead;
         // Simple read/write loop.
@@ -133,5 +124,21 @@ public class DataController {
             @RequestParam(value = "deviceId",required = true) int deviceId
     ) {
         return dataService.pumpStatus(deviceId);
+    }
+
+    /**
+     *
+     * @param token
+     * @return
+     */
+    @RequestMapping(value = "pointData", method = RequestMethod.GET)
+    @ResponseBody
+    public DataWrapper<ViewDataEntity> pointData(
+            @RequestParam(value = "token", required = true) String token,
+            @RequestParam(value = "termId",required = false) String termId,
+            @RequestParam(value = "port",required = false) String port,
+            @RequestParam(value = "number",required = false) String number
+    ) {
+        return dataService.pointData(termId,port,number);
     }
 }

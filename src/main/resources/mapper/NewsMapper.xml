@@ -37,6 +37,7 @@
             <if test="condition.endTime != null">AND alarmtime &lt; '${condition.endTime}'</if>
             <if test="condition.status != null">AND n.status = '${condition.status}'</if>
             <if test="condition.systemId != null">AND s.id = '${condition.systemId}'</if>
+            <if test="condition.describes != null">AND n.describes LIKE '%${condition.describes}%'</if>
         </where>
         ORDER BY alarmtime DESC
         <if test="page.numberPerPage != 0">
@@ -60,6 +61,7 @@
             <if test="condition.endTime != null">AND n.alarmtime &lt; '${condition.endTime}'</if>
             <if test="condition.status != null">AND n.status = '${condition.status}'</if>
             <if test="condition.systemId != null">AND s.id = '${condition.systemId}'</if>
+            <if test="condition.describes != null">AND n.descrbes LIKE '%${condition.describes}%'</if>
         </where>
     </select>
 

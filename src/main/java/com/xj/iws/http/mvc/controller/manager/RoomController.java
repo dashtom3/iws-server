@@ -211,20 +211,6 @@ public class RoomController {
         return roomService.test(groupEntity,terms);
     }
 
-    /**
-     *
-     * @param token
-     * @return
-     */
-    @RequestMapping(value = "manual", method = RequestMethod.POST)
-    @ResponseBody
-    public DataWrapper<Void> manual(
-            @RequestParam(value = "token", required = true) String token,
-            @RequestParam(value = "deviceId",required = true) String deviceId,
-            @RequestParam(value = "number",required = true) String number,
-            @RequestParam(value = "pumpStatus",required = true) String pumpStatus
-    ) {
-        return roomService.manual(deviceId,number,pumpStatus);
-    }
+
 
 }

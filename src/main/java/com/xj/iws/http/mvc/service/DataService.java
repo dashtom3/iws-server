@@ -18,4 +18,6 @@ public interface DataService {
     DataWrapper<ViewDataEntity> presentData(int deviceId);
 
     DataWrapper<List<DataField>> pumpStatus(int deviceId);
+
+    DataWrapper<ViewDataEntity> pointData(String termId,String port,String number);
 }

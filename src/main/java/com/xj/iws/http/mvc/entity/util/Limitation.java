@@ -22,7 +22,6 @@ public class Limitation {
     }
 
     public int getSystemId() {
-
         return systemId;
     }
 

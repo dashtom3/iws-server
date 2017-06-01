@@ -70,7 +70,6 @@ public class RoomServiceImpl implements RoomService {
         //获取泵房所属地点
         LocationEntity location = locationDao.detail(room.getLocationId());
         //获取泵房内所有控制器
-
         List<DeviceGroupEntity> groups = deviceDao.groupList(roomId);
 
         room.setLocation(location);
@@ -87,11 +86,26 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public DataWrapper<Void> addDevice(DeviceGroupEntity groupEntity, DeviceEntity[] devices) {
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
-        int i = deviceDao.addGroup(groupEntity);
-        int j = deviceDao.addDevice(groupEntity, devices);
-        enable(groupEntity.getGroupId());
-        start(String.valueOf(groupEntity.getGroupId()));
+        int i = deviceDao.checkDevice(groupEntity.getPort());
+        if (i != 0){
+            dataWrapper.setErrorCode(ErrorCodeEnum.Already_Exist_Error);
+        }else {
+            int j = deviceDao.addGroup(groupEntity);
+            if (j == 1){
+                deviceDao.addDevice(groupEntity, devices);
+                createTable(groupEntity.getGroupId());
+            }
+        }
         return dataWrapper;
+    }
+
+    private void createTable(int groupId) {
+        List<DeviceEntity> devices = deviceDao.deviceList(groupId);
+        String IP = serverDao.getIP();
+        for (DeviceEntity device : devices) {
+            String port = deviceDao.getPort(device.getId());
+            int i = deviceDao.createDataTable(IP, port, device);
+        }
     }
 
     @Override
@@ -107,6 +121,14 @@ public class RoomServiceImpl implements RoomService {
         int i = deviceDao.deleteDevice(groupId);
         int j = deviceDao.deleteGroup(groupId);
         return dataWrapper;
+    }
+    private void dropTable(int groupId){
+        List<DeviceEntity> devices = deviceDao.deviceList(groupId);
+        String IP = serverDao.getIP();
+        for (DeviceEntity device : devices) {
+            String port = deviceDao.getPort(device.getId());
+            int i = deviceDao.dropDataTable(IP, port, device);
+        }
     }
 
     @Override
@@ -131,20 +153,6 @@ public class RoomServiceImpl implements RoomService {
         DataWrapper<DeviceEntity> dataWrapper = new DataWrapper<DeviceEntity>();
         DeviceEntity device = deviceDao.deviceDetail(deviceId);
         dataWrapper.setData(device);
-        return dataWrapper;
-    }
-
-    @Override
-    public DataWrapper<Void> enable(int groupId) {
-        DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
-        List<DeviceEntity> devices = deviceDao.deviceList(groupId);
-
-        String IP = serverDao.getIP();
-
-        for (DeviceEntity device : devices) {
-            String port = deviceDao.getPort(device.getId());
-            int i = deviceDao.createDataTable(IP, port, device);
-        }
         return dataWrapper;
     }
 
@@ -219,8 +227,17 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public DataWrapper<Void> manual(String deviceId, String number, String pumpStatus) {
-        return null;
+    public DataWrapper<Void> turnPump(String deviceId, String number, String pumpStatus) {
+        DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
+
+        String param = ParamUtil.stringify("deviceId:" + deviceId, "fieldNum:" + number, "pumpStatus:" + pumpStatus);
+        Map<String, Object> response = ServerRequest.send("http://localhost:8180/iws_data/api/device/turnPump", param);
+
+        if (null != response && "SUCCEED".equals(response.get("callStatus"))) {
+        } else {
+            dataWrapper.setErrorCode(ErrorCodeEnum.Error);
+        }
+        return dataWrapper;
     }
 
 

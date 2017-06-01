@@ -23,8 +23,6 @@ public interface DeviceTermDao {
 
     int deleteDevice(int pointTableId);
 
-    int deleteField(int pointTableId);
-
     int update(DeviceTermEntity deviceTermEntity);
 
     DeviceTermEntity detail(int pointTableId);
@@ -39,5 +37,5 @@ public interface DeviceTermDao {
 
     List<DeviceTermEntity> deviceTermByIds(String[] terms);
 
-    int getCount();
+    int getCount(String type);
 }

@@ -24,4 +24,5 @@ public interface DeviceService {
     DataWrapper<DeviceGroupInfoEntity> groupDetail(int groupId);
 
     DataWrapper<List<DeviceGroupTypeEntity>> groupType();
+
 }

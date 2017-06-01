@@ -35,6 +35,8 @@ public interface DeviceDao {
 
     int createDataTable(@Param("IP") String IP,@Param("port") String port,@Param("device") DeviceEntity device);
 
+    int dropDataTable(@Param("IP") String IP,@Param("port") String port,@Param("device") DeviceEntity device);
+
     String getPort(int deiceId);
 
     String getNumber(int deviceId);
@@ -42,4 +44,6 @@ public interface DeviceDao {
     int runGroup(@Param("groupId") String groupId,@Param("status") int i);
 
     int runDevice(@Param("groupId") String groupId,@Param("status") int i);
+
+    int checkDevice(String port);
 }

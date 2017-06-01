@@ -1,7 +1,10 @@
 package com.xj.iws.http.mvc.service.impl;
 
+import com.sun.tools.javac.comp.Todo;
+import com.xj.iws.common.communication.ServerRequest;
 import com.xj.iws.common.enums.ErrorCodeEnum;
 import com.xj.iws.common.utils.Page;
+import com.xj.iws.common.utils.ParamUtil;
 import com.xj.iws.http.mvc.dao.DeviceDao;
 import com.xj.iws.http.mvc.dao.DeviceInfoDao;
 import com.xj.iws.http.mvc.dao.DeviceTermDao;
@@ -22,6 +25,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by XiaoJiang01 on 2017/3/14.
@@ -50,7 +54,6 @@ public class DeviceServiceImpl implements DeviceService {
     @Override
     public DataWrapper<Void> delete(int deviceGroupId) {
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
-        int i = deviceInfoDao.deleteDevice(deviceGroupId, 0);
         int j = deviceInfoDao.deleteGroup(deviceGroupId);
 
         if (j != 1) {
@@ -74,13 +77,13 @@ public class DeviceServiceImpl implements DeviceService {
     public DataWrapper<List<DeviceGroupInfoEntity>> groupList(Page page) {
         DataWrapper<List<DeviceGroupInfoEntity>> dataWrapper = new DataWrapper<List<DeviceGroupInfoEntity>>();
         List<DeviceGroupInfoEntity> deviceGroups = deviceInfoDao.deviceGroupList(page);
-        for (DeviceGroupInfoEntity group : deviceGroups){
+        for (DeviceGroupInfoEntity group : deviceGroups) {
             String[] terms = group.getTerms().split(",");
             List<DeviceTermEntity> deviceTerms = deviceTermDao.deviceTermByIds(terms);
             group.setDeviceTerms(deviceTerms);
         }
         int totalNumber = deviceInfoDao.getCount();
-        dataWrapper.setPage(page,totalNumber);
+        dataWrapper.setPage(page, totalNumber);
         dataWrapper.setData(deviceGroups);
         return dataWrapper;
     }

@@ -27,15 +27,14 @@ public class LimitationController {
 
 
     /**
-     * 查询用户是否有该系统权限
-     * @param systemId
+     * 查询用户是否为管理员
+     *
      * @param token
      * @return
      */
-    @RequestMapping(value = "checkSystem", method = RequestMethod.GET)
+    @RequestMapping(value = "checkAdmin", method = RequestMethod.GET)
     @ResponseBody
-    public DataWrapper<Void> checkSystem(
-            @RequestParam(value = "systemId", required = true) int systemId,
+    public DataWrapper<Void> checkAdmin(
             @RequestParam(value = "token", required = true) String token
     ) {
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
@@ -43,17 +42,14 @@ public class LimitationController {
 
         //用户是否为管理员
         if (!limitationService.checkAdmin(user)) {
-            //用户是否有该系统权限
-            if (!limitationService.checkSystem(user,systemId)) {
-                dataWrapper.setErrorCode(ErrorCodeEnum.Limitation_error);
-                dataWrapper.setCallStatus(CallStatusEnum.SUCCEED);
-            }
+            dataWrapper.setErrorCode(ErrorCodeEnum.Limitation_error);
         }
         return dataWrapper;
     }
 
     /**
      * 查询用户是否有该地区读/写权限
+     *
      * @param systemId
      * @param areaId
      * @param token
@@ -72,10 +68,9 @@ public class LimitationController {
 
         //用户是否为管理员
         if (!limitationService.checkAdmin(user)) {
-            //用户是否有该系统该地区相应权限 writable 0只读,1可写
-            if (!limitationService.checkLimit(user,systemId,areaId,writable)) {
+            //用户是否有该系统该地区相应权限 writable 1只读,2可写
+            if (!limitationService.checkLimit(user, systemId, areaId, writable)) {
                 dataWrapper.setErrorCode(ErrorCodeEnum.Limitation_error);
-                dataWrapper.setCallStatus(CallStatusEnum.SUCCEED);
             }
         }
         return dataWrapper;

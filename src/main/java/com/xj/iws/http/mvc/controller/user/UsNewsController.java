@@ -39,6 +39,7 @@ public class UsNewsController {
             @RequestParam(value = "endTime", required = false) String endTime,
             @RequestParam(value = "status", required = false) String status,
             @RequestParam(value = "systemId", required = false) String systemId,
+            @RequestParam(value = "describes", required = false) String describes,
             @ModelAttribute Page page
     ) {
         UserEntity user = SessionManager.getSession(token);
@@ -50,6 +51,7 @@ public class UsNewsController {
         condition.put("endTime", endTime);
         condition.put("status", status);
         condition.put("systemId", systemId);
+        condition.put("describes", describes);
         return newsService.list(condition,page);
     }
 

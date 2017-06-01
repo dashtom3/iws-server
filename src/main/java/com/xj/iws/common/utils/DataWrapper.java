@@ -7,6 +7,7 @@ import com.xj.iws.common.enums.ErrorCodeEnum;
 public class DataWrapper<T>  {
     private CallStatusEnum callStatus;
     private ErrorCodeEnum errorCode;
+    private String errorLabel;
     private T data;
     private String token;
 
@@ -17,8 +18,8 @@ public class DataWrapper<T>  {
     private int totalPage;
 
     public DataWrapper() {
-        callStatus = CallStatusEnum.SUCCEED;
-        errorCode = ErrorCodeEnum.No_Error;
+        setCallStatus(CallStatusEnum.SUCCEED);
+        setErrorCode(ErrorCodeEnum.No_Error);
     }
 
     public CallStatusEnum getCallStatus() {
@@ -38,6 +39,11 @@ public class DataWrapper<T>  {
         if (!errorCode.equals(ErrorCodeEnum.No_Error)) {
             this.callStatus = CallStatusEnum.FAILED;
         }
+        this.errorLabel = errorCode.getLabel();
+    }
+
+    public String getErrorLabel() {
+        return errorLabel;
     }
 
     public T getData() {

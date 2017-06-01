@@ -106,9 +106,9 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
-    public DataWrapper<List<LocationEntity>> query(Map<String, String> condition, Page page) {
+    public DataWrapper<List<LocationEntity>> query(Map<String, String> condition, List<Limitation> limitations, Page page) {
         DataWrapper<List<LocationEntity>> dataWrapper = new DataWrapper<List<LocationEntity>>();
-        List<LocationEntity> locations = locationDao.query(condition,page);
+        List<LocationEntity> locations = locationDao.query(condition,limitations,page);
         int totalNumber = locationDao.getCount(condition);
         dataWrapper.setPage(page,totalNumber);
         dataWrapper.setData(locations);

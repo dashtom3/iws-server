@@ -5,7 +5,7 @@
 
 <mapper namespace="com.xj.iws.http.mvc.dao.LocationDao">
 
-    <sql id="field">systemid,provinceid,cityid,areaid,positionx,positiony,name,describes</sql>
+    <sql id="field">systemid,provinceid,cityid,areaid,positionx,positiony,name,describes,status</sql>
 
     <resultMap id="LocationEntity" type="com.xj.iws.http.mvc.entity.LocationEntity">
         <id column="id" property="id" jdbcType="INTEGER"/>
@@ -26,12 +26,12 @@
 
     <insert id="add" parameterType="LocationEntity" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO location (<include refid="field"/>) VALUES
-        (${systemId},${provinceId},${cityId},${areaId},${positionX},${positionY},'${name}','${describes}')
+        (${systemId},${provinceId},${cityId},${areaId},${positionX},${positionY},'${name}','${describes}',0)
     </insert>
 
-    <delete id="delete" parameterType="int">
-        DELETE FROM location WHERE id = ${_parameter}
-    </delete>
+    <update id="delete">
+        UPDATE location SET status = 2 WHERE id = ${_parameter}
+    </update>
 
     <update id="update" parameterType="LocationEntity">
         UPDATE location
@@ -53,7 +53,7 @@
         vw.id,vw.systemid,vw.provinceid,vw.cityid,vw.areaid,vw.positionx,vw.positiony,vw.name,vw.describes,
         vw.provincename,vw.cityname,vw.areaname,vw.systemname,vw.pic
         FROM (SELECT
-        l.id,l.systemid,l.provinceid,l.cityid,l.areaid,l.positionx,l.positiony,l.name,l.describes,
+        l.id,l.systemid,l.provinceid,l.cityid,l.areaid,l.positionx,l.positiony,l.name,l.describes,l.status,
         p.name AS provincename,c.name AS cityname,a.name AS areaname,s.name AS systemname,s.pic AS pic
 
         FROM location l
@@ -71,9 +71,8 @@
         </where>
         ORDER BY
         l.systemid,l.provinceid,l.cityid,l.areaid ) vw
-        <where>
-            <if test="systemId != 0">AND vw.systemid = ${systemId}</if>
-        </where>
+        WHERE vw.status != 2
+        <if test="systemId != 0">AND vw.systemid = ${systemId}</if>
         <if test="page.numberPerPage != 0">
             LIMIT ${page.currentNumber},${page.numberPerPage}
         </if>
@@ -120,21 +119,28 @@
         vw.id,vw.systemid,vw.provinceid,vw.cityid,vw.areaid,vw.positionx,vw.positiony,vw.name,vw.describes,
         vw.provincename,vw.cityname,vw.areaname,vw.systemname,vw.pic
         FROM (SELECT
-        l.id,l.systemid,l.provinceid,l.cityid,l.areaid,l.positionx,l.positiony,l.name,l.describes,
+        l.id,l.systemid,l.provinceid,l.cityid,l.areaid,l.positionx,l.positiony,l.name,l.describes,l.status,
         p.name AS provincename,c.name AS cityname,a.name AS areaname,s.name AS systemname,s.pic AS pic
-
         FROM location l
         LEFT JOIN province p ON l.provinceid = p.provinceid
         LEFT JOIN city c ON l.cityid = c.cityid
         LEFT JOIN area a ON l.areaid = a.areaid
         LEFT JOIN system s ON l.systemid = s.id
         <where>
-            <if test="condition.systemId != null">AND l.systemid = ${condition.systemId}</if>
-            <if test="condition.areaId != null">AND l.areaid = ${condition.areaId}</if>
-            <if test="condition.cityId != null">AND l.cityid = ${condition.cityId}</if>
-            <if test="condition.provinceId != null">AND l.provinceid = ${condition.provinceId}</if>
+            <foreach collection="limits" item="limit" separator="OR">
+                <if test="limit.systemId != 0">l.systemid = ${limit.systemId}</if>
+                <if test="limit.provinceId != null">AND l.provinceid = ${limit.provinceId}</if>
+                <if test="limit.cityId != null">AND l.cityid = ${limit.cityId}</if>
+                <if test="limit.areaId != null">AND l.areaid = ${limit.areaId}</if>
+            </foreach>
         </where>
         ORDER BY l.systemid,l.provinceid,l.cityid,l.areaid ) vw
+        <where>
+            <if test="condition.systemId != null">AND vw.systemid = ${condition.systemId}</if>
+            <if test="condition.areaId != null">AND vw.areaid = ${condition.areaId}</if>
+            <if test="condition.cityId != null">AND vw.cityid = ${condition.cityId}</if>
+            <if test="condition.provinceId != null">AND vw.provinceid = ${condition.provinceId}</if>
+        </where>
         <if test="page.numberPerPage != 0">
             LIMIT ${page.currentNumber},${page.numberPerPage}
         </if>

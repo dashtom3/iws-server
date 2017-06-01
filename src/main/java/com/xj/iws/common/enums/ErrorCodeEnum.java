@@ -17,7 +17,8 @@ public enum ErrorCodeEnum implements Serializable {
     Verify_Code_notExist("验证码不存在",7),
     Username_NOT_Exist("用户不存在",8),
     Password_error("密码错误",9),
-    Limitation_error("无操作权限",10);
+    Limitation_error("无操作权限",10),
+    Already_Exist_Error("已存在",11);
 
     private String label;
     private Integer code;
@@ -42,9 +43,13 @@ public enum ErrorCodeEnum implements Serializable {
         return code;
     }
 
+    public void setCode(Integer code) {
+        this.code = code;
+    }
+
     @Override
     public String toString() {
-        return code.toString();
+        return "ErrorCode#"+code.toString()+":"+label;
     }
 
     public static ErrorCodeEnum parse(int code) {

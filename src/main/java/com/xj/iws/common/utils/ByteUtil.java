@@ -310,7 +310,7 @@ public class ByteUtil {
 	 * @return 转换完成的byte数组
 	 */
 	public static byte[] intToBigEndianByteArray(int i) {
-		return ByteBuffer.allocate(2).order(ByteOrder.BIG_ENDIAN).putInt(i)
+		return ByteBuffer.allocate(4).order(ByteOrder.BIG_ENDIAN).putInt(i)
 				.array();
 	}
 
@@ -322,7 +322,7 @@ public class ByteUtil {
 	 * @return 转换完成的byte数组
 	 */
 	public static byte[] longToBigEndianByteArray(long l) {
-		return ByteBuffer.allocate(2).order(ByteOrder.BIG_ENDIAN).putLong(l)
+		return ByteBuffer.allocate(8).order(ByteOrder.BIG_ENDIAN).putLong(l)
 				.array();
 	}
 

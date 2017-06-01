@@ -31,15 +31,15 @@ public class DeviceTermServiceImpl implements DeviceTermService {
         DataWrapper<DeviceTermEntity> dataWrapper = new DataWrapper<DeviceTermEntity>();
         deviceTermEntity.setCount(fields.length);
         int i = deviceTermDao.addDevice(deviceTermEntity);
-        for (int j = 0; j <fields.length ; j++) {
-            fields[j].setNumber(j+1);
+        for (int j = 0; j < fields.length; j++) {
+            fields[j].setNumber(j + 1);
         }
-        int j = deviceTermDao.addField(deviceTermEntity.getId(),fields);
-        if (i != 1){
+        int j = deviceTermDao.addField(deviceTermEntity.getId(), fields);
+        if (i != 1) {
             dataWrapper.setErrorCode(ErrorCodeEnum.Error);
-        }else {
+        } else {
             List<PointFieldEntity> list = new ArrayList<PointFieldEntity>();
-            Collections.addAll(list,fields);
+            Collections.addAll(list, fields);
 
             deviceTermEntity.setFields(list);
             dataWrapper.setData(deviceTermEntity);
@@ -66,8 +66,7 @@ public class DeviceTermServiceImpl implements DeviceTermService {
     public DataWrapper<Void> delete(int pointTableId) {
         DataWrapper<Void> dataWrapper = new DataWrapper<Void>();
         int i = deviceTermDao.deleteDevice(pointTableId);
-        int j = deviceTermDao.deleteField(pointTableId);
-        if (i != 1){
+        if (i != 1) {
             dataWrapper.setErrorCode(ErrorCodeEnum.Error);
         }
         return dataWrapper;
@@ -84,13 +83,13 @@ public class DeviceTermServiceImpl implements DeviceTermService {
     @Override
     public DataWrapper<List<DeviceTermEntity>> list(String type, Page page) {
         DataWrapper<List<DeviceTermEntity>> dataWrapper = new DataWrapper<List<DeviceTermEntity>>();
-        List<DeviceTermEntity> devices = deviceTermDao.deviceTermList(type,page);
-        List<PointFieldEntity> fields = deviceTermDao.fieldList(0);
-        if (devices != null){
-            devices = PackageUtil.deviceTermPack(devices,fields);
+        List<DeviceTermEntity> devices = deviceTermDao.deviceTermList(type, page);
+        for (DeviceTermEntity device : devices) {
+            List<PointFieldEntity> fields = deviceTermDao.fieldList(device.getId());
+            device.setFields(fields);
         }
-        int totalNumber = deviceTermDao.getCount();
-        dataWrapper.setPage(page,totalNumber);
+        int totalNumber = deviceTermDao.getCount(type);
+        dataWrapper.setPage(page, totalNumber);
         dataWrapper.setData(devices);
         return dataWrapper;
     }

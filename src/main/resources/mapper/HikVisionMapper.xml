@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xj.iws.http.mvc.dao.HikVisionDao">
+
+    <sql id="field">roomid,ip,port,username,password,iProtocol,iStreamType,iChannelID,bZeroChannel,name,describes</sql>
+
+    <resultMap id="HikVisionEntity" type="com.xj.iws.http.mvc.entity.HikVisionEntity">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="roomid" property="roomId" jdbcType="INTEGER"/>
+        <result column="ip" property="ip" jdbcType="VARCHAR"/>
+        <result column="port" property="port" jdbcType="VARCHAR"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="iProtocol" property="protocol" jdbcType="VARCHAR"/>
+        <result column="iStreamType" property="streamType" jdbcType="VARCHAR"/>
+        <result column="iChannelID" property="channelID" jdbcType="VARCHAR"/>
+        <result column="bZeroChannel" property="zeroChannel" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="describes" property="describes" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="add" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO hikvision (<include refid="field"/>) VALUES (
+        '${roomId}','${ip}','${port}','${username}','${password}','${protocol}','${streamType}','${channelID}','${zeroChannel}',
+        '${name}','${describes}')
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM hikvision WHERE id = ${_parameter}
+    </delete>
+
+    <update id="update" useGeneratedKeys="true" keyProperty="id">
+        UPDATE hikvision
+        <set>
+            <if test="roomId != 0"> roomid = '${roomId}',</if>
+            <if test="ip != null"> ip = '${ip}',</if>
+            <if test="port != null"> port = '${port}',</if>
+            <if test="username != null"> username = '${username}',</if>
+            <if test="password != null"> password = '${password}',</if>
+            <if test="protocol != null"> iProtocol = '${protocol}',</if>
+            <if test="streamType != null"> iStreamType = '${streamType}',</if>
+            <if test="channelID != null"> iChannelID = '${channelID}',</if>
+            <if test="zeroChannel != null"> bZeroChannel = '${zeroChannel}',</if>
+            <if test="name != null"> name = '${name}',</if>
+            <if test="describes != null"> describes = '${describes}',</if>
+        </set>
+        WHERE id = ${id}
+    </update>
+
+    <select id="detail" resultMap="HikVisionEntity">
+        SELECT id,<include refid="field"/> FROM hikvision WHERE id = ${_parameter}
+    </select>
+
+    <select id="list" resultMap="HikVisionEntity">
+        SELECT id,roomid,ip,port,username,password,iProtocol,iStreamType,iChannelID,bZeroChannel,name,describes FROM (
+        SELECT h.id,h.roomid,h.ip,h.port,h.username,h.password,h.iProtocol,h.iStreamType,h.iChannelID,h.bZeroChannel,h.name,h.describes
+        FROM hikvision h
+        LEFT JOIN room r ON h.roomid = r.id
+        LEFT JOIN location l ON r.locationid = l.id
+        LEFT JOIN system s ON l.systemid = s.id
+        <where>
+            <foreach collection="limit" item="limit" separator="OR">
+                <if test="limit.systemId != 0">l.systemid = ${limit.systemId}</if>
+                <if test="limit.provinceId != null">AND l.provinceid = ${limit.provinceId}</if>
+                <if test="limit.cityId != null">AND l.cityid = ${limit.cityId}</if>
+                <if test="limit.areaId != null">AND l.areaid = ${limit.areaId}</if>
+            </foreach>
+        </where>
+        ORDER BY h.id
+        ) vw
+        <where>
+            <if test="roomId != null">roomid = '${roomId}'</if>
+        </where>
+    </select>
+
+    <select id="query" resultMap="HikVisionEntity">
+        SELECT id,<include refid="field"/> FROM hikvision
+        <where>
+            <if test="condition.roomId != null">roomid = '${condition.roomId}'</if>
+            <if test="condition.ip != null">ip = '${condition.ip}'</if>
+            <if test="condition.name != null">name LIKE '%${condition.name}%'</if>
+        </where>
+        ORDER BY id
+        <if test="page.numberPerPage != 0">
+            LIMIT ${page.currentNumber},${page.numberPerPage}
+        </if>
+    </select>
+
+    <select id="getCount">
+        SELECT count(0) FROM hikvision
+        <where>
+            <if test="condition.roomId != null">roomid = '${condition.roomId}'</if>
+            <if test="condition.ip != null">ip = '${condition.ip}'</if>
+            <if test="condition.name != null">name LIKE '%${condition.name}%'</if>
+        </where>
+    </select>
+
+</mapper>

@@ -123,7 +123,7 @@ public class DataProcess {
 
     private DataField role01(String s, PointFieldEntity field) {
         DataField data = new DataField();
-        double value = Double.valueOf(s) / field.getMultiple();
+        double value = (double)Integer.parseInt(s,16) / field.getMultiple();
         if (value < field.getMin() || value > field.getMax()) {
             data.setException(DataEnum.Exception);
         }

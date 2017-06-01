@@ -31,8 +31,6 @@ public interface RoomService {
 
     DataWrapper<DeviceGroupEntity> groupDetail(int groupId);
 
-    DataWrapper<Void> enable(int groupId);
-
     DataWrapper<Void> start(String groupIds);
 
     DataWrapper<DeviceEntity> deviceDetail(int deviceId);
@@ -41,5 +39,7 @@ public interface RoomService {
 
     DataWrapper<Map<String,String>> test(DeviceGroupEntity groupEntity, DeviceEntity[] devices);
 
-    DataWrapper<Void> manual(String deviceId, String number, String pumpStatus);
+    DataWrapper<Void> turnPump(String deviceId, String number, String pumpStatus);
+
+
 }

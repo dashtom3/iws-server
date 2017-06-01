@@ -5,7 +5,7 @@
 
 <mapper namespace="com.xj.iws.http.mvc.dao.SystemDao">
 
-    <sql id="field">date,name,pic,describes</sql>
+    <sql id="field">date,name,pic,describes,status</sql>
 
     <resultMap id="SystemEntity" type="com.xj.iws.http.mvc.entity.SystemEntity">
         <id column="id" property="id" jdbcType="INTEGER"/>
@@ -16,12 +16,12 @@
     </resultMap>
 
     <insert id="add" parameterType="SystemEntity">
-        INSERT INTO system (<include refid="field"/>) VALUES ('${strdate}','${name}','${pic}','${describes}')
+        INSERT INTO system (<include refid="field"/>) VALUES ('${strdate}','${name}','${pic}','${describes}',0)
     </insert>
 
-    <delete id="delete" parameterType="int">
-        DELETE FROM system WHERE id = ${_parameter}
-    </delete>
+    <update id="delete">
+        UPDATE system SET status = 2 WHERE id = ${_parameter}
+    </update>
 
     <update id="update" parameterType="SystemEntity">
         UPDATE system
@@ -34,15 +34,17 @@
     </update>
 
     <select id="list" resultMap="SystemEntity">
-        SELECT id,
-        <include refid="field"/>
+        SELECT id,<include refid="field"/>
+        FROM (
+        SELECT id,<include refid="field"/>
         FROM system
         <where>
             <foreach collection="list" item="limit" separator="OR ">
                 <if test="limit.systemId != 0">id = ${limit.systemId}</if>
             </foreach>
         </where>
-        ORDER BY id
+        ORDER BY id) vw
+        WHERE vw.status != 2
     </select>
 
     <select id="detail" parameterType="int" resultMap="SystemEntity">

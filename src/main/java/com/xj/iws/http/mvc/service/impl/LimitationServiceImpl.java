@@ -38,15 +38,6 @@ public class LimitationServiceImpl implements LimitationService {
     }
 
     @Override
-    public boolean checkSystem(UserEntity user, int systemId) {
-        boolean result = false;
-        if (0 != roleDao.checkSystem(user.getRoleId(), systemId)) {
-            result = true;
-        }
-        return result;
-    }
-
-    @Override
     public boolean checkLimit(UserEntity user, int systemId, String areaId,int writable) {
         boolean result = false;
 

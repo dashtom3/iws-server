@@ -44,7 +44,6 @@
     </select>
 
     <select id="presentData" parameterType="HashMap" resultMap="DataEntity">
-
         SELECT d.deviceid,d.port,d.number,d.time,d.error,d.count,d.data,
         dg.name AS groupname,r.name AS roomname,l.name AS locationname,CONCAT(p.name,c.name,a.name) AS addressname
         FROM `${tableName}` d
@@ -56,7 +55,7 @@
         LEFT JOIN city c ON c.cityid = a.cityid
         LEFT JOIN province p ON p.provinceid = c.provinceid
 
-        WHERE d.deviceid = ${deviceId}
+        WHERE d.deviceid = ${deviceId} AND time &gt; now() - 3
         ORDER BY time DESC LIMIT 1
     </select>
 

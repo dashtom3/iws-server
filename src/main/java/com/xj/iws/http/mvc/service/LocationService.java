@@ -23,5 +23,5 @@ public interface LocationService {
 
     DataWrapper<List<LocationEntity>> list(int id, List<Limitation> limitations, Page page);
 
-    DataWrapper<List<LocationEntity>> query(Map<String, String> condition, Page page);
+    DataWrapper<List<LocationEntity>> query(Map<String, String> condition, List<Limitation> limitations, Page page);
 }

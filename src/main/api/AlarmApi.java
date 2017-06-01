@@ -13,14 +13,13 @@ public interface LocationApi {
      *
      * @apiParam {String} token 身份验证
      * @apiParam {String} systemId 系统id
-     * @apiParam {String} provinceId 地点id
-     * @apiParam {String} cityId 地点id
-     * @apiParam {String} areaId 地点id
+     * @apiParam {String} provinceId 省份id
+     * @apiParam {String} cityId 城市id
+     * @apiParam {String} areaId 城区id
      * @apiParam {String} locationId 地点id
-     * @apiParam {String} roomId 地点id
-     * @apiParam {String} groupId 地点id
-     * @apiParam {String} deviceId 地点id
-     *
+     * @apiParam {String} roomId 泵房id
+     * @apiParam {String} groupId 设备id
+     * @apiParam {String} deviceId 控制器id
      * @apiParam {String} status 状态(0未结束,1已结束)
      * @apiParam {String} startTime (查询开始时间大于startTime的数据)
      * @apiParam {String} endTime (查询开始时间小于startTime的数据)
