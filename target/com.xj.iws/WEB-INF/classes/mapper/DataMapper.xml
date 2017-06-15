@@ -5,7 +5,7 @@
 
 <mapper namespace="com.xj.iws.http.mvc.dao.DataDao">
 
-    <sql id="field">deviceid,port,number,time,error,count,data</sql>
+    <sql id="field">deviceid,port,number,time,error,count,bit,data</sql>
 
     <resultMap id="DataEntity" type="com.xj.iws.http.mvc.entity.DataEntity">
         <id column="id" property="id" jdbcType="INTEGER"/>
@@ -15,6 +15,7 @@
         <result column="time" property="time"/>
         <result column="error" property="error" jdbcType="VARCHAR"/>
         <result column="count" property="count" jdbcType="INTEGER"/>
+        <result column="bit" property="bit" jdbcType="INTEGER"/>
         <result column="data" property="data" jdbcType="VARCHAR"/>
 
         <result column="groupname" property="groupName" jdbcType="VARCHAR"/>
@@ -24,7 +25,7 @@
     </resultMap>
 
     <select id="query" parameterType="HashMap" resultMap="DataEntity">
-        SELECT d.deviceid,d.port,d.number,d.time,d.error,d.count,d.data,
+        SELECT d.deviceid,d.port,d.number,d.time,d.error,d.count,d.bit,d.data,
         dg.name AS groupname,r.name AS roomname,l.name AS locationname,CONCAT(p.`name`,c.`name`,a.`name`) AS addressname
         FROM `${condition.tableName}` d
         LEFT JOIN device de ON d.deviceid = de.id
@@ -44,7 +45,7 @@
     </select>
 
     <select id="presentData" parameterType="HashMap" resultMap="DataEntity">
-        SELECT d.deviceid,d.port,d.number,d.time,d.error,d.count,d.data,
+        SELECT d.deviceid,d.port,d.number,d.time,d.error,d.count,d.bit,d.data,
         dg.name AS groupname,r.name AS roomname,l.name AS locationname,CONCAT(p.name,c.name,a.name) AS addressname
         FROM `${tableName}` d
         LEFT JOIN device de ON d.deviceid = de.id

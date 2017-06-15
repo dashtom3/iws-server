@@ -10,6 +10,7 @@ import com.xj.iws.http.mvc.entity.util.ViewDataEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.text.DecimalFormat;
 import java.util.*;
 
 /**
@@ -35,8 +36,10 @@ public class DataProcess {
 
     public List<DataField> pumpStatus(DataEntity data) {
         List<DataField> pumpStatus = new ArrayList<DataField>();
+        //数据分段
         String[] arrayData = DataFormat.subData(data.getData(), 4);
         for (int i = 0; i < pointFields.size(); i++) {
+            //获取数据对应字段
             PointFieldEntity field = pointFields.get(i);
             DataField dataField;
             switch (field.getRoleId()) {
@@ -70,12 +73,14 @@ public class DataProcess {
             String number = data.getNumber();
             Date time = data.getTime();
             int count = data.getCount();
+            int length = data.getBit();
             String addressName = data.getAddressName();
             String locationName = data.getLocationName();
             String roomName = data.getRoomName();
             String groupName = data.getGroupName();
-
-            String[] arrayData = DataFormat.subData(data.getData(), 4);
+            String value = data.getData();
+            if (null == value || "".equals(value)) continue;
+            String[] arrayData = DataFormat.subData(data.getData(), length);
             List<DataField> dataFields = analyze(arrayData);
 
             ViewDataEntity viewData = new ViewDataEntity(port, number, time, DataEnum.No_Exception, count, addressName, locationName, roomName, groupName, dataFields);
@@ -94,6 +99,7 @@ public class DataProcess {
             PointFieldEntity field = pointFields.get(i);
             DataField dataField;
 
+            //分别对应数据库中不同的释义规则
             switch (field.getRoleId()) {
                 case 1:
                     dataField = role01(data[i], field);
@@ -110,6 +116,9 @@ public class DataProcess {
                 case 5:
                     dataField = role05(data[i]);
                     break;
+                case 6:
+                    dataField = role06(data[i], field);
+                    break;
                 default:
                     dataField = new DataField();
                     break;
@@ -123,7 +132,7 @@ public class DataProcess {
 
     private DataField role01(String s, PointFieldEntity field) {
         DataField data = new DataField();
-        double value = (double)Integer.parseInt(s,16) / field.getMultiple();
+        double value = (double) Integer.parseInt(s, 16) / field.getMultiple();
         if (value < field.getMin() || value > field.getMax()) {
             data.setException(DataEnum.Exception);
         }
@@ -182,6 +191,18 @@ public class DataProcess {
         int i = Integer.parseInt(s);
         data.setValue(i);
         data.setData(status.get(4).get(String.valueOf(i + 1)));
+        return data;
+    }
+
+    private DataField role06(String s, PointFieldEntity field) {
+        DataField data = new DataField();
+        double temp = (double) Float.intBitsToFloat(Integer.parseInt(s, 16));
+        double value = Double.parseDouble(new DecimalFormat("#.00").format(temp));
+        if (value < field.getMin() || value > field.getMax()) {
+            data.setException(DataEnum.Exception);
+        }
+        data.setValue(value);
+        data.setData(String.valueOf(value) + field.getUnit());
         return data;
     }
 }

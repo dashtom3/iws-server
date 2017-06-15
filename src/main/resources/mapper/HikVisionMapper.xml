@@ -20,6 +20,11 @@
         <result column="bZeroChannel" property="zeroChannel" jdbcType="VARCHAR"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="describes" property="describes" jdbcType="VARCHAR"/>
+
+        <result column="provinceid" property="provinceId" jdbcType="VARCHAR"/>
+        <result column="cityid" property="cityId" jdbcType="VARCHAR"/>
+        <result column="areaid" property="areaId" jdbcType="VARCHAR"/>
+        <result column="locationid" property="locationId" jdbcType="VARCHAR"/>
     </resultMap>
 
     <insert id="add" useGeneratedKeys="true" keyProperty="id">
@@ -51,7 +56,17 @@
     </update>
 
     <select id="detail" resultMap="HikVisionEntity">
-        SELECT id,<include refid="field"/> FROM hikvision WHERE id = ${_parameter}
+        SELECT h.id,h.roomid,h.ip,h.port,h.username,h.password,h.iProtocol,h.iStreamType,h.iChannelID,h.bZeroChannel,h.name,h.describes,
+        l.provinceid,l.cityid,l.areaid,r.locationid,l.systemid
+
+        FROM hikvision h
+        LEFT JOIN room r ON h.roomid = r.id
+        LEFT JOIN location l ON r.locationid = l.id
+        LEFT JOIN province p ON l.provinceid = p.provinceid
+        LEFT JOIN city c ON l.cityid = c.cityid
+        LEFT JOIN area a ON l.areaid = a.areaid
+        LEFT JOIN system s ON l.systemid = s.id
+        WHERE id = ${_parameter}
     </select>
 
     <select id="list" resultMap="HikVisionEntity">
@@ -60,6 +75,9 @@
         FROM hikvision h
         LEFT JOIN room r ON h.roomid = r.id
         LEFT JOIN location l ON r.locationid = l.id
+        LEFT JOIN province p ON l.provinceid = p.provinceid
+        LEFT JOIN city c ON l.cityid = c.cityid
+        LEFT JOIN area a ON l.areaid = a.areaid
         LEFT JOIN system s ON l.systemid = s.id
         <where>
             <foreach collection="limit" item="limit" separator="OR">

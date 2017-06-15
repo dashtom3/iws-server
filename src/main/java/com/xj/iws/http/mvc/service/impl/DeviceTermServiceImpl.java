@@ -1,9 +1,11 @@
 package com.xj.iws.http.mvc.service.impl;
 
+import com.xj.iws.common.communication.ServerRequest;
 import com.xj.iws.common.enums.ErrorCodeEnum;
 import com.xj.iws.common.utils.DataWrapper;
 import com.xj.iws.common.utils.PackageUtil;
 import com.xj.iws.common.utils.Page;
+import com.xj.iws.common.utils.ParamUtil;
 import com.xj.iws.http.mvc.dao.PointRoleDao;
 import com.xj.iws.http.mvc.dao.DeviceTermDao;
 import com.xj.iws.http.mvc.entity.DeviceTermEntity;
@@ -11,6 +13,8 @@ import com.xj.iws.http.mvc.entity.DeviceTypeEntity;
 import com.xj.iws.http.mvc.entity.PointFieldEntity;
 import com.xj.iws.http.mvc.entity.PointRoleEntity;
 import com.xj.iws.http.mvc.service.DeviceTermService;
+import net.sf.json.JSON;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -110,5 +114,26 @@ public class DeviceTermServiceImpl implements DeviceTermService {
         dataWrapper.setData(devices);
         return dataWrapper;
     }
+
+    @Override
+    public DataWrapper<String> check(int type, PointFieldEntity[] fields, String port, String number) {
+        DataWrapper<String> dataWrapper = new DataWrapper<String>();
+        int count = fields.length;
+        String[] address = new String[count];
+        if (type == 2)
+            for (int i = 0; i < fields.length; i++) {
+                address[i] = fields[i].getAddress();
+            }
+        String strAddress = ParamUtil.arrayToString(address);
+        String param = ParamUtil.stringify("type:" + type, "count:" + count, "address:" + strAddress, "port:" + port, "number:" + number);
+        Map<String, Object> response = ServerRequest.send("http://localhost:8180/iws_data/api/device/checkTable", param);
+        if (null != response && "SUCCEED".equals(response.get("callStatus"))) {
+            dataWrapper.setData((String) response.get("data"));
+        } else {
+            dataWrapper.setErrorCode(ErrorCodeEnum.Error);
+        }
+        return dataWrapper;
+    }
+
 
 }

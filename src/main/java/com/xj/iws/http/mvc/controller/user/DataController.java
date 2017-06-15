@@ -28,9 +28,6 @@ import java.util.Map;
 @RequestMapping("api/data")
 public class DataController {
 
-    /**
-     *
-     */
     @Autowired
     DataService dataService;
 

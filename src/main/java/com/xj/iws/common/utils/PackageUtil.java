@@ -113,26 +113,25 @@ public class PackageUtil {
         List<PointFieldEntity> fieldPack = new ArrayList<PointFieldEntity>();
 
         PointFieldEntity end = new PointFieldEntity();
-        end.setDeviceId(0);
+        end.setTermId(0);
         fields.add(end);
-
-        int i = fields.get(0).getDeviceId();
+        int i = fields.get(0).getTermId();
         for (int j = 0; j < fields.size(); j++) {
             PointFieldEntity field = fields.get(j);
-            int deviceId = field.getDeviceId();
+            int deviceId = field.getTermId();
 
             if (i == deviceId) {
                 fieldPack.add(field);
             } else {
                 for (DeviceTermEntity deviceTerm : deviceTerms) {
-                    if (deviceTerm.getId() == fields.get(j - 1).getDeviceId()) {
+                    if (deviceTerm.getId() == fields.get(j - 1).getTermId()) {
                         deviceTerm.setFields(fieldPack);
                         break;
                     }
                 }
                 fieldPack = new ArrayList<PointFieldEntity>();
                 fieldPack.add(field);
-                i = field.getDeviceId();
+                i = field.getTermId();
             }
         }
         return deviceTerms;

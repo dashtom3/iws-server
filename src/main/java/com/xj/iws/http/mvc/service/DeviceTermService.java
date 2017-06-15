@@ -29,4 +29,6 @@ public interface DeviceTermService {
     DataWrapper<List<DeviceTypeEntity>> typeList();
 
     DataWrapper<List<DeviceTermEntity>> query(Map<String, String> condition);
+
+    DataWrapper<String> check(int type, PointFieldEntity[] fields, String port, String number);
 }

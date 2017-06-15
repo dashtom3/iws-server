@@ -119,13 +119,14 @@
 
     <update id="createDataTable">
         CREATE TABLE `data_${IP}:${port}#${device.number}` (
-        `id` int(10) NOT NULL auto_increment,
+        `id` int(12) NOT NULL auto_increment,
         `deviceid` int(10),
         `port` varchar(20),
         `number` varchar(20),
         `time` datetime,
         `error` varchar(128),
         `count` int(4),
+        `length` int(2),
         `data` varchar(512),
         PRIMARY KEY  (`id`))
         ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='${device.name}数据表' AUTO_INCREMENT=1

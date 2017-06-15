@@ -10,7 +10,7 @@ import java.util.List;
 @Alias("PointFieldEntity")
 public class PointFieldEntity {
     private int id;
-    private int deviceId;
+    private int termId;
     private int number;
     private int roleId;
     private String name;
@@ -19,6 +19,7 @@ public class PointFieldEntity {
     private double min;
     private double max;
     private int multiple;
+    private String address;
 
     private List<String> status;
 
@@ -27,9 +28,9 @@ public class PointFieldEntity {
     public PointFieldEntity() {
     }
 
-    public PointFieldEntity(int id, int deviceId, int number, int roleId, String name, String describes, String unit, double min, double max, int multiple) {
+    public PointFieldEntity(int id, int termId, int number, int roleId, String name, String describes, String unit, double min, double max, int multiple, String address) {
         this.id = id;
-        this.deviceId = deviceId;
+        this.termId = termId;
         this.number = number;
         this.roleId = roleId;
         this.name = name;
@@ -38,6 +39,7 @@ public class PointFieldEntity {
         this.min = min;
         this.max = max;
         this.multiple = multiple;
+        this.address = address;
     }
 
     public int getId() {
@@ -48,12 +50,12 @@ public class PointFieldEntity {
         this.id = id;
     }
 
-    public int getDeviceId() {
-        return deviceId;
+    public int getTermId() {
+        return termId;
     }
 
-    public void setDeviceId(int deviceId) {
-        this.deviceId = deviceId;
+    public void setTermId(int termId) {
+        this.termId = termId;
     }
 
     public int getNumber() {
@@ -118,6 +120,14 @@ public class PointFieldEntity {
 
     public void setMultiple(int multiple) {
         this.multiple = multiple;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public DeviceTermEntity getTable() {

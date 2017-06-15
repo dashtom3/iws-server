@@ -94,8 +94,9 @@ public class DataServiceImpl implements DataService {
         }
         if (null != data) {
             int count = deviceTerm.getCount();
+            int length = deviceTermDao.getBit(Integer.parseInt(termId));
 
-            DataEntity dataEntity = new DataEntity(0, 0, port, number, new Date(), "ER", count, data);
+            DataEntity dataEntity = new DataEntity(0, 0, port, number, new Date(), "ER", count, length, data);
             List<DataEntity> datas = new ArrayList<DataEntity>();
             datas.add(dataEntity);
 

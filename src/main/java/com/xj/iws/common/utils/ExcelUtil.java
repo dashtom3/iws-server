@@ -46,12 +46,12 @@ public class ExcelUtil {
         Font f2 = wb.createFont();
 
         // 创建第一种字体样式（用于标题）
-        fT.setFontHeightInPoints((short) 16);
+        fT.setFontHeightInPoints((short) 12);
         fT.setColor(IndexedColors.BLACK.getIndex());
-        // 创建第一种字体样式（用于列名）
+        // 创建第二种字体样式（用于列名）
         f.setFontHeightInPoints((short) 12);
         f.setColor(IndexedColors.BLACK.getIndex());
-        // 创建第二种字体样式（用于值）
+        // 创建第三种字体样式（用于值）
         f2.setFontHeightInPoints((short) 10);
         f2.setColor(IndexedColors.BLACK.getIndex());
 
@@ -62,7 +62,7 @@ public class ExcelUtil {
         // 设置第二种单元格的样式（用于值）
         cs2.setFont(f2);
 
-        // 设置第二种单元格的样式（用于值）
+        // 设置第三种单元格的样式（用于值）
         csT.setFont(fT);
 
         Cell cell0 = row0.createCell(0);

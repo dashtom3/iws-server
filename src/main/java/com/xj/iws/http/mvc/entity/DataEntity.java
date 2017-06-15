@@ -16,6 +16,7 @@ public class DataEntity {
     private Date time;
     private String error;
     private int count;
+    private int bit;
     private String data;
 
     private String tableName;
@@ -28,8 +29,7 @@ public class DataEntity {
     public DataEntity() {
     }
 
-    public DataEntity(int id, int deviceId, String port, String number, Date time, String error, int count, String data) {
-
+    public DataEntity(int id, int deviceId, String port, String number, Date time, String error, int count, int bit, String data) {
         this.id = id;
         this.deviceId = deviceId;
         this.port = port;
@@ -37,6 +37,7 @@ public class DataEntity {
         this.time = time;
         this.error = error;
         this.count = count;
+        this.bit = bit;
         this.data = data;
     }
 
@@ -94,6 +95,14 @@ public class DataEntity {
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public int getBit() {
+        return bit;
+    }
+
+    public void setBit(int bit) {
+        this.bit = bit;
     }
 
     public String getData() {

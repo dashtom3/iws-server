@@ -29,8 +29,7 @@ public class HttpUtil {
             // 设置通用的请求属性
             conn.setRequestProperty("accept", "application/json");
             conn.setRequestProperty("content-type", "application/json;charset=utf-8");
-            conn.setRequestProperty("content-length",
-                    "256");
+            conn.setRequestProperty("content-length", "256");
 
             //conn.setRequestProperty("authorization","");
             //String base64Code = new BASE64Encoder().encode();

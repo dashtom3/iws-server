@@ -29,7 +29,9 @@
     <select id="deviceGroupList" resultMap="deviceGroupInfoEntity">
         SELECT id,
         <include refid="deviceGroupInfo"/>
-        FROM devicegroupinfo ORDER BY id
+        FROM devicegroupinfo
+        WHERE status != 2
+        ORDER BY id
         <if test="numberPerPage != 0">
             LIMIT ${currentNumber},${numberPerPage}
         </if>

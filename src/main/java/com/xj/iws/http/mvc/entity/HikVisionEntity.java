@@ -9,19 +9,21 @@ import org.apache.ibatis.type.Alias;
 public class HikVisionEntity {
     private int id;
     private int roomId;
-
     private String ip;
     private String port;
     private String username;
     private String password;
-
     private String protocol;
     private String streamType;
     private String channelID;
     private String zeroChannel;
-
     private String name;
     private String describes;
+
+    private String provinceId;
+    private String cityId;
+    private String areaId;
+    private String locationId;
 
     public HikVisionEntity() {
         protocol = "1";
@@ -139,5 +141,37 @@ public class HikVisionEntity {
 
     public void setDescribes(String describes) {
         this.describes = describes;
+    }
+
+    public String getProvinceId() {
+        return provinceId;
+    }
+
+    public void setProvinceId(String provinceId) {
+        this.provinceId = provinceId;
+    }
+
+    public String getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(String cityId) {
+        this.cityId = cityId;
+    }
+
+    public String getAreaId() {
+        return areaId;
+    }
+
+    public void setAreaId(String areaId) {
+        this.areaId = areaId;
+    }
+
+    public String getLocationId() {
+        return locationId;
+    }
+
+    public void setLocationId(String locationId) {
+        this.locationId = locationId;
     }
 }

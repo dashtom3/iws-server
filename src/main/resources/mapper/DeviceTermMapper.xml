@@ -5,13 +5,13 @@
 
 <mapper namespace="com.xj.iws.http.mvc.dao.DeviceTermDao">
 
-    <sql id="deviceType">name,pic,describes</sql>
+    <sql id="deviceType">bit,name,pic,describes</sql>
     <sql id="deviceTerm">count,protocol,type,name,describes,status</sql>
-    <sql id="pointField">deviceid,number,roleid,name,describes,unit,min,max,multiple</sql>
+    <sql id="pointField">termid,number,roleid,name,describes,unit,min,max,multiple,address</sql>
 
     <resultMap id="PointFieldEntity" type="com.xj.iws.http.mvc.entity.PointFieldEntity">
         <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="deviceid" property="deviceId" jdbcType="INTEGER"/>
+        <result column="termid" property="termId" jdbcType="INTEGER"/>
         <result column="number" property="number" jdbcType="INTEGER"/>
         <result column="roleid" property="roleId" jdbcType="INTEGER"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
@@ -20,13 +20,15 @@
         <result column="min" property="min" jdbcType="DOUBLE"/>
         <result column="max" property="max" jdbcType="DOUBLE"/>
         <result column="multiple" property="multiple" jdbcType="INTEGER"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
     </resultMap>
 
     <resultMap id="DeviceTermEntity" type="com.xj.iws.http.mvc.entity.DeviceTermEntity">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="count" property="count" jdbcType="INTEGER"/>
+        <result column="length" property="length" jdbcType="INTEGER"/>
         <result column="protocol" property="protocol" jdbcType="VARCHAR"/>
-        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="describes" property="describes" jdbcType="VARCHAR"/>
         <result column="typename" property="typeName" jdbcType="VARCHAR"/>
@@ -34,6 +36,7 @@
 
     <resultMap id="DeviceTypeEntity" type="com.xj.iws.http.mvc.entity.DeviceTypeEntity">
         <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="bit" property="bit" jdbcType="INTEGER"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="pic" property="pic" jdbcType="VARCHAR"/>
         <result column="describes" property="describes" jdbcType="VARCHAR"/>
@@ -47,7 +50,7 @@
     <insert id="addField">
         INSERT INTO pointfield (<include refid="pointField"/>) VALUES
         <foreach collection="fields" item="item" separator=",">
-            (${deviceId},'${item.number}','${item.roleId}','${item.name}','${item.describes}','${item.unit}','${item.min}','${item.max}','${item.multiple}')
+            (${termId},'${item.number}','${item.roleId}','${item.name}','${item.describes}','${item.unit}','${item.min}','${item.max}','${item.multiple}','${item.address}')
         </foreach>
     </insert>
 
@@ -69,9 +72,9 @@
         SELECT id,<include refid="pointField"/>
         FROM pointfield
         <where>
-            <if test="_parameter != 0">deviceid = ${_parameter}</if>
+            <if test="_parameter != 0">termid = ${_parameter}</if>
         </where>
-        ORDER BY deviceid,id
+        ORDER BY id
     </select>
 
     <select id="detail" parameterType="int" resultMap="DeviceTermEntity">
@@ -108,6 +111,12 @@
             <if test="_parameter != null"> dt.type = '${_parameter}'</if>
         </where>
         ORDER BY dt.id
+    </select>
+
+    <select id="getBit" resultType="int">
+        SELECT bit FROM deviceterm tm
+        LEFT JOIN devicetype tp ON tm.type = tp.id
+        WHERE tm.id = ${_parameter}
     </select>
 
     <select id="fieldDetail" parameterType="int" resultMap="PointFieldEntity">

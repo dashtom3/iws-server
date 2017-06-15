@@ -148,4 +148,23 @@ public class DeviceTermController {
         condition.put("name", name);
         return deviceTermService.query(condition);
     }
+
+    /**
+     * 添加控制器
+     *
+     * @param token
+     * @return
+     */
+    @RequestMapping(value = "check", method = RequestMethod.POST)
+    @ResponseBody
+    public DataWrapper<String> check(
+            @RequestParam(value = "token", required = true) String token,
+            @ModelAttribute DeviceTermEntity deviceTermEntity,
+            @RequestBody PointFieldEntity[] fields,
+            @RequestParam(value = "port",required = true)String port,
+            @RequestParam(value = "number",required = true)String number
+    ) {
+        int type = deviceTermEntity.getType();
+        return deviceTermService.check(type,fields,port,number);
+    }
 }

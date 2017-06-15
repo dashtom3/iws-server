@@ -7,6 +7,8 @@ public class Page {
     private int numberPerPage;
     private int currentPage;
     private int currentNumber;
+    private int totalPage;
+    private int totalNumber;
 
     public int getCurrentNumber() {
         return currentNumber;
@@ -19,22 +21,18 @@ public class Page {
     public Page() {
     }
 
-    public Page(int numberPerPage, int currentPage, int totalNumber, int totalPage) {
-
+    public Page(int numberPerPage, int currentPage) {
         this.numberPerPage = numberPerPage;
         this.currentPage = currentPage;
     }
 
     public int getNumberPerPage() {
-
         return numberPerPage;
     }
 
     public void setNumberPerPage(int numberPerPage) {
         this.numberPerPage = numberPerPage;
-        if (currentPage != 0){
-            currentNumber = (currentPage-1)*numberPerPage;
-        }
+        if (currentPage != 0) currentNumber = (currentPage-1)*numberPerPage;
     }
 
     public int getCurrentPage() {
@@ -43,8 +41,23 @@ public class Page {
 
     public void setCurrentPage(int currentPage) {
         this.currentPage = currentPage;
-        if (numberPerPage != 0){
-            currentNumber = (currentPage-1)*numberPerPage;
-        }
+        if (numberPerPage != 0) currentNumber = (currentPage-1)*numberPerPage;
+
+    }
+
+    public int getTotalPage() {
+        return totalPage;
+    }
+
+    public void setTotalPage(int totalNumber) {
+        this.totalPage = (int)Math.ceil((double) totalNumber/(double) numberPerPage);
+    }
+
+    public int getTotalNumber() {
+        return totalNumber;
+    }
+
+    public void setTotalNumber(int totalNumber) {
+        this.totalNumber = totalNumber;
     }
 }

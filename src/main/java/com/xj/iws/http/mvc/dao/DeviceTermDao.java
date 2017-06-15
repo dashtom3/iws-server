@@ -38,4 +38,6 @@ public interface DeviceTermDao {
     List<DeviceTermEntity> deviceTermByIds(String[] terms);
 
     int getCount(String type);
+
+    int getBit(int i);
 }
