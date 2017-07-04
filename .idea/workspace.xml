@@ -6,80 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="be0bf87b-fdb5-49f0-96ac-bab80a65eead" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_pool2_2_2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_jcl_over_slf4j_1_7_22.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_commons_1_13_0_RELEASE.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_keyvalue_1_2_0_RELEASE.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_redis_1_8_0_RELEASE.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__redis_clients_jedis_2_9_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/mvc/dao/redis/RedisBase.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/spring-context.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/spring-redis.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/common/sessionManager/SessionManager.class" afterPath="$PROJECT_DIR$/target/classes/com/xj/iws/common/sessionManager/SessionManager.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/common/sessionManager/VerifyCodeManager.class" afterPath="$PROJECT_DIR$/target/classes/com/xj/iws/common/sessionManager/VerifyCodeManager.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/common/utils/TimeUtil.class" afterPath="$PROJECT_DIR$/target/classes/com/xj/iws/common/utils/TimeUtil.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/http/aop/LogAspect.class" afterPath="$PROJECT_DIR$/target/classes/com/xj/iws/http/aop/LogAspect.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/http/mvc/controller/manager/DeviceTermController.class" afterPath="$PROJECT_DIR$/target/classes/com/xj/iws/http/mvc/controller/manager/DeviceTermController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/http/mvc/controller/user/DataController.class" afterPath="$PROJECT_DIR$/target/classes/com/xj/iws/http/mvc/controller/user/DataController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/http/mvc/entity/DeviceEntity.class" afterPath="$PROJECT_DIR$/target/classes/com/xj/iws/http/mvc/entity/DeviceEntity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/http/mvc/service/DataService.class" afterPath="$PROJECT_DIR$/target/classes/com/xj/iws/http/mvc/service/DataService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/http/mvc/service/DeviceTermService.class" afterPath="$PROJECT_DIR$/target/classes/com/xj/iws/http/mvc/service/DeviceTermService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/http/mvc/service/impl/DataServiceImpl.class" afterPath="$PROJECT_DIR$/target/classes/com/xj/iws/http/mvc/service/impl/DataServiceImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/http/mvc/service/impl/DeviceTermServiceImpl.class" afterPath="$PROJECT_DIR$/target/classes/com/xj/iws/http/mvc/service/impl/DeviceTermServiceImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/xj/iws/http/mvc/service/impl/RoleServiceImpl.class" afterPath="$PROJECT_DIR$/target/classes/com/xj/iws/http/mvc/service/impl/RoleServiceImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/com.xj.iws.war" afterPath="$PROJECT_DIR$/target/com.xj.iws.war" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/common/sessionManager/SessionManager.class" afterPath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/common/sessionManager/SessionManager.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/common/sessionManager/VerifyCodeManager.class" afterPath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/common/sessionManager/VerifyCodeManager.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/common/utils/TimeUtil.class" afterPath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/common/utils/TimeUtil.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/http/aop/LogAspect.class" afterPath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/http/aop/LogAspect.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/http/mvc/controller/manager/DeviceTermController.class" afterPath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/http/mvc/controller/manager/DeviceTermController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/http/mvc/controller/user/DataController.class" afterPath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/http/mvc/controller/user/DataController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/http/mvc/entity/DeviceEntity.class" afterPath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/http/mvc/entity/DeviceEntity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/http/mvc/service/DataService.class" afterPath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/http/mvc/service/DataService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/http/mvc/service/DeviceTermService.class" afterPath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/http/mvc/service/DeviceTermService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/http/mvc/service/impl/DataServiceImpl.class" afterPath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/http/mvc/service/impl/DataServiceImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/http/mvc/service/impl/DeviceTermServiceImpl.class" afterPath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/http/mvc/service/impl/DeviceTermServiceImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/http/mvc/service/impl/RoleServiceImpl.class" afterPath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/com/xj/iws/http/mvc/service/impl/RoleServiceImpl.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/iws_war.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/iws_war.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/iws_war_exploded.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/iws_war_exploded.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/iws.iml" afterPath="$PROJECT_DIR$/iws.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/api/DataApi.java" afterPath="$PROJECT_DIR$/src/main/api/DataApi.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/common/sessionManager/SessionManager.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/common/sessionManager/SessionManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/common/sessionManager/VerifyCodeManager.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/common/sessionManager/VerifyCodeManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/common/utils/TimeUtil.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/common/utils/TimeUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/aop/LogAspect.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/aop/LogAspect.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/mvc/controller/user/DataController.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/mvc/controller/user/DataController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/mvc/entity/DeviceEntity.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/mvc/entity/DeviceEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/mvc/service/DataService.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/mvc/service/DataService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/mvc/service/impl/DataServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/mvc/service/impl/DataServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/mvc/service/impl/RoleServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/xj/iws/http/mvc/service/impl/RoleServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/applicationContext.xml" afterPath="$PROJECT_DIR$/src/main/resources/applicationContext.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/dispatcher-servlet.xml" afterPath="$PROJECT_DIR$/src/main/resources/dispatcher-servlet.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/jdbc.properties" afterPath="$PROJECT_DIR$/src/main/resources/jdbc.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mapper/DataMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mapper/DataMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mapper/DeviceMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mapper/DeviceMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mybatis-configuration.xml" afterPath="$PROJECT_DIR$/src/main/resources/mybatis-configuration.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/spring-mybatis.xml" afterPath="$PROJECT_DIR$/src/main/resources/spring-mybatis.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/applicationContext.xml" afterPath="$PROJECT_DIR$/target/classes/applicationContext.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/dispatcher-servlet.xml" afterPath="$PROJECT_DIR$/target/classes/dispatcher-servlet.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/jdbc.properties" afterPath="$PROJECT_DIR$/target/classes/jdbc.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/mapper/DataMapper.xml" afterPath="$PROJECT_DIR$/target/classes/mapper/DataMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/mapper/DeviceMapper.xml" afterPath="$PROJECT_DIR$/target/classes/mapper/DeviceMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/mybatis-configuration.xml" afterPath="$PROJECT_DIR$/target/classes/mybatis-configuration.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/spring-mybatis.xml" afterPath="$PROJECT_DIR$/target/classes/spring-mybatis.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/applicationContext.xml" afterPath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/applicationContext.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/dispatcher-servlet.xml" afterPath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/dispatcher-servlet.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/jdbc.properties" afterPath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/jdbc.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/mapper/DataMapper.xml" afterPath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/mapper/DataMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/mapper/DeviceMapper.xml" afterPath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/mapper/DeviceMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/mybatis-configuration.xml" afterPath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/mybatis-configuration.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/spring-mybatis.xml" afterPath="$PROJECT_DIR$/target/com.xj.iws/WEB-INF/classes/spring-mybatis.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/spring-websocket.xml" afterPath="$PROJECT_DIR$/src/main/resources/spring-webSocket.xml" />
-    </list>
+    <list default="true" id="be0bf87b-fdb5-49f0-96ac-bab80a65eead" name="Default" comment="" />
     <ignored path="iws.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -139,11 +66,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DeviceTermController.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="DeviceTermController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/http/mvc/controller/manager/DeviceTermController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="730">
-              <caret line="170" column="0" selection-start-line="170" selection-start-column="0" selection-end-line="170" selection-end-column="0" />
+            <state relative-caret-position="686">
+              <caret line="168" column="5" selection-start-line="168" selection-start-column="5" selection-end-line="168" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -163,7 +90,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AreaMapper.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AreaMapper.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/AreaMapper.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="66">
@@ -1910,12 +1837,12 @@
       <workItem from="1498200513150" duration="5591000" />
       <workItem from="1498442691696" duration="5931000" />
       <workItem from="1499047901563" duration="6469000" />
-      <workItem from="1499133100076" duration="3002000" />
+      <workItem from="1499133100076" duration="4047000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1289625000" />
+    <option name="totallyTimeSpent" value="1290670000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1927,8 +1854,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329718" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -2551,14 +2478,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/http/mvc/controller/manager/DeviceTermController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="730">
-          <caret line="170" column="0" selection-start-line="170" selection-start-column="0" selection-end-line="170" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/AlarmMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-528">
@@ -2584,6 +2503,14 @@
             <marker date="1492484447898" expanded="true" signature="2746:3017" ph="SELECT a.id,... area" />
             <marker date="1492484447898" expanded="true" signature="3110:3341" ph="SELECT name province" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xj/iws/http/mvc/controller/manager/DeviceTermController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="686">
+          <caret line="168" column="5" selection-start-line="168" selection-start-column="5" selection-end-line="168" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
