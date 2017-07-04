@@ -21,6 +21,7 @@ public class DeviceEntity {
     private String termName;
     private String termType;
     private int count;
+    private int bit;
     private String protocol;
 
     public DeviceEntity() {
@@ -131,6 +132,14 @@ public class DeviceEntity {
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public int getBit() {
+        return bit;
+    }
+
+    public void setBit(int bit) {
+        this.bit = bit;
     }
 
     public String getProtocol() {

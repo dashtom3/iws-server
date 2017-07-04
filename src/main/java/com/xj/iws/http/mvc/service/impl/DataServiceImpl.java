@@ -6,7 +6,9 @@ import com.xj.iws.common.enums.ErrorCodeEnum;
 import com.xj.iws.common.utils.DataWrapper;
 import com.xj.iws.common.utils.Page;
 import com.xj.iws.common.utils.ParamUtil;
+import com.xj.iws.common.utils.TimeUtil;
 import com.xj.iws.http.mvc.dao.*;
+import com.xj.iws.http.mvc.dao.redis.RedisBase;
 import com.xj.iws.http.mvc.entity.DataEntity;
 import com.xj.iws.http.mvc.entity.DeviceEntity;
 import com.xj.iws.http.mvc.entity.DeviceTermEntity;
@@ -15,8 +17,10 @@ import com.xj.iws.http.mvc.entity.util.DataField;
 import com.xj.iws.http.mvc.entity.util.ViewDataEntity;
 import com.xj.iws.http.mvc.service.DataService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
 import java.util.*;
 
 /**
@@ -32,14 +36,15 @@ public class DataServiceImpl implements DataService {
     @Autowired
     DataProcess dataProcess;
     @Autowired
-    ServerDao serverDao;
-    @Autowired
     DeviceDao deviceDao;
+    @Autowired
+    RedisBase redisBase;
+
 
     @Override
     public DataWrapper<List<ViewDataEntity>> query(Map<String, String> conditions, Page page) {
         DataWrapper<List<ViewDataEntity>> dataWrapper = new DataWrapper<List<ViewDataEntity>>();
-        conditions.put("tableName", preConditions(Integer.parseInt(conditions.get("deviceId"))));
+        conditions.put("tableName", "data_" + preConditions(Integer.parseInt(conditions.get("deviceId"))));
 
         List<DataEntity> datas = dataDao.query(conditions, page);
 
@@ -52,11 +57,70 @@ public class DataServiceImpl implements DataService {
         return dataWrapper;
     }
 
+    public DataWrapper<List<ViewDataEntity>> dataAtPresentDate(Map<String, String> conditions, Page page) {
+        DataWrapper<List<ViewDataEntity>> dataWrapper = new DataWrapper<List<ViewDataEntity>>();
+        String date = TimeUtil.getDate(new Date(), 0);
+        int deviceId = Integer.parseInt(conditions.get("deviceId"));
+        DeviceEntity device = deviceDao.deviceDetail(deviceId);
+
+
+        String port = device.getPort();
+        String number = device.getNumber();
+        int count = device.getCount();
+        int bit = device.getBit();
+
+        String tableName = "data_" + date + "_" + preConditions(deviceId);
+        String startTime = conditions.get("startTime").split(" ")[1].replaceAll(":", "");
+        String endTime = conditions.get("endTime").split(" ")[1].replaceAll(":", "");
+        int timeStep = Integer.parseInt(conditions.get("timeStep"));
+
+        Object[] dataSet = redisBase.zSetOps().rangeByScoreWithScores(tableName, Double.valueOf(startTime), Double.valueOf(endTime)).toArray();
+        List<String> tempList = new ArrayList<String>();
+        for (int i = 0; i <dataSet.length ;i++ ) {
+            ZSetOperations.TypedTuple<String> ops = (ZSetOperations.TypedTuple<String>)dataSet[i];
+            if (ops.getScore() % timeStep == 0){
+                tempList.add(ops.getValue());
+            }
+        }
+        int totalNumber = tempList.size();
+
+        List<String> dataList = new ArrayList<String>();
+        for (int i = page.getCurrentNumber(); i < page.getNumberPerPage() ; i++) {
+            try {
+                dataList.add(tempList.get(i));
+            }catch (Exception e){
+                break;
+            }
+        }
+
+        List<DataEntity> dataEntities = new ArrayList<DataEntity>();
+        for (String temp : dataList) {
+            String[] arrayTemp = temp.split(":");
+            String strTime = date + arrayTemp[0];
+            Date time = null;
+            try {
+                time = TimeUtil.changeStringToDate(strTime);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            String data = arrayTemp[1];
+            String exception = arrayTemp[2];
+
+            DataEntity dataEntity = new DataEntity(0, deviceId, port, number, time, exception, count, bit, data);
+            dataEntities.add(dataEntity);
+        }
+
+        List<ViewDataEntity> viewData = dataProcess.process(dataEntities);
+        dataWrapper.setData(viewData);
+        dataWrapper.setPage(page, totalNumber);
+        return dataWrapper;
+    }
+
     @Override
     public DataWrapper<ViewDataEntity> presentData(int deviceId) {
         DataWrapper<ViewDataEntity> dataWrapper = new DataWrapper<ViewDataEntity>();
 
-        String tableName = preConditions(deviceId);
+        String tableName = "data_" + preConditions(deviceId);
 
         List<DataEntity> datas = dataDao.presentData(deviceId, tableName);
         ViewDataEntity viewData = dataProcess.process(datas).get(0);
@@ -111,7 +175,6 @@ public class DataServiceImpl implements DataService {
     }
 
     private String preConditions(int deviceId) {
-        String IP = serverDao.getIP();
         DeviceEntity device = deviceDao.deviceDetail(deviceId);
 
         String port = device.getPort();
@@ -121,7 +184,7 @@ public class DataServiceImpl implements DataService {
         List<PointFieldEntity> pointFields = deviceTermDao.fieldList(termId);
         dataProcess.enable(pointFields);
 
-        return "data_" + IP + ":" + port + "#" + number;
+        return port + "#" + number;
     }
 
 }

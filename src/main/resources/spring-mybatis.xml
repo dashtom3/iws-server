@@ -1,26 +1,15 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
        xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="
       http://www.springframework.org/schema/beans
       http://www.springframework.org/schema/beans/spring-beans.xsd
-      http://www.springframework.org/schema/context
-      http://www.springframework.org/schema/context/spring-context.xsd
       http://www.springframework.org/schema/aop
       http://www.springframework.org/schema/aop/spring-aop.xsd
+      http://www.springframework.org/schema/tx
+      http://www.springframework.org/schema/tx/spring-tx.xsd
          ">
-
-    <!-- 自动扫描 -->
-    <context:component-scan base-package="com.xj.iws.http.mvc.controller"/>
-    <context:component-scan base-package="com.xj.iws.http.mvc.service"/>
-    <context:component-scan base-package="com.xj.iws.http.mvc.dao"/>
-    <context:component-scan base-package="com.xj.iws.common.data"/>
-    <!-- 引入配置文件 -->
-    <bean id="propertyConfigurer"
-          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location" value="classpath:jdbc.properties"/>
-    </bean>
 
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
         <!-- 数据库基本信息配置 -->
@@ -74,22 +63,23 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <!--<tx:advice id="advice" transaction-manager="transactionManager">-->
-    <!--<tx:attributes>-->
-    <!--<tx:method name="delete*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" no-rollback-for="java.lang.RuntimeException"/>-->
-    <!--<tx:method name="insert*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.RuntimeException"/>-->
-    <!--<tx:method name="update*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception"/>-->
-    <!--<tx:method name="add*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception"/>-->
-    <!--<tx:method name="find*" propagation="REQUIRED" read-only="true" rollback-for="java.lang.Exception"/>-->
-    <!--<tx:method name="get*" propagation="REQUIRED" read-only="true" rollback-for="java.lang.Exception"/>-->
-    <!--<tx:method name="select*" propagation="REQUIRED" read-only="true" rollback-for="java.lang.Exception"/>-->
-    <!--</tx:attributes>-->
-    <!--</tx:advice>-->
+    <tx:advice id="advice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="delete*" propagation="REQUIRED" read-only="false"/>
+            <!--<tx:method name="insert*" propagation="REQUIRED" read-only="false"-->
+                       <!--rollback-for="java.lang.RuntimeException"/>-->
+            <tx:method name="update*" propagation="REQUIRED" read-only="false"/>
+            <tx:method name="add*" propagation="REQUIRED" read-only="false"/>
+            <tx:method name="find*" propagation="REQUIRED" read-only="true"/>
+            <tx:method name="get*" propagation="REQUIRED" read-only="true"/>
+            <tx:method name="select*" propagation="REQUIRED" read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
 
-    <!--<aop:config>-->
-    <!--&lt;!&ndash;把事务控制在Service层&ndash;&gt;-->
-    <!--<aop:pointcut id="txPointcut" expression="execution(* com.xj.iws.http.mvc.service.*Service.*(..))" />-->
-    <!--<aop:advisor pointcut-ref="txPointcut" advice-ref="advice"/>-->
-    <!--</aop:config>-->
+    <aop:config>
+        <!--把事务控制在Service层-->
+        <aop:pointcut id="txPointcut" expression="execution(* com.xj.iws.http.mvc.service.*Service.*(..))"/>
+        <aop:advisor pointcut-ref="txPointcut" advice-ref="advice"/>
+    </aop:config>
 
 </beans>

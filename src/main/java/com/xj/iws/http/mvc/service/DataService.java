@@ -20,4 +20,6 @@ public interface DataService {
     DataWrapper<List<DataField>> pumpStatus(int deviceId);
 
     DataWrapper<ViewDataEntity> pointData(String termId,String port,String number);
+
+    DataWrapper<List<ViewDataEntity>> dataAtPresentDate(Map<String, String> conditions, Page page);
 }

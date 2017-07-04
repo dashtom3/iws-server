@@ -10,7 +10,7 @@ import java.util.Random;
  * Created by tian on 16/10/10.
  */
 public class VerifyCodeManager {
-    private static int minute = 1;
+    private static int minute = 5;
     private static HashMap<String, String> USER_CODE_MAP = new HashMap<String, String>();
     public static String newPhoneCode(String phoneNum) {
         Random random = new Random();
@@ -18,9 +18,8 @@ public class VerifyCodeManager {
         String code = String.valueOf(a);
         String oldCode = getPhoneCode(phoneNum);
 
-        Date nowTime = new Date();
         if(oldCode.equals("overdue")||oldCode.equals("noCode")){
-            USER_CODE_MAP.put(phoneNum,code+ TimeUtil.changeDateToString(nowTime));
+            USER_CODE_MAP.put(phoneNum,code+ TimeUtil.getDateTime(new Date(),0));
             return code;
         }
         else
@@ -29,7 +28,7 @@ public class VerifyCodeManager {
 
     public static String getPhoneCode(String phoneNum){
         try {
-            System.out.println("contain:"+USER_CODE_MAP.containsKey(phoneNum));
+//            System.out.println("contain:"+USER_CODE_MAP.containsKey(phoneNum));
             if(USER_CODE_MAP.containsKey(phoneNum)){
                 if (TimeUtil.timeBetween(TimeUtil.changeStringToDate(USER_CODE_MAP.get(phoneNum).substring(4)), new Date()) / (60 * 1000) > minute){
                     VerifyCodeManager.removePhoneCodeByPhoneNum(phoneNum);
@@ -38,8 +37,7 @@ public class VerifyCodeManager {
                     return  USER_CODE_MAP.get(phoneNum).substring(0,4);
                 }
             }
-            else
-                return "noCode";
+            else return "noCode";
 
         }catch (Exception e){
             e.printStackTrace();

@@ -3,16 +3,14 @@ package com.xj.iws.common.sessionManager;
 import com.xj.iws.http.mvc.entity.UserEntity;
 import com.xj.iws.common.utils.UUIDGenerator;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by tian on 16/9/27.
  */
 public class SessionManager {
     private static int KEY_COUNT = 0;
+    private static final int KEY_TIME = 2 * 3600 * 1000;
     private static HashMap<String, UserEntity> USER_SESSION_MAP = new HashMap<String, UserEntity>();
 
     public static String newSession(UserEntity user) {
@@ -26,23 +24,26 @@ public class SessionManager {
 
         USER_SESSION_MAP.put(sessionKey, user);
 //        System.out.println("#####"+user.getUsername()+"login success,token:"+sessionKey);
+        new Timer().schedule(new Task(sessionKey), KEY_TIME);
         return sessionKey;
     }
 
     public static UserEntity getSession(String key) {
-        if(USER_SESSION_MAP.containsKey(key))
+        if (USER_SESSION_MAP.containsKey(key))
             return USER_SESSION_MAP.get(key);
         else
             return null;
     }
-    public static String getSessionByUserID(Long userId){
+
+    public static String getSessionByUserID(Long userId) {
         Set<String> set = USER_SESSION_MAP.keySet();
-        for(String key :set){
-            if(USER_SESSION_MAP.get(key).getId()==userId)
+        for (String key : set) {
+            if (USER_SESSION_MAP.get(key).getId() == userId)
                 return key;
         }
         return null;
     }
+
     public static void removeSession(String key) {
         if (USER_SESSION_MAP.containsKey(key)) {
             //log.info("Session Destroyed! Key:" + key);
@@ -52,18 +53,35 @@ public class SessionManager {
 
     /**
      * 删除某用户的Session
+     *
      * @param userId
      */
     public static void removeSessionByUserId(Long userId) {
         Iterator<Map.Entry<String, UserEntity>> iter = USER_SESSION_MAP.entrySet().iterator();
         while (iter.hasNext()) {
-            Map.Entry<String, UserEntity> entry =  iter.next();
+            Map.Entry<String, UserEntity> entry = iter.next();
             String key = entry.getKey();
             UserEntity value = entry.getValue();
-            if (value!=null && value.getId() == userId) {
+            if (value != null && value.getId() == userId) {
                 removeSession(key);
                 break;
             }
+        }
+    }
+
+    /**
+     * 自执行删除
+     */
+    private static class Task extends TimerTask {
+        private String key;
+
+        public Task(String key) {
+            this.key = key;
+        }
+
+        @Override
+        public void run() {
+            removeSession(key);
         }
     }
 }

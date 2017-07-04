@@ -7,4 +7,5 @@
     <typeAliases>
         <package name="com.xj.iws.http.mvc.entity"/>
     </typeAliases>
+
 </configuration>

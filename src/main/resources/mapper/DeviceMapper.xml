@@ -21,6 +21,7 @@
         <result column="termname" property="termName" jdbcType="VARCHAR"/>
         <result column="termtype" property="termType" jdbcType="VARCHAR"/>
         <result column="count" property="count" jdbcType="INTEGER"/>
+        <result column="bit" property="bit" jdbcType="INTEGER"/>
         <result column="protocol" property="protocol" jdbcType="VARCHAR"/>
     </resultMap>
     <resultMap id="DeviceGroupEntity" type="com.xj.iws.http.mvc.entity.DeviceGroupEntity">
@@ -88,7 +89,7 @@
 
     <select id="deviceList" parameterType="int" resultMap="DeviceEntity">
         SELECT d.id,d.groupid,d.termid,d.status,d.port,d.number,d.name,d.describes,
-        t.count,t.protocol,p.name AS termtype,t.name AS termname
+        t.count,t.protocol,p.bit,p.name AS termtype,t.name AS termname
         FROM device d
         LEFT JOIN deviceterm t ON d.termid = t.id
         LEFT JOIN devicetype p ON t.type = p.id
@@ -100,7 +101,7 @@
 
     <select id="deviceDetail" parameterType="int" resultMap="DeviceEntity">
         SELECT d.id,d.groupid,d.termid,d.status,d.port,d.number,d.name,d.describes,
-        t.count,t.protocol,p.name AS termtype,t.name AS termname
+        t.count,t.protocol,p.bit,p.name AS termtype,t.name AS termname
         FROM device d
         LEFT JOIN deviceterm t ON d.termid = t.id
         LEFT JOIN devicetype p ON t.type = p.id
@@ -118,22 +119,17 @@
     </select>
 
     <update id="createDataTable">
-        CREATE TABLE `data_${IP}:${port}#${device.number}` (
+        CREATE TABLE `data_${port}#${device.number}` (
         `id` int(12) NOT NULL auto_increment,
-        `deviceid` int(10),
-        `port` varchar(20),
-        `number` varchar(20),
         `time` datetime,
         `error` varchar(128),
-        `count` int(4),
-        `length` int(2),
         `data` varchar(512),
         PRIMARY KEY  (`id`))
         ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='${device.name}数据表' AUTO_INCREMENT=1
     </update>
 
     <update id="dropDataTable">
-        DROP TABLE `data_${IP}:${port}#${device.number}`
+        DROP TABLE `data_${port}#${device.number}`
     </update>
 
     <update id="runGroup" useGeneratedKeys="true" keyProperty="groupId">

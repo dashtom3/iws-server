@@ -58,6 +58,24 @@ public class DataController {
         return dataService.presentData(deviceId);
     }
 
+    @RequestMapping(value = "todayData", method = RequestMethod.GET)
+    @ResponseBody
+    public DataWrapper<List<ViewDataEntity>> todayData(
+            @RequestParam(value = "token", required = true) String token,
+            @RequestParam(value = "deviceId", required = true) String deviceId,
+            @RequestParam(value = "startTime", required = true) String startTime,
+            @RequestParam(value = "endTime", required = true) String endTime,
+            @RequestParam(value = "timeStep", required = true) String timeStep,
+            @ModelAttribute Page page
+    ) {
+        Map<String, String> conditions = new HashMap<String, String>();
+        conditions.put("deviceId", deviceId);
+        conditions.put("startTime", startTime);
+        conditions.put("endTime", endTime);
+        conditions.put("timeStep", timeStep);
+        return dataService.dataAtPresentDate(conditions,page);
+    }
+
     @RequestMapping(value = "outputExcel", method = RequestMethod.GET)
     @ResponseBody
     public void outputExcel(

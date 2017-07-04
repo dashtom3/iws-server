@@ -78,9 +78,9 @@ public class LogAspect {
                 break;
             }
         }
-//        if (null != handle){
-//            LogEntity log = new LogEntity(user.getId(),handle,IP);
-//            logDao.addHandle(log);
-//        }
+        if (null != handle){
+            LogEntity log = new LogEntity(user.getId(),handle,IP);
+            logDao.addHandle(log);
+        }
     }
 }
